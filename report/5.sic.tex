@@ -1,0 +1,245 @@
+\chapter{Standards and Design Constraints}
+
+This chapter outlines the engineering standards and professional codes of conduct for the proposed CREST framework, along with the design constraints, cost analysis, and complex engineering problem mapping relevant to the project.
+
+\section{Compliance with the Standards}
+
+Designing a framework that integrates Large Language Models, symbolic theorem provers, semantic similarity metrics, and structured LLM-based diagnosis requires adherence to established engineering standards. The following sections detail how CREST aligns with these professional guidelines.
+
+\subsection{Software Standards}
+
+\textbf{Fundamental Canons of ASME Code 2:}\\
+Engineers will perform services only in areas of their competence. This project falls within Computer Science and Engineering, specifically Artificial Intelligence, Natural Language Processing, Formal Methods, and Symbolic Reasoning, all within the academic and professional competence of the development team.
+
+\textbf{ACM Code of Professional Responsibilities Code 2.2:}\\
+Maintain high standards of professional competence, conduct, and ethical practice. The framework adheres to rigorous professional standards, which is particularly important given that semantically incorrect FOL translations propagating through symbolic solvers can produce confidently wrong conclusions in any downstream application.
+
+\textbf{ACM Code of Professional Responsibilities Code 2.3:}\\
+Know and respect existing rules pertaining to professional work. Use of third-party LLM APIs (Groq, Anthropic) is conducted strictly within each provider's terms of service and rate-limit policies, and all evaluation datasets including FOLIO are accessed under their specified licenses.
+
+\textbf{ACM Code of Professional Responsibilities Code 2.4:}\\
+Give comprehensive and thorough evaluations of computer systems and their impacts. The team has explicitly documented component-level limitations: BERTScore's reduced sensitivity to quantifier-scope changes, the predicate checker's restriction to programmed lexical drift patterns, and the LLM-as-Judge's requirement for empirical validation against ground-truth annotations.
+
+\textbf{ACM Code of Professional Responsibilities Code 2.5:}\\
+Perform work only in areas of competence. The solution addresses a challenge within Computer Science and Engineering by combining natural language processing, formal logic, symbolic verification, and uncertainty quantification, all within the team's field of study.
+
+\textbf{ACM Code of Professional Responsibilities Code 2.6:}\\
+Access computing and communication resources only when authorized. All API access uses individually issued credentials, and no unauthorized data scraping or credential sharing is performed at any stage of the project.
+
+\textbf{ACM Code of Professional Responsibilities Code 2.7:}\\
+Design and implement systems that are robustly and usably secure. The framework incorporates deterministic checks (predicate consistency via regex and edit distance) alongside neural components (BERTScore and LLM-as-Judge), ensuring at least one risk signal remains available even if a neural component degrades.
+
+\textbf{IEEE Code of Ethics Code 6:}\\
+Maintain technical competence in software and hardware. The system design draws on the team's background in natural language processing, formal verification, and NeSy systems literature, supplemented by review of recent ACL, EMNLP, NeurIPS, and ICLR publications.
+
+\subsection{Hardware Standards}
+
+\textbf{Fundamental Canons of ASME Code 2:}\\
+Engineers shall perform services only in areas of their competence. Managing the hardware requirements, including GPU-backed cloud inference for the forward translator and CPU-based execution for symbolic solving and deterministic checking, falls within the technical capabilities of the development team.
+
+\textbf{ACM Professional Responsibilities Code 2.3:}\\
+Know and respect existing rules pertaining to professional work. Cloud computing environments including Google Colab and Kaggle are accessed within the standard academic-tier usage limits of each platform.
+
+\textbf{ACM Professional Responsibilities Code 2.4:}\\
+Give comprehensive and thorough evaluations of computer systems and their impacts. Hardware failure risks such as transient API unavailability and rate-limit throttling are mitigated through retry logic, deterministic caching of intermediate outputs, and reproducible random seeds.
+
+\textbf{ACM Professional Responsibilities Code 2.6:}\\
+Design and implement systems that are robustly and usably secure. All intermediate pipeline outputs (forward FOL, back-translated NL, BERTScore values, judge diagnoses) are logged in structured form for independent verification and reproducibility.
+
+\subsection{Communication Standards}
+
+\textbf{ASM General Ethical Principles Code 1.3:}\\
+Be honest and trustworthy. CREST produces risk scores explicitly accompanied by their underlying signals (semantic similarity score, predicate inconsistency rate, judge-diagnosed error type), allowing any downstream user to trace the source of a flagged translation rather than receiving an opaque number.
+
+\textbf{IEEE Code of Ethics Code 4:}\\
+Avoid unlawful conduct.
+\begin{itemize}
+    \item All datasets, including FOLIO, are used in accordance with their original licensing terms.
+    \item No private, sensitive, or personally identifiable information is processed by the system. All evaluation inputs are drawn from public benchmarks.
+    \item API integrations with Groq and Anthropic are conducted using authorized credentials and within published terms of service.
+    \item Outputs of the system are clearly labeled as automated risk estimates and are not represented as authoritative judgments on the correctness of any particular FOL formula.
+\end{itemize}
+
+\subsection{Societal Standards}
+
+\textbf{Fundamental Principles of ASME Code 1:}\\
+Using knowledge and skills for the enhancement of human welfare. CREST directly addresses silent failure in AI systems that could produce confidently incorrect outputs in high-stakes domains, contributing to safer deployment of AI-driven reasoning systems.
+
+\textbf{Fundamental Principles of ASME Code 4:}\\
+Supporting the professional and technical societies of their disciplines. The literature review and citations acknowledge contributions across NL-to-FOL translation, NeSy AI, uncertainty quantification, and LLM-as-Judge research, strengthening the shared professional knowledge base.
+
+\textbf{ACM General Ethical Principles Code 1.1:}\\
+Contribute to society and to human well-being. By reducing the rate at which semantically incorrect symbolic translations reach downstream solvers, the framework supports more reliable AI-driven decision-making in any application dependent on formal reasoning over natural language inputs.
+
+\textbf{ACM General Ethical Principles Code 1.4:}\\
+Be fair and take action not to discriminate. The evaluation methodology tests the framework across the full diversity of premise types and reasoning patterns in the FOLIO benchmark, rather than restricting evaluation to cases where the framework is expected to perform well.
+
+\textbf{ACM General Ethical Principles Code 1.6:}\\
+Respect privacy. The framework processes only publicly available benchmark data and does not store, log, or transmit any user-provided sensitive inputs in its evaluation pipeline.
+
+\textbf{ACM General Ethical Principles Code 1.7:}\\
+Honor confidentiality. No confidential information is involved in the development or evaluation of the system. All datasets, code, and results are intended to be reproducible and publishable.
+
+\textbf{ACM Professional Leadership Code 3.1:}\\
+Ensure that the public good is the central concern during all professional computing work. Improving the safety of NeSy AI systems is a direct public-good concern as such systems are increasingly deployed in domains affecting human welfare.
+
+\textbf{IEEE Code of Ethics Code 1:}\\
+Ensure the safety of the public and the environment. The proactive risk-estimation layer in CREST is specifically designed to prevent silent semantic failure in symbolic reasoning pipelines, contributing to the safety of any downstream system relying on formal logical inference.
+
+\textbf{IEEE Code of Ethics Code 7:}\\
+Avoid discrimination. The framework operates on structural and semantic properties of FOL translations and does not consume demographic, identity-based, or otherwise sensitive features that could introduce discriminatory bias.
+
+\section{Design Constraints}
+
+\subsection{Economic Constraint}
+The framework incurs computational costs primarily from LLM API calls for forward translation, back-translation, and LLM-as-Judge diagnosis. The forward translator uses Llama-3.1-8B via the Groq API free academic tier. The back-translator and judge use the Anthropic Claude API, a pay-per-token service. Budget constraints affect the scale of the full evaluation, and the routing mechanism minimizes cost by invoking the judge and re-translation loop only for high-risk translations rather than every input.
+
+\subsection{Environmental Constraint}
+Large language model inference contributes to a measurable carbon footprint at scale. CREST mitigates this through three design choices .The predicate consistency checker runs locally on the CPU with negligible energy cost. The routing mechanism restricts expensive neural diagnosis to high-risk inputs, and the use of Llama-3.1-8B rather than a frontier-scale model significantly reduces per-call energy consumption during the most frequent pipeline step.
+
+\subsection{Ethical Constraint}
+CREST processes only natural language and FOL representations of logical reasoning problems and does not consume sensitive user data. The framework produces risk scores, not correctness judgments. Downstream users must understand that a low risk score does not guarantee semantic correctness and that a high risk score does not constitute a definitive verdict of error. This positioning is intended to prevent over-depended on automated risk estimation in safety-critical settings.
+
+\subsection{Social Constraint}
+New safety layers adoption in AI pipelines often faces resistance from developers who view additional verification steps as latency or cost overhead. CREST's training-free design allows insertion into any existing NL-to-FOL pipeline without retraining the underlying models. The routing mechanism ensures the additional cost is incurred only for high-risk translations, preserving the latency profile on safe inputs and lowering the operational barrier to adoption.
+
+\section{Cost Analysis}
+
+The CREST framework operates within a resource-conscious academic budget. The primary paid components are the back-translation and diagnostic API calls via the Anthropic Claude API. The forward translator uses the Groq API free academic tier. All remaining components rely on open-source licensing and free compute environments. All costs are reported in Bangladeshi Taka (BDT).
+
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|p{2.8cm}|p{7.8cm}|r|}
+\hline
+\textbf{Component} & \textbf{Specification} & \textbf{Cost (BDT)} \\
+\hline
+Forward Translator API &
+Llama-3.1-8B via Groq API free academic tier for NL-to-FOL forward translation. &
+0 \\
+\hline
+Back-Translation API &
+Anthropic Claude API for FOL-to-NL back-translation across approximately 1,430 FOLIO premises, plus retries and additional benchmark extensions. &
+3,000 \\
+\hline
+LLM-as-Judge API &
+Anthropic Claude API for structured error diagnosis. &
+2,000 \\
+\hline
+Cloud GPU Compute &
+Google Colab Pro subscription for full-scale BERTScore computation, embedding model experimentation, and Z3 batch execution. &
+5,000 \\
+\hline
+On-Demand GPU Rental &
+Occasional RunPod on-demand GPU access for stress testing, local Llama inference fallback, and ablation experiments outside Colab session limits. &
+4,500 \\
+\hline
+Evaluation Datasets &
+FOLIO~\cite{han2024folio} via Hugging Face open license. ProofWriter and additional benchmarks via their respective open releases. &
+0 \\
+\hline
+Solver and Libraries &
+Z3 SMT Solver~\cite{demoura2008z3}, BERTScore, Hugging Face Transformers, and supporting Python libraries under open-source licenses. &
+0 \\
+\hline
+Contingency Buffer &
+Reserve for API overage charges, additional sampling runs during ablation studies, and unexpected scaling needs. &
+4,000 \\
+\hline
+
+\multicolumn{2}{|r|}{\textbf{Total Allocated Budget}} &
+\textbf{BDT 18,500} \\
+\hline
+\end{tabular}
+\caption{Project Cost Analysis  6-Month Development and Evaluation Lifecycle}
+\label{tab:project_cost_analysis}
+\end{table}
+
+\noindent\textit{Zero-cost components rely on open-source licensing and free-tier API access, ensuring full reproducibility in resource-constrained research environments. The training-free design eliminates fine-tuning costs that dominate comparable NeSy research budgets.}
+\clearpage
+
+\section{Complex Engineering Problem}
+
+\subsection{Complex Problem Solving}
+
+A project constitutes a complex engineering problem if it satisfies any criteria from P1 to P7. The following maps the CREST framework against these Knowledge and Problem Profiles.
+
+\textbf{P1: Depth of Knowledge Required.}
+P1 is satisfied when one or more of K3 through K8 are fulfilled.
+
+\textbf{K3: Engineering Fundamentals:} The framework employs edit-distance algorithms for predicate name comparison, regex-based FOL component extraction, and modular pipeline architecture for routing between components, directly applying data structures and string-matching fundamentals.
+
+\textbf{K4: Specialist Knowledge:} Integration of Large Language Models, FOL translation, SMT solvers, contextual-embedding-based semantic similarity, and LLM-as-Judge diagnosis demonstrates specialist knowledge extending well beyond standard undergraduate curricula.
+
+\textbf{K5: Engineering Design:} Standard library functions are insufficient. The framework requires custom design of a back-translation semantic loss signal, a deterministic cross-premise predicate consistency checker, an LLM-as-Judge prompt structure for FOL error diagnosis, and a feedback-template system converting structured diagnoses into targeted re-translation prompts.
+
+\textbf{K6: Knowledge of Engineering Practice:} The project follows software engineering best practices including version control via Git, reproducible execution through Jupyter and Colab notebooks, modular API-based architecture, and structured logging of all pipeline outputs.
+
+\textbf{K7: Contextual Awareness:} The framework is explicitly framed as a safety layer rather than a definitive verifier, with the team having considered the implications of deploying such a system in high-stakes domains where silent semantic failure can cause real harm.
+
+\textbf{K8: Research Literature:} The extensive literature review draws from ACL, EMNLP, NeurIPS, ICLR, and TACAS, satisfying the requirement for engagement with current research literature.
+
+Fulfilling K3 through K8 confirms that the project successfully meets the P1 requirement.
+
+\textbf{P2: Range of Conflicting Requirements.}
+The CREST system has to balance a few tough choices. Bigger AI models check work better, but they are slow and cost more. Being super strict catches more mistakes, but it also creates extra work by falsely flagging good translations. Also, the basic checker is very consistent, but only the smart AI can spot new, unusual errors. By testing and finding the perfect balance between all these things, the system meets the P2 requirement.
+
+\textbf{P3: Depth of Analysis Required.}
+No obvious solution exists for proactive, training-free NL-to-FOL safety. Existing approaches are either reactive (relying on solver feedback) or training-based (requiring annotated corpora). Designing a proactive inference-time safety layer required identifying risk signals and combining them with a structured diagnostic component, a non-trivial design problem satisfying P3.
+
+\textbf{P4: Familiarity of Issues.}
+Combining back-translation semantic loss, deterministic predicate alignment, and LLM-as-Judge diagnosis into a unified proactive pipeline for symbolic translation is a frontier research direction without standard textbook solutions, satisfying P4.
+
+\textbf{P5: Extent of Applicable Codes.}
+The development process is governed by ACM, ASME, and IEEE codes of ethics, the licensing terms of third-party LLM APIs, and the data-use terms of evaluation benchmarks. Downstream deployment in regulated domains such as healthcare or finance would additionally inherit HIPAA or GDPR requirements, satisfying P5.
+
+\textbf{P6: Extent of Stakeholder Involvement.}
+The CREST system supports researchers looking for ready to use safety features, developers creating language to logic software, and end users who benefit from fewer errors. By carefully managing everyone's different needs for accuracy, speed, cost, and openness, the system successfully satisfies requirement P6.
+
+\textbf{P7: Interdependence.}
+Every part of this system relies on the others. The first tool must create clean logic so the next tools can check it. The scoring depends on those checks. The AI judge needs organized data to spot mistakes, and the correction notes must be crystal clear so the system can fix itself. If even one piece fails, the whole process breaks down. Testing everything together makes sure it all works, which meets the P7 requirement.
+
+\begin{table}[htpb]
+\centering
+
+\vspace{0.5em}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\thead{P1\\Depth of\\Knowledge} & \thead{P2\\Range of\\Conflicting\\Requirements} & \thead{P3\\Depth of\\Analysis} & \thead{P4\\Familiarity\\of Issues} & \thead{P5\\Applicable\\Codes} & \thead{P6\\Stakeholder\\Involvement} & \thead{P7\\Interdependence} \\ \hline
+$\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\ \hline
+\end{tabular}
+\caption{Mapping with complex problem solving.}
+\end{table}
+
+\subsection{Engineering Activities}
+
+\textbf{A1: Range of Resources.}
+The framework draws on cloud-based LLM inference (Groq, Anthropic), GPU-backed notebook environments (Google Colab, Kaggle), the FOLIO benchmark, BERTScore, the Z3 SMT solver, and standard Python libraries for regex and edit-distance computation, satisfying the requirement for a broad spectrum of computational and informational resources.
+
+\textbf{A2: Innovation.}
+Back-translation combination semantic loss against original human-written NL, deterministic cross-premise predicate consistency checking, and LLM-as-Judge diagnosis into a single proactive, training-free pipeline is not present in any existing system. No prior work intercepts NL-to-FOL translations before solver execution using this combination of signals without fine-tuning, satisfying A2.
+
+\textbf{A3: Level of Interaction.}
+Developing CREST requires cross-component coordination between the NLP layer (forward and back translation), the formal logic layer (predicate analysis and symbolic solving), the evaluation layer (BERTScore and similarity metrics), and the diagnostic layer (LLM-as-Judge prompt design and feedback template generation), .
+
+\textbf{A4:Consequences for Society and Environment. }The CREST system stops AI from making invisible errors that lead to confidently wrong answers in critical apps. It is also built to be eco-friendly. By only running heavy AI scans on the most risky inputs, it cuts down on energy use and successfully meets the A4 standard.
+
+\textbf{A5: Familiarity.}
+The project extends well beyond standard undergraduate engineering experiences, demanding integration of natural language processing, formal logic translation, semantic similarity measurement, and structured LLM-based evaluation into a coherent end-to-end pipeline, satisfying A5.
+
+
+\begin{table}[htpb]
+\centering
+
+\vspace{0.5em}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\thead{A1\\Range of\\Resources} & \thead{A2\\Innovation} & \thead{A3\\Level of\\Interaction} & \thead{A4\\Consequences\\for Society\\and Environment} & \thead{A5\\Familiarity} \\ \hline
+$\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\ \hline
+\end{tabular}
+\caption{Mapping with complex engineering activities.}
+\end{table}
+\section{Summary}
+
+This chapter detailed the standards, design constraints, cost analysis, and complex engineering problem mapping for CREST. The system aligns with ACM, ASME, and IEEE professional codes, and complies with third-party API licensing terms and open benchmark data-use policies. Key design constraints across economic, environmental, ethical, and social dimensions were addressed through specific architectural decisions, including the routing mechanism, the use of deterministic components for reproducible risk signals, and the training-free design that lowers the operational barrier to adoption. The cost analysis confirmed project feasibility within an academic budget. The complex engineering problem analysis confirmed that CREST satisfies all criteria from P1 through P7 and A1 through A5, establishing it as a substantively complex engineering endeavour contributing to the broader effort of making Neuro-Symbolic AI systems safer in real-world deployment.
+

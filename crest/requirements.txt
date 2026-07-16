@@ -1,0 +1,11 @@
+# install torch/torchvision separately with the CUDA index matching your driver, e.g.:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+torch
+torchvision
+
+z3-solver
+datasets
+huggingface_hub
+transformers
+accelerate
+sentence-transformers

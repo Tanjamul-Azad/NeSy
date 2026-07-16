@@ -1,0 +1,12 @@
+.venv/
+.venv_tmp/
+__pycache__/
+*.pyc
+
+.claude/settings.local.json
+
+# large model/data caches if ever created under the repo root
+*.bin
+*.safetensors
+*.pt
+*.ckpt

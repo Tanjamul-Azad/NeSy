@@ -1,0 +1,14 @@
+report_fydp_source.zip
+
+*.aux
+*.log
+*.toc
+*.out
+*.bbl
+*.blg
+*.lot
+*.lof
+*.idx
+*.ilg
+*.ind
+*.synctex.gz

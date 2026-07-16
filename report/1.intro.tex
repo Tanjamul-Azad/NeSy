@@ -1,0 +1,51 @@
+\chapter{Introduction}
+
+In this chapter the project scope,motivation, objective, methodoly and expected results of the suggested CREST framework for proactive semantic risk detection and correction in Neuro-Symbolic AI pipelines are described.
+
+\section{Project Overview}
+
+At present, Neuro-Symbolic(Nesy) Artificial Intelligence has emerged as a leading example for building trustworthy and interpretable reasoning systems. Make a combination of the linguistic flexibility of Large Language Models(LLMs) with the formal correctness which is guaranteed by symbolic solvers. A populer design employs an LLM to convert natural alnguage statements into First Order Logic (FOL),which is subsequently sent to a symbolic theorem prover such as   Z3~\cite{demoura2008z3} for deductive inference. Although this design offers the best of both worlds,it hides a critical vulnerability at the translation boundary: the symbolic solver has no way to identify errors  when the LLM generates a syntactically valid but semantically flawed FOL formula .Without giving any warning,the solver returns an inaccurate conclusion after reasoning faithfully over an incorrect premise. We call these events as silent semantic failure,which impugns the very trustworthiness that Nesy systems were designed to provide.
+
+In order to  fill this fundamental gap,this research presents \textbf{CREST} (\textbf{Corrective Risk Estimation for Symbolic Translation}), a proactive, training-free framework that intercepts LLM-generated FOL translations before they reach the symbolic solver. CREST determines the underlying error type, calculates a quantitative semantic risk score and directs high risk translations through a focused feedback driven correction loop. Combining deterministic predicate consistency checking, back translation semantic loss measurement and an LLM as judge diagnosis module, CREST serves as a semantic safety gate applicable to any off-the-shelf NeSy pipeline without requiring model retraining.
+
+\section{Motivation}
+
+NeSy systems are now being used more and more in critical fields where a single incorrect translation could have serious consequences. An omitted negation in a clinical statement such as patient has no history of penicillin allergy might be silently reversed in medical decision support. This can produce a wrong drug recommendation. In law, trying to follow the rules can actually turn into breaking them. If someone misunderstands a strict "pick only one" rule as a 'you can pick both' rule. A quantifier scope error causes a tight threshold requirement in financial regulation to change into a permissive rule. Through the same inference engine the symbolic solver receives both correct and incorrect translations to the symbolic solver in each domain,resulting in conclusions with identical apparent confidence and no cautions.2
+
+The main problem of this vulnerability is the well established. Inaccuracy of LLM self-assessment for structured symbolic outputs. On FOL translation tasks,LLM often show overconfidence,generating high confidence results even when the underlying translation is completely wrong~\cite{savage2024do, yang2024harnessing}. Current correction techniques can be divided into two categories: reactive approaches that wait for the solver to produce error messages before attempting revision~\cite{pan2023logiclm}, and training-based techniques that require large enough expert annotated FOL corpora ~\cite{thatikonda2024strategies}. Sementtic translation risk is not estimated before solver execution. The main issue this research attempts to solve is developing such a proactive, training free safety system.
+
+\section{Objectives}
+
+The main goal of this research is to design,propose and empirically support a proactive,training free framework that intercepts and fixes semantically inaccurate LLM to FOL translations before they get to a symbolic solver. The following are the precise goal:
+
+\begin{enumerate}
+    \item To prove empirically that internal confidence signals cannot function as a safety gate in Neuro Symbolic pipelines and that LLM self reported confidence is an unreliable predictor of NL to FOL translations correctness.
+
+    \item To determine and describe \textbf{cross-premise predicate naming inconsistency} as a quantifiable, predictable risk signal associated with translation instability in a variety of  multi-premise FOL reasoning tasks.
+
+    \item To empirically show that when given semantically wrong but syntactically valid FOL,symbolic solvers like Z3 display slient semantic failure,leading to incorrect conclusions without issuing an error or warning.  
+
+    \item To creat the \textbf{CREST framework}, a multi-component proactive pipeline that uses LLM as judge error diagnosis,deteministic predicate consistency checking, and back translation semantic loss measurement to assess translation risk prior to solver execution.
+
+    \item To develop a \textbf{feedback-driven corrective re-translation mechanism} that allows the forward translator to fix high risk translations before symbolic inference by converting diagnostic outputs into targeted prompts.
+\end{enumerate}
+
+\section{Methodology}
+
+The methodology of this project is organized into three coordinated layers :
+
+\begin{enumerate}
+    \item \textbf{Empirical Gap Characterization:} Three failure modes are identified  through a series of pilot experiments on the FOLIO benchmark~\cite{han2024folio} the quiet failure of Z3 on semantically incorrect FOL,the large cross premise predicate name inconsistency and the unreliability of LLM confidence on NL to FOL translation and the quiet failure of Z3 on semantically wrong FOL.The empirical foundation for the suggested framework is established by these experiments.
+
+    \item \textbf{Proactive Risk Estimation Layer:} To remove same direction bias , a back translation module utilize a various model than the forward translator in order to translate generated FOL back into natural language.BERTScore is used to compare the back translated text with the original human written input~\cite{zhang2020bertscore},capturing the meaning level changes that surface measures such as BLEU and ROUGE systematically overlook.Targeting the particular cross premise failure mode found in earlier research, a parallel deterministic  predicate consistency checker finds predicate names that are lexically inconsistent but semantically equivalent across all premises of a tale. ~\cite{thatikonda2024strategies}.
+
+    \item \textbf{Diagnostic and Corrective Layer:} When translations exceed the risk threshold, an LLM as a judge component receives them and produces a structured error diagnosis that details the type,severity and location of the issue within the FOL . Based on this diagnosis,the forward translator receives a personalized feedback prompt for retranslation. Translations below the threshold proceed directly to the Z3 solver ,avoiding the corrective layer.
+\end{enumerate}
+
+\section{Project Outcome}
+
+The anticipated outcome of the research is complete, training-free framework for proactive semantic risk detection and correction at the LLM-to-symbolic translation boundary. This is supported by pilot experiments that motivate each design decision. Because CREST is domain-independent and solver agnostic , it can be deployed over any NeSy pipeline that changes natural language into formal symbolic representation prior to interfacae. Ultimately the finished product proves a fundamental proof of concept for a novel family of training free semantic safety methods that supplement current reactive correction techniques rather than taking their place.
+
+\section{Organization of the Report}
+
+The rest of this report is structured as follows.In \textbf{Chapter 2}  the state of the art  in NL to FOL translation, NeSy reasoning, uncertainty quantification and self-refinement for symbolic outputs is surveyed, and the gaps motivating CREST are identified.In  \textbf{Chapter 3}  the proposed CREST architecture is described.In \textbf{Chapter 4}  the pilot experiments are presented. Engineering standards, design constraints, and cost analysis are discussed in \textbf{Chapter 5} .Contribution is summarised, acknowledgment of pilot-stage limitations, and future assessment objective are outlined in \textbf{Chapter 6} 

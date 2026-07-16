@@ -1,0 +1,115 @@
+\chapter{Background}
+
+This chapter provides the foundational concepts needed to understand the remaining part of the report, provides a comprehensive literature review of related research and similar applications in the NeSy AI and NL to FOL translation literature, and develops the gap analysis motivating the proposed CREST framework.
+
+\section{Preliminaries}
+
+\textbf{Neuro-Symbolic (NeSy) AI} refers to architectures that combine sub-symbolic neural reasoning with symbolic logical inference. The neural component manages flexible natural language understanding, while the symbolic component enforces formal correctness over structured representations~\cite{colelough2025nesyreview}.
+
+\textbf{First-Order Logic (FOL)} is a formal language for representing statements with quantifiers, predicates, and logical connectives, providing an exact, machine-verifiable representation of natural language meaning. Standard FOL builds include universal quantification ($\forall$), existential quantification ($\exists$), negation ($\neg$), conjunction ($\wedge$), disjunction ($\vee$), and implication ($\rightarrow$).
+
+\textbf{Large Language Models (LLMs)} are deep neural networks trained on large text bodies capable of complex natural language understanding and generation. Within NeSy pipelines, LLMs serve as semantic parsers translating natural language premises into FOL, but prior work has consistently shown they make systematic errors when generating structured symbolic outputs~\cite{yang2024harnessing, thatikonda2024strategies}.
+
+\textbf{NL to FOL Translation} is the task of converting natural language statements into corresponding FOL formulas, representing the critical interface between the neural and symbolic components of any NeSy reasoning pipeline. Errors can be syntactic, violating FOL grammar, or semantic, where the formula is grammatically valid but fails to keep the meaning of the original statement.
+
+\textbf{Symbolic Theorem Provers} are deterministic systems that perform formal logical inference over symbolic representations. Z3~\cite{demoura2008z3}, a Satisfiability Modulo Theories (SMT) solver from Microsoft Research is the standard symbolic engine in modern NeSy pipelines. Z3 verifies logical consequences only with respect to its input formulas and has no mechanism for assessing whether those formulas correctly capture the intended meaning of the original natural language premises.
+
+\textbf{Uncertainty Quantification (UQ)} refers to techniques for estimating model confidence in its predictions. In structured generation settings such as FOL translation, standard UQ methods become less reliable because the output space is combinatorial and semantically structured rather than smoothly distributed.
+
+\textbf{BERTScore} is an approach that is  used to compare two sentences and determine how similar their meanings are. ~\cite{zhang2020bertscore}. Unlike n-gram-based metrics such as BLEU and ROUGE, BERTScore captures meaning-level changes including the loss of critical operators such as negation, making it well-suited for back-translation comparison scenarios.
+
+\textbf{Back-Translation Consistency} is a technique where the system translates the output back into the source representation and comparing it against the original input. In the NL to FOL context, this produces a natural language paraphrase of the generated FOL that can be compared against the original human-written premise to estimate semantic preservation.
+
+\textbf{LLM-as-Judge} refers to the use of a large language model as an evaluator that examines errors or assesses the quality of outputs produced by another model. This paradigm has emerged as a flexible alternative to rule-based classifiers for detecting nuanced or previously unobserved error types in structured generation tasks.
+
+\textbf{The FOLIO Dataset} is a human annotated benchmark for FOL reasoning in natural language, consisting of 1,430 expert-written examples paired with ground-truth FOL annotations~\cite{han2024folio}. FOLIO's combination of natural language richness, multi-premise structure, and gold-standard FOL annotations makes it the standard benchmark for evaluating NL to FOL translation correctness and cross-premise consistency.
+
+\section{Literature Review}
+
+\subsection{Similar Applications}
+
+Several systems and frameworks have been developed with objectives related to integrating natural language understanding with formal symbolic reasoning in NeSy pipelines.
+
+\textbf{Logic-LM}~\cite{pan2023logiclm} is one of the most influential frameworks combining LLMs with symbolic solvers. The system translates natural language problems into symbolic formulations and delegates inference to deterministic solvers such as Z3 and Prover9, achieving substantial improvements over chain-of-thought prompting across five reasoning benchmarks. It introduces a self refinement module that uses solver error messages to revise incorrect formalizations. 
+
+\textbf{LINC}~\cite{olausson2023linc} combines language models with FOL theorem provers for natural language inference. The system translates premises and hypotheses into FOL and uses an external prover for entailment, reporting complementary failure modes between purely neural and neuro-symbolic approaches. No mechanism is provided to estimate semantic risk before prover invocation.
+
+\textbf{LogicLLaMA and MALLS}~\cite{yang2024harnessing} address NL to FOL translation through supervised fine-tuning of LLaMA-7B and LLaMA-13B on 28,000 GPT-4-generated NL-FOL pairs. While demonstrating GPT-4-level performance at reduced computational cost, the approach requires extensive training data, operates at the single-statement level, and does not address cross-premise consistency errors that arise in multi-premise reasoning.
+
+\textbf{Strategies for Improving NL to FOL Translation}~\cite{thatikonda2024strategies} introduce ProofFOL and propose a multi-stage filtering pipeline with format correction, syntax validation, and semantic filtering. The authors fine-tune smaller models and explicitly acknowledge that realistic logical reasoning requires consistency of NL to FOL translations in predicate naming and logical operator usage across statements. However, their verifier requires fine-tuning on perturbation data, making it inapplicable as a training-free inference-time safety layer over arbitrary NeSy pipelines.
+
+\textbf{SelfCheckGPT}~\cite{manakul2023selfcheck} demonstrates that consistency across multiple sampled outputs can serve as a hallucination detection signal for open ended language generation, using BERTScore, n-gram overlap, and natural language inference to assign hallucination scores. While the consistency principle is general, the evaluation focuses entirely on unstructured text. Direct transfer to structured FOL generation, where the output space is governed by formal semantics, stays underexplored.
+
+Unlike the systems above, CREST integrates back-translation semantic loss measurement, deterministic predicate consistency checking, and LLM-as-Judge error diagnosis into a unified proactive pipeline operating before the symbolic solver executes and requiring no fine tuning of any model component. This combination addresses the core limitation left unresolved by all existing systems.
+
+\subsection{Related Research}
+
+Recent advancements across NeSy AI, NL to FOL translation, and consistency based uncertainty quantification collectively appreciate the present work.
+
+Colelough and Regli~\cite{colelough2025nesyreview} conducted a PRISMA based systematic review of 167 NeSy papers from 2020 to 2024, finding that meta-cognition, the capacity of an AI system to monitor and adjust its own reasoning , appears in only five percent of reviewed papers. This finding directly motivates mechanisms that detect and correct translation errors before they actually propagate into symbolic inference.
+
+A central line of work has focused on the quality and reliability of the NL to FOL translation step. Yang et al.~\cite{yang2024harnessing} demonstrated that even the most capable LLMs make systematic errors when translating single natural language statements into FOL. Thatikonda et al.~\cite{thatikonda2024strategies} expanded this to multi-premise scenarios, observing that cross-premise consistency in predicate naming and logical operator usage is both necessary for correct reasoning and consistently violated. Their work is the closest to ours in identifying predicate inconsistency as a critical failure mode but the proposed solution is training-based rather than proactive at inference time. Pan et al.~\cite{pan2023logiclm} and Olausson et al.~\cite{olausson2023linc} both demonstrated that reactive correction triggered by solver failure is insufficient, since syntactically valid but semantically wrong FOL passes their verification mechanisms undetected.
+
+On the uncertainty quantification side, Savage et al.~\cite{savage2024do} found that LLMs frequently exhibit overconfidence in clinical decision tasks, producing high-certainty outputs even when the judgment is ambiguous,  a calibration failure that generalizes directly to the NL-to-FOL translation boundary. Manakul et al.~\cite{manakul2023selfcheck} showed that consistency-based sampling can detect hallucinations in open ended text, but applying this principle to structured FOL outputs requires care, since two semantically distinct FOL formulas may exhibit high token level similarity while two logically equivalent formulas may appear lexically different.
+
+For measuring semantic preservation, BERTScore~\cite{zhang2020bertscore} has become a widely taken metric, leveraging contextual embeddings to capture meaning level differences that n-gram metrics miss. The FOLIO benchmark~\cite{han2024folio}, with its expert-annotated multi-premise stories and mechanically verifiable ground truth FOL annotations, provides the most suitable evaluation platform for studying both translation correctness and cross premise consistency.
+
+Despite these collective advancements, no existing framework combines proactive risk estimation, deterministic cross premise consistency checking, and training free LLM-based error diagnosis into a unified pipeline that intercepts semantically incorrect FOL before symbolic inference. This is the specific gap CREST is designed to fill.
+
+\section{Gap Analysis}
+
+Recent advancements in NL to FOL translation, neuro-symbolic reasoning, and consistency based uncertainty quantification have demonstrated meaningful progress across individual components. However, several critical gaps persist that significantly limit their applicability to safe, training free deployment in real world Neuro-Symbolic pipelines:
+
+\begin{itemize}
+
+    \item Existing error correction strategies in NeSy pipelines are  \textbf{reactive}, relying on the symbolic solver to return error messages that subsequently trigger LLM based revision. This means that semantically incorrect but syntactically valid FOL passes through the verification mechanism undetected, since the solver verifies logical entailment over its input rather than the semantic faithfulness of the input to the original natural language.
+
+    \item LLM self reported confidence has been shown to be \textbf{anti correlated with translation safety} in structured generation tasks, with high confidence outputs often being wrong. No existing NeSy pipeline incorporates an external risk estimation mechanism that operates independently of the LLM's own confidence signals at the translation boundary.
+
+    \item \textbf{Cross premise predicate naming inconsistency} has been acknowledged in the literature as a critical semantic failure mode in multi premise NL to FOL translation, but existing solutions require supervised fine tuning on annotated FOL datasets. There is an absence of training free mechanisms that can detect predicate drift across premises at inference time.
+
+    \item Consistency based hallucination detection methods such as SelfCheckGPT have been developed for \textbf{open ended natural language generation}, but their direct application to structured FOL generation is non trivial. Two semantically distinct FOL formulas may exhibit high token level similarity, and two semantically equivalent FOL formulas may exhibit low token level similarity, undermining naive consistency based risk signals.
+
+    \item Most surface level similarity metrics such as BLEU and ROUGE are \textbf{insensitive to meaning level changes} such as the loss of negation or the inversion of quantifier scope. These metrics are therefore inadequate for measuring semantic preservation in back translation based risk estimation scenarios, where the most critical error modes involve single token operator changes that completely invert the meaning of a premise.
+
+    \item Existing self refinement frameworks for symbolic translation generate corrective prompts based on \textbf{generic solver error messages} rather than on structured semantic diagnostics. As a result, the corrective signal lacks specificity about the type, location, and severity of the underlying translation error, limiting the effectiveness of re-translation.
+
+    \item Symbolic theorem provers such as Z3 are \textbf{semantically blind} to the natural language origins of their input. When presented with a syntactically valid but semantically incorrect FOL formula; the solver returns a logically correct conclusion with respect to its input, producing an incorrect downstream answer with no error or warning. This phenomenon of silent semantic failure constitutes a fundamental safety vulnerability in any NeSy pipeline.
+
+\end{itemize}
+\begin{table}[h]
+\centering
+\label{tab:litreview}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|p{3.5cm}|p{3cm}|p{3cm}|p{3cm}|p{4.5cm}|}
+\hline
+\textbf{ Reference}& \textbf{Problem Addressed} & \textbf{Methodology} & \textbf{Tools \& Datasets} & \textbf{Identified Gaps} \\
+\hline
+~\cite{colelough2025nesyreview}& Mapping of NeSy research landscape & PRISMA-based systematic review of 167 papers across five research areas & 2020-2024 NeSy literature corpus& Meta cognition is the least explored area at five percent of papers; self-monitoring at translation boundary is essentially absent\\
+\hline
+~\cite{pan2023logiclm}& LLM-symbolic integration for faithful reasoning & LLM to FOL translation followed by symbolic solver inference with self-refinement loop& ProofWriter, PrOntoQA, FOLIO, LogicalDeduction, AR-LSAT & Self refinement is reactive and triggered only by solver errors; semantically wrong but solver valid FOL bypasses the loop\\
+\hline
+~\cite{olausson2023linc}& Neurosymbolic NL inference using LLMs and FOL provers & Translation of premises and hypotheses to FOL with external prover based entailment checking& FOLIO and ProofWriter & No proactive semantic risk assessment before prover invocation; consistency across translations is not measured \\
+\hline
+~\cite{yang2024harnessing}& Improving NL-to-FOL translation via fine-tuning & Fine-tuning LLaMA-7B/13B on GPT-4 generated synthetic NL-FOL pairs with LoRA& MALLS (28k pairs) & Sentence level focus; multi-premise consistency not addressed; requires significant training resources and annotated data\\
+\hline
+~\cite{thatikonda2024strategies}& Translation error reduction via fine-tuning and verification & Incremental fine-tuning with predicate and FOL verifiers; categorization of syntactic and semantic errors & ProofFOL, FOLIO, ProofWriter & Verifier requires fine tuning on perturbation data; not directly applicable as a training free safety layer over arbitrary NeSy pipelines\\
+\hline
+~\cite{manakul2023selfcheck}& Consistency-based hallucination detection in LLMs & Sampling based comparison using BERTScore, n-gram, and QA-based variants& WikiBio passages from GPT-3 & Designed for unstructured open-ended text; direct transfer to structured FOL outputs is non-trivial due to surface-vs-semantic mismatch \\
+\hline
+~\cite{savage2024do}& Reliability and calibration of LLM outputs & Systematic evaluation of LLM confidence calibration across clinical scenarios & Clinical decision benchmarks & Confirms LLM self-confidence is unreliable for safety-critical tasks; no proposed external risk signal for structured translation \\
+\hline
+~\cite{han2024folio}& Evaluation of NL-FOL reasoning and translation & Expert-annotated multi-premise stories with ground-truth FOL formulas verified by FOL engine & FOLIO (1,430 examples) & A benchmark rather than a detection or correction method; reveals translation errors but provides no mechanism for proactive intervention \\
+\hline
+~\cite{zhang2020bertscore}& Semantic-aware evaluation of generated text & Contextual embedding-based token similarity with precision, recall, and F1 & 363 MT and image captioning systems & A general purpose metric not applied to NeSy translation risk; known insensitivity to quantifier scope changes requires complementary signals\\
+\hline
+~\cite{demoura2008z3}& Formal symbolic inference & Satisfiability Modulo Theories solver for FOL with multiple background theories & Software verification benchmarks and academic NeSy pipelines & Verifies entailment over input formulas only; cannot detect that input FOL is semantically inconsistent with original NL premise\\
+\hline
+\end{tabular}%
+}
+\caption{Literature Review Summary with Identified Gaps}
+\end{table}
+
+\section{Summary}
+
+Research on translating natural language into formal logic, neurosymbolic reasoning, and using consistency to measure uncertainty has come a long way. We've seen real progress through end-to-end frameworks, models fine-tuned to catch errors, and sampling-based methods for spotting hallucinations. That said, there's still plenty left to figure out. Existing self refinement systems operate reactively after solver failure rather than proactively before execution. Fine-tuning based verifiers cannot serve as inference time safety layers over arbitrary pre existing pipelines. Consistency based detection methods have been validated on unstructured natural language, not structured symbolic outputs where the surface vs. semantic relationship is qualitatively different. Surface level metrics fail to detect critical meaning level changes such as negation loss and quantifier scope inversion. Crucially, no existing solution integrates back translation semantic loss measurement, deterministic predicate consistency checking, and structured LLM based error diagnosis into a coherent training free framework that intercepts semantically incorrect FOL before it reaches the symbolic solver. The proposed CREST framework directly addresses these crucial gaps.
