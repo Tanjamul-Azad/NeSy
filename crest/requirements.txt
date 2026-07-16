@@ -2,10 +2,14 @@
 #   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
 torch
 torchvision
+bitsandbytes
 
-z3-solver
 datasets
 huggingface_hub
 transformers
 accelerate
 sentence-transformers
+
+# grounder (Phase 1.4): Prover9 via NLTK, not Z3 -- see crest/grounding/fol_to_prover9.py
+# for why. Requires WSL (Ubuntu) on Windows to run the vendored Prover9 binary.
+nltk
