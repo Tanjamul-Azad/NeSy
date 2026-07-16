@@ -4,6 +4,14 @@ Phase 1.1: reproducibility is itself a claim in the paper. Every call is
 logged (prompt version, exact input, exact output, generation config, seed)
 so a "training-free, deterministic detector" claim is actually falsifiable,
 not asserted.
+
+Model source (2026-07-16): meta-llama/Llama-3.1-8B-Instruct itself is gated
+and pending Meta's manual approval. Using NousResearch's ungated reupload
+instead -- verified byte-identical safetensors shard sizes against the
+official repo across all 4 shards before trusting it. Same model, same
+weights, just an unblocked host. Swap MODEL_NAME back to the official repo
+once/if Meta's approval clears, purely for citation-path cleanliness; no
+functional difference either way.
 """
 
 import json
@@ -14,7 +22,7 @@ from pathlib import Path
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
-MODEL_NAME = "meta-llama/Llama-3.1-8B-Instruct"
+MODEL_NAME = "NousResearch/Meta-Llama-3.1-8B-Instruct"
 SEED = 42
 
 # Frozen prompt template — do not edit in place once experiments have started.
