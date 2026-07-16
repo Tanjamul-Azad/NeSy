@@ -1,0 +1,19 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# model weights / checkpoints
+*.bin
+*.safetensors
+*.pt
+*.ckpt
+checkpoints/
+
+# raw data
+data/raw/
+data/processed/*
+!data/processed/.gitkeep
+
+experiments/logs/*
+!experiments/logs/.gitkeep
