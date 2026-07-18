@@ -2,6 +2,29 @@
 
 Reproduction steps: env setup, seeds, and run commands go here.
 
+## GPU-heavy work runs on Kaggle, not locally
+
+Decision (2026-07-18): loading Llama-3.1-8B-Instruct in 4-bit via bitsandbytes
+segfaulted reproducibly on this local Windows machine — crashed at the exact
+same tensor every time, across two CUDA versions (cu130, cu124) and multiple
+`device_map` configs. That pattern (identical crash point regardless of
+config) points to a Windows-specific bitsandbytes bug, not a config or
+hardware problem here. Also, local hardware is genuinely tight for this work:
+8GB VRAM and only ~16GB system RAM (often <5GB free with normal apps open).
+
+**Model loading, inference, and training now run on Kaggle** (free T4x2/P100,
+16GB VRAM, Linux — sidesteps the Windows bitsandbytes issue and gives more
+headroom). Use `crest/scripts/crest_kaggle.ipynb`: it clones this repo fresh
+into the Kaggle session, installs the non-torch dependencies (Kaggle's base
+image already has torch+CUDA configured — don't reinstall it), and runs the
+harness. GitHub stays the single source of truth; the notebook can push
+results back to it directly (see its last cell) using a Kaggle Secret, not
+this repo, for the token.
+
+The local venv (below) still exists for the parts that don't need heavy
+GPU/RAM work: the FOLIO loader, the Prover9 grounder, code editing, and any
+CPU-only debugging.
+
 ## Setup
 
 Virtual env lives at `D:\FYDP\.venv` (not under `crest/`), created with the system
