@@ -79,6 +79,8 @@ class LlamaHarness:
             model_name,
             quantization_config=quant_config,
             device_map="auto",
+            low_cpu_mem_usage=True,
+            torch_dtype=torch.float16,
         )
         self.model.eval()
 
