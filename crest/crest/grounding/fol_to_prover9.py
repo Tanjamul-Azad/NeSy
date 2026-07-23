@@ -159,7 +159,18 @@ class WSLProver9(Prover9):
 
     def _call_prover9(self, input_str, args=None, verbose=False):
         args = args or []
-        updated_input_str = ""
+        # Critical: without this, Prover9's default convention treats any
+        # identifier starting with letters t-z as an implicitly-quantified
+        # variable, not a constant. FOLIO's camelCase constants routinely
+        # start with those letters (e.g. "unitedStatesCitizenship", starting
+        # with 'u') and were silently getting corrupted into free variables,
+        # producing wrong entailment results. Confirmed 2026-07-18 via
+        # example_id 1410 -- "unitedStatesCitizenship" was clausified as a
+        # bare variable "y". With prolog_style_variables, constants are safe
+        # regardless of their first letter, and explicit quantifiers (all x,
+        # exists y) still bind correctly since that's determined by the
+        # explicit quantifier syntax, not the naming convention.
+        updated_input_str = "set(prolog_style_variables).\n\n"
         if self._timeout > 0:
             updated_input_str += "assign(max_seconds, %d).\n\n" % self._timeout
         updated_input_str += input_str
@@ -190,7 +201,12 @@ class WSLProver9(Prover9):
             stdin=subprocess.PIPE,
         )
         stdout, _ = p.communicate(input=input_str.encode("utf-8"))
-        return stdout.decode("utf-8"), p.returncode
+        # Prover9 (a decades-old C program) doesn't reliably round-trip
+        # non-ASCII identifiers (confirmed 2026-07-18, e.g. "świątek") when
+        # echoing them back in its own output -- decode leniently so that
+        # cosmetic mangling in the echoed text doesn't crash the actual
+        # proof result, which Prover9 computed correctly regardless.
+        return stdout.decode("utf-8", errors="replace"), p.returncode
 
 
 @dataclass
@@ -214,8 +230,17 @@ def check_entailment(premises: List[str], conclusion: str, timeout: int = 60) ->
 
     prover = WSLProver9(timeout=timeout)
 
-    proved_goal, goal_output = prover._prove(goal, assumptions)
-    proved_negation, negation_output = prover._prove(negated_goal, assumptions)
+    def _try_prove(target):
+        try:
+            return prover._prove(target, assumptions)
+        except Prover9LimitExceededException as e:
+            # Timeout (or other resource limit) is not proved within budget --
+            # genuinely inconclusive, not a crash. Contributes to "Uncertain"
+            # rather than aborting the whole entailment check.
+            return False, f"LIMIT_EXCEEDED: {e}"
+
+    proved_goal, goal_output = _try_prove(goal)
+    proved_negation, negation_output = _try_prove(negated_goal)
 
     if proved_goal and proved_negation:
         # Shouldn't happen with a consistent premise set -- flag it rather

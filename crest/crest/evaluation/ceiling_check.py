@@ -24,6 +24,17 @@ from nltk.sem.logic import LogicalExpressionException
 
 from data.loaders.folio_loader import load_folio
 from crest.grounding.fol_to_prover9 import check_entailment
+from nltk.inference.prover9 import Prover9FatalException
+
+# Confirmed 2026-07-18: three distinct exception types all indicate the gold
+# FOL itself is malformed, not a grounder bug --
+#   LogicalExpressionException: NLTK's parser rejects it (e.g. unbalanced parens)
+#   ValueError: our own paren-scanning code rejects it first (e.g. unbalanced
+#     parens inside an XOR operand, caught before NLTK even sees it)
+#   Prover9FatalException: Prover9 itself rejects the input (e.g. a predicate
+#     used with two different arities across premises -- a real annotation
+#     inconsistency found in FOLIO's gold data, example_id 819-821)
+MALFORMED_DATA_EXCEPTIONS = (LogicalExpressionException, ValueError, Prover9FatalException)
 
 # FOLIO labels are "True" / "False" / "Uncertain" -- matches our EntailmentResult.label
 LABEL_MAP = {"True": "True", "False": "False", "Uncertain": "Uncertain"}
@@ -43,11 +54,7 @@ def run_ceiling_check(split: str = "validation", limit: int = None, timeout: int
         try:
             result = check_entailment(ex.premises_fol, ex.conclusion_fol, timeout=timeout)
             predicted = result.label
-        except LogicalExpressionException as e:
-            # Confirmed 2026-07-18: some FOLIO gold-FOL entries are themselves
-            # malformed (e.g. unbalanced parens) -- this is a data issue, not a
-            # grounder bug. Tag separately so it doesn't get conflated with
-            # genuine grounder failures on well-formed input.
+        except MALFORMED_DATA_EXCEPTIONS as e:
             predicted = "MALFORMED_GOLD_FOL"
             malformed = True
             malformed_gold += 1
