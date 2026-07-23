@@ -57,34 +57,82 @@ def _find_matching_close(text: str, open_idx: int) -> int:
     raise ValueError(f"Unbalanced parentheses from index {open_idx} in: {text}")
 
 
-def _find_enclosing_parens(text: str, pos: int) -> tuple:
-    depth = 0
-    for i in range(pos, -1, -1):
-        if text[i] == ")":
-            depth += 1
-        elif text[i] == "(":
-            if depth == 0:
-                return i, _find_matching_close(text, i)
-            depth -= 1
-    raise ValueError(f"No enclosing parentheses for position {pos} in: {text}")
+def _scan_term_right(text: str, pos: int) -> tuple:
+    """Find the immediate FOL term starting at/after `pos` (skipping
+    whitespace): either a parenthesized group, a predicate call
+    `Name(args)`, or a bare atom, optionally negation-prefixed.
+    """
+    i = pos
+    while i < len(text) and text[i].isspace():
+        i += 1
+    start = i
+    if i < len(text) and text[i] == "¬":
+        i += 1
+        while i < len(text) and text[i].isspace():
+            i += 1
+    if i < len(text) and text[i] == "(":
+        return start, _find_matching_close(text, i) + 1
+    while i < len(text) and (text[i].isalnum() or text[i] == "_"):
+        i += 1
+    if i < len(text) and text[i] == "(":
+        return start, _find_matching_close(text, i) + 1
+    return start, i
+
+
+def _scan_term_left(text: str, pos: int) -> tuple:
+    """Find the immediate FOL term ending at/before `pos` (skipping
+    whitespace going backward) -- mirror of `_scan_term_right`.
+    """
+    i = pos
+    while i > 0 and text[i - 1].isspace():
+        i -= 1
+    end = i
+    if i > 0 and text[i - 1] == ")":
+        depth = 0
+        j = i - 1
+        while j >= 0:
+            if text[j] == ")":
+                depth += 1
+            elif text[j] == "(":
+                depth -= 1
+                if depth == 0:
+                    break
+            j -= 1
+        open_idx = j
+        k = open_idx
+        while k > 0 and (text[k - 1].isalnum() or text[k - 1] == "_"):
+            k -= 1
+        term_start = k if k < open_idx else open_idx
+    else:
+        j = i
+        while j > 0 and (text[j - 1].isalnum() or text[j - 1] == "_"):
+            j -= 1
+        term_start = j
+    m = term_start
+    while m > 0 and text[m - 1].isspace():
+        m -= 1
+    if m > 0 and text[m - 1] == "¬":
+        term_start = m - 1
+    return term_start, end
 
 
 def _expand_xor(text: str) -> str:
     """FOLIO uses '⊕' (XOR), which NLTK's logic parser has no primitive for.
-    Rewrite '(A ⊕ B)' as '-((A)<->(B))' using the enclosing parens around
-    each XOR occurrence, so nesting is handled correctly rather than via a
-    naive regex substitution.
+    Rewrite the immediate left/right operands of each '⊕' as
+    '-((left)<->(right))' -- found by scanning for the adjacent FOL term on
+    each side, not by assuming '⊕' always sits inside its own dedicated
+    enclosing parens. Confirmed 2026-07-18 (FOLIO example_id 1364) that it
+    doesn't always: '... → Cute(rockie) ⊕ Skittish(rockie)' has no wrapping
+    parens around the XOR at all.
     """
     while "⊕" in text:
         idx = text.index("⊕")
-        open_idx, close_idx = _find_enclosing_parens(text, idx)
-        inner = text[open_idx + 1 : close_idx]
-        parts = inner.split("⊕")
-        if len(parts) != 2:
-            raise ValueError(f"Expected exactly one '⊕' in enclosing parens, got: {inner}")
-        left, right = parts[0].strip(), parts[1].strip()
+        left_start, left_end = _scan_term_left(text, idx)
+        right_start, right_end = _scan_term_right(text, idx + 1)
+        left = text[left_start:left_end].strip()
+        right = text[right_start:right_end].strip()
         replacement = f"-(({left})<->({right}))"
-        text = text[:open_idx] + replacement + text[close_idx + 1 :]
+        text = text[:left_start] + replacement + text[right_end:]
     return text
 
 
