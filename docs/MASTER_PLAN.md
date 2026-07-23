@@ -14,6 +14,8 @@ date: "July 2026"
 
 > **Governing principle:** every phase below exists to answer a specific research question or to de-risk a specific claim. Nothing is built "because the poster says so." If a phase stops making sense after new evidence, the plan changes — the plan does not override the evidence.
 
+> **Standing rule (2026-07-18):** this document is the single source of truth for what the plan actually is, across every session and every chat. Whenever a real plan change happens — a phase's approach changes, a tool/library decision changes, a gate's threshold changes, something gets unblocked or reblocked — update this document immediately, in the same session, not as a followup. Don't let the plan drift out of sync with what's actually being done.
+
 ---
 
 ## How to read this document
