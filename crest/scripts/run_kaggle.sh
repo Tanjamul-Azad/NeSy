@@ -26,6 +26,12 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+# Syntax-check first. A Kaggle run burns GPU quota and ~10 minutes of model
+# loading before it reaches the experiment cell, and a run has already been
+# lost to a plain SyntaxError in a notebook cell. This check costs ms.
+python "${REPO_ROOT}/scripts/validate_notebook.py" \
+    "${REPO_ROOT}/scripts/kaggle_kernel/crest_kaggle.ipynb"
+
 kaggle kernels push -p "${REPO_ROOT}/scripts/kaggle_kernel" --accelerator NvidiaTeslaT4
 
 echo
