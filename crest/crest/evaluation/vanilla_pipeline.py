@@ -101,6 +101,7 @@ def run_vanilla_pipeline(
     out_path: str = None,
     harness: LlamaHarness = None,
     mode: str = "story",
+    few_shot: bool = True,
     sample: str = "random",
     sample_seed: int = 42,
 ):
@@ -141,7 +142,7 @@ def run_vanilla_pipeline(
         if mode == "story":
             try:
                 translated_premises, translated_conclusion = harness.translate_story(
-                    ex.premises, ex.conclusion
+                    ex.premises, ex.conclusion, few_shot=few_shot
                 )
             except StoryFormatError as e:
                 # Unparseable output is a LOUD failure -- visibly broken
@@ -161,7 +162,12 @@ def run_vanilla_pipeline(
                 predicted_label=None,
                 outcome="loud_failure",
                 error=f"StoryFormatError: {format_error}",
-                failure_stage="translation_format",
+                # Truncation is a harness budget problem, not a model
+                # translation failure -- keep them in separate bins so a
+                # misconfiguration can never inflate a reported rate.
+                failure_stage=("translation_truncated"
+                               if getattr(format_error, "truncated", False)
+                               else "translation_format"),
             )
         else:
             result = classify_example(
@@ -196,8 +202,10 @@ def run_vanilla_pipeline(
     print(f"\n=== Vanilla pipeline on {split} (n={summary['n']}, mode={mode}) ===")
     print(f"correct: {summary['correct']} ({summary['accuracy']:.1%})")
     print(f"loud_failure: {summary['loud_failure']} ({summary['loud_failure_rate']:.1%})")
-    print(f"  - translation_format: {summary['loud_failure_translation_format']}")
-    print(f"  - fol_parse:          {summary['loud_failure_fol_parse']}")
+    print(f"  - translation_format:    {summary['loud_failure_translation_format']}")
+    print(f"  - translation_truncated: {summary['loud_failure_translation_truncated']}"
+          f"   (harness token budget, NOT a model error)")
+    print(f"  - fol_parse:             {summary['loud_failure_fol_parse']}")
     print(f"silent_failure: {summary['silent_failure']} ({summary['silent_failure_rate']:.1%})")
     print(
         f"silent_failure_rate_excluding_loud: "
@@ -210,12 +218,14 @@ def run_vanilla_pipeline(
         # Mode is in the filename: a "story" run and a "per_premise" ablation
         # of the same split are different experiments and must not overwrite
         # each other.
+        shot = "fewshot" if few_shot else "zeroshot"
         out_path = (PROJECT_ROOT / "experiments" / "logs"
-                    / f"vanilla_pipeline_{mode}_{split}{suffix}.json")
+                    / f"vanilla_pipeline_{mode}_{shot}_{split}{suffix}.json")
     out_file = Path(out_path)
     out_file.parent.mkdir(parents=True, exist_ok=True)
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump({"split": split, "limit": limit, "mode": mode,
+                   "few_shot": few_shot,
                    "sample": sample, "sample_seed": sample_seed,
                    "summary": summary, "results": records}, f, indent=2, ensure_ascii=False)
     print(f"Full results written to {out_file}")
@@ -232,6 +242,8 @@ if __name__ == "__main__":
     parser.add_argument("--timeout", type=int, default=60)
     parser.add_argument("--log-path", default=None)
     parser.add_argument("--out-path", default=None)
+    parser.add_argument("--zero-shot", action="store_true",
+                        help="ablation: use the v2 zero-shot prompt instead of v3 few-shot")
     parser.add_argument(
         "--sample", default="random", choices=["random", "head"],
         help="random = seeded representative subset across stories (default); "
@@ -251,6 +263,7 @@ if __name__ == "__main__":
         log_path=args.log_path,
         out_path=args.out_path,
         mode=args.mode,
+        few_shot=not args.zero_shot,
         sample=args.sample,
         sample_seed=args.sample_seed,
     )

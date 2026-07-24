@@ -117,6 +117,9 @@ def summarize(results: List[ClassifiedResult]) -> dict:
         "loud_failure_translation_format": sum(
             r.failure_stage == "translation_format" for r in results
         ),
+        "loud_failure_translation_truncated": sum(
+            r.failure_stage == "translation_truncated" for r in results
+        ),
         "loud_failure_fol_parse": sum(r.failure_stage == "fol_parse" for r in results),
         "accuracy": correct / n if n else 0.0,
         "loud_failure_rate": loud / n if n else 0.0,
