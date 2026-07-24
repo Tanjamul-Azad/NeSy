@@ -1,0 +1,42 @@
+{
+  "split": "validation",
+  "limit": 1,
+  "mode": "story",
+  "few_shot": true,
+  "sample": "random",
+  "sample_seed": 42,
+  "summary": {
+    "n": 1,
+    "correct": 1,
+    "loud_failure": 0,
+    "silent_failure": 0,
+    "loud_failure_translation_format": 0,
+    "loud_failure_translation_truncated": 0,
+    "loud_failure_fol_parse": 0,
+    "accuracy": 1.0,
+    "loud_failure_rate": 0.0,
+    "silent_failure_rate": 0.0,
+    "silent_failure_rate_excluding_loud": 0.0
+  },
+  "results": [
+    {
+      "example_id": "802",
+      "story_id": "318",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (AiringAt(x, 8pm, monday) ∧ GivesOutRosesOnTV(x))",
+        "∀x (GivesOutRosesOnTV(x) → IsEpisodeOf(x, theBachelor))",
+        "PortraysLivesOfRealPeople(theBachelor)",
+        "∀x (PortraysLivesOfRealPeople(x) → IsRealityTVShow(x))",
+        "Show(breakingBad)",
+        "¬IsRealityTVShow(breakingBad)"
+      ],
+      "translated_conclusion": "∃y (AiringAt(breakingBad, 8pm, monday) ∧ Show(breakingBad))",
+      "elapsed_sec": 4.56
+    }
+  ]
+}
