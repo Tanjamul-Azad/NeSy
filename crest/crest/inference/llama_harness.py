@@ -78,6 +78,102 @@ STORY_PROMPT_TEMPLATE = (
     "FOL translations:\n"
 )
 
+# v3 (whole-story, FEW-SHOT) -- matches the literature standard. Logic-LM and
+# LINC both prompt with worked demonstrations, not bare instructions.
+#
+# Motivation is empirical, not stylistic: the v2 zero-shot run (n=50) scored
+# 37.9% accuracy among gradeable examples against a 33.3% chance level and a
+# 34.0% majority-class baseline -- i.e. at chance. Reading the actual output
+# showed the model didn't know FOLIO's *conventions* rather than failing at
+# logic: it emitted things like `Knowledge(K) ∧ Book(B) → Contains(B, K)`
+# (uppercase letters used as if variables, no quantifier at all) and
+# `Reads(H, "Walden" by Henry Thoreau)` (raw English inside a term).
+# Demonstrations are the standard fix for convention-mismatch of that kind.
+#
+# The demonstrations come from FOLIO's TRAIN split (never validation -- that
+# would contaminate the test set) and every one was verified by running its
+# gold FOL through our own Prover9 grounder and confirming it reproduces the
+# gold label, so a demo cannot teach a broken NL->FOL mapping.
+#
+# Deliberately EXCLUDED: train example_id 251/252, whose gold FOL contains
+# `Residentof` in one premise and `ResidentOf` in another. That case mismatch
+# is precisely the predicate-inconsistency failure CREST exists to detect --
+# using it as a demonstration would teach the model to commit the error we
+# are trying to measure.
+#
+# Like v2, this prompt still does NOT instruct the model to keep predicate
+# names consistent. The demonstrations model consistent naming by example,
+# which is how the literature's prompts behave; an explicit instruction would
+# be a separate condition (see the v2 note above).
+FEWSHOT_PROMPT_VERSION = "v3-story-fewshot"
+
+# train example_id 261 -- universal quantification, implication, conjunction,
+# camelCase multi-word constants.
+_DEMO_1 = (
+    "P1: If a legislator is found guilty of stealing government funds, they will be suspended from office.\n"
+    "P2: Tiffany T. Alston was a legislator in Maryland's House of Delegates from 2011 to 2013.\n"
+    "P3: Tiffany T. Alston was found guilty of stealing government funds in 2012.\n"
+    "C: Tiffany T. Alston was suspended from the Maryland House of Delegates.\n"
+    "\n"
+    "FOL translations:\n"
+    "P1: ∀x ((Legislator(x) ∧ StealsFunds(x)) → Suspended(x))\n"
+    "P2: Legislator(tiffanyTAlston)\n"
+    "P3: StealsFunds(tiffanyTAlston) ∧ StealsFundsInYr(tiffanyTAlston, yr2012)\n"
+    "C: Suspended(tiffanyTAlston)"
+)
+
+# train example_id 316 -- binary predicates, negation inside a quantified
+# formula, constants that are not people.
+_DEMO_2 = (
+    "P1: Ordinary is an unincorporated community.\n"
+    "P2: Located within Elliot County, Ordinary is on Kentucky Route 32.\n"
+    "P3: Ordinary is located northwest of Sandy Hook.\n"
+    "C: There are no unincorporated communities along Kentucky Route 32.\n"
+    "\n"
+    "FOL translations:\n"
+    "P1: UnincorporatedCommunity(ordinary)\n"
+    "P2: LocatedIn(ordinary, elliotCounty) ∧ On(ordinary, kentuckyRoute32)\n"
+    "P3: LocatedNorthwestOf(ordinary, sandyHook)\n"
+    "C: ∀x (On(x, kentuckyRoute32) → ¬UnincorporatedCommunity(x))"
+)
+
+# train example_id 1126 -- disjunction, negation, and FOLIO's ⊕ (XOR), which
+# the model otherwise never produces and which our grounder specifically
+# supports.
+_DEMO_3 = (
+    "P1: All people who regularly drink coffee are dependent on caffeine.\n"
+    "P2: People regularly drink coffee, or they don't want to be addicted to caffeine, or both.\n"
+    "P3: No one who doesn't want to be addicted to caffeine is unaware that caffeine is a drug.\n"
+    "P4: Rina is either a student who is dependent on caffeine, or she is not a student and not dependent on caffeine.\n"
+    "C: Rina doesn't want to be addicted to caffeine or is unaware that caffeine is a drug.\n"
+    "\n"
+    "FOL translations:\n"
+    "P1: ∀x (DrinkRegularly(x, coffee) → IsDependentOn(x, caffeine))\n"
+    "P2: ∀x (DrinkRegularly(x, coffee) ∨ ¬WantToBeAddictedTo(x, caffeine))\n"
+    "P3: ∀x (¬WantToBeAddictedTo(x, caffeine) → ¬AwareThatDrug(x, caffeine))\n"
+    "P4: ¬(IsDependentOn(rina, caffeine) ⊕ Student(rina))\n"
+    "C: ¬WantToBeAddictedTo(rina, caffeine) ∨ ¬AwareThatDrug(rina, caffeine)"
+)
+
+FEWSHOT_PROMPT_TEMPLATE = (
+    "Translate each natural language statement into a First-Order Logic "
+    "(FOL) formula.\n\n"
+    "Use standard FOL syntax: quantifiers (∀, ∃), connectives "
+    "(∧, ∨, ¬, →, ↔, ⊕), and predicates in the form "
+    "Predicate(arg1, arg2, ...). Write constants in lowerCamelCase and "
+    "variables as x, y, z.\n\n"
+    "Output exactly one line per statement, in the same order, each line "
+    "starting with the label shown (P1, P2, ..., C). Output only these "
+    "lines — no explanations, no commentary, no markdown.\n\n"
+    "Here are worked examples.\n\n"
+    "### Example 1\n" + _DEMO_1 + "\n\n"
+    "### Example 2\n" + _DEMO_2 + "\n\n"
+    "### Example 3\n" + _DEMO_3 + "\n\n"
+    "### Now translate these\n"
+    "{numbered_statements}\n\n"
+    "FOL translations:\n"
+)
+
 
 class StoryFormatError(ValueError):
     """The model's whole-story output couldn't be parsed into exactly the
@@ -87,7 +183,17 @@ class StoryFormatError(ValueError):
     treats ValueError as a "loud" malformed-input failure, and a translation
     the pipeline cannot even parse is loud by definition -- it visibly breaks
     rather than silently producing a confident wrong answer.
+
+    `truncated` distinguishes "the model ran out of token budget mid-output"
+    from "the model produced the wrong shape". Both are unparseable, but the
+    first is our own harness misconfiguration and must not be reported as a
+    model translation failure -- the n=50 run had exactly 2 of these, both
+    missing only the LAST premise, which is the signature of hitting the cap.
     """
+
+    def __init__(self, message, truncated: bool = False):
+        super().__init__(message)
+        self.truncated = truncated
 
 
 def _strip_markdown_fences(text: str) -> str:
@@ -202,7 +308,12 @@ class LlamaHarness:
         )
         self.model.eval()
 
-    def _generate(self, prompt: str, max_new_tokens: int) -> str:
+    def _generate(self, prompt: str, max_new_tokens: int) -> Tuple[str, bool]:
+        """Returns (text, hit_token_cap). The flag matters: output that ran
+        out of budget mid-formula is our misconfiguration, not a model
+        translation failure, and conflating the two would put a harness bug
+        into a reported prevalence number.
+        """
         torch.manual_seed(self.seed)
 
         messages = [{"role": "user", "content": prompt}]
@@ -222,16 +333,19 @@ class LlamaHarness:
             )
 
         input_length = inputs["input_ids"].shape[-1]
-        return self.tokenizer.decode(
-            output_ids[0][input_length:], skip_special_tokens=True
-        ).strip()
+        generated = output_ids[0][input_length:]
+        hit_cap = len(generated) >= max_new_tokens
+        text = self.tokenizer.decode(generated, skip_special_tokens=True).strip()
+        return text, hit_cap
 
     def translate(self, premise: str, max_new_tokens: int = 200) -> str:
         """Per-premise translation (prompt v1). ABLATION ONLY -- see the note
         on PROMPT_TEMPLATE above; use translate_story() for the primary
         vanilla baseline.
         """
-        raw_output = self._generate(PROMPT_TEMPLATE.format(premise=premise), max_new_tokens)
+        raw_output, _ = self._generate(
+            PROMPT_TEMPLATE.format(premise=premise), max_new_tokens
+        )
         fol = raw_output.strip()
         self._log(PROMPT_VERSION, premise, raw_output, fol)
         return fol
@@ -241,12 +355,20 @@ class LlamaHarness:
         premises: List[str],
         conclusion: str,
         max_new_tokens: int = None,
+        few_shot: bool = True,
     ) -> Tuple[List[str], str]:
-        """Whole-story translation (prompt v2) -- the primary vanilla baseline.
+        """Whole-story translation -- the primary vanilla baseline.
 
         All premises and the conclusion go in one prompt so the model can keep
         predicate and constant naming consistent across formulas, matching
         standard practice (Logic-LM, LINC, FOLIO).
+
+        `few_shot=True` (default) uses prompt v3 with worked demonstrations,
+        which is what the literature actually does. `few_shot=False` uses the
+        zero-shot v2 prompt and is retained as an explicit ablation --
+        "does the baseline's weakness come from missing demonstrations?" is a
+        real question, and the zero-shot n=50 run answers it with a measured
+        number rather than an assumption.
 
         Raises StoryFormatError if the output can't be parsed into exactly
         P1..Pn plus C. Callers should treat that as a loud failure, not
@@ -255,27 +377,35 @@ class LlamaHarness:
         numbered = "\n".join(
             [f"P{i + 1}: {p}" for i, p in enumerate(premises)] + [f"C: {conclusion}"]
         )
-        prompt = STORY_PROMPT_TEMPLATE.format(numbered_statements=numbered)
+        template = FEWSHOT_PROMPT_TEMPLATE if few_shot else STORY_PROMPT_TEMPLATE
+        version = FEWSHOT_PROMPT_VERSION if few_shot else STORY_PROMPT_VERSION
+        prompt = template.format(numbered_statements=numbered)
 
         if max_new_tokens is None:
-            # Scale with the story: one formula per statement, and a fixed
-            # budget silently truncates longer FOLIO stories mid-output, which
-            # would show up as a bogus "missing P7" format failure rather than
-            # the token-budget problem it actually is.
-            max_new_tokens = 120 * (len(premises) + 1) + 100
+            # Scale with the story. The zero-shot n=50 run produced 2 format
+            # failures, both missing only the LAST premise -- the signature of
+            # running out of budget rather than of a malformed answer -- so
+            # this is deliberately generous. hit_cap below catches the rest.
+            max_new_tokens = 180 * (len(premises) + 1) + 200
 
-        raw_output = self._generate(prompt, max_new_tokens)
+        raw_output, hit_cap = self._generate(prompt, max_new_tokens)
         try:
             premises_fol, conclusion_fol = parse_story_output(raw_output, len(premises))
-        except StoryFormatError:
+        except StoryFormatError as e:
             # Log the unparseable output before re-raising -- otherwise the
             # only record of what the model actually said is lost, and format
             # failures are exactly what we need the raw text for.
-            self._log(STORY_PROMPT_VERSION, numbered, raw_output, fol=None)
+            self._log(version, numbered, raw_output, fol=None)
+            if hit_cap:
+                raise StoryFormatError(
+                    f"output truncated at max_new_tokens={max_new_tokens} "
+                    f"(harness budget, not a model error): {e}",
+                    truncated=True,
+                ) from e
             raise
 
         self._log(
-            STORY_PROMPT_VERSION,
+            version,
             numbered,
             raw_output,
             fol="\n".join(premises_fol + [conclusion_fol]),
