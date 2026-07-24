@@ -32,7 +32,13 @@ import time
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+# Anchor every default path to the project root rather than the cwd -- this
+# gets called both as `python -m` from crest/ and inline from a Kaggle
+# notebook whose cwd is the repo root one level up, and a cwd-relative
+# default silently wrote results to the wrong place in the second case.
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from data.loaders.folio_loader import load_folio
 from crest.inference.llama_harness import LlamaHarness
@@ -43,14 +49,23 @@ def run_vanilla_pipeline(
     split: str = "validation",
     limit: int = None,
     timeout: int = 60,
-    log_path: str = "experiments/logs/llama_harness_calls.jsonl",
+    log_path: str = None,
     out_path: str = None,
+    harness: LlamaHarness = None,
 ):
+    """`harness` lets a caller pass an already-loaded LlamaHarness. Loading
+    Llama-3.1-8B twice (once for a notebook smoke test, once here) wastes
+    several GB of VRAM for no reason and risks OOM on a single T4 -- the
+    Kaggle notebook loads it once and passes it in.
+    """
     data = load_folio(split=split)
     if limit:
         data = data[:limit]
 
-    harness = LlamaHarness(log_path=log_path)
+    if log_path is None:
+        log_path = PROJECT_ROOT / "experiments" / "logs" / "llama_harness_calls.jsonl"
+    if harness is None:
+        harness = LlamaHarness(log_path=str(log_path))
 
     classified = []
     records = []
@@ -102,7 +117,7 @@ def run_vanilla_pipeline(
 
     if out_path is None:
         suffix = f"_n{limit}" if limit else ""
-        out_path = f"experiments/logs/vanilla_pipeline_{split}{suffix}.json"
+        out_path = PROJECT_ROOT / "experiments" / "logs" / f"vanilla_pipeline_{split}{suffix}.json"
     out_file = Path(out_path)
     out_file.parent.mkdir(parents=True, exist_ok=True)
     with open(out_file, "w", encoding="utf-8") as f:
@@ -119,7 +134,7 @@ if __name__ == "__main__":
     parser.add_argument("--split", default="validation", choices=["train", "validation"])
     parser.add_argument("--limit", type=int, default=50, help="Phase 3.1: start with a 50-100 example subset")
     parser.add_argument("--timeout", type=int, default=60)
-    parser.add_argument("--log-path", default="experiments/logs/llama_harness_calls.jsonl")
+    parser.add_argument("--log-path", default=None)
     parser.add_argument("--out-path", default=None)
     args = parser.parse_args()
     run_vanilla_pipeline(
