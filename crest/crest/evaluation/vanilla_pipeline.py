@@ -31,7 +31,12 @@ import sys
 import time
 from pathlib import Path
 
-sys.stdout.reconfigure(encoding="utf-8")
+# Windows consoles default to cp1252 and crash printing FOL symbols (∀, ∧).
+# Guarded because this module also runs inside a Jupyter/Kaggle kernel, where
+# sys.stdout is an ipykernel OutStream with no .reconfigure() -- an unguarded
+# call there raises AttributeError at import time and kills the run.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 # Anchor every default path to the project root rather than the cwd -- this
 # gets called both as `python -m` from crest/ and inline from a Kaggle
@@ -41,8 +46,12 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from data.loaders.folio_loader import load_folio
-from crest.inference.llama_harness import LlamaHarness
-from crest.evaluation.silent_failure_metrics import classify_example, summarize
+from crest.inference.llama_harness import LlamaHarness, StoryFormatError
+from crest.evaluation.silent_failure_metrics import (
+    ClassifiedResult,
+    classify_example,
+    summarize,
+)
 
 
 def run_vanilla_pipeline(
@@ -52,12 +61,28 @@ def run_vanilla_pipeline(
     log_path: str = None,
     out_path: str = None,
     harness: LlamaHarness = None,
+    mode: str = "story",
 ):
     """`harness` lets a caller pass an already-loaded LlamaHarness. Loading
     Llama-3.1-8B twice (once for a notebook smoke test, once here) wastes
     several GB of VRAM for no reason and risks OOM on a single T4 -- the
     Kaggle notebook loads it once and passes it in.
+
+    `mode`:
+      "story"       -- PRIMARY baseline (prompt v2). All premises plus the
+                       conclusion in one prompt, matching standard practice
+                       (Logic-LM, LINC, FOLIO).
+      "per_premise" -- ABLATION ONLY (prompt v1). Each premise translated in
+                       isolation. Do not report this as the vanilla
+                       silent-failure prevalence: with no shared context the
+                       model cannot keep predicate names consistent across
+                       formulas, so it manufactures the very failure class
+                       CREST claims to detect. Its legitimate use is the
+                       contrast "inconsistency with vs. without context".
     """
+    if mode not in ("story", "per_premise"):
+        raise ValueError(f"unknown mode {mode!r}; expected 'story' or 'per_premise'")
+
     data = load_folio(split=split)
     if limit:
         data = data[:limit]
@@ -71,19 +96,40 @@ def run_vanilla_pipeline(
     records = []
     for i, ex in enumerate(data):
         start = time.time()
-        # Translate each premise independently, then the conclusion, through
-        # the same single-sentence NL->FOL prompt (Phase 1.1) -- mirrors how
-        # FOLIO's own gold premises-FOL is one formula per premise line.
-        translated_premises = [harness.translate(p) for p in ex.premises]
-        translated_conclusion = harness.translate(ex.conclusion)
+        format_error = None
+        if mode == "story":
+            try:
+                translated_premises, translated_conclusion = harness.translate_story(
+                    ex.premises, ex.conclusion
+                )
+            except StoryFormatError as e:
+                # Unparseable output is a LOUD failure -- visibly broken
+                # without needing the gold label -- but it's a different
+                # cause than malformed FOL, so tag the stage rather than
+                # letting it masquerade as an FOL syntax error.
+                translated_premises, translated_conclusion = None, None
+                format_error = e
+        else:
+            translated_premises = [harness.translate(p) for p in ex.premises]
+            translated_conclusion = harness.translate(ex.conclusion)
 
-        result = classify_example(
-            example_id=ex.example_id,
-            premises_fol=translated_premises,
-            conclusion_fol=translated_conclusion,
-            gold_label=ex.label,
-            timeout=timeout,
-        )
+        if format_error is not None:
+            result = ClassifiedResult(
+                example_id=ex.example_id,
+                gold_label=ex.label,
+                predicted_label=None,
+                outcome="loud_failure",
+                error=f"StoryFormatError: {format_error}",
+                failure_stage="translation_format",
+            )
+        else:
+            result = classify_example(
+                example_id=ex.example_id,
+                premises_fol=translated_premises,
+                conclusion_fol=translated_conclusion,
+                gold_label=ex.label,
+                timeout=timeout,
+            )
         classified.append(result)
 
         elapsed = time.time() - start
@@ -93,6 +139,7 @@ def run_vanilla_pipeline(
             "gold_label": ex.label,
             "predicted_label": result.predicted_label,
             "outcome": result.outcome,
+            "failure_stage": result.failure_stage,
             "error": result.error,
             "translated_premises": translated_premises,
             "translated_conclusion": translated_conclusion,
@@ -105,9 +152,11 @@ def run_vanilla_pipeline(
         )
 
     summary = summarize(classified)
-    print(f"\n=== Vanilla pipeline on {split} (n={summary['n']}) ===")
+    print(f"\n=== Vanilla pipeline on {split} (n={summary['n']}, mode={mode}) ===")
     print(f"correct: {summary['correct']} ({summary['accuracy']:.1%})")
     print(f"loud_failure: {summary['loud_failure']} ({summary['loud_failure_rate']:.1%})")
+    print(f"  - translation_format: {summary['loud_failure_translation_format']}")
+    print(f"  - fol_parse:          {summary['loud_failure_fol_parse']}")
     print(f"silent_failure: {summary['silent_failure']} ({summary['silent_failure_rate']:.1%})")
     print(
         f"silent_failure_rate_excluding_loud: "
@@ -117,11 +166,16 @@ def run_vanilla_pipeline(
 
     if out_path is None:
         suffix = f"_n{limit}" if limit else ""
-        out_path = PROJECT_ROOT / "experiments" / "logs" / f"vanilla_pipeline_{split}{suffix}.json"
+        # Mode is in the filename: a "story" run and a "per_premise" ablation
+        # of the same split are different experiments and must not overwrite
+        # each other.
+        out_path = (PROJECT_ROOT / "experiments" / "logs"
+                    / f"vanilla_pipeline_{mode}_{split}{suffix}.json")
     out_file = Path(out_path)
     out_file.parent.mkdir(parents=True, exist_ok=True)
     with open(out_file, "w", encoding="utf-8") as f:
-        json.dump({"split": split, "limit": limit, "summary": summary, "results": records}, f, indent=2, ensure_ascii=False)
+        json.dump({"split": split, "limit": limit, "mode": mode,
+                   "summary": summary, "results": records}, f, indent=2, ensure_ascii=False)
     print(f"Full results written to {out_file}")
 
     return summary, records
@@ -136,6 +190,11 @@ if __name__ == "__main__":
     parser.add_argument("--timeout", type=int, default=60)
     parser.add_argument("--log-path", default=None)
     parser.add_argument("--out-path", default=None)
+    parser.add_argument(
+        "--mode", default="story", choices=["story", "per_premise"],
+        help="story = primary baseline (whole-story prompt); "
+             "per_premise = ablation only, do not report as vanilla prevalence",
+    )
     args = parser.parse_args()
     run_vanilla_pipeline(
         split=args.split,
@@ -143,4 +202,5 @@ if __name__ == "__main__":
         timeout=args.timeout,
         log_path=args.log_path,
         out_path=args.out_path,
+        mode=args.mode,
     )

@@ -16,7 +16,11 @@ from pathlib import Path
 # symbols (∧, ∀, etc.) that Windows' default console codepage (cp1252) can't
 # encode -- reconfigure stdout so a crash while printing progress doesn't
 # lose whatever results were already computed.
-sys.stdout.reconfigure(encoding="utf-8")
+# Guarded: inside a Jupyter/Kaggle kernel sys.stdout is an ipykernel
+# OutStream with no .reconfigure(), and an unguarded call raises
+# AttributeError at import time.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
