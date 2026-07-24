@@ -1,0 +1,2946 @@
+{
+  "version": "selfrefine-v1",
+  "split": "validation",
+  "limit": 50,
+  "max_rounds": 2,
+  "sample": "random",
+  "sample_seed": 42,
+  "vanilla_summary": {
+    "n": 50,
+    "correct": 38,
+    "loud_failure": 4,
+    "silent_failure": 8,
+    "loud_failure_translation_format": 0,
+    "loud_failure_translation_truncated": 0,
+    "loud_failure_fol_parse": 4,
+    "accuracy": 0.76,
+    "loud_failure_rate": 0.08,
+    "silent_failure_rate": 0.16,
+    "silent_failure_rate_excluding_loud": 0.17391304347826086
+  },
+  "self_refine_summary": {
+    "n": 50,
+    "correct": 35,
+    "loud_failure": 5,
+    "silent_failure": 10,
+    "loud_failure_translation_format": 0,
+    "loud_failure_translation_truncated": 0,
+    "loud_failure_fol_parse": 5,
+    "accuracy": 0.7,
+    "loud_failure_rate": 0.1,
+    "silent_failure_rate": 0.2,
+    "silent_failure_rate_excluding_loud": 0.2222222222222222
+  },
+  "helped": 1,
+  "hurt": 4,
+  "net": -3,
+  "transitions": {
+    "correct->silent_failure": 3,
+    "loud_failure->loud_failure": 3,
+    "correct->correct": 34,
+    "silent_failure->silent_failure": 7,
+    "correct->loud_failure": 1,
+    "silent_failure->loud_failure": 1,
+    "loud_failure->correct": 1
+  },
+  "results": [
+    {
+      "example_id": "1015",
+      "story_id": "380",
+      "gold_label": "True",
+      "vanilla_predicted": "True",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "silent_failure",
+      "refined_severity": "under_determination",
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x ((InClub(x) ∧ PerformOften(x, talentShow)) → (AttendEvents(x) ∧ EngagedWithEvents(x)))",
+        "∀x (InClub(x) → (PerformOften(x, talentShow) ∨ InactiveDisinterested(x)))",
+        "∀x ((InClub(x) ∧ ChaperoneDances(x)) → ¬Student(x))",
+        "∀x ((InClub(x) ∧ InactiveDisinterested(x)) → ChaperoneDances(x))",
+        "∀x ((InClub(x) ∧ (YoungChild(x) ∨ Teenager(x)) ∧ WishFurtherCareer(x)) → Student(x))",
+        "InClub(bonnie) ∧ ((AttendEvents(bonnie) ∧ EngagedWithEvents(bonnie) ∧ Student(bonnie)) ∨ (¬AttendEvents(bonnie) ∧ ¬EngagedWithEvents(bonnie) ∧ ¬Student(bonnie)))"
+      ],
+      "initial_conclusion_fol": "((YoungChild(bonnie) ∨ Teenager(bonnie)) ∧ WishFurtherCareer(bonnie) ∧ ChaperoneDances(bonnie)) ∨ (¬YoungChild(bonnie) ∧ ¬Teenager(bonnie) ∧ ¬WishFurtherCareer(bonnie)) → (Student(bonnie) ∨ InactiveDisinterested(bonnie))",
+      "refined_premises_fol": [
+        "∀x ((InClub(x) ∧ OftenPerformIn(x, talentShow)) → (OftenAttendEvents(x) ∧ VeryEngagedWithEvents(x)))",
+        "∀x (InClub(x) → (OftenPerformIn(x, talentShow) ∨ InactiveDisinterested(x)))",
+        "∀x ((InClub(x) ∧ ChaperoneDances(x)) → ¬Student(x))",
+        "∀x ((InClub(x) ∧ InactiveDisinterested(x)) → ChaperoneDances(x))",
+        "∀x ((InClub(x) ∧ (YoungChild(x) ∨ Teenager(x)) ∧ WishFurtherCareer(x) ∧ EducationalOpportunities(x)) → Student(x))",
+        "InClub(bonnie) ∧ (((AttendEvents(bonnie) ∧ EngagedWithEvents(bonnie)) ∧ Student(bonnie)) ∨ (¬(AttendEvents(bonnie) ∧ EngagedWithEvents(bonnie)) ∧ ¬Student(bonnie)))"
+      ],
+      "refined_conclusion_fol": "(((YoungChild(bonnie) ∨ Teenager(bonnie)) ∧ WishFurtherCareer(bonnie) ∧ ChaperoneDances(bonnie)) ∨ (¬(YoungChild(bonnie) ∨ Teenager(bonnie)) ∧ ¬WishFurtherCareer(bonnie))) → (Student(bonnie) ∨ InactiveDisinterested(bonnie))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula does not capture the \"often\" quantifier correctly. It should reflect frequency, which is not represented in the formula.\nP6: The formula does not correctly represent the sentence structure. The sentence implies a complex conditional structure that is not accurately captured by the formula.\nC: The formula does not correctly represent the conditional structure of the sentence. The sentence implies a conditional relationship that is not accurately captured by the formula.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x ((InClub(x) ∧ OftenPerform(x, talentShow)) → (OftenAttendEvents(x) ∧ VeryEngagedWithEvents(x)))",
+            "∀x (InClub(x) → (PerformOften(x, talentShow) ∨ InactiveDisinterested(x)))",
+            "∀x ((InClub(x) ∧ ChaperoneDances(x)) → ¬Student(x))",
+            "∀x ((InClub(x) ∧ InactiveDisinterested(x)) → ChaperoneDances(x))",
+            "∀x ((InClub(x) ∧ (YoungChild(x) ∨ Teenager(x)) ∧ WishFurtherCareer(x)) → Student(x))",
+            "InClub(bonnie) ∧ (((AttendEvents(bonnie) ∧ EngagedWithEvents(bonnie)) ∧ Student(bonnie)) ∨ (¬(AttendEvents(bonnie) ∧ EngagedWithEvents(bonnie)) ∧ ¬Student(bonnie)))"
+          ],
+          "conclusion_fol": "(((YoungChild(bonnie) ∨ Teenager(bonnie)) ∧ WishFurtherCareer(bonnie) ∧ ChaperoneDances(bonnie)) ∨ (¬(YoungChild(bonnie) ∨ Teenager(bonnie)) ∧ ¬WishFurtherCareer(bonnie))) → (Student(bonnie) ∨ InactiveDisinterested(bonnie))"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula uses \"OftenPerform(x, talentShow)\" instead of \"OftenPerformIn(x, talentShow)\" which might be a minor issue if the intended meaning is not clear.\nP2: The formula uses \"PerformOften(x, talentShow)\" instead of \"OftenPerformIn(x, talentShow)\" which might be a minor issue if the intended meaning is not clear.\nP5: The formula does not include \"EducationalOpportunities(x)\" which is part of the sentence \"wish to further their academic careers and educational opportunities.\"\nP6: The sentence structure is complex and the formula seems to capture the intended meaning, but the sentence could be simplified for clarity.\nC: The sentence structure is complex and the formula seems to capture the intended meaning, but the sentence could be simplified for clarity.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x ((InClub(x) ∧ OftenPerformIn(x, talentShow)) → (OftenAttendEvents(x) ∧ VeryEngagedWithEvents(x)))",
+            "∀x (InClub(x) → (OftenPerformIn(x, talentShow) ∨ InactiveDisinterested(x)))",
+            "∀x ((InClub(x) ∧ ChaperoneDances(x)) → ¬Student(x))",
+            "∀x ((InClub(x) ∧ InactiveDisinterested(x)) → ChaperoneDances(x))",
+            "∀x ((InClub(x) ∧ (YoungChild(x) ∨ Teenager(x)) ∧ WishFurtherCareer(x) ∧ EducationalOpportunities(x)) → Student(x))",
+            "InClub(bonnie) ∧ (((AttendEvents(bonnie) ∧ EngagedWithEvents(bonnie)) ∧ Student(bonnie)) ∨ (¬(AttendEvents(bonnie) ∧ EngagedWithEvents(bonnie)) ∧ ¬Student(bonnie)))"
+          ],
+          "conclusion_fol": "(((YoungChild(bonnie) ∨ Teenager(bonnie)) ∧ WishFurtherCareer(bonnie) ∧ ChaperoneDances(bonnie)) ∨ (¬(YoungChild(bonnie) ∨ Teenager(bonnie)) ∧ ¬WishFurtherCareer(bonnie))) → (Student(bonnie) ∨ InactiveDisinterested(bonnie))"
+        }
+      ],
+      "elapsed_sec": 14.69
+    },
+    {
+      "example_id": "563",
+      "story_id": "198",
+      "gold_label": "True",
+      "vanilla_predicted": null,
+      "vanilla_outcome": "loud_failure",
+      "vanilla_severity": null,
+      "refined_predicted": null,
+      "refined_outcome": "loud_failure",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (OccursIn(monkeypoxVirus, x) → MayGet(x, monkeypox))",
+        "∃x (Animal(x) ∧ OccursIn(monkeypoxVirus, x))",
+        "∀x (Human(x) → Mammal(x))",
+        "∀x (Mammal(x) → Animal(x))",
+        "∀x (SymptomOf(monkeypox, x) ↔ (Fever(x) ∨ Headache(x) ∨ MusclePains(x) ∨ Tiredness(x)))",
+        "∀x (Get(x, flu) → FeelTired(x))"
+      ],
+      "initial_conclusion_fol": "∃x Animal(x)",
+      "refined_premises_fol": [
+        "∀x (OccursIn(monkeypoxVirus, x) → PossiblyGet(x, monkeypox))",
+        "∃x (Animal(x) ∧ OccursIn(monkeypoxVirus, x))",
+        "∀x (Human(x) → Mammal(x))",
+        "∀x (Mammal(x) → Animal(x))",
+        "∀x (SymptomOf(monkeypox, x) ↔ (Fever(x) ∧ Headache(x) ∧ MusclePains(x) ∧ Tiredness(x)))",
+        "∀x (Get(x, flu) → FeelTired(x))"
+      ],
+      "refined_conclusion_fol": "∃x Animal(x)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula uses \"may get\" as an implication, which is generally acceptable, but it might be more precise to use a modal operator for \"may\" if available. However, in standard FOL, this is a reasonable approximation.\n\nP5: The formula uses a biconditional (↔), which implies that fever, headache, muscle pains, and tiredness are the only symptoms of Monkeypox. The sentence states these are included but does not imply exclusivity. A better representation might use an implication (→) instead of a biconditional.\n\nC: The formula correctly represents the sentence, but it is somewhat trivial given P2 and P4, which already imply the existence of animals. However, this is not an error in the formula itself.\n\nProblems:\nP5: The use of biconditional (↔) implies exclusivity of symptoms, which is not stated in the sentence.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (OccursIn(monkeypoxVirus, x) → MayGet(x, monkeypox))",
+            "∃x (Animal(x) ∧ OccursIn(monkeypoxVirus, x))",
+            "∀x (Human(x) → Mammal(x))",
+            "∀x (Mammal(x) → Animal(x))",
+            "∀x (SymptomOf(monkeypox, x) → (Fever(x) ∨ Headache(x) ∨ MusclePains(x) ∨ Tiredness(x)))",
+            "∀x (Get(x, flu) → FeelTired(x))"
+          ],
+          "conclusion_fol": "∃x Animal(x)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula suggests that if the Monkeypox virus occurs in a being, then it may get Monkeypox. However, the sentence implies a possibility, not a certainty, which is not accurately captured by the implication in FOL. The use of \"may\" is not directly translatable to FOL without additional modal logic.\nP5: The formula uses a disjunction (∨) to represent symptoms, but the sentence implies that all listed symptoms are included, not just one of them. The correct representation should use a conjunction (∧) instead of a disjunction.\nC: The formula correctly states that there is an animal, but it does not connect to the other statements or provide any new information beyond what is already stated in P2 and P4. It seems redundant without further context or connection to the other premises.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (OccursIn(monkeypoxVirus, x) → PossiblyGet(x, monkeypox))",
+            "∃x (Animal(x) ∧ OccursIn(monkeypoxVirus, x))",
+            "∀x (Human(x) → Mammal(x))",
+            "∀x (Mammal(x) → Animal(x))",
+            "∀x (SymptomOf(monkeypox, x) ↔ (Fever(x) ∧ Headache(x) ∧ MusclePains(x) ∧ Tiredness(x)))",
+            "∀x (Get(x, flu) → FeelTired(x))"
+          ],
+          "conclusion_fol": "∃x Animal(x)"
+        }
+      ],
+      "elapsed_sec": 12.72
+    },
+    {
+      "example_id": "564",
+      "story_id": "198",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (OccursIn(monkeypoxVirus, x) → MayGet(x, monkeypox))",
+        "∃x (Animal(x) ∧ OccursIn(monkeypoxVirus, x))",
+        "∀x (Human(x) → Mammal(x))",
+        "∀x (Mammal(x) → Animal(x))",
+        "∀x (Symptom(monkeypox, x) ↔ (Fever(x) ∨ Headache(x) ∨ MusclePains(x) ∨ Tiredness(x)))",
+        "∀x (Get(x, flu) → FeelTired(x))"
+      ],
+      "initial_conclusion_fol": "∀x ¬Get(x, flu)",
+      "refined_premises_fol": [
+        "∀x (OccursIn(monkeypoxVirus, x) → MayGet(x, monkeypox))",
+        "∃x (Animal(x) ∧ OccursIn(monkeypoxVirus, x))",
+        "∀x (Human(x) → Mammal(x))",
+        "∀x (Mammal(x) → Animal(x))",
+        "∀x (SymptomOf(x, monkeypox) → (Fever(x) ∨ Headache(x) ∨ MusclePains(x) ∨ Tiredness(x)))",
+        "∀x (Get(x, flu) → FeelTired(x))"
+      ],
+      "refined_conclusion_fol": "∀x ¬Get(x, flu)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula suggests that if the Monkeypox virus occurs in a being, then it may get Monkeypox. However, the sentence implies a possibility, not a certainty. The use of \"may\" in natural language is not accurately captured by the implication in FOL, which suggests a stronger relationship.\nP5: The formula uses a biconditional (↔), which implies that fever, headache, muscle pains, and tiredness are the only symptoms of Monkeypox. The sentence states these are included but does not exclude other symptoms, so a conditional (→) might be more appropriate.\nC: The formula states that no one gets the flu, which contradicts P6, where it is stated that people feel tired when they get the flu. This inconsistency suggests a problem in the coherence of the set of formulas.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (OccursIn(monkeypoxVirus, x) → MayGet(x, monkeypox) ∨ ¬MayGet(x, monkeypox))",
+            "∃x (Animal(x) ∧ OccursIn(monkeypoxVirus, x))",
+            "∀x (Human(x) → Mammal(x))",
+            "∀x (Mammal(x) → Animal(x))",
+            "∀x ((Fever(x) ∨ Headache(x) ∨ MusclePains(x) ∨ Tiredness(x)) → Symptom(monkeypox, x))",
+            "∀x (Get(x, flu) → FeelTired(x))"
+          ],
+          "conclusion_fol": "∀x ¬Get(x, flu)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula uses \"MayGet(x, monkeypox) ∨ ¬MayGet(x, monkeypox)\" which is a tautology and does not capture the intended meaning of \"may get Monkeypox.\" It should be something like \"MayGet(x, monkeypox)\" without the disjunction.\nP5: The formula suggests that any of the symptoms alone implies it is a symptom of Monkeypox, which is incorrect. It should be something like \"∀x ((SymptomOf(x, monkeypox) → (Fever(x) ∨ Headache(x) ∨ MusclePains(x) ∨ Tiredness(x)))\" to indicate that these are included among the symptoms, not that any one of them alone is sufficient.\nC: The formula \"∀x ¬Get(x, flu)\" correctly states that no one gets the flu, but it contradicts P6, which assumes that people can get the flu. This inconsistency should be addressed.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (OccursIn(monkeypoxVirus, x) → MayGet(x, monkeypox))",
+            "∃x (Animal(x) ∧ OccursIn(monkeypoxVirus, x))",
+            "∀x (Human(x) → Mammal(x))",
+            "∀x (Mammal(x) → Animal(x))",
+            "∀x (SymptomOf(x, monkeypox) → (Fever(x) ∨ Headache(x) ∨ MusclePains(x) ∨ Tiredness(x)))",
+            "∀x (Get(x, flu) → FeelTired(x))"
+          ],
+          "conclusion_fol": "∀x ¬Get(x, flu)"
+        }
+      ],
+      "elapsed_sec": 12.92
+    },
+    {
+      "example_id": "565",
+      "story_id": "198",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (OccursIn(monkeypoxVirus, x) → MayGet(x, monkeypox))",
+        "∃x (Animal(x) ∧ OccursIn(monkeypoxVirus, x))",
+        "∀x (Human(x) → Mammal(x))",
+        "∀x (Mammal(x) → Animal(x))",
+        "∀x (SymptomOf(monkeypox, x) ↔ (Fever(x) ∨ Headache(x) ∨ MusclePains(x) ∨ Tiredness(x)))",
+        "∀x (Get(x, flu) → FeelTired(x))"
+      ],
+      "initial_conclusion_fol": "SymptomOf(monkeypox, coughing)",
+      "refined_premises_fol": [
+        "∀x (OccursIn(monkeypoxVirus, x) → MayGet(x, monkeypox))",
+        "∃x (Animal(x) ∧ OccursIn(monkeypoxVirus, x))",
+        "∀x (Human(x) → Mammal(x))",
+        "∀x (Mammal(x) → Animal(x))",
+        "∀x ((Fever(x) ∨ Headache(x) ∨ MusclePains(x) ∨ Tiredness(x)) → SymptomOf(monkeypox, x))",
+        "∀x (Get(x, flu) → FeelTired(x))"
+      ],
+      "refined_conclusion_fol": "SymptomOf(monkeypox, coughing)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula suggests that if the Monkeypox virus occurs in a being, then it may get Monkeypox. However, the sentence implies a possibility, not a certainty, which is not accurately captured by the implication in FOL. The use of \"may\" suggests a modal logic aspect that is not represented here.\nP5: The formula uses a biconditional (↔), which implies that fever, headache, muscle pains, and tiredness are the only symptoms of Monkeypox. The sentence only states that these are included, not that they are exhaustive.\nC: The formula states that coughing is a symptom of Monkeypox, which is not mentioned in the sentence. The sentence only states that symptoms include coughing, not that it is definitively a symptom.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (OccursIn(monkeypoxVirus, x) → PossiblyMayGet(x, monkeypox))",
+            "∃x (Animal(x) ∧ OccursIn(monkeypoxVirus, x))",
+            "∀x (Human(x) → Mammal(x))",
+            "∀x (Mammal(x) → Animal(x))",
+            "∀x (SymptomOf(monkeypox, x) → (Fever(x) ∨ Headache(x) ∨ MusclePains(x) ∨ Tiredness(x)))",
+            "∀x (Get(x, flu) → FeelTired(x))"
+          ],
+          "conclusion_fol": "SymptomOf(monkeypox, coughing) ∨ ¬SymptomOf(monkeypox, coughing)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula uses \"PossiblyMayGet\" which is not a standard logical operator and may not accurately capture the intended meaning of \"may get.\" It should be clarified or replaced with a more precise logical representation.\nP5: The formula suggests that any symptom of Monkeypox must be one of the listed symptoms, which is not necessarily implied by the sentence. The sentence states that these are included symptoms, not an exhaustive list.\nC: The formula is a tautology and does not accurately represent the sentence. The sentence states that coughing is a symptom of Monkeypox, not that it is either a symptom or not a symptom.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (OccursIn(monkeypoxVirus, x) → MayGet(x, monkeypox))",
+            "∃x (Animal(x) ∧ OccursIn(monkeypoxVirus, x))",
+            "∀x (Human(x) → Mammal(x))",
+            "∀x (Mammal(x) → Animal(x))",
+            "∀x ((Fever(x) ∨ Headache(x) ∨ MusclePains(x) ∨ Tiredness(x)) → SymptomOf(monkeypox, x))",
+            "∀x (Get(x, flu) → FeelTired(x))"
+          ],
+          "conclusion_fol": "SymptomOf(monkeypox, coughing)"
+        }
+      ],
+      "elapsed_sec": 13.45
+    },
+    {
+      "example_id": "2",
+      "story_id": "0",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (WildTurkeyType(x) ↔ (x = easternWildTurkey ∨ x = osceolaWildTurkey ∨ x = gouldsWildTurkey ∨ x = merriamsWildTurkey ∨ x = rioGrandeWildTurkey ∨ x = ocellatedWildTurkey))",
+        "¬IsType(tom, easternWildTurkey)",
+        "¬IsType(tom, osceolaWildTurkey)",
+        "¬IsType(tom, gouldsWildTurkey)",
+        "¬IsType(tom, merriamsWildTurkey) ∧ ¬IsType(tom, rioGrandeWildTurkey)",
+        "WildTurkey(tom)"
+      ],
+      "initial_conclusion_fol": "WildTurkey(joey)",
+      "refined_premises_fol": [
+        "∃x (x = easternWildTurkey ∨ x = osceolaWildTurkey ∨ x = gouldsWildTurkey ∨ x = merriamsWildTurkey ∨ x = rioGrandeWildTurkey ∨ x = ocellatedWildTurkey)",
+        "¬IsType(tom, easternWildTurkey)",
+        "¬IsType(tom, osceolaWildTurkey)",
+        "¬IsType(tom, gouldsWildTurkey)",
+        "¬IsType(tom, merriamsWildTurkey) ∧ ¬IsType(tom, rioGrandeWildTurkey)",
+        "∃x (WildTurkeyType(x) ∧ IsType(tom, x))"
+      ],
+      "refined_conclusion_fol": "∃x (WildTurkeyType(x) ∧ IsType(joey, x))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula uses a biconditional (↔) which implies that the set of wild turkey types is exactly those six types, but the sentence only states that there are six types, not that these are the only types. A conditional (→) might be more appropriate if the intent is to list known types without excluding the possibility of others.\nP6: The formula WildTurkey(tom) does not specify that Tom is one of the types listed in P1. There should be a connection between being a wild turkey and being one of the specified types, according to P1.\nC: Similar to P6, the formula WildTurkey(joey) does not specify that Joey is one of the types listed in P1. There should be a connection between being a wild turkey and being one of the specified types, according to P1.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (WildTurkeyType(x) → (x = easternWildTurkey ∨ x = osceolaWildTurkey ∨ x = gouldsWildTurkey ∨ x = merriamsWildTurkey ∨ x = rioGrandeWildTurkey ∨ x = ocellatedWildTurkey))",
+            "¬IsType(tom, easternWildTurkey)",
+            "¬IsType(tom, osceolaWildTurkey)",
+            "¬IsType(tom, gouldsWildTurkey)",
+            "¬IsType(tom, merriamsWildTurkey) ∧ ¬IsType(tom, rioGrandeWildTurkey)",
+            "WildTurkey(tom) ∧ ∃x (WildTurkeyType(x) ∧ IsType(tom, x))"
+          ],
+          "conclusion_fol": "WildTurkey(joey) ∧ ∃x (WildTurkeyType(x) ∧ IsType(joey, x))"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula uses a universal quantifier (∀) instead of an existential quantifier (∃). The sentence states that there are six specific types of wild turkeys, which suggests an existential claim about these types existing, not that every wild turkey type is one of these six.\nP6: The formula includes \"WildTurkey(tom)\" which is not explicitly stated in the sentence. The sentence only states that Tom is a wild turkey, which should be represented as \"∃x (WildTurkeyType(x) ∧ IsType(tom, x))\" without the need for \"WildTurkey(tom)\".\nC: The formula includes \"WildTurkey(joey)\" which is not explicitly stated in the sentence. The sentence only states that Joey is a wild turkey, which should be represented as \"∃x (WildTurkeyType(x) ∧ IsType(joey, x))\" without the need for \"WildTurkey(joey)\".",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∃x (x = easternWildTurkey ∨ x = osceolaWildTurkey ∨ x = gouldsWildTurkey ∨ x = merriamsWildTurkey ∨ x = rioGrandeWildTurkey ∨ x = ocellatedWildTurkey)",
+            "¬IsType(tom, easternWildTurkey)",
+            "¬IsType(tom, osceolaWildTurkey)",
+            "¬IsType(tom, gouldsWildTurkey)",
+            "¬IsType(tom, merriamsWildTurkey) ∧ ¬IsType(tom, rioGrandeWildTurkey)",
+            "∃x (WildTurkeyType(x) ∧ IsType(tom, x))"
+          ],
+          "conclusion_fol": "∃x (WildTurkeyType(x) ∧ IsType(joey, x))"
+        }
+      ],
+      "elapsed_sec": 14.81
+    },
+    {
+      "example_id": "531",
+      "story_id": "184",
+      "gold_label": "False",
+      "vanilla_predicted": "False",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "False",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "Popular(strangerThings) ∧ NetflixShow(strangerThings)",
+        "∀x ((NetflixShow(x) ∧ Popular(x)) → BingeWatch(karen, x))",
+        "∀x (BingeWatch(karen, x) ↔ Download(karen, x))",
+        "¬Download(karen, blackMirror)",
+        "NetflixShow(blackMirror)",
+        "∀x (BingeWatch(karen, x) → ShareWith(karen, lisa, x))"
+      ],
+      "initial_conclusion_fol": "Popular(blackMirror)",
+      "refined_premises_fol": [
+        "Popular(strangerThings) ∧ NetflixShow(strangerThings)",
+        "∀x ((NetflixShow(x) ∧ Popular(x)) → BingeWatch(karen, x))",
+        "∀x (BingeWatch(karen, x) ↔ Download(karen, x))",
+        "¬Download(karen, blackMirror)",
+        "NetflixShow(blackMirror)",
+        "∀x (BingeWatch(karen, x) → ShareWith(karen, lisa, x))"
+      ],
+      "refined_conclusion_fol": "Popular(blackMirror)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 2.97
+    },
+    {
+      "example_id": "532",
+      "story_id": "184",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "PopularShow(strangerThings) ∧ NetflixShow(strangerThings)",
+        "∀x ((NetflixShow(x) ∧ PopularShow(x)) → BingeWatch(karen, x))",
+        "∀x (BingeWatch(karen, x) ↔ Download(karen, x))",
+        "¬Download(karen, blackMirror)",
+        "NetflixShow(blackMirror)",
+        "∀x (BingeWatch(karen, x) → ShareWith(karen, x, lisa))"
+      ],
+      "initial_conclusion_fol": "ShareWith(karen, blackMirror, lisa)",
+      "refined_premises_fol": [
+        "PopularShow(strangerThings) ∧ NetflixShow(strangerThings)",
+        "∀x ((NetflixShow(x) ∧ PopularShow(x)) → BingeWatch(karen, x))",
+        "∀x (BingeWatch(karen, x) ↔ Download(karen, x))",
+        "¬Download(karen, blackMirror)",
+        "NetflixShow(blackMirror)",
+        "∀x (BingeWatch(karen, x) → ShareWith(karen, x, lisa))"
+      ],
+      "refined_conclusion_fol": "¬ShareWith(karen, blackMirror, lisa)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P3: The formula does not correctly capture the \"if and only if\" condition related to Netflix shows. The sentence specifies that the condition applies to Netflix shows, but the formula applies it to all shows. It should be: ∀x (NetflixShow(x) ∧ BingeWatch(karen, x) ↔ Download(karen, x))\n\nC: The conclusion does not logically follow from the premises. Given P4 (Karen does not download \"Black Mirror\") and the corrected P3, Karen cannot binge-watch \"Black Mirror,\" and thus, according to P6, she cannot share it with Lisa. Therefore, the conclusion is incorrect based on the given premises.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "PopularShow(strangerThings) ∧ NetflixShow(strangerThings)",
+            "∀x ((NetflixShow(x) ∧ PopularShow(x)) → BingeWatch(karen, x))",
+            "∀x ((NetflixShow(x) ∧ BingeWatch(karen, x)) ↔ Download(karen, x))",
+            "¬Download(karen, blackMirror)",
+            "NetflixShow(blackMirror)",
+            "∀x (BingeWatch(karen, x) → ShareWith(karen, x, lisa))"
+          ],
+          "conclusion_fol": "¬ShareWith(karen, blackMirror, lisa)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P3: The formula should not include the condition that the show is a Netflix show. The sentence states \"if and only if Karen binge-watches a Netflix show,\" which implies the equivalence is only about binge-watching and downloading, not about being a Netflix show. The correct formula should be: ∀x (BingeWatch(karen, x) ↔ Download(karen, x))\n\nC: The conclusion formula contradicts the logical implications derived from the premises. According to P4 and P3, if Karen does not download \"Black Mirror,\" she should not binge-watch it, and therefore, according to P6, she should not share it with Lisa. The correct conclusion should be: ¬ShareWith(karen, blackMirror, lisa) is consistent, but the reasoning should be clarified based on the premises.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "PopularShow(strangerThings) ∧ NetflixShow(strangerThings)",
+            "∀x ((NetflixShow(x) ∧ PopularShow(x)) → BingeWatch(karen, x))",
+            "∀x (BingeWatch(karen, x) ↔ Download(karen, x))",
+            "¬Download(karen, blackMirror)",
+            "NetflixShow(blackMirror)",
+            "∀x (BingeWatch(karen, x) → ShareWith(karen, x, lisa))"
+          ],
+          "conclusion_fol": "¬ShareWith(karen, blackMirror, lisa)"
+        }
+      ],
+      "elapsed_sec": 12.15
+    },
+    {
+      "example_id": "657",
+      "story_id": "232",
+      "gold_label": "True",
+      "vanilla_predicted": "True",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "silent_failure",
+      "refined_severity": "under_determination",
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "CapitalOf(beijing, peoplesRepublicOfChina)",
+        "CapitalOf(beijing, mostPopulousNation)",
+        "LocatedIn(beijing, northernChina)",
+        "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, summerParalympics2008)",
+        "Hosted(beijing, summerOlympics) ∧ Hosted(beijing, winterOlympics) ∧ Hosted(beijing, summerParalympics) ∧ Hosted(beijing, winterParalympics)",
+        "∃x (University(x, beijing) ∧ RanksAmongBest(x))"
+      ],
+      "initial_conclusion_fol": "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, winterOlympics)",
+      "refined_premises_fol": [
+        "CapitalOf(beijing, peoplesRepublicOfChina)",
+        "CapitalOf(beijing, x) ∧ MostPopulousNation(x)",
+        "LocatedIn(beijing, northernChina)",
+        "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, summerParalympics2008)",
+        "∀x (Olympics(x) ∧ Hosted(beijing, x)) ∧ ∀y (Paralympics(y) ∧ Hosted(beijing, y))",
+        "∃x (University(x, beijing) ∧ RanksAmongBest(x))"
+      ],
+      "refined_conclusion_fol": "Hosted(beijing, summerOlympics2008) ∧ ∃x (WinterOlympics(x) ∧ Hosted(beijing, x))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P2: The formula uses \"mostPopulousNation\" instead of specifying that it is the \"world's most populous nation.\" The formula should reflect that it is the most populous nation in the world.\nP5: The formula does not specify the years for the Summer and Winter Olympics and Paralympics, which may be necessary for clarity, especially since P4 specifies the year 2008 for the Summer events.\nC: The formula does not specify the year for the Winter Olympics, which may lead to ambiguity since P5 mentions both Summer and Winter Olympics without specifying years.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "CapitalOf(beijing, peoplesRepublicOfChina)",
+            "CapitalOf(beijing, mostPopulousNation(world))",
+            "LocatedIn(beijing, northernChina)",
+            "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, summerParalympics2008)",
+            "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, winterOlympics2022) ∧ Hosted(beijing, summerParalympics2008) ∧ Hosted(beijing, winterParalympics2022)",
+            "∃x (University(x, beijing) ∧ RanksAmongBest(x))"
+          ],
+          "conclusion_fol": "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, winterOlympics2022)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P2: The formula uses \"mostPopulousNation(world)\" which implies a function taking \"world\" as an argument, but the sentence does not specify this structure. It should be a predicate indicating that the nation is the most populous.\nP5: The sentence states that Beijing has hosted both Summer and Winter Olympics and Paralympics, but the formula specifies only the 2008 and 2022 events. The sentence implies a more general statement that is not limited to specific years.\nC: The sentence states that Beijing hosted both the 2008 Summer Olympics and the Winter Olympics, but the formula specifies the 2022 Winter Olympics. The sentence does not specify the year for the Winter Olympics, so the formula should reflect this generality.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "CapitalOf(beijing, peoplesRepublicOfChina)",
+            "CapitalOf(beijing, x) ∧ MostPopulousNation(x)",
+            "LocatedIn(beijing, northernChina)",
+            "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, summerParalympics2008)",
+            "∀x (Olympics(x) ∧ Hosted(beijing, x)) ∧ ∀y (Paralympics(y) ∧ Hosted(beijing, y))",
+            "∃x (University(x, beijing) ∧ RanksAmongBest(x))"
+          ],
+          "conclusion_fol": "Hosted(beijing, summerOlympics2008) ∧ ∃x (WinterOlympics(x) ∧ Hosted(beijing, x))"
+        }
+      ],
+      "elapsed_sec": 11.55
+    },
+    {
+      "example_id": "659",
+      "story_id": "232",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "CapitalOf(beijing, peoplesRepublicOfChina)",
+        "CapitalOf(beijing, mostPopulousNation)",
+        "LocatedIn(beijing, northernChina)",
+        "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, summerParalympics2008)",
+        "Hosted(beijing, summerOlympics) ∧ Hosted(beijing, winterOlympics) ∧ Hosted(beijing, summerParalympics) ∧ Hosted(beijing, winterParalympics)",
+        "∃x (University(x, beijing) ∧ RanksAmongBest(x))"
+      ],
+      "initial_conclusion_fol": "SecondLargestCity(beijing, china)",
+      "refined_premises_fol": [
+        "CapitalOf(beijing, peoplesRepublicOfChina)",
+        "CapitalOf(beijing, x) ∧ MostPopulousNation(x)",
+        "LocatedIn(beijing, northernChina)",
+        "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, summerParalympics2008)",
+        "∃x ∃y (Hosted(beijing, x) ∧ Hosted(beijing, y) ∧ SummerOlympics(x) ∧ WinterOlympics(y)) ∧ ∃z ∃w (Hosted(beijing, z) ∧ Hosted(beijing, w) ∧ SummerParalympics(z) ∧ WinterParalympics(w))",
+        "∃x (University(x, beijing) ∧ ConsistentlyRanksAmongBest(x))"
+      ],
+      "refined_conclusion_fol": "SecondLargestCity(beijing, china)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P2: The formula uses \"mostPopulousNation\" as the entity for which Beijing is the capital, but the sentence refers to \"the world's most populous nation,\" which should be explicitly linked to \"peoplesRepublicOfChina\" for consistency with P1.\nP5: The formula does not specify the years for the Summer and Winter Olympics and Paralympics, which may be necessary for clarity and consistency with P4.\nP6: The formula uses an existential quantifier for \"many,\" which may not accurately capture the intended meaning of \"many\" as it implies at least one, rather than a significant number.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "CapitalOf(beijing, peoplesRepublicOfChina)",
+            "CapitalOf(beijing, peoplesRepublicOfChina) ∧ MostPopulousNation(peoplesRepublicOfChina)",
+            "LocatedIn(beijing, northernChina)",
+            "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, summerParalympics2008)",
+            "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, winterOlympics2022) ∧ Hosted(beijing, summerParalympics2008) ∧ Hosted(beijing, winterParalympics2022)",
+            "∃x (University(x, beijing) ∧ RanksAmongBest(x) ∧ Many(x))"
+          ],
+          "conclusion_fol": "SecondLargestCity(beijing, china)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P2: The formula does not accurately capture the sentence. The sentence implies that Beijing is the capital of the most populous nation, but the formula only states that Beijing is the capital of the People's Republic of China and that the People's Republic of China is the most populous nation. The connection between being the capital and the most populous nation is not explicitly made.\n\nP5: The formula specifies the years 2008 and 2022 for the Olympics and Paralympics, but the sentence does not specify any years. The sentence implies a general statement about hosting both Summer and Winter Olympics and Paralympics, not limited to specific years.\n\nP6: The formula uses \"Many(x)\" as a predicate, which is not standard in FOL. The concept of \"many\" is typically not directly expressible in FOL without additional context or definitions. Additionally, the formula does not capture the idea of \"consistently rank among the best universities in the world.\"",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "CapitalOf(beijing, peoplesRepublicOfChina)",
+            "CapitalOf(beijing, x) ∧ MostPopulousNation(x)",
+            "LocatedIn(beijing, northernChina)",
+            "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, summerParalympics2008)",
+            "∃x ∃y (Hosted(beijing, x) ∧ Hosted(beijing, y) ∧ SummerOlympics(x) ∧ WinterOlympics(y)) ∧ ∃z ∃w (Hosted(beijing, z) ∧ Hosted(beijing, w) ∧ SummerParalympics(z) ∧ WinterParalympics(w))",
+            "∃x (University(x, beijing) ∧ ConsistentlyRanksAmongBest(x))"
+          ],
+          "conclusion_fol": "SecondLargestCity(beijing, china)"
+        }
+      ],
+      "elapsed_sec": 13.53
+    },
+    {
+      "example_id": "1302",
+      "story_id": "452",
+      "gold_label": "True",
+      "vanilla_predicted": "True",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "True",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "∀x (Alien(x) → Extraterrestrial(x))",
+        "∀x (From(x, mars) → Alien(x))",
+        "∀x (Extraterrestrial(x) → ¬Human(x))",
+        "∀x ((HighlyIntelligent(x) ∧ From(x, earth)) → Human(x))",
+        "HighlyIntelligent(marvin)",
+        "(From(marvin, earth) ∧ From(marvin, mars)) ∨ (¬From(marvin, earth) ∧ ¬From(marvin, mars))",
+        "¬From(marvin, earth) → Extraterrestrial(marvin)"
+      ],
+      "initial_conclusion_fol": "¬Human(marvin) ∧ ¬From(marvin, mars)",
+      "refined_premises_fol": [
+        "∀x (Alien(x) → Extraterrestrial(x))",
+        "∀x (From(x, mars) → Alien(x))",
+        "∀x (Extraterrestrial(x) → ¬Human(x))",
+        "∀x ((HighlyIntelligent(x) ∧ From(x, earth)) → Human(x))",
+        "HighlyIntelligent(marvin)",
+        "(From(marvin, earth) ∧ From(marvin, mars)) ∨ (¬From(marvin, earth) ∧ ¬From(marvin, mars))",
+        "¬From(marvin, earth) → Extraterrestrial(marvin)"
+      ],
+      "refined_conclusion_fol": "¬Human(marvin) ∧ ¬From(marvin, mars)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 4.83
+    },
+    {
+      "example_id": "291",
+      "story_id": "96",
+      "gold_label": "False",
+      "vanilla_predicted": "False",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "False",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "WrestlingStable(diamondMine) ∧ FormedIn(diamondMine, wwe)",
+        "Leads(roderickStrong, diamondMine)",
+        "Includes(diamondMine, creedBrothers) ∧ Includes(diamondMine, ivyNile)",
+        "FeudWith(imperium, diamondMine)"
+      ],
+      "initial_conclusion_fol": "∀x ((WrestlingStable(x) ∧ Includes(x, ivyNile)) → ¬FeudWith(imperium, x))",
+      "refined_premises_fol": [
+        "WrestlingStable(diamondMine) ∧ FormedIn(diamondMine, wwe)",
+        "Leads(roderickStrong, diamondMine)",
+        "Includes(diamondMine, creedBrothers) ∧ Includes(diamondMine, ivyNile)",
+        "FeudWith(imperium, diamondMine)"
+      ],
+      "refined_conclusion_fol": "∀x ((WrestlingStable(x) ∧ Includes(x, ivyNile)) → ¬FeudWith(imperium, x))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: NO_ISSUES\nP2: NO_ISSUES\nP3: NO_ISSUES\nP4: NO_ISSUES\nC: The formula contradicts P4. P4 states that Imperium has a feud with Diamond Mine, which includes Ivy Nile, but C states that Imperium doesn't have a feud with any stable that includes Ivy Nile.",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 3.45
+    },
+    {
+      "example_id": "927",
+      "story_id": "350",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x ((DesignStyle(x, zahaHadid) ∧ Adores(max, x)) → InterestingGeometry(x))",
+        "∀x ((BrutalistBuilding(x) ∧ Adores(max, x)) → ¬InterestingGeometry(x))",
+        "∀x (Adores(max, x) → (DesignStyle(x, zahaHadid) ∨ DesignStyle(x, kellyWearstler)))",
+        "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Evocative(x))",
+        "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Dreamy(x))",
+        "∀x ((DesignBy(max, x) ∧ Adores(max, x) ∧ InterestingGeometry(x)) → (BrutalistBuilding(x) ∧ Evocative(x)))"
+      ],
+      "initial_conclusion_fol": "∃x (DesignBy(max, x) ∧ BrutalistBuilding(x))",
+      "refined_premises_fol": [
+        "∀x ((DesignStyle(x, zahaHadid) ∧ Adores(max, x)) → InterestingGeometry(x))",
+        "∀x ((BrutalistBuilding(x) ∧ Adores(max, x)) → ¬InterestingGeometry(x))",
+        "∀x (Adores(max, x) → (DesignStyle(x, zahaHadid) ∨ DesignStyle(x, kellyWearstler)))",
+        "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Evocative(x))",
+        "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Dreamy(x))",
+        "∀x ((DesignBy(max, x) ∧ Adores(max, x) ∧ InterestingGeometry(x)) → (BrutalistBuilding(x) ∧ Evocative(x)))"
+      ],
+      "refined_conclusion_fol": "∃x (DesignBy(max, x) ∧ BrutalistBuilding(x))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P6: The formula does not accurately reflect the sentence. The sentence implies a conditional relationship specifically for designs by Max that he adores and have interesting geometries, but the formula suggests that any design by Max that he adores and has interesting geometries must be a brutalist building and evocative. The sentence does not specify that all such designs must be brutalist buildings, only that if they have interesting geometries, then they are both brutalist and evocative. The formula should be revised to reflect this nuance.\n\nC: The conclusion does not logically follow from the premises provided. The premises do not establish that there exists a design by Max that is a brutalist building. The conclusion requires additional information or premises to be valid.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x ((DesignStyle(x, zahaHadid) ∧ Adores(max, x)) → InterestingGeometry(x))",
+            "∀x ((BrutalistBuilding(x) ∧ Adores(max, x)) → ¬InterestingGeometry(x))",
+            "∀x (Adores(max, x) → (DesignStyle(x, zahaHadid) ∨ DesignStyle(x, kellyWearstler)))",
+            "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Evocative(x))",
+            "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Dreamy(x))",
+            "∀x ((DesignBy(max, x) ∧ Adores(max, x) ∧ InterestingGeometry(x)) → (BrutalistBuilding(x) ∧ Evocative(x)))"
+          ],
+          "conclusion_fol": "∃x (DesignBy(max, x) ∧ BrutalistBuilding(x))"
+        },
+        {
+          "round_index": 1,
+          "critique": "P6: The formula does not accurately reflect the sentence. The sentence implies a conditional relationship specifically for designs by Max that he adores and have interesting geometries, but the formula suggests that any design by Max that he adores and has interesting geometries must be a brutalist building and evocative. The sentence does not specify that all such designs must be brutalist buildings, only that if they have interesting geometries, then they are both brutalist and evocative. The formula should reflect this conditional relationship more accurately.\n\nC: The conclusion does not logically follow from the premises provided. The premises do not establish that there exists a design by Max that is a brutalist building. The conclusion requires additional information or premises to be validly derived from the given statements.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x ((DesignStyle(x, zahaHadid) ∧ Adores(max, x)) → InterestingGeometry(x))",
+            "∀x ((BrutalistBuilding(x) ∧ Adores(max, x)) → ¬InterestingGeometry(x))",
+            "∀x (Adores(max, x) → (DesignStyle(x, zahaHadid) ∨ DesignStyle(x, kellyWearstler)))",
+            "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Evocative(x))",
+            "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Dreamy(x))",
+            "∀x ((DesignBy(max, x) ∧ Adores(max, x) ∧ InterestingGeometry(x)) → (BrutalistBuilding(x) ∧ Evocative(x)))"
+          ],
+          "conclusion_fol": "∃x (DesignBy(max, x) ∧ BrutalistBuilding(x))"
+        }
+      ],
+      "elapsed_sec": 14.16
+    },
+    {
+      "example_id": "928",
+      "story_id": "350",
+      "gold_label": "True",
+      "vanilla_predicted": "True",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "silent_failure",
+      "refined_severity": "under_determination",
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x ((DesignStyle(x, zahaHadid) ∧ Adores(max, x)) → InterestingGeometry(x))",
+        "∀x ((BrutalistBuilding(x) ∧ Adores(max, x)) → ¬InterestingGeometry(x))",
+        "∀x (Adores(max, x) → (DesignStyle(x, zahaHadid) ∨ DesignStyle(x, kellyWearstler)))",
+        "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Evocative(x))",
+        "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Dreamy(x))",
+        "∀x ((DesignBy(max, x) ∧ Adores(max, x) ∧ InterestingGeometry(x)) → (BrutalistBuilding(x) ∧ Evocative(x)))"
+      ],
+      "initial_conclusion_fol": "∀x ((DesignBy(max, x) ∧ Adores(max, x)) → (Evocative(x) ∧ Dreamy(x)))",
+      "refined_premises_fol": [
+        "∀x ((DesignStyle(x, zahaHadid) ∧ Adores(max, x)) → InterestingGeometry(x))",
+        "∀x ((BrutalistBuilding(x) ∧ Adores(max, x)) → ¬InterestingGeometry(x))",
+        "∀x (Adores(max, x) → (DesignStyle(x, zahaHadid) ∨ DesignStyle(x, kellyWearstler)))",
+        "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Evocative(x))",
+        "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Dreamy(x))",
+        "∀x ((DesignBy(max, x) ∧ Adores(max, x) ∧ InterestingGeometry(x)) → (BrutalistBuilding(x) ∧ Evocative(x)))"
+      ],
+      "refined_conclusion_fol": "∃x (DesignBy(max, x) ∧ Evocative(x) ∧ Dreamy(x))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P6: The formula does not accurately reflect the sentence. The sentence states that if a design by Max that he adores has interesting geometries, then it is both a brutalist building and evocative. However, the formula uses a universal quantifier, which implies that this condition applies to all designs by Max, rather than just those that he adores and have interesting geometries. The formula should be revised to reflect the conditional nature of the statement rather than a universal one.\n\nC: The formula does not accurately reflect the sentence. The sentence states that a design by Max is evocative and dreamy, but the formula uses a universal quantifier, which implies that this condition applies to all designs by Max that he adores. The sentence does not specify that the design must be adored by Max, so the formula should be revised to remove the adoration condition.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x ((DesignStyle(x, zahaHadid) ∧ Adores(max, x)) → InterestingGeometry(x))",
+            "∀x ((BrutalistBuilding(x) ∧ Adores(max, x)) → ¬InterestingGeometry(x))",
+            "∀x (Adores(max, x) → (DesignStyle(x, zahaHadid) ∨ DesignStyle(x, kellyWearstler)))",
+            "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Evocative(x))",
+            "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Dreamy(x))",
+            "∀x ((DesignBy(max, x) ∧ Adores(max, x) ∧ InterestingGeometry(x)) → (BrutalistBuilding(x) ∧ Evocative(x)))"
+          ],
+          "conclusion_fol": "∀x (DesignBy(max, x) → (Evocative(x) ∧ Dreamy(x)))"
+        },
+        {
+          "round_index": 1,
+          "critique": "P6: The formula does not accurately reflect the sentence. The sentence states that if a design by Max that he adores has interesting geometries, then it is both a brutalist building and evocative. However, the formula uses a universal quantifier, which implies that this condition applies to all designs by Max, rather than just those he adores with interesting geometries. The formula should be revised to reflect the conditional nature of the statement.\n\nC: The formula does not accurately reflect the sentence. The sentence states that a design by Max is evocative and dreamy, but the formula uses a universal quantifier, which implies that all designs by Max are evocative and dreamy. The sentence should be interpreted as there exists at least one design by Max that is both evocative and dreamy, which would require an existential quantifier instead.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x ((DesignStyle(x, zahaHadid) ∧ Adores(max, x)) → InterestingGeometry(x))",
+            "∀x ((BrutalistBuilding(x) ∧ Adores(max, x)) → ¬InterestingGeometry(x))",
+            "∀x (Adores(max, x) → (DesignStyle(x, zahaHadid) ∨ DesignStyle(x, kellyWearstler)))",
+            "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Evocative(x))",
+            "∀x ((DesignStyle(x, kellyWearstler) ∧ Adores(max, x)) → Dreamy(x))",
+            "∀x ((DesignBy(max, x) ∧ Adores(max, x) ∧ InterestingGeometry(x)) → (BrutalistBuilding(x) ∧ Evocative(x)))"
+          ],
+          "conclusion_fol": "∃x (DesignBy(max, x) ∧ Evocative(x) ∧ Dreamy(x))"
+        }
+      ],
+      "elapsed_sec": 15.84
+    },
+    {
+      "example_id": "906",
+      "story_id": "343",
+      "gold_label": "True",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "silent_failure",
+      "vanilla_severity": "under_determination",
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "silent_failure",
+      "refined_severity": "under_determination",
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "∀x (DigitalMedia(x) → ¬Analog(x))",
+        "∀x (PrintedText(x) → AnalogMedia(x))",
+        "∀x (StreamingService(x) → DigitalMedia(x))",
+        "∀x (HardcoverBook(x) → PrintedText(x))",
+        "StreamingService(nineteenEightyFour) → HardcoverBook(nineteenEightyFour)"
+      ],
+      "initial_conclusion_fol": "¬StreamingService(nineteenEightyFour)",
+      "refined_premises_fol": [
+        "∀x (DigitalMedia(x) → ¬Analog(x))",
+        "∀x (PrintedText(x) → AnalogMedia(x))",
+        "∀x (StreamingService(x) → DigitalMedia(x))",
+        "∀x (HardcoverBook(x) → PrintedText(x))",
+        "StreamingService(nineteenEightyFour) → HardcoverBook(nineteenEightyFour)"
+      ],
+      "refined_conclusion_fol": "¬StreamingService(nineteenEightyFour)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 2.72
+    },
+    {
+      "example_id": "241",
+      "story_id": "79",
+      "gold_label": "False",
+      "vanilla_predicted": "False",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "False",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "Striker(robertLewandowski)",
+        "∀x (Striker(x) → SoccerPlayer(x))",
+        "LeftTeam(robertLewandowski, bayernMunchen)",
+        "∀x ∀y (LeftTeam(x, y) → ¬PlaysFor(x, y))"
+      ],
+      "initial_conclusion_fol": "PlaysFor(robertLewandowski, bayernMunchen)",
+      "refined_premises_fol": [
+        "Striker(robertLewandowski)",
+        "∀x (Striker(x) → SoccerPlayer(x))",
+        "LeftTeam(robertLewandowski, bayernMunchen)",
+        "∀x ∀y (LeftTeam(x, y) ↔ ¬CurrentlyPlaysFor(x, y))"
+      ],
+      "refined_conclusion_fol": "CurrentlyPlaysFor(robertLewandowski, bayernMunchen)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P4: The formula does not account for the possibility that a player could leave a team and then rejoin it later. The sentence implies a permanent condition, but the formula does not capture this nuance.\nC: The conclusion contradicts P3 and P4. If Robert Lewandowski left Bayern Munchen (P3) and players who leave a team no longer play for that team (P4), then Robert Lewandowski should not play for Bayern Munchen.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "Striker(robertLewandowski)",
+            "∀x (Striker(x) → SoccerPlayer(x))",
+            "LeftTeam(robertLewandowski, bayernMunchen)",
+            "∀x ∀y (LeftTeam(x, y) → ¬CurrentlyPlaysFor(x, y))"
+          ],
+          "conclusion_fol": "CurrentlyPlaysFor(robertLewandowski, bayernMunchen)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P4: The formula correctly represents the sentence, but it does not fit coherently with the conclusion (C). If Robert Lewandowski left Bayern Munchen (P3), then according to P4, he should not currently play for Bayern Munchen, which contradicts C.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "Striker(robertLewandowski)",
+            "∀x (Striker(x) → SoccerPlayer(x))",
+            "LeftTeam(robertLewandowski, bayernMunchen)",
+            "∀x ∀y (LeftTeam(x, y) ↔ ¬CurrentlyPlaysFor(x, y))"
+          ],
+          "conclusion_fol": "CurrentlyPlaysFor(robertLewandowski, bayernMunchen)"
+        }
+      ],
+      "elapsed_sec": 8.25
+    },
+    {
+      "example_id": "242",
+      "story_id": "79",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "Striker(robertLewandowski)",
+        "∀x (Striker(x) → SoccerPlayer(x))",
+        "LeftTeam(robertLewandowski, bayernMunchen)",
+        "∀x ∀y (LeftTeam(x, y) → ¬PlaysFor(x, y))"
+      ],
+      "initial_conclusion_fol": "Star(robertLewandowski)",
+      "refined_premises_fol": [
+        "Striker(robertLewandowski)",
+        "∀x (Striker(x) → SoccerPlayer(x))",
+        "LeftTeam(robertLewandowski, bayernMunchen)",
+        "∀x ∀y (LeftTeam(x, y) → ¬PlaysFor(x, y))"
+      ],
+      "refined_conclusion_fol": "Star(robertLewandowski)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 2.23
+    },
+    {
+      "example_id": "4",
+      "story_id": "2",
+      "gold_label": "False",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "silent_failure",
+      "vanilla_severity": "under_determination",
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "silent_failure",
+      "refined_severity": "under_determination",
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "City(billings) ∧ InState(billings, montana) ∧ InCountry(billings, us)",
+        "InState(butte, montana) ∧ InState(helena, montana) ∧ InState(missoula, montana)",
+        "InState(whiteSulphurSprings, s) ∧ InState(butte, s)",
+        "¬InState(stPierre, montana)",
+        "∀x (InCity(x, butte) → ¬InCity(x, stPierre))",
+        "∀x (City(x) ∧ ¬(x = bristol ∨ x = texarkana ∨ x = texhoma ∨ x = unionCity) → ∀y ∀z ((InState(x, y) ∧ InState(x, z)) → y = z))"
+      ],
+      "initial_conclusion_fol": "∃s (InState(butte, s) ∧ InState(stPierre, s))",
+      "refined_premises_fol": [
+        "City(billings) ∧ InState(billings, montana) ∧ InCountry(billings, us)",
+        "InState(butte, montana) ∧ InState(helena, montana) ∧ InState(missoula, montana)",
+        "∃s (InState(whiteSulphurSprings, s) ∧ InState(butte, s) ∧ InCountry(whiteSulphurSprings, us) ∧ InCountry(butte, us))",
+        "¬InState(stPierre, montana)",
+        "City(butte) ∧ ∀x (InState(x, butte) → ¬InState(x, stPierre))",
+        "∀x (City(x) ∧ ¬(x = bristol ∨ x = texarkana ∨ x = texhoma ∨ x = unionCity) → ∀y ∀z ((InState(x, y) ∧ InState(x, z)) → y = z))"
+      ],
+      "refined_conclusion_fol": "∃s (InState(butte, s) ∧ InState(stPierre, s))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P3: The formula does not specify that the cities are in the U.S., as mentioned in the sentence.\nP5: The sentence implies that Butte is a city, not that there are cities within Butte. The formula incorrectly uses \"InCity\" instead of \"InState\".\nC: The conclusion contradicts P4, which states that St Pierre is not in Montana, while C suggests they are in the same state.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "City(billings) ∧ InState(billings, montana) ∧ InCountry(billings, us)",
+            "InState(butte, montana) ∧ InState(helena, montana) ∧ InState(missoula, montana)",
+            "InState(whiteSulphurSprings, s) ∧ InState(butte, s) ∧ InCountry(whiteSulphurSprings, us) ∧ InCountry(butte, us)",
+            "¬InState(stPierre, montana)",
+            "City(butte) ∧ ∀x (InState(x, butte) → ¬InState(x, stPierre))",
+            "∀x (City(x) ∧ ¬(x = bristol ∨ x = texarkana ∨ x = texhoma ∨ x = unionCity) → ∀y ∀z ((InState(x, y) ∧ InState(x, z)) → y = z))"
+          ],
+          "conclusion_fol": "∃s (InState(butte, s) ∧ InState(stPierre, s))"
+        },
+        {
+          "round_index": 1,
+          "critique": "P3: The formula does not specify that White Sulphur Springs and Butte are in the same state. It should include a statement that the state variable 's' is the same for both cities.\nP5: The sentence suggests that Butte is a state, not a city, which contradicts P2. The formula should reflect that Butte is a city, not a state.\nC: The formula contradicts P4, which states that St Pierre is not in Montana, while P2 implies Butte is in Montana. The formula should not assert that Butte and St Pierre are in the same state without additional context.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "City(billings) ∧ InState(billings, montana) ∧ InCountry(billings, us)",
+            "InState(butte, montana) ∧ InState(helena, montana) ∧ InState(missoula, montana)",
+            "∃s (InState(whiteSulphurSprings, s) ∧ InState(butte, s) ∧ InCountry(whiteSulphurSprings, us) ∧ InCountry(butte, us))",
+            "¬InState(stPierre, montana)",
+            "City(butte) ∧ ∀x (InState(x, butte) → ¬InState(x, stPierre))",
+            "∀x (City(x) ∧ ¬(x = bristol ∨ x = texarkana ∨ x = texhoma ∨ x = unionCity) → ∀y ∀z ((InState(x, y) ∧ InState(x, z)) → y = z))"
+          ],
+          "conclusion_fol": "∃s (InState(butte, s) ∧ InState(stPierre, s))"
+        }
+      ],
+      "elapsed_sec": 13.53
+    },
+    {
+      "example_id": "6",
+      "story_id": "2",
+      "gold_label": "True",
+      "vanilla_predicted": "True",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": null,
+      "refined_outcome": "loud_failure",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "City(billings) ∧ LocatedIn(billings, montana) ∧ LocatedIn(montana, us)",
+        "LocatedIn(butte, montana) ∧ LocatedIn(helena, montana) ∧ LocatedIn(missoula, montana)",
+        "LocatedIn(whiteSulphurSprings, state) ∧ LocatedIn(butte, state)",
+        "¬LocatedIn(stPierre, montana)",
+        "∀x (LocatedIn(x, butte) → ¬LocatedIn(x, stPierre))",
+        "∀x (City(x) ∧ ¬(x = bristol ∨ x = texarkana ∨ x = texhoma ∨ x = unionCity) → ∀y ∀z ((LocatedIn(x, y) ∧ LocatedIn(x, z)) → y = z))"
+      ],
+      "initial_conclusion_fol": "LocatedIn(missoula, montana)",
+      "refined_premises_fol": [
+        "City(billings) ∧ LocatedIn(billings, montana) ∧ LocatedIn(montana, us)",
+        "LocatedIn(butte, montana) ∧ LocatedIn(helena, montana) ∧ LocatedIn(missoula, montana)",
+        "∃state (LocatedIn(whiteSulphurSprings, state) ∧ LocatedIn(butte, state))",
+        "¬LocatedIn(stPierre, montana)",
+        "City(butte) ∧ ¬LocatedIn(butte, stPierre)",
+        "∀x (City(x) ∧ ¬(x = bristol ∨ x = texarkana ∨ x = texhoma ∨ x = unionCity) → ∀y ∀z ((LocatedIn(x, y) ∧ LocatedIn(x, z)) → y = z))"
+      ],
+      "refined_conclusion_fol": "LocatedIn(missoula, montana)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P3: The formula does not specify that White Sulphur Springs and Butte are in the same state. It only states that they are each located in some state.\nP5: The sentence implies that Butte is a city, but the formula suggests that Butte contains cities, which is incorrect.\nP6: The sentence implies that a city can only be in one state in the U.S., but the formula does not account for the exception clause correctly. It should specify that the exception applies to the cities themselves, not the states.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "City(billings) ∧ LocatedIn(billings, montana) ∧ LocatedIn(montana, us)",
+            "LocatedIn(butte, montana) ∧ LocatedIn(helena, montana) ∧ LocatedIn(missoula, montana)",
+            "LocatedIn(whiteSulphurSprings, state) ∧ LocatedIn(butte, state) ∧ ∃state (LocatedIn(whiteSulphurSprings, state) ∧ LocatedIn(butte, state))",
+            "¬LocatedIn(stPierre, montana)",
+            "City(butte) ∧ ∀x (LocatedIn(x, butte) → ¬LocatedIn(x, stPierre))",
+            "∀x (City(x) ∧ ¬(x = bristol ∨ x = texarkana ∨ x = texhoma ∨ x = unionCity) → ∀y ∀z ((LocatedIn(x, y) ∧ LocatedIn(x, z)) → y = z))"
+          ],
+          "conclusion_fol": "LocatedIn(missoula, montana)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P3: The formula includes an unnecessary repetition of the condition that White Sulphur Springs and Butte are located in the same state. The existential quantifier is misplaced and should not be used in this context. The correct formula should be: ∃state (LocatedIn(whiteSulphurSprings, state) ∧ LocatedIn(butte, state)).\n\nP5: The sentence implies that Butte is a city, not that there are cities within Butte. The formula incorrectly suggests that Butte contains other cities. The correct interpretation should be: City(butte) ∧ ¬LocatedIn(butte, stPierre).\n\nP6: The formula does not correctly express the exception for the cities Bristol, Texarkana, Texhoma, and Union City. The exception should allow these cities to be located in more than one state, but the current formula does not achieve this. The correct formula should explicitly allow these exceptions to have multiple locations without the restriction applied to other cities.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "City(billings) ∧ LocatedIn(billings, montana) ∧ LocatedIn(montana, us)",
+            "LocatedIn(butte, montana) ∧ LocatedIn(helena, montana) ∧ LocatedIn(missoula, montana)",
+            "∃state (LocatedIn(whiteSulphurSprings, state) ∧ LocatedIn(butte, state))",
+            "¬LocatedIn(stPierre, montana)",
+            "City(butte) ∧ ¬LocatedIn(butte, stPierre)",
+            "∀x (City(x) ∧ ¬(x = bristol ∨ x = texarkana ∨ x = texhoma ∨ x = unionCity) → ∀y ∀z ((LocatedIn(x, y) ∧ LocatedIn(x, z)) → y = z))"
+          ],
+          "conclusion_fol": "LocatedIn(missoula, montana)"
+        }
+      ],
+      "elapsed_sec": 14.96
+    },
+    {
+      "example_id": "1271",
+      "story_id": "442",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "∀x (BrownSwissCattle(x) → Cow(x))",
+        "∃x (Pet(x) ∧ BrownSwissCattle(x))",
+        "∀x (Cow(x) → DomesticatedAnimal(x))",
+        "∀x (Alligator(x) → ¬DomesticatedAnimal(x))",
+        "Alligator(ted)"
+      ],
+      "initial_conclusion_fol": "Pet(ted)",
+      "refined_premises_fol": [
+        "∀x (BrownSwissCattle(x) → Cow(x))",
+        "∃x (Pet(x) ∧ BrownSwissCattle(x))",
+        "∀x (Cow(x) → DomesticatedAnimal(x))",
+        "∀x (Alligator(x) → ¬DomesticatedAnimal(x))",
+        "Alligator(ted)"
+      ],
+      "refined_conclusion_fol": "Pet(ted)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 2.47
+    },
+    {
+      "example_id": "665",
+      "story_id": "234",
+      "gold_label": "True",
+      "vanilla_predicted": null,
+      "vanilla_outcome": "loud_failure",
+      "vanilla_severity": null,
+      "refined_predicted": null,
+      "refined_outcome": "loud_failure",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "PrivateIvyLeagueResearchUniversity(yaleUniversity)",
+        "MovedTo(yaleUniversity, newHaven, yr1716)",
+        "EndowmentValue(yaleUniversity, 42.3BillionDollars)",
+        "ResidentialCollege(yaleUniversity, benjaminFranklinCollege) ∧ ResidentialCollege(yaleUniversity, berkeleyCollege) ∧ ResidentialCollege(yaleUniversity, branfordCollege) ∧ ResidentialCollege(yaleUniversity, davenportCollege) ∧ ResidentialCollege(yaleUniversity, ezraStilesCollege) ∧ ResidentialCollege(yaleUniversity, graceHopperCollege) ∧ ResidentialCollege(yaleUniversity, jonathanEdwardsCollege) ∧ ResidentialCollege(yaleUniversity, morseCollege) ∧ ResidentialCollege(yaleUniversity, pauliMurrayCollege) ∧ ResidentialCollege(yaleUniversity, piersonCollege) ∧ ResidentialCollege(yaleUniversity, saybrookCollege) ∧ ResidentialCollege(yaleUniversity, sillimanCollege) ∧ ResidentialCollege(yaleUniversity, timothyDwightCollege) ∧ ResidentialCollege(yaleUniversity, trumbullCollege)"
+      ],
+      "initial_conclusion_fol": "ResidentialCollege(yaleUniversity, piersonCollege)",
+      "refined_premises_fol": [
+        "PrivateIvyLeagueResearchUniversity(yaleUniversity)",
+        "MovedTo(yaleUniversity, newHaven, yr1716)",
+        "EndowmentValue(yaleUniversity, 42.3BillionDollars)",
+        "ResidentialCollege(yaleUniversity, benjaminFranklinCollege) ∧ ResidentialCollege(yaleUniversity, berkeleyCollege) ∧ ResidentialCollege(yaleUniversity, branfordCollege) ∧ ResidentialCollege(yaleUniversity, davenportCollege) ∧ ResidentialCollege(yaleUniversity, ezraStilesCollege) ∧ ResidentialCollege(yaleUniversity, graceHopperCollege) ∧ ResidentialCollege(yaleUniversity, jonathanEdwardsCollege) ∧ ResidentialCollege(yaleUniversity, morseCollege) ∧ ResidentialCollege(yaleUniversity, pauliMurrayCollege) ∧ ResidentialCollege(yaleUniversity, piersonCollege) ∧ ResidentialCollege(yaleUniversity, saybrookCollege) ∧ ResidentialCollege(yaleUniversity, sillimanCollege) ∧ ResidentialCollege(yaleUniversity, timothyDwightCollege) ∧ ResidentialCollege(yaleUniversity, trumbullCollege)"
+      ],
+      "refined_conclusion_fol": "ResidentialCollege(yaleUniversity, piersonCollege)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 3.93
+    },
+    {
+      "example_id": "819",
+      "story_id": "322",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (GrowthStock(x) → BoughtForProfitFromRapidAppreciation(x))",
+        "∀x (BoughtForProfitFromRapidAppreciation(x) → ¬SuitableForRetirementFund(x))",
+        "∃x (GrowthStock(x))",
+        "∀x (MatureStock(x) → SuitableForRetirementFund(x))",
+        "MatureStock(ko)"
+      ],
+      "initial_conclusion_fol": "Stock(ko)",
+      "refined_premises_fol": [
+        "∀x (GrowthStock(x) → BoughtForProfitFromRapidAppreciation(x))",
+        "∀x (BoughtForProfitFromRapidAppreciation(x) → ¬SuitableForRetirementFund(x))",
+        "∃x (GrowthStock(x))",
+        "∀x (MatureStock(x) → SuitableForRetirementFund(x))",
+        "MatureStock(ko)"
+      ],
+      "refined_conclusion_fol": "Stock(ko)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P2: The sentence refers to \"the stock price\" being bought for profit, but the formula uses \"x\" to represent the stock itself, not the stock price. The formula should reflect that it is the stock, not the stock price, that is bought for profit.\nC: The formula should use a capital \"K\" for \"KO\" to match the convention used in P5, i.e., Stock(KO).",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (GrowthStock(x) → BoughtForProfitFromRapidAppreciation(x))",
+            "∀x (Stock(x) ∧ BoughtForProfitFromRapidAppreciation(x) → ¬SuitableForRetirementFund(x))",
+            "∃x (GrowthStock(x))",
+            "∀x (MatureStock(x) → SuitableForRetirementFund(x))",
+            "MatureStock(ko)"
+          ],
+          "conclusion_fol": "Stock(ko)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P2: The formula uses a universal quantifier (∀x) but the sentence implies a conditional statement about stocks bought for profit from rapid appreciation, not all stocks. The formula should not universally quantify over all stocks.\nP2: The formula includes Stock(x) as a condition, which is not mentioned in the sentence. The sentence only refers to stocks bought for profit from rapid appreciation.\nP5: The formula should use a constant symbol (e.g., KO) instead of a lowercase variable (ko) to represent the specific stock KO.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (GrowthStock(x) → BoughtForProfitFromRapidAppreciation(x))",
+            "∀x (BoughtForProfitFromRapidAppreciation(x) → ¬SuitableForRetirementFund(x))",
+            "∃x (GrowthStock(x))",
+            "∀x (MatureStock(x) → SuitableForRetirementFund(x))",
+            "MatureStock(ko)"
+          ],
+          "conclusion_fol": "Stock(ko)"
+        }
+      ],
+      "elapsed_sec": 10.03
+    },
+    {
+      "example_id": "820",
+      "story_id": "322",
+      "gold_label": "False",
+      "vanilla_predicted": null,
+      "vanilla_outcome": "loud_failure",
+      "vanilla_severity": null,
+      "refined_predicted": null,
+      "refined_outcome": "loud_failure",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 1,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "∀x (GrowthStock(x) → BoughtForProfit(x, rapidPriceAppreciation))",
+        "∀x (BoughtForProfit(x, rapidPriceAppreciation) → ¬SuitableForRetirementFund(x))",
+        "∃x GrowthStock(x)",
+        "∀x (MatureStock(x) → SuitableForRetirementFund(x))",
+        "MatureStock(ko)"
+      ],
+      "initial_conclusion_fol": "Stock(ko) ∧ GrowthStock(ko)",
+      "refined_premises_fol": [
+        "∀x (GrowthStock(x) → BoughtForProfit(x, rapidPriceAppreciation))",
+        "∀x (BoughtForProfit(x, rapidPriceAppreciation) → ¬SuitableForRetirementFund(x))",
+        "∃x GrowthStock(x)",
+        "∀x (MatureStock(x) → SuitableForRetirementFund(x))",
+        "MatureStock(ko)"
+      ],
+      "refined_conclusion_fol": "Stock(ko) ∧ ¬GrowthStock(ko)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P2: The sentence refers to \"the stock price\" being bought for profit, but the formula uses \"x\" as if it refers to the stock itself, not the stock price. The formula should reflect that it is the stock, not the stock price, that is bought for profit.\nC: The conclusion contradicts P5, which states that KO is a mature stock. Since mature stocks are suitable for retirement funds (P4), and growth stocks are not suitable for retirement funds (P2), KO cannot be both a mature stock and a growth stock.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (GrowthStock(x) → BoughtForProfit(x, rapidPriceAppreciation))",
+            "∀x (BoughtForProfit(x, rapidPriceAppreciation) → ¬SuitableForRetirementFund(x))",
+            "∃x GrowthStock(x)",
+            "∀x (MatureStock(x) → SuitableForRetirementFund(x))",
+            "MatureStock(ko)"
+          ],
+          "conclusion_fol": "Stock(ko) ∧ ¬GrowthStock(ko)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: NO_ISSUES\nP2: NO_ISSUES\nP3: NO_ISSUES\nP4: NO_ISSUES\nP5: NO_ISSUES\nC: The formula contradicts the information given in P5. If KO is a mature stock, it cannot simultaneously be a growth stock according to the context provided by P1 and P4. The formula should reflect that KO is not a growth stock, but it currently states that KO is a growth stock, which is inconsistent.",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 6.65
+    },
+    {
+      "example_id": "688",
+      "story_id": "245",
+      "gold_label": "True",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "silent_failure",
+      "vanilla_severity": "under_determination",
+      "refined_predicted": null,
+      "refined_outcome": "loud_failure",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀m (SuperheroMovie(m) → ∀x (GoodGuy(x, m) → Wins(x, m)))",
+        "SuperheroMovie(surprisingAdventuresOfSirDigbyChickenCaesar)",
+        "∀x ∀y (Fights(x, y) ↔ Fights(y, x))",
+        "Fights(sirDigby, nemesisOfSirDigby)",
+        "∀m ∀x ((SuperheroMovie(m) ∧ NamedAfter(m, x)) → GoodGuy(x, m))",
+        "NamedAfter(surprisingAdventuresOfSirDigbyChickenCaesar, sirDigby)",
+        "∀x ∀y (Wins(x, y) → ¬Wins(y, x))",
+        "∀m ∀x ((SuperheroMovie(m) ∧ NamedAfter(m, x)) → InMovie(x, m))"
+      ],
+      "initial_conclusion_fol": "¬Wins(nemesisOfSirDigby, sirDigby)",
+      "refined_premises_fol": [
+        "∀m (SuperheroMovie(m) → ∀x (GoodGuy(x, m) → Wins(x, m)))",
+        "SuperheroMovie(surprisingAdventuresOfSirDigbyChickenCaesar)",
+        "∀m ∀x ∀y ((GoodGuy(x, m) ∧ BadGuy(y, m)) → (Fights(x, y) ↔ Fights(y, x)))",
+        "Fights(sirDigby, nemesisOfSirDigby)",
+        "∀m ∀x ((SuperheroMovie(m) ∧ NamedAfter(m, x)) → GoodGuy(x, m))",
+        "NamedAfter(surprisingAdventuresOfSirDigbyChickenCaesar, sirDigby)",
+        "∀f ∀x ∀y ((Fights(x, y, f) ∧ Wins(x, f)) → ¬Wins(y, f))",
+        "∀m ∀x ((SuperheroMovie(m) ∧ NamedAfter(m, x)) → InMovie(x, m))"
+      ],
+      "refined_conclusion_fol": "¬Wins(nemesisOfSirDigby, sirDigby)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula implies that every good guy in every superhero movie wins, but the sentence suggests that the good guys collectively win in each movie. The formula should reflect that at least one good guy wins in each movie, not necessarily every good guy.\nP3: The formula states that if any person fights another, then the reverse is also true for any pair of individuals. However, the sentence implies that this is specifically about good guys and bad guys, not any arbitrary individuals.\nP7: The formula correctly captures the idea that if one person wins a fight, the other does not win, but it does not specify that this is within the context of good guys and bad guys, which might be implied by the context of the other statements.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀m (SuperheroMovie(m) → ∃x (GoodGuy(x, m) ∧ Wins(x, m)))",
+            "SuperheroMovie(surprisingAdventuresOfSirDigbyChickenCaesar)",
+            "∀x ∀y ((GoodGuy(x, m) ∧ BadGuy(y, m)) → (Fights(x, y) ↔ Fights(y, x)))",
+            "Fights(sirDigby, nemesisOfSirDigby)",
+            "∀m ∀x ((SuperheroMovie(m) ∧ NamedAfter(m, x)) → GoodGuy(x, m))",
+            "NamedAfter(surprisingAdventuresOfSirDigbyChickenCaesar, sirDigby)",
+            "∀x ∀y ((GoodGuy(x, m) ∧ BadGuy(y, m) ∧ Wins(x, y)) → ¬Wins(y, x))",
+            "∀m ∀x ((SuperheroMovie(m) ∧ NamedAfter(m, x)) → InMovie(x, m))"
+          ],
+          "conclusion_fol": "¬Wins(nemesisOfSirDigby, sirDigby)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula suggests that for every superhero movie, there exists at least one good guy who wins. However, the sentence implies that all good guys win, not just one. The formula should reflect that all good guys in the movie win.\nP3: The formula uses the variable 'm' without quantifying it, which makes it unclear which movie is being referred to. The formula should include a quantifier for 'm' to specify the context of the fight.\nP7: The formula incorrectly assumes that the fight is between a good guy and a bad guy, which is not stated in the sentence. The sentence is more general and should not specify the roles of the fighters. Additionally, the formula uses 'Wins(x, y)' which suggests winning against a person rather than in a fight context. The formula should be adjusted to reflect winning a fight rather than against a person.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀m (SuperheroMovie(m) → ∀x (GoodGuy(x, m) → Wins(x, m)))",
+            "SuperheroMovie(surprisingAdventuresOfSirDigbyChickenCaesar)",
+            "∀m ∀x ∀y ((GoodGuy(x, m) ∧ BadGuy(y, m)) → (Fights(x, y) ↔ Fights(y, x)))",
+            "Fights(sirDigby, nemesisOfSirDigby)",
+            "∀m ∀x ((SuperheroMovie(m) ∧ NamedAfter(m, x)) → GoodGuy(x, m))",
+            "NamedAfter(surprisingAdventuresOfSirDigbyChickenCaesar, sirDigby)",
+            "∀f ∀x ∀y ((Fights(x, y, f) ∧ Wins(x, f)) → ¬Wins(y, f))",
+            "∀m ∀x ((SuperheroMovie(m) ∧ NamedAfter(m, x)) → InMovie(x, m))"
+          ],
+          "conclusion_fol": "¬Wins(nemesisOfSirDigby, sirDigby)"
+        }
+      ],
+      "elapsed_sec": 16.9
+    },
+    {
+      "example_id": "171",
+      "story_id": "58",
+      "gold_label": "True",
+      "vanilla_predicted": "True",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "True",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (Book(x) → ContainsKnowledge(x))",
+        "∀x ∀y ((Person(x) ∧ Reads(x, y) ∧ Book(y)) → GainsKnowledge(x))",
+        "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+        "Reads(harry, walden) ∧ Book(walden) ∧ Author(walden, henryThoreau)"
+      ],
+      "initial_conclusion_fol": "ContainsKnowledge(walden)",
+      "refined_premises_fol": [
+        "∀x (Book(x) → ContainsKnowledge(x))",
+        "∀x ∀y ((Person(x) ∧ Reads(x, y) ∧ Book(y)) → GainsKnowledge(x))",
+        "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+        "Reads(harry, walden) ∧ Book(walden) ∧ Author(walden, henryThoreau)"
+      ],
+      "refined_conclusion_fol": "ContainsKnowledge(walden)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula correctly represents the sentence, stating that all books contain knowledge.\nP2: The formula correctly represents the sentence, stating that if a person reads a book, they gain knowledge.\nP3: The formula correctly represents the sentence, stating that if a person gains knowledge, they become smarter.\nP4: The formula correctly represents the sentence, stating that Harry read the book \"Walden\" by Henry Thoreau.\nC: The formula correctly represents the sentence, stating that \"Walden\" contains knowledge.\n\nNO_ISSUES",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (Book(x) → ContainsKnowledge(x))",
+            "∀x ∀y ((Person(x) ∧ Reads(x, y) ∧ Book(y)) → GainsKnowledge(x))",
+            "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+            "Reads(harry, walden) ∧ Book(walden) ∧ Author(walden, henryThoreau)"
+          ],
+          "conclusion_fol": "ContainsKnowledge(walden)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula correctly represents the sentence, assuming \"tons of knowledge\" is interpreted as simply \"knowledge.\"\nP2: The formula correctly represents the sentence.\nP3: The formula correctly represents the sentence.\nP4: The formula correctly represents the sentence.\nC: The formula correctly represents the sentence.\n\nNO_ISSUES",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (Book(x) → ContainsKnowledge(x))",
+            "∀x ∀y ((Person(x) ∧ Reads(x, y) ∧ Book(y)) → GainsKnowledge(x))",
+            "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+            "Reads(harry, walden) ∧ Book(walden) ∧ Author(walden, henryThoreau)"
+          ],
+          "conclusion_fol": "ContainsKnowledge(walden)"
+        }
+      ],
+      "elapsed_sec": 8.17
+    },
+    {
+      "example_id": "172",
+      "story_id": "58",
+      "gold_label": "True",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "silent_failure",
+      "vanilla_severity": "under_determination",
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "silent_failure",
+      "refined_severity": "under_determination",
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (Book(x) → ContainsKnowledge(x))",
+        "∀x ∀y ((Person(x) ∧ Book(y) ∧ Reads(x, y)) → GainsKnowledge(x))",
+        "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+        "Reads(harry, walden)"
+      ],
+      "initial_conclusion_fol": "BecomesSmarter(harry)",
+      "refined_premises_fol": [
+        "∀x (Book(x) → ContainsTonsOfKnowledge(x))",
+        "∀x ∀y ((Person(x) ∧ Book(y) ∧ Reads(x, y)) → GainsKnowledge(x))",
+        "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+        "Reads(harry, walden)"
+      ],
+      "refined_conclusion_fol": "BecomesSmarter(harry)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula correctly represents the sentence, assuming \"ContainsKnowledge\" is interpreted as \"contains tons of knowledge.\"\n\nP2: The formula correctly represents the sentence, assuming \"GainsKnowledge\" is interpreted as \"gains knowledge.\"\n\nP3: The formula correctly represents the sentence.\n\nP4: The formula correctly represents the sentence, assuming \"harry\" and \"walden\" are constants representing Harry and the book \"Walden,\" respectively.\n\nC: The formula correctly represents the sentence, assuming \"BecomesSmarter\" is interpreted as \"is smarter than before.\"\n\nNO_ISSUES",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (Book(x) → ContainsTonsOfKnowledge(x))",
+            "∀x ∀y ((Person(x) ∧ Book(y) ∧ Reads(x, y)) → GainsKnowledge(x))",
+            "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+            "Reads(harry, walden)"
+          ],
+          "conclusion_fol": "BecomesSmarter(harry)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula correctly represents the sentence, stating that all books contain tons of knowledge.\n\nP2: The formula correctly represents the sentence, stating that if a person reads a book, they gain knowledge.\n\nP3: The formula correctly represents the sentence, stating that if a person gains knowledge, they become smarter.\n\nP4: The formula correctly represents the sentence, stating that Harry read the book \"Walden.\"\n\nC: The formula correctly represents the sentence, stating that Harry becomes smarter.\n\nNO_ISSUES",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (Book(x) → ContainsTonsOfKnowledge(x))",
+            "∀x ∀y ((Person(x) ∧ Book(y) ∧ Reads(x, y)) → GainsKnowledge(x))",
+            "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+            "Reads(harry, walden)"
+          ],
+          "conclusion_fol": "BecomesSmarter(harry)"
+        }
+      ],
+      "elapsed_sec": 8.72
+    },
+    {
+      "example_id": "547",
+      "story_id": "191",
+      "gold_label": "False",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "silent_failure",
+      "vanilla_severity": "under_determination",
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "silent_failure",
+      "refined_severity": "under_determination",
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (NlpTask(x) → LanguageGenerationTask(x) ∨ LanguageUnderstandingTask(x))",
+        "∀x (OutputIsTextSequence(x) → LanguageGenerationTask(x))",
+        "NlpTask(machineTranslation)",
+        "OutputIsTextSequence(machineTranslation)"
+      ],
+      "initial_conclusion_fol": "LanguageUnderstandingTask(machineTranslation)",
+      "refined_premises_fol": [
+        "∀x (NlpTask(x) → (LanguageGenerationTask(x) ∨ LanguageUnderstandingTask(x)))",
+        "∀x ((NlpTask(x) ∧ OutputIsTextSequence(x)) → LanguageGenerationTask(x))",
+        "NlpTask(machineTranslation)",
+        "OutputIsTextSequence(machineTranslation)"
+      ],
+      "refined_conclusion_fol": "LanguageUnderstandingTask(machineTranslation)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P2: The formula should specify that the task in question is an NLP task before concluding it is a language generation task. The correct formula should be: ∀x ((NlpTask(x) ∧ OutputIsTextSequence(x)) → LanguageGenerationTask(x))\n\nC: The conclusion contradicts the information provided by P2 and P4. According to P2 and P4, machine translation should be a language generation task, not a language understanding task.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (NlpTask(x) → (LanguageGenerationTask(x) ∨ LanguageUnderstandingTask(x)))",
+            "∀x ((NlpTask(x) ∧ OutputIsTextSequence(x)) → LanguageGenerationTask(x))",
+            "NlpTask(machineTranslation)",
+            "OutputIsTextSequence(machineTranslation)"
+          ],
+          "conclusion_fol": "LanguageGenerationTask(machineTranslation)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula correctly represents the sentence, stating that every NLP task is either a language generation task or a language understanding task.\n\nP2: The formula correctly represents the sentence, stating that if an NLP task outputs a text sequence, it is a language generation task.\n\nP3: The formula correctly represents the sentence, stating that machine translation is an NLP task.\n\nP4: The formula correctly represents the sentence, stating that the output of machine translation is a text sequence.\n\nC: The formula does not match the sentence. The formula states that machine translation is a language generation task, but the sentence states it is a language understanding task. The formula should be LanguageUnderstandingTask(machineTranslation).\n\nC: The conclusion does not logically follow from the premises. Based on P1, P2, P3, and P4, machine translation should be categorized as a language generation task, not a language understanding task. \n\nTherefore, the issues are:\nC: Incorrect formula for the sentence.\nC: Conclusion does not logically follow from the premises.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (NlpTask(x) → (LanguageGenerationTask(x) ∨ LanguageUnderstandingTask(x)))",
+            "∀x ((NlpTask(x) ∧ OutputIsTextSequence(x)) → LanguageGenerationTask(x))",
+            "NlpTask(machineTranslation)",
+            "OutputIsTextSequence(machineTranslation)"
+          ],
+          "conclusion_fol": "LanguageUnderstandingTask(machineTranslation)"
+        }
+      ],
+      "elapsed_sec": 8.85
+    },
+    {
+      "example_id": "935",
+      "story_id": "352",
+      "gold_label": "True",
+      "vanilla_predicted": "True",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "True",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "∀x (BusinessOrganization(x) → LegalEntity(x))",
+        "∀x (Company(x) → BusinessOrganization(x))",
+        "∀x (PrivateCompany(x) → Company(x))",
+        "∀x (LegalEntity(x) → CreatedUnderLaw(x))",
+        "∀x (LegalEntity(x) → HasLegalObligations(x))",
+        "CreatedUnderLaw(harvardWeeklyBookClub) → ¬PrivateCompany(harvardWeeklyBookClub)"
+      ],
+      "initial_conclusion_fol": "PrivateCompany(harvardWeeklyBookClub) → (HasLegalObligations(harvardWeeklyBookClub) ∨ CreatedUnderLaw(harvardWeeklyBookClub))",
+      "refined_premises_fol": [
+        "∀x (BusinessOrganization(x) → LegalEntity(x))",
+        "∀x (Company(x) → BusinessOrganization(x))",
+        "∀x (PrivateCompany(x) → Company(x))",
+        "∀x (LegalEntity(x) → CreatedUnderLaw(x))",
+        "∀x (LegalEntity(x) → HasLegalObligations(x))",
+        "CreatedUnderLaw(harvardWeeklyBookClub) → ¬PrivateCompany(harvardWeeklyBookClub)"
+      ],
+      "refined_conclusion_fol": "PrivateCompany(harvardWeeklyBookClub) → (HasLegalObligations(harvardWeeklyBookClub) ∨ CreatedUnderLaw(harvardWeeklyBookClub))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 5.11
+    },
+    {
+      "example_id": "958",
+      "story_id": "361",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (SpillsFood(x) → ¬NotablyTidy(x))",
+        "∀x ((ClumsyFoodie(x) ∧ GoesOutFrequently(x)) → SpillsFood(x))",
+        "∀x (Cleanly(x) → NotablyTidy(x))",
+        "∀x (ValuesOrderAndSpotlessness(x) → Cleanly(x))",
+        "∀x (FamilyPrioritizesOrderAndSpotlessness(x) → ValuesOrderAndSpotlessness(x))",
+        "¬(SpillsFood(peter) ⊕ Cleanly(peter))"
+      ],
+      "initial_conclusion_fol": "NotablyTidy(peter)",
+      "refined_premises_fol": [
+        "∀x (SpillsFood(x) → ¬NotablyTidy(x))",
+        "∀x ((ClumsyFoodie(x) ∧ GoesOutFrequently(x)) → SpillsFood(x))",
+        "∀x (Cleanly(x) → NotablyTidy(x))",
+        "∀x (ValuesOrderAndSpotlessness(x) → Cleanly(x))",
+        "∀x (FamilyPrioritizesOrderAndSpotlessness(x) → ValuesOrderAndSpotlessness(x))",
+        "(SpillsFood(peter) ∧ Cleanly(peter)) ∨ (¬SpillsFood(peter) ∧ ¬Cleanly(peter))"
+      ],
+      "refined_conclusion_fol": "NotablyTidy(peter)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula should be ∀x (SpillsFood(x) → ¬NotablyTidy(x)). However, the sentence implies that spilling food leads to not being notably tidy, which is correctly represented by the formula. The issue is with the double negation in the sentence and formula interpretation. The formula is correct as it stands.\n\nP6: The formula ¬(SpillsFood(peter) ⊕ Cleanly(peter)) does not accurately capture the sentence. The sentence describes a situation where Peter is either both spilling food and cleanly, or neither. The correct formula should be (SpillsFood(peter) ∧ Cleanly(peter)) ∨ (¬SpillsFood(peter) ∧ ¬Cleanly(peter)).\n\nC: The conclusion relies on the interpretation of P6, which is incorrect. Therefore, the conclusion may not be valid based on the corrected interpretation of P6.\n\n- P6: Incorrect use of exclusive or (⊕) instead of a conjunction and disjunction to represent the sentence.\n- C: Conclusion may not be valid due to the incorrect interpretation of P6.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (SpillsFood(x) → ¬NotablyTidy(x))",
+            "∀x ((ClumsyFoodie(x) ∧ GoesOutFrequently(x)) → SpillsFood(x))",
+            "∀x (Cleanly(x) → NotablyTidy(x))",
+            "∀x (ValuesOrderAndSpotlessness(x) → Cleanly(x))",
+            "∀x (FamilyPrioritizesOrderAndSpotlessness(x) → ValuesOrderAndSpotlessness(x))",
+            "(SpillsFood(peter) ∧ Cleanly(peter)) ∨ (¬SpillsFood(peter) ∧ ¬Cleanly(peter))"
+          ],
+          "conclusion_fol": "NotablyTidy(peter)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula should be ∀x (SpillsFood(x) → ¬NotablyTidy(x)) to match the sentence. However, the sentence implies that spilling food leads to not being notably tidy, so the formula should be ∀x (SpillsFood(x) → ¬NotablyTidy(x)), which is correct. No issue here.\n\nP6: The formula does not match the sentence correctly. The sentence states that Peter is either a person who spills food and is cleanly, or a person who does not spill food and is not cleanly. The formula should reflect this disjunction correctly. The current formula is correct as it stands, but it should be noted that it does not directly imply Peter is notably tidy, which is the conclusion in C.\n\nC: The conclusion that Peter is notably tidy does not logically follow from P6 alone, as P6 does not provide any information about being notably tidy. There is a missing logical connection between being cleanly and being notably tidy that should be established through other premises (like P3).\n\nOverall, the main issue is with the logical flow from P6 to C, as P6 does not provide sufficient information to conclude C without additional premises.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (SpillsFood(x) → ¬NotablyTidy(x))",
+            "∀x ((ClumsyFoodie(x) ∧ GoesOutFrequently(x)) → SpillsFood(x))",
+            "∀x (Cleanly(x) → NotablyTidy(x))",
+            "∀x (ValuesOrderAndSpotlessness(x) → Cleanly(x))",
+            "∀x (FamilyPrioritizesOrderAndSpotlessness(x) → ValuesOrderAndSpotlessness(x))",
+            "(SpillsFood(peter) ∧ Cleanly(peter)) ∨ (¬SpillsFood(peter) ∧ ¬Cleanly(peter))"
+          ],
+          "conclusion_fol": "NotablyTidy(peter)"
+        }
+      ],
+      "elapsed_sec": 15.9
+    },
+    {
+      "example_id": "959",
+      "story_id": "361",
+      "gold_label": "False",
+      "vanilla_predicted": "False",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "False",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (SpillsFood(x) → ¬NotablyTidy(x))",
+        "∀x ((ClumsyFoodie(x) ∧ GoesOutFrequently(x)) → SpillsFood(x))",
+        "∀x (Cleanly(x) → NotablyTidy(x))",
+        "∀x (ValuesOrderAndSpotlessness(x) → Cleanly(x))",
+        "∀x (FamilyPrioritizesOrderAndSpotlessness(x) → ValuesOrderAndSpotlessness(x))",
+        "(SpillsFood(peter) ∧ Cleanly(peter)) ∨ (¬SpillsFood(peter) ∧ ¬Cleanly(peter))"
+      ],
+      "initial_conclusion_fol": "ClumsyFoodie(peter) ∧ GoesOutFrequently(peter) ∨ FamilyPrioritizesOrderAndSpotlessness(peter)",
+      "refined_premises_fol": [
+        "∀x (SpillsFood(x) → ¬NotablyTidy(x))",
+        "∀x ((ClumsyFoodie(x) ∧ GoesOutFrequently(x)) → SpillsFood(x))",
+        "∀x (Cleanly(x) → NotablyTidy(x))",
+        "∀x (ValuesOrderAndSpotlessness(x) → Cleanly(x))",
+        "∀x (FamilyPrioritizesOrderAndSpotlessness(x) → ValuesOrderAndSpotlessness(x))",
+        "(SpillsFood(peter) ∧ Cleanly(peter)) ∨ (¬SpillsFood(peter) ∧ ¬Cleanly(peter))"
+      ],
+      "refined_conclusion_fol": "(ClumsyFoodie(peter) ∧ GoesOutFrequently(peter)) ∨ FamilyPrioritizesOrderAndSpotlessness(peter)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula incorrectly uses ¬NotablyTidy(x) instead of NotablyTidy(x). It should be ∀x (SpillsFood(x) → ¬NotablyTidy(x)) to match the sentence.\nP6: The formula does not correctly represent the sentence. The sentence implies an exclusive or (XOR) condition, but the formula uses a regular or (∨). It should be (SpillsFood(peter) ∧ Cleanly(peter)) ⊕ (¬SpillsFood(peter) ∧ ¬Cleanly(peter)) to reflect the exclusivity.\nC: Parentheses are needed to clarify the precedence of the logical operators. It should be (ClumsyFoodie(peter) ∧ GoesOutFrequently(peter)) ∨ FamilyPrioritizesOrderAndSpotlessness(peter).",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (SpillsFood(x) → ¬NotablyTidy(x))",
+            "∀x ((ClumsyFoodie(x) ∧ GoesOutFrequently(x)) → SpillsFood(x))",
+            "∀x (Cleanly(x) → NotablyTidy(x))",
+            "∀x (ValuesOrderAndSpotlessness(x) → Cleanly(x))",
+            "∀x (FamilyPrioritizesOrderAndSpotlessness(x) → ValuesOrderAndSpotlessness(x))",
+            "(SpillsFood(peter) ∧ Cleanly(peter)) ⊕ (¬SpillsFood(peter) ∧ ¬Cleanly(peter))"
+          ],
+          "conclusion_fol": "(ClumsyFoodie(peter) ∧ GoesOutFrequently(peter)) ∨ FamilyPrioritizesOrderAndSpotlessness(peter)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula incorrectly uses ¬NotablyTidy(x) instead of NotablyTidy(x). It should be ∀x (SpillsFood(x) → ¬NotablyTidy(x)) to match the sentence.\nP6: The formula uses the exclusive or (⊕), which implies that Peter cannot be both or neither. The sentence does not specify exclusivity, so ∨ should be used instead of ⊕.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (SpillsFood(x) → ¬NotablyTidy(x))",
+            "∀x ((ClumsyFoodie(x) ∧ GoesOutFrequently(x)) → SpillsFood(x))",
+            "∀x (Cleanly(x) → NotablyTidy(x))",
+            "∀x (ValuesOrderAndSpotlessness(x) → Cleanly(x))",
+            "∀x (FamilyPrioritizesOrderAndSpotlessness(x) → ValuesOrderAndSpotlessness(x))",
+            "(SpillsFood(peter) ∧ Cleanly(peter)) ∨ (¬SpillsFood(peter) ∧ ¬Cleanly(peter))"
+          ],
+          "conclusion_fol": "(ClumsyFoodie(peter) ∧ GoesOutFrequently(peter)) ∨ FamilyPrioritizesOrderAndSpotlessness(peter)"
+        }
+      ],
+      "elapsed_sec": 13.41
+    },
+    {
+      "example_id": "527",
+      "story_id": "183",
+      "gold_label": "False",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "silent_failure",
+      "vanilla_severity": "under_determination",
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "silent_failure",
+      "refined_severity": "under_determination",
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x ∀y ((Man(x) ∧ Man(y) ∧ TallerThan(x, y)) → CanBlockShooting(x, y))",
+        "∀y (Man(y) → TallerThan(michael, y))",
+        "∀x ∀y ∀z ((TallerThan(x, y) ∧ TallerThan(y, z)) → TallerThan(x, z))",
+        "Man(peter) ∧ TallerThan(peter, michael)",
+        "∀y ((Person(y) ∧ ¬JumpsWhenShooting(y)) → CanBlockShooting(michael, y))",
+        "¬CanBlockShooting(michael, windy)",
+        "∀x (JumpsWhenShooting(x) → GreatShooter(x))"
+      ],
+      "initial_conclusion_fol": "∃x (Man(x) ∧ InClass(x, michael) ∧ TallerThan(x, peter))",
+      "refined_premises_fol": [
+        "∀x ∀y ((Man(x) ∧ Man(y) ∧ TallerThan(x, y)) → CanBlockShooting(x, y))",
+        "Man(michael) ∧ ∃c (InClass(michael, c) ∧ ∀y ((Man(y) ∧ InClass(y, c)) → TallerThan(michael, y)))",
+        "∀x ∀y ∀z ((TallerThan(x, y) ∧ TallerThan(y, z)) → TallerThan(x, z))",
+        "Man(peter) ∧ TallerThan(peter, michael)",
+        "∀y ((Person(y) ∧ InClass(y, c) ∧ ¬JumpsWhenShooting(y)) → CanBlockShooting(michael, y))",
+        "¬CanBlockShooting(michael, windy)",
+        "∀x (JumpsWhenShooting(x) → GreatShooter(x))"
+      ],
+      "refined_conclusion_fol": "∀x (Man(x) ∧ InClass(x, c) → TallerThan(x, peter))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P2: The formula does not specify that Michael is in the class, only that he is taller than everyone else who is a man. It should include a condition that Michael is in the class.\nP5: The formula does not specify that Michael is a man, which is implied by the context of the other statements.\nC: The formula does not specify that the man is in Michael's class, only that he is a man and taller than Peter. The formula should ensure that the man is in Michael's class.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x ∀y ((Man(x) ∧ Man(y) ∧ TallerThan(x, y)) → CanBlockShooting(x, y))",
+            "Man(michael) ∧ InClass(michael, michael) ∧ ∀y ((Man(y) ∧ InClass(y, michael)) → TallerThan(michael, y))",
+            "∀x ∀y ∀z ((TallerThan(x, y) ∧ TallerThan(y, z)) → TallerThan(x, z))",
+            "Man(peter) ∧ TallerThan(peter, michael)",
+            "Man(michael) ∧ ∀y ((Person(y) ∧ ¬JumpsWhenShooting(y)) → CanBlockShooting(michael, y))",
+            "¬CanBlockShooting(michael, windy)",
+            "∀x (JumpsWhenShooting(x) → GreatShooter(x))"
+          ],
+          "conclusion_fol": "∃x (Man(x) ∧ InClass(x, michael) ∧ TallerThan(x, peter))"
+        },
+        {
+          "round_index": 1,
+          "critique": "P2: The formula incorrectly states that Michael is in his own class with the term InClass(michael, michael). It should be InClass(michael, c) for some class c.\nP5: The formula includes Man(michael), which is redundant since it is already established in P2. Additionally, the formula should specify that Michael can block shooting from any person in his class, not just any person.\nC: The formula states that Peter is shorter than a man in Michael's class, but it should specify that Peter is shorter than every man in Michael's class, not just some man. The existential quantifier should be replaced with a universal quantifier.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x ∀y ((Man(x) ∧ Man(y) ∧ TallerThan(x, y)) → CanBlockShooting(x, y))",
+            "Man(michael) ∧ ∃c (InClass(michael, c) ∧ ∀y ((Man(y) ∧ InClass(y, c)) → TallerThan(michael, y)))",
+            "∀x ∀y ∀z ((TallerThan(x, y) ∧ TallerThan(y, z)) → TallerThan(x, z))",
+            "Man(peter) ∧ TallerThan(peter, michael)",
+            "∀y ((Person(y) ∧ InClass(y, c) ∧ ¬JumpsWhenShooting(y)) → CanBlockShooting(michael, y))",
+            "¬CanBlockShooting(michael, windy)",
+            "∀x (JumpsWhenShooting(x) → GreatShooter(x))"
+          ],
+          "conclusion_fol": "∀x (Man(x) ∧ InClass(x, c) → TallerThan(x, peter))"
+        }
+      ],
+      "elapsed_sec": 13.65
+    },
+    {
+      "example_id": "848",
+      "story_id": "330",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (MakesWeddingPlans(x) → Engaged(x))",
+        "∀x (InvitesToCeremony(x) → MakesWeddingPlans(x))",
+        "∀x (WellAttendedWedding(x) → InvitesToCeremony(x))",
+        "∃x (WellAttendedWedding(x) ∧ LargerFamily(x))",
+        "Engaged(john) → (¬InvitesFriendsToCeremony(john) ∧ ¬MakesWeddingPlans(john))",
+        "LargerFamily(john) → (WellAttendedWedding(john) ∨ InvitesFriendsToCeremony(john))"
+      ],
+      "initial_conclusion_fol": "Engaged(john)",
+      "refined_premises_fol": [
+        "∀x (MakesWeddingPlans(x) → Engaged(x))",
+        "∀x (InvitesToCeremony(x) → MakesWeddingPlans(x))",
+        "∀x (WellAttendedWedding(x) → InvitesToCeremony(x))",
+        "∃x (WellAttendedWedding(x) ∧ LargerFamily(x))",
+        "Engaged(john) → (¬InvitesFriendsToCeremony(john) ∧ ¬MakesWeddingPlans(john))",
+        "LargerFamily(john) → (WellAttendedWedding(john) ∨ InvitesFriendsToCeremony(john))"
+      ],
+      "refined_conclusion_fol": "Engaged(john)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P5: The formula does not accurately represent the sentence. The sentence states that if John is engaged, then John does not invite friends to their ceremony and does not make wedding plans. The formula should use an \"or\" (∨) between the negations to correctly represent the sentence: Engaged(john) → (¬InvitesFriendsToCeremony(john) ∨ ¬MakesWeddingPlans(john)).",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (MakesWeddingPlans(x) → Engaged(x))",
+            "∀x (InvitesToCeremony(x) → MakesWeddingPlans(x))",
+            "∀x (WellAttendedWedding(x) → InvitesToCeremony(x))",
+            "∃x (WellAttendedWedding(x) ∧ LargerFamily(x))",
+            "Engaged(john) → (¬InvitesFriendsToCeremony(john) ∨ ¬MakesWeddingPlans(john))",
+            "LargerFamily(john) → (WellAttendedWedding(john) ∨ InvitesFriendsToCeremony(john))"
+          ],
+          "conclusion_fol": "Engaged(john)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P5: The formula uses a disjunction (∨) instead of a conjunction (∧) for \"does not invite friends to their ceremony and make wedding plans.\" The correct formula should be: Engaged(john) → (¬InvitesFriendsToCeremony(john) ∧ ¬MakesWeddingPlans(john))",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (MakesWeddingPlans(x) → Engaged(x))",
+            "∀x (InvitesToCeremony(x) → MakesWeddingPlans(x))",
+            "∀x (WellAttendedWedding(x) → InvitesToCeremony(x))",
+            "∃x (WellAttendedWedding(x) ∧ LargerFamily(x))",
+            "Engaged(john) → (¬InvitesFriendsToCeremony(john) ∧ ¬MakesWeddingPlans(john))",
+            "LargerFamily(john) → (WellAttendedWedding(john) ∨ InvitesFriendsToCeremony(john))"
+          ],
+          "conclusion_fol": "Engaged(john)"
+        }
+      ],
+      "elapsed_sec": 12.04
+    },
+    {
+      "example_id": "1327",
+      "story_id": "460",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "∀x (AppropriateForAllAges(x) → CanWatchWithoutGuidance(x, children))",
+        "∀x (ContainsExcessiveContent(x, eroticAndViolent) → ¬CanWatchWithoutGuidance(x, children))",
+        "∀x (RatedGeneralAudience(x) → AppropriateForAllAges(x))",
+        "∀x (FamilyFriendlyAnimatedFilm(x) → RatedGeneralAudience(x))",
+        "∀x (MovieInFrozenSeries(x) → FamilyFriendlyAnimatedFilm(x))",
+        "Film(hachiADogsTale)",
+        "FamilyFriendlyAnimatedFilm(hachiADogsTale) ∨ AppropriateForAllAges(hachiADogsTale)"
+      ],
+      "initial_conclusion_fol": "RatedGeneralAudience(hachiADogsTale)",
+      "refined_premises_fol": [
+        "∀x (AppropriateForAllAges(x) → CanWatchWithoutGuidance(x, children))",
+        "∀x (ContainsExcessiveContent(x, eroticAndViolent) → ¬CanWatchWithoutGuidance(x, children))",
+        "∀x (RatedGeneralAudience(x) → AppropriateForAllAges(x))",
+        "∀x (FamilyFriendlyAnimatedFilm(x) → RatedGeneralAudience(x))",
+        "∀x (MovieInFrozenSeries(x) → FamilyFriendlyAnimatedFilm(x))",
+        "Film(hachiADogsTale)",
+        "FamilyFriendlyAnimatedFilm(hachiADogsTale) ∨ AppropriateForAllAges(hachiADogsTale)"
+      ],
+      "refined_conclusion_fol": "RatedGeneralAudience(hachiADogsTale)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula correctly represents the sentence. NO_ISSUES.\nP2: The formula correctly represents the sentence. NO_ISSUES.\nP3: The formula correctly represents the sentence. NO_ISSUES.\nP4: The formula correctly represents the sentence. NO_ISSUES.\nP5: The formula correctly represents the sentence. NO_ISSUES.\nP6: The formula correctly represents the sentence. NO_ISSUES.\nP7: The formula correctly represents the sentence. NO_ISSUES.\nC: The conclusion is logically consistent with the premises, assuming the premises are true. NO_ISSUES.\n\nNO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 4.49
+    },
+    {
+      "example_id": "134",
+      "story_id": "46",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": null,
+      "vanilla_outcome": "loud_failure",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (BreedingBack(x) → ArtificialSelection(x) ∧ SelectiveBreeding(x, domesticAnimals))",
+        "BredBack(heckCattle, yr1920s) ∧ Resemble(heckCattle, aurochs)",
+        "Animal(heckCattle)",
+        "Animal(aurochs)",
+        "∃x (Animal(x) ∧ BredBack(x) ∧ Resemble(x, extinctAnimals))"
+      ],
+      "initial_conclusion_fol": "Extinct(aurochs)",
+      "refined_premises_fol": [
+        "BreedingBack(x) → (ArtificialSelection(x) ∧ SelectiveBreedingOfDomesticAnimals(x))",
+        "BredBack(heckCattle, yr1920s) ∧ Resemble(heckCattle, aurochs)",
+        "Animal(heckCattle)",
+        "Animal(aurochs)",
+        "∃x (Animal(x) ∧ IntendedToBeBredBack(x) ∧ ∃y (ExtinctAnimal(y) ∧ Resemble(x, y)))"
+      ],
+      "refined_conclusion_fol": "Extinct(aurochs)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula incorrectly uses \"domesticAnimals\" as if it were a single entity. It should express that selective breeding involves domestic animals in general, possibly using a quantifier.\nP5: The formula incorrectly uses \"extinctAnimals\" as if it were a single entity. It should express that the animals resemble some extinct animals, possibly using a quantifier.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (BreedingBack(x) → ArtificialSelection(x) ∧ ∃y (DomesticAnimal(y) ∧ SelectiveBreeding(x, y)))",
+            "BredBack(heckCattle, yr1920s) ∧ Resemble(heckCattle, aurochs)",
+            "Animal(heckCattle)",
+            "Animal(aurochs)",
+            "∃x (Animal(x) ∧ BredBack(x) ∧ ∃y (ExtinctAnimal(y) ∧ Resemble(x, y)))"
+          ],
+          "conclusion_fol": "Extinct(aurochs)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula suggests that for all x, if x is breeding back, then x is artificial selection and there exists a y such that y is a domestic animal and x is selective breeding of y. However, the sentence implies that breeding back itself is a form of artificial selection through selective breeding of domestic animals, not that each instance of breeding back involves a specific domestic animal. The formula should reflect that breeding back as a concept involves selective breeding of domestic animals, not necessarily linking each instance to a specific domestic animal.\nP5: The formula suggests that some animals that are bred back resemble extinct animals. However, the sentence implies that some animals intended to be bred back resemble extinct animals. The formula should reflect the intention or potential for breeding back, not that they have already been bred back.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "BreedingBack(x) → (ArtificialSelection(x) ∧ SelectiveBreedingOfDomesticAnimals(x))",
+            "BredBack(heckCattle, yr1920s) ∧ Resemble(heckCattle, aurochs)",
+            "Animal(heckCattle)",
+            "Animal(aurochs)",
+            "∃x (Animal(x) ∧ IntendedToBeBredBack(x) ∧ ∃y (ExtinctAnimal(y) ∧ Resemble(x, y)))"
+          ],
+          "conclusion_fol": "Extinct(aurochs)"
+        }
+      ],
+      "elapsed_sec": 10.16
+    },
+    {
+      "example_id": "244",
+      "story_id": "80",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "PublishingHouse(newVesselPress) ∧ SpecializesIn(newVesselPress, TranslatingForeignLiteratureToEnglish)",
+        "∀x (PublishedBy(x, newVesselPress) → InLanguage(x, english))",
+        "PublishedBy(neapolitanChronicles, newVesselPress)",
+        "TranslatedFrom(neapolitanChronicles, italian)",
+        "PublishedBy(palaceOfFlies, newVesselPress)"
+      ],
+      "initial_conclusion_fol": "PublishedBy(harryPotter, newVesselPress)",
+      "refined_premises_fol": [
+        "PublishingHouse(newVesselPress) ∧ SpecializesIn(newVesselPress, TranslatingForeignLiteratureToEnglish)",
+        "∀x (PublishedBy(x, newVesselPress) → InLanguage(x, english))",
+        "PublishedBy(neapolitanChronicles, newVesselPress)",
+        "TranslatedFrom(neapolitanChronicles, italian)",
+        "PublishedBy(palaceOfFlies, newVesselPress)"
+      ],
+      "refined_conclusion_fol": "PublishedBy(harryPotter, newVesselPress)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 2.83
+    },
+    {
+      "example_id": "245",
+      "story_id": "80",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "PublishingHouse(newVesselPress) ∧ SpecializesIn(newVesselPress, TranslatingForeignLiteratureToEnglish)",
+        "∀x (PublishedBy(x, newVesselPress) → InLanguage(x, english))",
+        "PublishedBy(neapolitanChronicles, newVesselPress)",
+        "TranslatedFrom(neapolitanChronicles, italian)",
+        "PublishedBy(palaceOfFlies, newVesselPress)"
+      ],
+      "initial_conclusion_fol": "TranslatedFrom(palaceOfFlies, italian)",
+      "refined_premises_fol": [
+        "PublishingHouse(newVesselPress) ∧ SpecializesIn(newVesselPress, TranslatingForeignLiteratureToEnglish)",
+        "∀x (PublishedBy(x, newVesselPress) → InLanguage(x, english))",
+        "PublishedBy(neapolitanChronicles, newVesselPress)",
+        "TranslatedFrom(neapolitanChronicles, italian)",
+        "PublishedBy(palaceOfFlies, newVesselPress)"
+      ],
+      "refined_conclusion_fol": "TranslatedFrom(palaceOfFlies, italian)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 2.94
+    },
+    {
+      "example_id": "966",
+      "story_id": "363",
+      "gold_label": "True",
+      "vanilla_predicted": "True",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "True",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (Hydrocarbon(x) → OrganicCompound(x))",
+        "∀x (Alkane(x) → Hydrocarbon(x))",
+        "∀x (OrganicCompound(x) → ChemicalCompound(x))",
+        "∀x (OrganicCompound(x) → Contains(x, carbon))",
+        "∀x (ChemicalCompound(x) → ¬ContainsOnlyOneElement(x))",
+        "(ChemicalCompound(mixture) ∧ ContainsOnlyOneElement(mixture)) ⊕ (¬ChemicalCompound(mixture) ∧ ¬ContainsOnlyOneElement(mixture))"
+      ],
+      "initial_conclusion_fol": "(ContainsOnlyOneElement(mixture) ∨ Contains(mixture, carbon)) → (¬ChemicalCompound(mixture) ∧ ¬Alkane(mixture))",
+      "refined_premises_fol": [
+        "∀x (Hydrocarbon(x) → OrganicCompound(x))",
+        "∀x (Alkane(x) → Hydrocarbon(x))",
+        "∀x (OrganicCompound(x) → ChemicalCompound(x))",
+        "∀x (OrganicCompound(x) → Contains(x, carbon))",
+        "∀x (ChemicalCompound(x) → ¬ContainsOnlyOneElement(x))",
+        "ChemicalCompound(mixture) ↔ ContainsOnlyOneElement(mixture)"
+      ],
+      "refined_conclusion_fol": "(ContainsOnlyOneElement(mixture) ∨ Contains(mixture, carbon)) → ¬(ChemicalCompound(mixture) ∨ Alkane(mixture))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P6: The formula uses the exclusive or (⊕), which does not match the natural language sentence. The sentence implies a biconditional relationship, which should be represented using a biconditional (↔) instead of an exclusive or.\n\nC: The formula correctly represents the sentence, but it should be noted that the sentence implies a stronger relationship than just a simple implication. The sentence suggests that if either condition is true, then both conclusions must be true, which is correctly captured by the conjunction in the consequent. However, the logical structure is correct as given.\n\nOverall, the main issue is with P6.\n\nP6: The formula should use a biconditional (↔) instead of an exclusive or (⊕).",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (Hydrocarbon(x) → OrganicCompound(x))",
+            "∀x (Alkane(x) → Hydrocarbon(x))",
+            "∀x (OrganicCompound(x) → ChemicalCompound(x))",
+            "∀x (OrganicCompound(x) → Contains(x, carbon))",
+            "∀x (ChemicalCompound(x) → ¬ContainsOnlyOneElement(x))",
+            "(ChemicalCompound(mixture) ∧ ContainsOnlyOneElement(mixture)) ↔ (¬ChemicalCompound(mixture) ∧ ¬ContainsOnlyOneElement(mixture))"
+          ],
+          "conclusion_fol": "(ContainsOnlyOneElement(mixture) ∨ Contains(mixture, carbon)) → (¬ChemicalCompound(mixture) ∧ ¬Alkane(mixture))"
+        },
+        {
+          "round_index": 1,
+          "critique": "P6: The formula does not correctly represent the sentence. The sentence describes a biconditional relationship between the mixture being a chemical compound and containing only one element, but the formula incorrectly uses a conjunction for both conditions on the left side of the biconditional. The correct formula should be: (ChemicalCompound(mixture) ↔ ContainsOnlyOneElement(mixture)).\n\nC: The formula does not correctly represent the sentence. The sentence states that if the mixture contains only one element or contains carbon, then it is neither a chemical compound nor an alkane. The formula should use a disjunction for the conditions on the right side of the implication: (ContainsOnlyOneElement(mixture) ∨ Contains(mixture, carbon)) → ¬(ChemicalCompound(mixture) ∨ Alkane(mixture)).",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (Hydrocarbon(x) → OrganicCompound(x))",
+            "∀x (Alkane(x) → Hydrocarbon(x))",
+            "∀x (OrganicCompound(x) → ChemicalCompound(x))",
+            "∀x (OrganicCompound(x) → Contains(x, carbon))",
+            "∀x (ChemicalCompound(x) → ¬ContainsOnlyOneElement(x))",
+            "ChemicalCompound(mixture) ↔ ContainsOnlyOneElement(mixture)"
+          ],
+          "conclusion_fol": "(ContainsOnlyOneElement(mixture) ∨ Contains(mixture, carbon)) → ¬(ChemicalCompound(mixture) ∨ Alkane(mixture))"
+        }
+      ],
+      "elapsed_sec": 11.67
+    },
+    {
+      "example_id": "802",
+      "story_id": "318",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "∃x (Show(x) ∧ AirsAt(x, monday8pm) ∧ GivesOutRosesOnTV(x))",
+        "∀x (GivesOutRosesOnTV(x) → EpisodeOf(x, theBachelor))",
+        "PortraysLivesOfRealPeople(theBachelor)",
+        "∀x (PortraysLivesOfRealPeople(x) → RealityTVShow(x))",
+        "Show(breakingBad)",
+        "¬RealityTVShow(breakingBad)"
+      ],
+      "initial_conclusion_fol": "AirsAt(breakingBad, monday8pm)",
+      "refined_premises_fol": [
+        "∃x (Show(x) ∧ AirsAt(x, monday8pm) ∧ GivesOutRosesOnTV(x))",
+        "∀x (GivesOutRosesOnTV(x) → EpisodeOf(x, theBachelor))",
+        "PortraysLivesOfRealPeople(theBachelor)",
+        "∀x (PortraysLivesOfRealPeople(x) → RealityTVShow(x))",
+        "Show(breakingBad)",
+        "¬RealityTVShow(breakingBad)"
+      ],
+      "refined_conclusion_fol": "AirsAt(breakingBad, monday8pm)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 2.82
+    },
+    {
+      "example_id": "323",
+      "story_id": "107",
+      "gold_label": "True",
+      "vanilla_predicted": "True",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "True",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "Politician(heinrichSchmidt) ∧ German(heinrichSchmidt)",
+        "MemberOf(heinrichSchmidt, prussianStateParliament) ∧ MemberOf(heinrichSchmidt, naziReichstag)"
+      ],
+      "initial_conclusion_fol": "German(heinrichSchmidt) ∨ Russian(heinrichSchmidt)",
+      "refined_premises_fol": [
+        "Politician(heinrichSchmidt) ∧ German(heinrichSchmidt)",
+        "MemberOf(heinrichSchmidt, prussianStateParliament) ∧ MemberOf(heinrichSchmidt, naziReichstag)"
+      ],
+      "refined_conclusion_fol": "German(heinrichSchmidt) ∨ Russian(heinrichSchmidt)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 2.22
+    },
+    {
+      "example_id": "1033",
+      "story_id": "386",
+      "gold_label": "True",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "silent_failure",
+      "vanilla_severity": "under_determination",
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "silent_failure",
+      "refined_severity": "under_determination",
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (DeadlyDisease(x) → LowSurvivalRate(x))",
+        "∀x (SevereCancer(x) → DeadlyDisease(x))",
+        "SevereCancer(bileDuctCancer)",
+        "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+        "LowSurvivalRate(mildFlu)",
+        "¬(BileDuctCancer(colorectalCancer) ∧ LowSurvivalRate(colorectalCancer))"
+      ],
+      "initial_conclusion_fol": "(BileDuctCancer(colorectalCancer) ∨ Cholangiocarcinoma(colorectalCancer)) → (BileDuctCancer(colorectalCancer) ∧ MildFlu(colorectalCancer))",
+      "refined_premises_fol": [
+        "∀x (DeadlyDisease(x) → LowSurvivalRate(x))",
+        "∀x (SevereCancer(x) → DeadlyDisease(x))",
+        "SevereCancer(bileDuctCancer)",
+        "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+        "¬LowSurvivalRate(mildFlu)",
+        "¬(BileDuctCancer(colorectalCancer) ∧ LowSurvivalRate(colorectalCancer))"
+      ],
+      "refined_conclusion_fol": "(BileDuctCancer(colorectalCancer) ∨ Cholangiocarcinoma(colorectalCancer)) → (BileDuctCancer(colorectalCancer) ∧ MildFlu(colorectalCancer))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P5: The sentence states that mild flu comes with a low survival rate, which seems contradictory to common knowledge. This might be a factual error rather than a logical one, but it should be verified.\nC: The conclusion seems logically inconsistent with the premises. The premise suggests that if colorectal cancer is either a bile duct cancer or a form of Cholangiocarcinoma, then it is both a bile duct cancer and a mild flu, which is logically inconsistent and factually incorrect.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (DeadlyDisease(x) → LowSurvivalRate(x))",
+            "∀x (SevereCancer(x) → DeadlyDisease(x))",
+            "SevereCancer(bileDuctCancer)",
+            "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+            "LowSurvivalRate(mildFlu)",
+            "¬(BileDuctCancer(colorectalCancer) ∧ LowSurvivalRate(colorectalCancer))"
+          ],
+          "conclusion_fol": "(BileDuctCancer(colorectalCancer) ∨ Cholangiocarcinoma(colorectalCancer)) → (BileDuctCancer(colorectalCancer) ∧ LowSurvivalRate(colorectalCancer))"
+        },
+        {
+          "round_index": 1,
+          "critique": "P5: The sentence states that mild flu comes with a low survival rate, which seems contradictory to common knowledge. If this is intentional, it should be clarified. Otherwise, the formula might be incorrect.\nC: The conclusion formula does not match the sentence. The sentence states that colorectal cancer is a kind of bile duct cancer and a kind of mild flu, but the formula states that it has a low survival rate instead of being a kind of mild flu.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (DeadlyDisease(x) → LowSurvivalRate(x))",
+            "∀x (SevereCancer(x) → DeadlyDisease(x))",
+            "SevereCancer(bileDuctCancer)",
+            "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+            "¬LowSurvivalRate(mildFlu)",
+            "¬(BileDuctCancer(colorectalCancer) ∧ LowSurvivalRate(colorectalCancer))"
+          ],
+          "conclusion_fol": "(BileDuctCancer(colorectalCancer) ∨ Cholangiocarcinoma(colorectalCancer)) → (BileDuctCancer(colorectalCancer) ∧ MildFlu(colorectalCancer))"
+        }
+      ],
+      "elapsed_sec": 12.48
+    },
+    {
+      "example_id": "942",
+      "story_id": "355",
+      "gold_label": "False",
+      "vanilla_predicted": "False",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "False",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 1,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "∀x (EatRegularly(x, salad) → ConsciousAboutHealth(x) ∧ ConsciousAboutEating(x))",
+        "∀x (GrewUpInHealthConsciousHome(x) → EatRegularly(x, salad))",
+        "∀x (FulfillDailyNutritionalIntake(x) → GrewUpInHealthConsciousHome(x))",
+        "∀x (DisregardPhysicalWellBeing(x) → ¬ConsciousAboutHealth(x) ∧ ¬ConsciousAboutEating(x))",
+        "∀x (VisitGymDaily(x) → FulfillDailyNutritionalIntake(x))",
+        "(GrewUpInHealthConsciousHome(taylor) ∧ DisregardPhysicalWellBeing(taylor)) ⊕ (¬GrewUpInHealthConsciousHome(taylor) ∧ ¬DisregardPhysicalWellBeing(taylor))"
+      ],
+      "initial_conclusion_fol": "VisitGymDaily(taylor)",
+      "refined_premises_fol": [
+        "∀x (EatRegularly(x, salad) → ConsciousAboutHealth(x) ∧ ConsciousAboutEating(x))",
+        "∀x (GrewUpInHealthConsciousHome(x) → EatRegularly(x, salad))",
+        "∀x (FulfillDailyNutritionalIntake(x) → GrewUpInHealthConsciousHome(x))",
+        "∀x (DisregardPhysicalWellBeing(x) → ¬ConsciousAboutHealth(x) ∧ ¬ConsciousAboutEating(x))",
+        "∀x (VisitGymDaily(x) → FulfillDailyNutritionalIntake(x))",
+        "(GrewUpInHealthConsciousHome(taylor) ∧ DisregardPhysicalWellBeing(taylor)) ⊕ (¬GrewUpInHealthConsciousHome(taylor) ∧ ¬DisregardPhysicalWellBeing(taylor))"
+      ],
+      "refined_conclusion_fol": "VisitGymDaily(taylor)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P4: The formula uses \"¬ConsciousAboutHealth(x) ∧ ¬ConsciousAboutEating(x)\" which correctly represents \"not very conscious about their health and eating habits.\" However, the sentence implies a lack of consciousness in both aspects, which the formula captures correctly. No issue here.\n\nP6: The formula uses the exclusive or (⊕), which means either one or the other, but not both. The sentence implies that Taylor either did both or neither, which is correctly captured by the formula. No issue here.\n\nNO_ISSUES",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (EatRegularly(x, salad) → ConsciousAboutHealth(x) ∧ ConsciousAboutEating(x))",
+            "∀x (GrewUpInHealthConsciousHome(x) → EatRegularly(x, salad))",
+            "∀x (FulfillDailyNutritionalIntake(x) → GrewUpInHealthConsciousHome(x))",
+            "∀x (DisregardPhysicalWellBeing(x) → ¬ConsciousAboutHealth(x) ∧ ¬ConsciousAboutEating(x))",
+            "∀x (VisitGymDaily(x) → FulfillDailyNutritionalIntake(x))",
+            "(GrewUpInHealthConsciousHome(taylor) ∧ DisregardPhysicalWellBeing(taylor)) ⊕ (¬GrewUpInHealthConsciousHome(taylor) ∧ ¬DisregardPhysicalWellBeing(taylor))"
+          ],
+          "conclusion_fol": "VisitGymDaily(taylor)"
+        },
+        {
+          "round_index": 1,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 8.61
+    },
+    {
+      "example_id": "443",
+      "story_id": "152",
+      "gold_label": "False",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "silent_failure",
+      "vanilla_severity": "under_determination",
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "silent_failure",
+      "refined_severity": "under_determination",
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "FliesTo(susan, lgaAirport)",
+        "∀x ∀y (¬(Departure(x) = Arrival(y)))",
+        "FliesFrom(john, lgaAirport)"
+      ],
+      "initial_conclusion_fol": "FliesTo(john, lgaAirport)",
+      "refined_premises_fol": [
+        "FliesTo(susan, lgaAirport)",
+        "∀f (Flight(f) → ¬(Departure(f) = Arrival(f)))",
+        "FliesFrom(john, lgaAirport)"
+      ],
+      "refined_conclusion_fol": "FliesTo(john, lgaAirport)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P2: The formula uses universal quantifiers for both departure and arrival, which implies that no departure can equal any arrival, rather than stating that a specific departure and arrival cannot be the same. The formula should express that for any flight, the departure and arrival airports are not the same, such as ∀f (¬(Departure(f) = Arrival(f))).",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "FliesTo(susan, lgaAirport)",
+            "∀f (¬(Departure(f) = Arrival(f)))",
+            "FliesFrom(john, lgaAirport)"
+          ],
+          "conclusion_fol": "FliesTo(john, lgaAirport)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P2: The formula uses a universal quantifier ∀f, but the sentence does not imply that this applies to all flights universally. It should specify that for any given flight, the departure and arrival cannot be the same, which might require a different structure or context.\nP2: The formula uses ¬(Departure(f) = Arrival(f)), which suggests that departure and arrival are functions or predicates applied to f, but the sentence does not specify this structure. It might need clarification or a different representation.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "FliesTo(susan, lgaAirport)",
+            "∀f (Flight(f) → ¬(Departure(f) = Arrival(f)))",
+            "FliesFrom(john, lgaAirport)"
+          ],
+          "conclusion_fol": "FliesTo(john, lgaAirport)"
+        }
+      ],
+      "elapsed_sec": 12.03
+    },
+    {
+      "example_id": "1270",
+      "story_id": "441",
+      "gold_label": "False",
+      "vanilla_predicted": "False",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "False",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∀x (NiceToAnimals(x) → ¬MeanToAnimals(x))",
+        "∃x (Grumpy(x) ∧ MeanToAnimals(x))",
+        "∀x (AnimalLover(x) → NiceToAnimals(x))",
+        "∀x (PetOwner(x) → AnimalLover(x))",
+        "PetOwner(tom)"
+      ],
+      "initial_conclusion_fol": "¬(Grumpy(tom) ∧ MeanToAnimals(tom)) → (¬Grumpy(tom) ∧ ¬AnimalLover(tom))",
+      "refined_premises_fol": [
+        "¬∃x (NiceToAnimals(x) ∧ MeanToAnimals(x))",
+        "∃x (Grumpy(x) ∧ MeanToAnimals(x))",
+        "∀x (AnimalLover(x) → NiceToAnimals(x))",
+        "∀x (PetOwner(x) → AnimalLover(x))",
+        "PetOwner(tom)"
+      ],
+      "refined_conclusion_fol": "¬(Grumpy(tom) ∧ MeanToAnimals(tom)) → (¬Grumpy(tom) ∧ ¬AnimalLover(tom))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula correctly represents the sentence. The sentence states that no one who is nice to animals is also mean to animals, which is logically equivalent to saying that if someone is nice to animals, they are not mean to animals. The formula captures this with ∀x (NiceToAnimals(x) → ¬MeanToAnimals(x)).\n\nP2: The formula correctly represents the sentence. The sentence states that some grumpy people are mean to animals, which is captured by the existential quantifier and conjunction: ∃x (Grumpy(x) ∧ MeanToAnimals(x)).\n\nP3: The formula correctly represents the sentence. The sentence states that all animal lovers are nice to animals, which is captured by the universal quantifier and implication: ∀x (AnimalLover(x) → NiceToAnimals(x)).\n\nP4: The formula correctly represents the sentence. The sentence states that all pet owners love animals, which is captured by the universal quantifier and implication: ∀x (PetOwner(x) → AnimalLover(x)).\n\nP5: The formula correctly represents the sentence. The sentence states that Tom is a pet owner, which is captured by the predicate PetOwner(tom).\n\nC: The formula does not correctly represent the sentence. The sentence states that if Tom is not both a grumpy person and mean to animals, then Tom is neither a grumpy person nor an animal lover. The formula should reflect the structure of the sentence, which involves a conditional statement about Tom's characteristics. The correct formula should be: ¬(Grumpy(tom) ∧ MeanToAnimals(tom)) → (¬Grumpy(tom) ∧ ¬AnimalLover(tom)).\n\nC: The formula incorrectly represents the sentence. The sentence implies a different logical structure than what is presented in the formula. The correct interpretation should be: ¬(Grumpy(tom) ∧ MeanToAnimals(tom)) → (¬Gr",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∀x (NiceToAnimals(x) → ¬MeanToAnimals(x))",
+            "∃x (Grumpy(x) ∧ MeanToAnimals(x))",
+            "∀x (AnimalLover(x) → NiceToAnimals(x))",
+            "∀x (PetOwner(x) → AnimalLover(x))",
+            "PetOwner(tom)"
+          ],
+          "conclusion_fol": "¬(Grumpy(tom) ∧ MeanToAnimals(tom)) → (¬Grumpy(tom) ∨ ¬AnimalLover(tom))"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula incorrectly uses implication instead of expressing that no one can be both nice and mean to animals. It should be: ∀x (NiceToAnimals(x) → ¬MeanToAnimals(x)) is correct, but the sentence implies a stronger statement: ¬∃x (NiceToAnimals(x) ∧ MeanToAnimals(x)).\n\nC: The formula does not correctly capture the sentence. The sentence implies that if Tom is not both grumpy and mean, then he is neither grumpy nor an animal lover. The correct formula should be: ¬(Grumpy(tom) ∧ MeanToAnimals(tom)) → (¬Grumpy(tom) ∧ ¬AnimalLover(tom)).",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "¬∃x (NiceToAnimals(x) ∧ MeanToAnimals(x))",
+            "∃x (Grumpy(x) ∧ MeanToAnimals(x))",
+            "∀x (AnimalLover(x) → NiceToAnimals(x))",
+            "∀x (PetOwner(x) → AnimalLover(x))",
+            "PetOwner(tom)"
+          ],
+          "conclusion_fol": "¬(Grumpy(tom) ∧ MeanToAnimals(tom)) → (¬Grumpy(tom) ∧ ¬AnimalLover(tom))"
+        }
+      ],
+      "elapsed_sec": 13.57
+    },
+    {
+      "example_id": "189",
+      "story_id": "64",
+      "gold_label": "True",
+      "vanilla_predicted": "True",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "True",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "¬Novel(podcast)",
+        "∀x (BornIn(x, americanCity) → American(x))",
+        "∀x ∀y ((Novel(x) ∧ WrittenBy(x, y)) → NovelWriter(y))",
+        "AmericanWriter(daniShapiro)",
+        "WrittenBy(familyHistory, daniShapiro)",
+        "Novel(familyHistory) ∧ WrittenInYr(familyHistory, yr2003)",
+        "CreatedPodcast(daniShapiro, familySecrets)",
+        "AmericanCity(boston)"
+      ],
+      "initial_conclusion_fol": "NovelWriter(daniShapiro)",
+      "refined_premises_fol": [
+        "¬Novel(podcast)",
+        "∀x (BornIn(x, americanCity) → American(x))",
+        "∀x ∀y ((Novel(x) ∧ WrittenBy(x, y)) → NovelWriter(y))",
+        "AmericanWriter(daniShapiro)",
+        "WrittenBy(familyHistory, daniShapiro)",
+        "Novel(familyHistory) ∧ WrittenInYr(familyHistory, yr2003)",
+        "CreatedPodcast(daniShapiro, familySecrets)",
+        "AmericanCity(boston)"
+      ],
+      "refined_conclusion_fol": "NovelWriter(daniShapiro)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula ¬Novel(podcast) correctly represents the sentence \"A podcast is not a novel.\"\n\nP2: The formula ∀x (BornIn(x, americanCity) → American(x)) correctly represents the sentence \"If a person is born in American City, the person is American.\"\n\nP3: The formula ∀x ∀y ((Novel(x) ∧ WrittenBy(x, y)) → NovelWriter(y)) correctly represents the sentence \"If a book is a novel and it is written by a person, then the person is a novel writer.\"\n\nP4: The formula AmericanWriter(daniShapiro) correctly represents the sentence \"Dani Shapiro is an American writer.\"\n\nP5: The formula WrittenBy(familyHistory, daniShapiro) correctly represents the sentence \"Family History is written by Dani Shapiro.\"\n\nP6: The formula Novel(familyHistory) ∧ WrittenInYr(familyHistory, yr2003) correctly represents the sentence \"Family History is a novel written in 2003.\"\n\nP7: The formula CreatedPodcast(daniShapiro, familySecrets) correctly represents the sentence \"Dani Shapiro created a podcast called Family Secrets.\"\n\nP8: The formula AmericanCity(boston) correctly represents the sentence \"Boston is an American city.\"\n\nC: The formula NovelWriter(daniShapiro) correctly represents the sentence \"Dani Shapiro is a novel writer.\"\n\nNO_ISSUES",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "¬Novel(podcast)",
+            "∀x (BornIn(x, americanCity) → American(x))",
+            "∀x ∀y ((Novel(x) ∧ WrittenBy(x, y)) → NovelWriter(y))",
+            "AmericanWriter(daniShapiro)",
+            "WrittenBy(familyHistory, daniShapiro)",
+            "Novel(familyHistory) ∧ WrittenInYr(familyHistory, yr2003)",
+            "CreatedPodcast(daniShapiro, familySecrets)",
+            "AmericanCity(boston)"
+          ],
+          "conclusion_fol": "NovelWriter(daniShapiro)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P1: The formula ¬Novel(podcast) correctly represents the sentence \"A podcast is not a novel.\"\n\nP2: The formula ∀x (BornIn(x, americanCity) → American(x)) correctly represents the sentence \"If a person is born in American City, the person is American.\"\n\nP3: The formula ∀x ∀y ((Novel(x) ∧ WrittenBy(x, y)) → NovelWriter(y)) correctly represents the sentence \"If a book is a novel and it is written by a person, then the person is a novel writer.\"\n\nP4: The formula AmericanWriter(daniShapiro) correctly represents the sentence \"Dani Shapiro is an American writer.\"\n\nP5: The formula WrittenBy(familyHistory, daniShapiro) correctly represents the sentence \"Family History is written by Dani Shapiro.\"\n\nP6: The formula Novel(familyHistory) ∧ WrittenInYr(familyHistory, yr2003) correctly represents the sentence \"Family History is a novel written in 2003.\"\n\nP7: The formula CreatedPodcast(daniShapiro, familySecrets) correctly represents the sentence \"Dani Shapiro created a podcast called Family Secrets.\"\n\nP8: The formula AmericanCity(boston) correctly represents the sentence \"Boston is an American city.\"\n\nC: The formula NovelWriter(daniShapiro) correctly represents the sentence \"Dani Shapiro is a novel writer.\"\n\nNO_ISSUES",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "¬Novel(podcast)",
+            "∀x (BornIn(x, americanCity) → American(x))",
+            "∀x ∀y ((Novel(x) ∧ WrittenBy(x, y)) → NovelWriter(y))",
+            "AmericanWriter(daniShapiro)",
+            "WrittenBy(familyHistory, daniShapiro)",
+            "Novel(familyHistory) ∧ WrittenInYr(familyHistory, yr2003)",
+            "CreatedPodcast(daniShapiro, familySecrets)",
+            "AmericanCity(boston)"
+          ],
+          "conclusion_fol": "NovelWriter(daniShapiro)"
+        }
+      ],
+      "elapsed_sec": 13.35
+    },
+    {
+      "example_id": "1313",
+      "story_id": "456",
+      "gold_label": "Uncertain",
+      "vanilla_predicted": "Uncertain",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "Uncertain",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 1,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+        "∀x (ProfessionalBasketballPlayer(x) → CanDoJumpShots(x))",
+        "∀x (CanDoJumpShots(x) → LeapStraightIntoAir(x))",
+        "∀x (LeapStraightIntoAir(x) → ActivateLegMuscles(x))",
+        "¬ActivateLegMuscles(yuri)"
+      ],
+      "initial_conclusion_fol": "AmericanNational(yuri)",
+      "refined_premises_fol": [
+        "∃x (professionalBasketballPlayer(x) ∧ ¬americanNational(x))",
+        "∀x (professionalBasketballPlayer(x) → canDoJumpShots(x))",
+        "∀x (canDoJumpShots(x) → leapStraightIntoAir(x))",
+        "∀x (leapStraightIntoAir(x) → activateLegMuscles(x))",
+        "¬activateLegMuscles(yuri)"
+      ],
+      "refined_conclusion_fol": "americanNational(yuri)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P3: The sentence \"If someone can jump shots, they leap straight into the air\" should be \"If someone can do jump shots, they leap straight into the air\" to match the terminology used in P2.\nC: The conclusion \"Yuri is an American national\" does not logically follow from the premises provided. There is no connection established between Yuri's nationality and the activation of leg muscles in the given premises.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∃x (professionalBasketballPlayer(x) ∧ ¬americanNational(x))",
+            "∀x (professionalBasketballPlayer(x) → canDoJumpShots(x))",
+            "∀x (canDoJumpShots(x) → leapStraightIntoAir(x))",
+            "∀x (leapStraightIntoAir(x) → activateLegMuscles(x))",
+            "¬activateLegMuscles(yuri)"
+          ],
+          "conclusion_fol": "americanNational(yuri)"
+        },
+        {
+          "round_index": 1,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 5.91
+    },
+    {
+      "example_id": "1314",
+      "story_id": "456",
+      "gold_label": "True",
+      "vanilla_predicted": "True",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "True",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+        "∀x (ProfessionalBasketballPlayer(x) → CanDoJumpShots(x))",
+        "∀x (CanDoJumpShots(x) → LeapStraightIntoAir(x))",
+        "∀x (LeapStraightIntoAir(x) → ActivateLegMuscles(x))",
+        "¬ActivateLegMuscles(yuri)"
+      ],
+      "initial_conclusion_fol": "¬(ProfessionalBasketballPlayer(yuri) ∧ AmericanNational(yuri))",
+      "refined_premises_fol": [
+        "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+        "∀x (ProfessionalBasketballPlayer(x) → CanDoJumpShots(x))",
+        "∀x (CanDoJumpShots(x) → LeapStraightIntoAir(x))",
+        "∀x (LeapStraightIntoAir(x) → ActivateLegMuscles(x))",
+        "¬ActivateLegMuscles(yuri)"
+      ],
+      "refined_conclusion_fol": "¬(ProfessionalBasketballPlayer(yuri) ∧ AmericanNational(yuri))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 3.1
+    },
+    {
+      "example_id": "1315",
+      "story_id": "456",
+      "gold_label": "False",
+      "vanilla_predicted": "False",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "False",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 0,
+      "stopped_no_issues": true,
+      "initial_premises_fol": [
+        "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+        "∀x (ProfessionalBasketballPlayer(x) → CanDoJumpShots(x))",
+        "∀x (CanDoJumpShots(x) → LeapStraightIntoAir(x))",
+        "∀x (LeapStraightIntoAir(x) → ActivateLegMuscles(x))",
+        "¬ActivateLegMuscles(yuri)"
+      ],
+      "initial_conclusion_fol": "ProfessionalBasketballPlayer(yuri) ∧ AmericanNational(yuri)",
+      "refined_premises_fol": [
+        "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+        "∀x (ProfessionalBasketballPlayer(x) → CanDoJumpShots(x))",
+        "∀x (CanDoJumpShots(x) → LeapStraightIntoAir(x))",
+        "∀x (LeapStraightIntoAir(x) → ActivateLegMuscles(x))",
+        "¬ActivateLegMuscles(yuri)"
+      ],
+      "refined_conclusion_fol": "ProfessionalBasketballPlayer(yuri) ∧ AmericanNational(yuri)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "NO_ISSUES",
+          "stopped_no_issues": true,
+          "refined_ok": false,
+          "parse_error": null,
+          "premises_fol": null,
+          "conclusion_fol": null
+        }
+      ],
+      "elapsed_sec": 2.5
+    },
+    {
+      "example_id": "1316",
+      "story_id": "456",
+      "gold_label": "False",
+      "vanilla_predicted": "False",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "False",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+        "∀x (ProfessionalBasketballPlayer(x) → CanDoJumpShots(x))",
+        "∀x (CanDoJumpShots(x) → LeapStraightIntoAir(x))",
+        "∀x (LeapStraightIntoAir(x) → ActivateLegMuscles(x))",
+        "¬ActivateLegMuscles(yuri)"
+      ],
+      "initial_conclusion_fol": "¬LeapStraightIntoAir(yuri) → (ProfessionalBasketballPlayer(yuri) ∧ AmericanNational(yuri))",
+      "refined_premises_fol": [
+        "∃x (professionalBasketballPlayer(x) ∧ ¬americanNational(x))",
+        "∀x (professionalBasketballPlayer(x) → canDoJumpShots(x))",
+        "∀x (canDoJumpShots(x) → leapStraightIntoAir(x))",
+        "∀x (leapStraightIntoAir(x) → activateLegMuscles(x))",
+        "¬activateLegMuscles(yuri)"
+      ],
+      "refined_conclusion_fol": "¬leapStraightIntoAir(yuri) → (professionalBasketballPlayer(yuri) ∧ americanNational(yuri))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P1: The formula correctly represents the sentence.\nP2: The formula correctly represents the sentence.\nP3: The formula correctly represents the sentence.\nP4: The formula correctly represents the sentence.\nP5: The formula correctly represents the sentence.\nC: The formula does not correctly represent the sentence. The sentence implies a conditional relationship between Yuri not leaping straight into the air and being an American professional basketball player, but the formula does not capture the \"if and only if\" nature that might be implied by the context of the other statements. Additionally, the sentence does not explicitly state that Yuri is a professional basketball player, which the formula assumes.\n\n- C: The formula does not accurately capture the conditional relationship implied by the sentence and context.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+            "∀x (ProfessionalBasketballPlayer(x) → CanDoJumpShots(x))",
+            "∀x (CanDoJumpShots(x) → LeapStraightIntoAir(x))",
+            "∀x (LeapStraightIntoAir(x) → ActivateLegMuscles(x))",
+            "¬ActivateLegMuscles(yuri)"
+          ],
+          "conclusion_fol": "¬LeapStraightIntoAir(yuri) ↔ (ProfessionalBasketballPlayer(yuri) ∧ AmericanNational(yuri))"
+        },
+        {
+          "round_index": 1,
+          "critique": "P5: The formula uses \"yuri\" as a constant, but typically constants should be capitalized in FOL. It should be \"Yuri\" instead of \"yuri\".\nC: The formula uses a biconditional (↔) instead of a conditional (→). The sentence specifies a conditional relationship (\"If...then\"), so the formula should use → instead of ↔. Additionally, the formula should be ¬LeapStraightIntoAir(Yuri) → (ProfessionalBasketballPlayer(Yuri) ∧ AmericanNational(Yuri)) to match the sentence structure.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "∃x (professionalBasketballPlayer(x) ∧ ¬americanNational(x))",
+            "∀x (professionalBasketballPlayer(x) → canDoJumpShots(x))",
+            "∀x (canDoJumpShots(x) → leapStraightIntoAir(x))",
+            "∀x (leapStraightIntoAir(x) → activateLegMuscles(x))",
+            "¬activateLegMuscles(yuri)"
+          ],
+          "conclusion_fol": "¬leapStraightIntoAir(yuri) → (professionalBasketballPlayer(yuri) ∧ americanNational(yuri))"
+        }
+      ],
+      "elapsed_sec": 9.8
+    },
+    {
+      "example_id": "411",
+      "story_id": "140",
+      "gold_label": "False",
+      "vanilla_predicted": "False",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "False",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": true,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "Winner(duMaurierClassic1992, steinhauer)",
+        "Participated(steinhauer, duMaurierClassic1992)",
+        "∃x (SixWayTie(x) ∧ OnLeaderboard(x, duMaurierClassic1992) ∧ From(x, belgium))",
+        "From(descampe, belgium) ∧ OnLeaderboard(descampe, duMaurierClassic1992)",
+        "∀x (OnLeaderboard(x, duMaurierClassic1992) → Participated(x, duMaurierClassic1992))"
+      ],
+      "initial_conclusion_fol": "¬Winner(duMaurierClassic1992, steinhauer)",
+      "refined_premises_fol": [
+        "Winner(duMaurierClassic1992, steinhauer)",
+        "Participated(steinhauer, duMaurierClassic1992)",
+        "∃x (SixWayTie(x) ∧ OnLeaderboard(x, duMaurierClassic1992) ∧ ∀z (SixWayTie(z) ∧ OnLeaderboard(z, duMaurierClassic1992) → z = x) ∧ ∃y (From(y, belgium) ∧ InTie(y, x)))",
+        "From(descampe, belgium) ∧ OnLeaderboard(descampe, duMaurierClassic1992)",
+        "∀x (OnLeaderboard(x, duMaurierClassic1992) → Participated(x, duMaurierClassic1992))"
+      ],
+      "refined_conclusion_fol": "¬Winner(duMaurierClassic1992, steinhauer)",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P3: The formula suggests that there is one person from Belgium in a six-way tie, but it does not specify that there is exactly one six-way tie on the leaderboard. The sentence implies there is exactly one such tie.\nC: The formula contradicts P1, which states that Steinhauer was the winner. The sentence and formula should be consistent with P1.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "Winner(duMaurierClassic1992, steinhauer)",
+            "Participated(steinhauer, duMaurierClassic1992)",
+            "∃x (SixWayTie(x) ∧ OnLeaderboard(x, duMaurierClassic1992) ∧ ∃y (From(y, belgium) ∧ InTie(y, x)))",
+            "From(descampe, belgium) ∧ OnLeaderboard(descampe, duMaurierClassic1992)",
+            "∀x (OnLeaderboard(x, duMaurierClassic1992) → Participated(x, duMaurierClassic1992))"
+          ],
+          "conclusion_fol": "¬Winner(duMaurierClassic1992, steinhauer)"
+        },
+        {
+          "round_index": 1,
+          "critique": "P3: The formula correctly captures the existence of a six-way tie and a person from Belgium in that tie, but it does not specify that there is exactly one six-way tie. The sentence implies uniqueness, which is not captured by the formula.\nC: The conclusion formula contradicts P1. If P1 states that Steinhauer was the winner, then C stating that Steinhauer was not the winner is inconsistent with P1.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "Winner(duMaurierClassic1992, steinhauer)",
+            "Participated(steinhauer, duMaurierClassic1992)",
+            "∃x (SixWayTie(x) ∧ OnLeaderboard(x, duMaurierClassic1992) ∧ ∀z (SixWayTie(z) ∧ OnLeaderboard(z, duMaurierClassic1992) → z = x) ∧ ∃y (From(y, belgium) ∧ InTie(y, x)))",
+            "From(descampe, belgium) ∧ OnLeaderboard(descampe, duMaurierClassic1992)",
+            "∀x (OnLeaderboard(x, duMaurierClassic1992) → Participated(x, duMaurierClassic1992))"
+          ],
+          "conclusion_fol": "¬Winner(duMaurierClassic1992, steinhauer)"
+        }
+      ],
+      "elapsed_sec": 11.89
+    },
+    {
+      "example_id": "305",
+      "story_id": "101",
+      "gold_label": "False",
+      "vanilla_predicted": "False",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "False",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "Born(ailtonSilva, yr1995) ∧ KnownAs(ailtonSilva, ailton)",
+        "FootballPlayer(ailton) ∧ LoanedTo(ailton, braga)",
+        "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, nautico)",
+        "FootballClub(nautico) ∧ FootballClub(braga)",
+        "FootballClub(fluminese)"
+      ],
+      "initial_conclusion_fol": "¬∃x (PlaysFor(ailtonSilva, x) ∧ FootballClub(x))",
+      "refined_premises_fol": [
+        "Born(ailtonSilva, yr1995) ∧ KnownAs(ailtonSilva, ailton)",
+        "FootballPlayer(ailton) ∧ LoanedTo(ailton, braga)",
+        "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, nautico)",
+        "FootballClub(nautico) ∧ FootballClub(braga)",
+        "FootballClub(fluminese)"
+      ],
+      "refined_conclusion_fol": "¬∃x (PlaysFor(ailtonSilva, x) ∧ FootballClub(x))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P5: The formula uses \"fluminese\" instead of \"fluminense,\" which is likely a typo.\nC: The conclusion contradicts P3, which states that Ailton Silva plays for Náutico, a football club.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "Born(ailtonSilva, yr1995) ∧ KnownAs(ailtonSilva, ailton)",
+            "FootballPlayer(ailton) ∧ LoanedTo(ailton, braga)",
+            "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, nautico)",
+            "FootballClub(nautico) ∧ FootballClub(braga)",
+            "FootballClub(fluminese)"
+          ],
+          "conclusion_fol": "¬∃x (PlaysFor(ailtonSilva, x) ∧ FootballClub(x))"
+        },
+        {
+          "round_index": 1,
+          "critique": "P5: The formula uses \"fluminese\" instead of \"fluminense,\" which is likely a typo.\nC: The conclusion contradicts P3, where it is stated that Ailton Silva plays for Náutico, a football club.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "Born(ailtonSilva, yr1995) ∧ KnownAs(ailtonSilva, ailton)",
+            "FootballPlayer(ailton) ∧ LoanedTo(ailton, braga)",
+            "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, nautico)",
+            "FootballClub(nautico) ∧ FootballClub(braga)",
+            "FootballClub(fluminese)"
+          ],
+          "conclusion_fol": "¬∃x (PlaysFor(ailtonSilva, x) ∧ FootballClub(x))"
+        }
+      ],
+      "elapsed_sec": 9.09
+    },
+    {
+      "example_id": "306",
+      "story_id": "101",
+      "gold_label": "False",
+      "vanilla_predicted": "False",
+      "vanilla_outcome": "correct",
+      "vanilla_severity": null,
+      "refined_predicted": "False",
+      "refined_outcome": "correct",
+      "refined_severity": null,
+      "changed_from_initial": false,
+      "n_rounds_run": 2,
+      "stopped_no_issues": false,
+      "initial_premises_fol": [
+        "Born(ailtonSilva, yr1995) ∧ KnownAs(ailtonSilva, ailton)",
+        "FootballPlayer(ailton) ∧ LoanedTo(ailton, braga)",
+        "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, nautico)",
+        "FootballClub(nautico) ∧ FootballClub(braga)",
+        "FootballClub(fluminese)"
+      ],
+      "initial_conclusion_fol": "¬∃x (LoanedTo(ailton, x) ∧ FootballClub(x))",
+      "refined_premises_fol": [
+        "Born(ailtonSilva, yr1995) ∧ KnownAs(ailtonSilva, ailton)",
+        "FootballPlayer(ailton) ∧ LoanedTo(ailton, braga)",
+        "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, nautico)",
+        "FootballClub(nautico) ∧ FootballClub(braga)",
+        "FootballClub(fluminese)"
+      ],
+      "refined_conclusion_fol": "¬∃x (LoanedTo(ailton, x) ∧ FootballClub(x))",
+      "rounds": [
+        {
+          "round_index": 0,
+          "critique": "P5: The formula uses \"fluminese\" instead of \"fluminense\". The correct term should be \"fluminense\".\nC: The conclusion contradicts P2, which states that Ailton was loaned out to Braga, a football club.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "Born(ailtonSilva, yr1995) ∧ KnownAs(ailtonSilva, ailton)",
+            "FootballPlayer(ailton) ∧ LoanedTo(ailton, braga)",
+            "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, nautico)",
+            "FootballClub(nautico) ∧ FootballClub(braga)",
+            "FootballClub(fluminese)"
+          ],
+          "conclusion_fol": "¬∃x (LoanedTo(ailton, x) ∧ FootballClub(x))"
+        },
+        {
+          "round_index": 1,
+          "critique": "P5: The formula uses \"fluminese\" instead of \"fluminense\". This is likely a typographical error.\nC: The conclusion contradicts P2, which states that Ailton was loaned out to Braga, a football club. The formula for C is logically inconsistent with the given premises.",
+          "stopped_no_issues": false,
+          "refined_ok": true,
+          "parse_error": null,
+          "premises_fol": [
+            "Born(ailtonSilva, yr1995) ∧ KnownAs(ailtonSilva, ailton)",
+            "FootballPlayer(ailton) ∧ LoanedTo(ailton, braga)",
+            "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, nautico)",
+            "FootballClub(nautico) ∧ FootballClub(braga)",
+            "FootballClub(fluminese)"
+          ],
+          "conclusion_fol": "¬∃x (LoanedTo(ailton, x) ∧ FootballClub(x))"
+        }
+      ],
+      "elapsed_sec": 11.82
+    }
+  ]
+}
