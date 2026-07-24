@@ -1,15 +1,21 @@
 """Phase 3.1: vanilla NL -> Llama -> FOL -> Prover9 pipeline.
 
-Runs FOLIO premises/conclusion through LlamaHarness's frozen Phase 1.1
-prompt (one sentence in, one FOL formula out -- each premise and the
-conclusion are translated independently, there's no separate "conclusion"
-prompt) and grounds the result with the same Prover9 grounder Phase 2.1
-verified against gold FOL. Classifies every example into the three-way bin
-(correct / loud failure / silent failure) defined in silent_failure_metrics.py.
+Translates FOLIO premises + conclusion with LlamaHarness, grounds the result
+with the same Prover9 grounder Phase 2.1 verified against gold FOL, and
+classifies every example into the three-way bin (correct / loud failure /
+silent failure) defined in silent_failure_metrics.py.
+
+Default mode is "story" (prompt v2): the whole problem in one prompt,
+matching standard practice (Logic-LM, LINC, FOLIO). The per-premise variant
+(prompt v1) is retained as mode="per_premise" but is an ABLATION ONLY --
+see the `mode` docstring in run_vanilla_pipeline for why reporting it as the
+vanilla baseline would be measuring an artefact of our own design.
 
 Per docs/MASTER_PLAN.md Phase 3.1: run on a 50-100 example subset first
 (--limit 50) and sanity-check the output before scaling to the full
-validation split (n=203).
+validation split (n=203). Use the default --sample random, not --sample
+head: FOLIO is story-ordered, so a sequential slice clusters into very few
+stories (first 50 = 18 stories vs 35 for a seeded random 50).
 
 **Needs a GPU** (LlamaHarness loads Llama-3.1-8B-Instruct in 4-bit via
 bitsandbytes) -- run this on Kaggle via
@@ -27,6 +33,7 @@ see the NOTE in silent_failure_metrics.py.
 """
 
 import json
+import random
 import sys
 import time
 from pathlib import Path
@@ -54,6 +61,38 @@ from crest.evaluation.silent_failure_metrics import (
 )
 
 
+def subsample(data, limit: int, strategy: str = "random", seed: int = 42):
+    """Pick a `limit`-sized dev subset.
+
+    FOLIO is ordered by story: consecutive examples share the same premises
+    and differ only in their conclusion. Taking data[:limit] therefore gives a
+    sample clustered into very few stories -- the first 5 validation examples
+    cover just 2 stories, and 3 of them come from story 380, whose gold FOL
+    Phase 2.1 already identified as malformed. Any prevalence measured that
+    way is dominated by whichever handful of stories happens to sort first.
+
+    "random" (default) samples across stories with a fixed seed, so the subset
+    is representative *and* reproducible. "head" keeps the old sequential
+    behaviour, useful only for quick plumbing checks where coverage is
+    irrelevant.
+
+    Note for later statistics: examples within a story are not independent
+    (shared premises), so confidence intervals over these results should
+    account for story-level clustering rather than treating n as n
+    independent trials.
+    """
+    if strategy == "head":
+        return data[:limit]
+    if strategy != "random":
+        raise ValueError(f"unknown sample strategy {strategy!r}; expected 'random' or 'head'")
+    if limit >= len(data):
+        return data
+    rng = random.Random(seed)
+    picked = rng.sample(range(len(data)), limit)
+    # Keep dataset order so logs stay readable and diffable across runs.
+    return [data[i] for i in sorted(picked)]
+
+
 def run_vanilla_pipeline(
     split: str = "validation",
     limit: int = None,
@@ -62,6 +101,8 @@ def run_vanilla_pipeline(
     out_path: str = None,
     harness: LlamaHarness = None,
     mode: str = "story",
+    sample: str = "random",
+    sample_seed: int = 42,
 ):
     """`harness` lets a caller pass an already-loaded LlamaHarness. Loading
     Llama-3.1-8B twice (once for a notebook smoke test, once here) wastes
@@ -85,7 +126,7 @@ def run_vanilla_pipeline(
 
     data = load_folio(split=split)
     if limit:
-        data = data[:limit]
+        data = subsample(data, limit, strategy=sample, seed=sample_seed)
 
     if log_path is None:
         log_path = PROJECT_ROOT / "experiments" / "logs" / "llama_harness_calls.jsonl"
@@ -175,6 +216,7 @@ def run_vanilla_pipeline(
     out_file.parent.mkdir(parents=True, exist_ok=True)
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump({"split": split, "limit": limit, "mode": mode,
+                   "sample": sample, "sample_seed": sample_seed,
                    "summary": summary, "results": records}, f, indent=2, ensure_ascii=False)
     print(f"Full results written to {out_file}")
 
@@ -191,6 +233,12 @@ if __name__ == "__main__":
     parser.add_argument("--log-path", default=None)
     parser.add_argument("--out-path", default=None)
     parser.add_argument(
+        "--sample", default="random", choices=["random", "head"],
+        help="random = seeded representative subset across stories (default); "
+             "head = first N sequentially, clustered into few stories",
+    )
+    parser.add_argument("--sample-seed", type=int, default=42)
+    parser.add_argument(
         "--mode", default="story", choices=["story", "per_premise"],
         help="story = primary baseline (whole-story prompt); "
              "per_premise = ablation only, do not report as vanilla prevalence",
@@ -203,4 +251,6 @@ if __name__ == "__main__":
         log_path=args.log_path,
         out_path=args.out_path,
         mode=args.mode,
+        sample=args.sample,
+        sample_seed=args.sample_seed,
     )
