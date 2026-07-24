@@ -1,0 +1,1836 @@
+{
+  "split": "validation",
+  "n": 203,
+  "accuracy": 0.5714285714285714,
+  "malformed_gold_fol_count": 60,
+  "accuracy_excluding_malformed": 0.8111888111888111,
+  "results": [
+    {
+      "example_id": "1014",
+      "story_id": "380",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "1015",
+      "story_id": "380",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "1016",
+      "story_id": "380",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "1208",
+      "story_id": "426",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.23
+    },
+    {
+      "example_id": "1209",
+      "story_id": "426",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1210",
+      "story_id": "426",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "563",
+      "story_id": "198",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "564",
+      "story_id": "198",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "565",
+      "story_id": "198",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "0",
+      "story_id": "0",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1",
+      "story_id": "0",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "2",
+      "story_id": "0",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "57",
+      "story_id": "20",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "58",
+      "story_id": "20",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "59",
+      "story_id": "20",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "726",
+      "story_id": "282",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1361",
+      "story_id": "471",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1362",
+      "story_id": "471",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1363",
+      "story_id": "471",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1364",
+      "story_id": "471",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1365",
+      "story_id": "471",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "530",
+      "story_id": "184",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "531",
+      "story_id": "184",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "532",
+      "story_id": "184",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "657",
+      "story_id": "232",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "658",
+      "story_id": "232",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "659",
+      "story_id": "232",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1301",
+      "story_id": "452",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1302",
+      "story_id": "452",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1303",
+      "story_id": "452",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "893",
+      "story_id": "340",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "894",
+      "story_id": "340",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "895",
+      "story_id": "340",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "289",
+      "story_id": "96",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "290",
+      "story_id": "96",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "291",
+      "story_id": "96",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "621",
+      "story_id": "219",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "622",
+      "story_id": "219",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "623",
+      "story_id": "219",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "927",
+      "story_id": "350",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "928",
+      "story_id": "350",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "929",
+      "story_id": "350",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "1029",
+      "story_id": "385",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.06
+    },
+    {
+      "example_id": "1030",
+      "story_id": "385",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.05
+    },
+    {
+      "example_id": "1031",
+      "story_id": "385",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.06
+    },
+    {
+      "example_id": "700",
+      "story_id": "256",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "456",
+      "story_id": "159",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "457",
+      "story_id": "159",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "904",
+      "story_id": "343",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "905",
+      "story_id": "343",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "906",
+      "story_id": "343",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "608",
+      "story_id": "213",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "609",
+      "story_id": "213",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "610",
+      "story_id": "213",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "240",
+      "story_id": "79",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "241",
+      "story_id": "79",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "242",
+      "story_id": "79",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "4",
+      "story_id": "2",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "5",
+      "story_id": "2",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "6",
+      "story_id": "2",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "548",
+      "story_id": "192",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "549",
+      "story_id": "192",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1271",
+      "story_id": "442",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1272",
+      "story_id": "442",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1273",
+      "story_id": "442",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "663",
+      "story_id": "234",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 149.68
+    },
+    {
+      "example_id": "664",
+      "story_id": "234",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 149.48
+    },
+    {
+      "example_id": "665",
+      "story_id": "234",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 235.38
+    },
+    {
+      "example_id": "360",
+      "story_id": "120",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "361",
+      "story_id": "120",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "819",
+      "story_id": "322",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.05
+    },
+    {
+      "example_id": "820",
+      "story_id": "322",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.05
+    },
+    {
+      "example_id": "821",
+      "story_id": "322",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.06
+    },
+    {
+      "example_id": "253",
+      "story_id": "83",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "254",
+      "story_id": "83",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "979",
+      "story_id": "368",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "980",
+      "story_id": "368",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "981",
+      "story_id": "368",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "805",
+      "story_id": "319",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "806",
+      "story_id": "319",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "807",
+      "story_id": "319",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "808",
+      "story_id": "319",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "809",
+      "story_id": "319",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "754",
+      "story_id": "306",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "755",
+      "story_id": "306",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "756",
+      "story_id": "306",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "688",
+      "story_id": "245",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "171",
+      "story_id": "58",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "172",
+      "story_id": "58",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "173",
+      "story_id": "58",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "546",
+      "story_id": "191",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "547",
+      "story_id": "191",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "476",
+      "story_id": "166",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "477",
+      "story_id": "166",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "478",
+      "story_id": "166",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "933",
+      "story_id": "352",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "934",
+      "story_id": "352",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "935",
+      "story_id": "352",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1366",
+      "story_id": "472",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "1367",
+      "story_id": "472",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "1368",
+      "story_id": "472",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "1011",
+      "story_id": "379",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1012",
+      "story_id": "379",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1013",
+      "story_id": "379",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "560",
+      "story_id": "197",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "561",
+      "story_id": "197",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "562",
+      "story_id": "197",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "958",
+      "story_id": "361",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "959",
+      "story_id": "361",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "960",
+      "story_id": "361",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "706",
+      "story_id": "262",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "370",
+      "story_id": "124",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "371",
+      "story_id": "124",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "372",
+      "story_id": "124",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "527",
+      "story_id": "183",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "528",
+      "story_id": "183",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "529",
+      "story_id": "183",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "439",
+      "story_id": "151",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "440",
+      "story_id": "151",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "441",
+      "story_id": "151",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "739",
+      "story_id": "295",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "786",
+      "story_id": "315",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "787",
+      "story_id": "315",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "788",
+      "story_id": "315",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "1348",
+      "story_id": "467",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1349",
+      "story_id": "467",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1350",
+      "story_id": "467",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "846",
+      "story_id": "330",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "847",
+      "story_id": "330",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "848",
+      "story_id": "330",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "849",
+      "story_id": "330",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "74",
+      "story_id": "26",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "75",
+      "story_id": "26",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "76",
+      "story_id": "26",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "578",
+      "story_id": "203",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "579",
+      "story_id": "203",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "580",
+      "story_id": "203",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "388",
+      "story_id": "131",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "389",
+      "story_id": "131",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1327",
+      "story_id": "460",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1328",
+      "story_id": "460",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1329",
+      "story_id": "460",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "133",
+      "story_id": "46",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "134",
+      "story_id": "46",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "1410",
+      "story_id": "483",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1411",
+      "story_id": "483",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1412",
+      "story_id": "483",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1413",
+      "story_id": "483",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1414",
+      "story_id": "483",
+      "gold_label": "False",
+      "predicted_label": "True",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "243",
+      "story_id": "80",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "244",
+      "story_id": "80",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "245",
+      "story_id": "80",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "964",
+      "story_id": "363",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "965",
+      "story_id": "363",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "966",
+      "story_id": "363",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "702",
+      "story_id": "258",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1244",
+      "story_id": "435",
+      "gold_label": "False",
+      "predicted_label": "Contradiction",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1245",
+      "story_id": "435",
+      "gold_label": "True",
+      "predicted_label": "Contradiction",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1246",
+      "story_id": "435",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "1247",
+      "story_id": "435",
+      "gold_label": "Uncertain",
+      "predicted_label": "Contradiction",
+      "match": false,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "618",
+      "story_id": "217",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "619",
+      "story_id": "217",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "736",
+      "story_id": "292",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "802",
+      "story_id": "318",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "803",
+      "story_id": "318",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.05
+    },
+    {
+      "example_id": "804",
+      "story_id": "318",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.06
+    },
+    {
+      "example_id": "323",
+      "story_id": "107",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "324",
+      "story_id": "107",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "325",
+      "story_id": "107",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1032",
+      "story_id": "386",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1033",
+      "story_id": "386",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1034",
+      "story_id": "386",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "941",
+      "story_id": "355",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "942",
+      "story_id": "355",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "943",
+      "story_id": "355",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "147",
+      "story_id": "51",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "148",
+      "story_id": "51",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "149",
+      "story_id": "51",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "703",
+      "story_id": "259",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "442",
+      "story_id": "152",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "443",
+      "story_id": "152",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1268",
+      "story_id": "441",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1269",
+      "story_id": "441",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1270",
+      "story_id": "441",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "189",
+      "story_id": "64",
+      "gold_label": "True",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "190",
+      "story_id": "64",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "191",
+      "story_id": "64",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "1313",
+      "story_id": "456",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1314",
+      "story_id": "456",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1315",
+      "story_id": "456",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1316",
+      "story_id": "456",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "1317",
+      "story_id": "456",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "724",
+      "story_id": "280",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "411",
+      "story_id": "140",
+      "gold_label": "False",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "412",
+      "story_id": "140",
+      "gold_label": "Uncertain",
+      "predicted_label": "MALFORMED_GOLD_FOL",
+      "match": false,
+      "malformed_gold_fol": true,
+      "elapsed_sec": 0.0
+    },
+    {
+      "example_id": "1324",
+      "story_id": "459",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "1325",
+      "story_id": "459",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.14
+    },
+    {
+      "example_id": "1326",
+      "story_id": "459",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.14
+    },
+    {
+      "example_id": "304",
+      "story_id": "101",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.1
+    },
+    {
+      "example_id": "305",
+      "story_id": "101",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "306",
+      "story_id": "101",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "307",
+      "story_id": "101",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    },
+    {
+      "example_id": "308",
+      "story_id": "101",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "match": true,
+      "malformed_gold_fol": false,
+      "elapsed_sec": 0.11
+    }
+  ]
+}
