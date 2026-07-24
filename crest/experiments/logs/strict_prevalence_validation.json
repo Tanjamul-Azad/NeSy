@@ -1,0 +1,36 @@
+{
+  "vanilla_file": "vanilla_pipeline_story_fewshot_validation.json",
+  "ceiling_file": "ceiling_check_validation.json",
+  "phase_3_1_all_examples": {
+    "n": 203,
+    "correct": 102,
+    "loud_failure": 32,
+    "silent_failure": 69,
+    "silent_under_determination": 57,
+    "silent_wrong_direction": 12,
+    "gradeable": 171,
+    "accuracy_all": 0.5024630541871922,
+    "accuracy_gradeable": 0.5964912280701754,
+    "silent_rate_all": 0.3399014778325123,
+    "silent_rate_gradeable": 0.40350877192982454,
+    "under_determination_rate_gradeable": 0.3333333333333333,
+    "wrong_direction_rate_gradeable": 0.07017543859649122
+  },
+  "phase_3_2_strict_verified_gold_only": {
+    "n": 116,
+    "correct": 70,
+    "loud_failure": 18,
+    "silent_failure": 28,
+    "silent_under_determination": 20,
+    "silent_wrong_direction": 8,
+    "gradeable": 98,
+    "accuracy_all": 0.603448275862069,
+    "accuracy_gradeable": 0.7142857142857143,
+    "silent_rate_all": 0.2413793103448276,
+    "silent_rate_gradeable": 0.2857142857142857,
+    "under_determination_rate_gradeable": 0.20408163265306123,
+    "wrong_direction_rate_gradeable": 0.08163265306122448
+  },
+  "n_verified_gold": 116,
+  "n_dropped_by_strict_filter": 87
+}

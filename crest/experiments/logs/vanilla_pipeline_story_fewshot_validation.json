@@ -1,0 +1,3769 @@
+{
+  "split": "validation",
+  "limit": null,
+  "mode": "story",
+  "few_shot": true,
+  "sample": "random",
+  "sample_seed": 42,
+  "summary": {
+    "n": 203,
+    "correct": 102,
+    "loud_failure": 32,
+    "silent_failure": 69,
+    "loud_failure_translation_format": 0,
+    "loud_failure_translation_truncated": 0,
+    "loud_failure_fol_parse": 32,
+    "accuracy": 0.5024630541871922,
+    "loud_failure_rate": 0.15763546798029557,
+    "silent_failure_rate": 0.3399014778325123,
+    "silent_failure_rate_excluding_loud": 0.40350877192982454
+  },
+  "results": [
+    {
+      "example_id": "1014",
+      "story_id": "380",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (InClub(x) ∧ PerformInTalentShow(x) → OftenAttend(x) ∧ EngagedWithSchool(x))",
+        "∀x (InClub(x) → (PerformInTalentShow(x) ∨ InactiveDisinterested(x)))",
+        "∀x (InClub(x) ∧ ChaperoneDance(x) → ¬Student(x))",
+        "∀x (InClub(x) ∧ InactiveDisinterested(x) → ChaperoneDance(x))",
+        "∀x (InClub(x) ∧ YoungChildTeenager(x) ∧ WishFurtherAcademic(x) → Student(x))",
+        "∀x (InClub(x) ∧ (OftenAttend(x) ∧ EngagedWithSchool(x) ∧ Student(x)) ⊕ (¬OftenAttend(x) ∧ ¬EngagedWithSchool(x) ∧ ¬Student(x)))"
+      ],
+      "translated_conclusion": "PerformInTalentShow(bonnie)",
+      "elapsed_sec": 15.98
+    },
+    {
+      "example_id": "1015",
+      "story_id": "380",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (InClub(x) ∧ PerformInTalentShow(x) → OftenAttend(x) ∧ VeryEngaged(x))",
+        "∀x (InClub(x) → (PerformInTalentShow(x) ∨ InactiveDisinterested(x)))",
+        "∀x (InClub(x) ∧ ChaperoneDance(x) → ¬Student(x))",
+        "∀x (InClub(x) ∧ InactiveDisinterested(x) → ChaperoneDance(x))",
+        "∀x (InClub(x) ∧ YoungChildTeenager(x) ∧ WishFurtherAcademic(x) → Student(x))",
+        "InClub(bonnie) ∧ (OftenAttend(bonnie) ∧ VeryEngaged(bonnie) ∧ Student(bonnie) ∨ ¬(OftenAttend(bonnie) ∧ VeryEngaged(bonnie) ∧ Student(bonnie)))"
+      ],
+      "translated_conclusion": "(YoungChildTeenager(bonnie) ∧ ChaperoneDance(bonnie) ∨ ¬YoungChildTeenager(bonnie)) → (Student(bonnie) ∨ InactiveDisinterested(bonnie))",
+      "elapsed_sec": 19.23
+    },
+    {
+      "example_id": "1016",
+      "story_id": "380",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (InClub(x) ∧ PerformInTalentShow(x) → OftenAttend(x) ∧ VeryEngaged(x))",
+        "∀x (InClub(x) → (PerformInTalentShow(x) ∨ InactiveDisinterested(x)))",
+        "∀x (InClub(x) ∧ ChaperoneDance(x) → ¬Student(x))",
+        "∀x (InClub(x) ∧ InactiveDisinterested(x) → ChaperoneDance(x))",
+        "∀x (InClub(x) ∧ YoungChildTeenager(x) ∧ WishFurtherAcademicCareer(x) → Student(x))",
+        "InClub(bonnie) ∧ (OftenAttend(bonnie) ∧ VeryEngaged(bonnie) ∧ Student(bonnie) ∨ ¬(OftenAttend(bonnie) ∧ VeryEngaged(bonnie) ∧ Student(bonnie)))"
+      ],
+      "translated_conclusion": "(ChaperoneDance(bonnie) ∨ ¬ChaperoneDance(bonnie)) → (YoungChildTeenager(bonnie) ∧ WishFurtherAcademicCareer(bonnie) ∧ InactiveDisinterested(bonnie))",
+      "elapsed_sec": 19.58
+    },
+    {
+      "example_id": "1208",
+      "story_id": "426",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ScheduleMeeting(x, customer) → GoToBuilding(x, companyBuilding, today))",
+        "∀x (LunchIn(x, companyBuilding) → ScheduleMeeting(x, customer))",
+        "∀x (LunchIn(x, companyBuilding) ∨ LunchIn(x, home))",
+        "∀x (LunchIn(x, home) → WorkingRemotelyFromHome(x, home))",
+        "∀x (InOtherCountries(x) → WorkingRemotelyFromHome(x, home))",
+        "∀x (Manager(x) → ¬WorkingRemotelyFromHome(x, home))",
+        "∀x (Manager(x) ↔ WillAppearInCompany(x, james, today))"
+      ],
+      "translated_conclusion": "LunchIn(james, companyBuilding)",
+      "elapsed_sec": 13.53
+    },
+    {
+      "example_id": "1209",
+      "story_id": "426",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ScheduleMeeting(x, customer) → GoToBuilding(x, companyBuilding, today))",
+        "∀x (LunchIn(x, companyBuilding) → ScheduleMeeting(x, customer))",
+        "∀x (LunchIn(x, companyBuilding) ∨ LunchIn(x, home))",
+        "∀x (LunchIn(x, home) → WorkingRemotelyFromHome(x, home))",
+        "∀x (InOtherCountries(x) → WorkingRemotelyFromHome(x, home))",
+        "∀x (Manager(x) → ¬WorkingRemotelyFromHome(x, home))",
+        "∀x (Manager(x) ↔ AppearIn(x, companyBuilding, today))"
+      ],
+      "translated_conclusion": "¬LunchIn(james, companyBuilding)",
+      "elapsed_sec": 13.84
+    },
+    {
+      "example_id": "1210",
+      "story_id": "426",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: ')'.\nall x ((Manager(x) | InOtherCountries(x)) -> (LunchAtHome(x) | WorkRemotelyFromHome(x))) -> (LunchAtHome(x) | WorkRemotelyFromHome(x)) -> (Manager(x) | InOtherCountries(x)))\n                                                                                                                                                                            ^",
+      "translated_premises": [
+        "∀x (ScheduleMeeting(x, customer) → GoToCompanyBuildingToday(x))",
+        "∀x (LunchInCompanyBuilding(x) → ScheduleMeeting(x, customer))",
+        "∀x (LunchInCompanyBuilding(x) ∨ LunchAtHome(x))",
+        "∀x (LunchAtHome(x) → WorkRemotelyFromHome(x))",
+        "∀x (InOtherCountries(x) → WorkRemotelyFromHome(x))",
+        "∀x (Manager(x) → ¬WorkRemotelyFromHome(x))",
+        "∀x (Manager(x) ↔ AppearInCompanyToday(x))"
+      ],
+      "translated_conclusion": "∀x ((Manager(x) ∨ InOtherCountries(x)) → (LunchAtHome(x) ∨ WorkRemotelyFromHome(x))) → (LunchAtHome(x) ∨ WorkRemotelyFromHome(x)) → (Manager(x) ∨ InOtherCountries(x)))",
+      "elapsed_sec": 16.43
+    },
+    {
+      "example_id": "563",
+      "story_id": "198",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Monkeypox(x) → MayGetMonkeypox(x))",
+        "∃x (Monkeypox(x) ∧ Animal(x))",
+        "∀x (Human(x) → Mammal(x))",
+        "∀x (Mammal(x) → Animal(x))",
+        "∀x (Monkeypox(x) → (Fever(x) ∧ Headache(x) ∧ MusclePains(x) ∧ Tiredness(x)))",
+        "∀x (Flu(x) → Tiredness(x))"
+      ],
+      "translated_conclusion": "∃x (Animal(x) ∧ ¬Human(x))",
+      "elapsed_sec": 10.9
+    },
+    {
+      "example_id": "564",
+      "story_id": "198",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (MonkeypoxVirus(x) → MayGetMonkeypox(x))",
+        "∃x (MonkeypoxVirus(x) ∧ Animal(x))",
+        "∀x (Human(x) → Mammal(x))",
+        "∀x (Mammal(x) → Animal(x))",
+        "∀x (Monkeypox(x) → (Fever(x) ∧ Headache(x) ∧ MusclePains(x) ∧ Tiredness(x)))",
+        "∀x (Flu(x) → Tiredness(x))"
+      ],
+      "translated_conclusion": "∀x (Flu(x) → ¬Exists(x))",
+      "elapsed_sec": 11.42
+    },
+    {
+      "example_id": "565",
+      "story_id": "198",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Monkeypox(x) → MayGetMonkeypox(x))",
+        "∃x (Monkeypox(x) ∧ Animal(x))",
+        "∀x (Human(x) → Mammal(x))",
+        "∀x (Mammal(x) → Animal(x))",
+        "∀x (Monkeypox(x) → (Fever(x) ∧ Headache(x) ∧ MusclePains(x) ∧ Tiredness(x)))",
+        "∀x (Flu(x) → Tiredness(x))"
+      ],
+      "translated_conclusion": "∀x (Monkeypox(x) → Coughing(x))",
+      "elapsed_sec": 11.55
+    },
+    {
+      "example_id": "0",
+      "story_id": "0",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '≠'.  Expected token ')'.\nexists x1 exists x2 exists x3 exists x4 exists x5 exists x6 (WildTurkey(x1) & WildTurkey(x2) & WildTurkey(x3) & WildTurkey(x4) & WildTurkey(x5) & WildTurkey(x6) & EasternWildTurkey(x1) & OsceolaWildTurkey(x2) & GouldsWildTurkey(x3) & MerriamsWildTurkey(x4) & RioGrandeWildTurkey(x5) & OcellatedWildTurkey(x6) & x1 ≠ x2 & x1 ≠ x3 & x1 ≠ x4 & x1 ≠ x5 & x1 ≠ x6 & x2 ≠ x3 & x2 ≠ x4 & x2 ≠ x5 & x2 ≠ x6 & x3 ≠ x4 & x3 ≠ x5 & x3 ≠ x6 & x4 ≠ x5 & x4 ≠ x6 & x5 ≠ x6)\n                                                                                                                                                                                                                                                                                                                          ^",
+      "translated_premises": [
+        "∃x1 ∃x2 ∃x3 ∃x4 ∃x5 ∃x6 (WildTurkey(x1) ∧ WildTurkey(x2) ∧ WildTurkey(x3) ∧ WildTurkey(x4) ∧ WildTurkey(x5) ∧ WildTurkey(x6) ∧ EasternWildTurkey(x1) ∧ OsceolaWildTurkey(x2) ∧ GouldsWildTurkey(x3) ∧ MerriamsWildTurkey(x4) ∧ RioGrandeWildTurkey(x5) ∧ OcellatedWildTurkey(x6) ∧ x1 ≠ x2 ∧ x1 ≠ x3 ∧ x1 ≠ x4 ∧ x1 ≠ x5 ∧ x1 ≠ x6 ∧ x2 ≠ x3 ∧ x2 ≠ x4 ∧ x2 ≠ x5 ∧ x2 ≠ x6 ∧ x3 ≠ x4 ∧ x3 ≠ x5 ∧ x3 ≠ x6 ∧ x4 ≠ x5 ∧ x4 ≠ x6 ∧ x5 ≠ x6)",
+        "¬EasternWildTurkey(tom)",
+        "¬OsceolaWildTurkey(tom)",
+        "¬GouldsWildTurkey(tom)",
+        "¬(MerriamsWildTurkey(tom) ⊕ RioGrandeWildTurkey(tom))",
+        "∃x (WildTurkey(x) ∧ x = tom)"
+      ],
+      "translated_conclusion": "OcellatedWildTurkey(tom)",
+      "elapsed_sec": 23.87
+    },
+    {
+      "example_id": "1",
+      "story_id": "0",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x1 ∃x2 ∃x3 ∃x4 ∃x5 ∃x6 (WildTurkey(x1) ∧ WildTurkey(x2) ∧ WildTurkey(x3) ∧ WildTurkey(x4) ∧ WildTurkey(x5) ∧ WildTurkey(x6) ∧ EasternWildTurkey(x1) ∧ OsceolaWildTurkey(x2) ∧ GouldsWildTurkey(x3) ∧ MerriamsWildTurkey(x4) ∧ RioGrandeWildTurkey(x5) ∧ OcellatedWildTurkey(x6))",
+        "¬EasternWildTurkey(tom)",
+        "¬OsceolaWildTurkey(tom)",
+        "¬GouldsWildTurkey(tom)",
+        "¬(MerriamsWildTurkey(tom) ∨ RioGrandeWildTurkey(tom))",
+        "∃x (WildTurkey(tom) ∧ x = x)"
+      ],
+      "translated_conclusion": "EasternWildTurkey(tom)",
+      "elapsed_sec": 16.74
+    },
+    {
+      "example_id": "2",
+      "story_id": "0",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (WildTurkey(x) ∧ EasternWildTurkey(x)) ∧ ∃x (WildTurkey(x) ∧ OsceolaWildTurkey(x)) ∧ ∃x (WildTurkey(x) ∧ GouldsWildTurkey(x)) ∧ ∃x (WildTurkey(x) ∧ MerriamsWildTurkey(x)) ∧ ∃x (WildTurkey(x) ∧ RioGrandeWildTurkey(x)) ∧ ∃x (WildTurkey(x) ∧ OcellatedWildTurkey(x))",
+        "¬EasternWildTurkey(tom)",
+        "¬OsceolaWildTurkey(tom)",
+        "¬GouldsWildTurkey(tom)",
+        "¬(MerriamsWildTurkey(tom) ∨ RioGrandeWildTurkey(tom))",
+        "∃x (WildTurkey(x) ∧ TypeOfWildTurkey(x, tom))"
+      ],
+      "translated_conclusion": "WildTurkey(joey)",
+      "elapsed_sec": 15.52
+    },
+    {
+      "example_id": "57",
+      "story_id": "20",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "JapaneseGameCompany(x) ∧ CreatedGame(x, theLegendOfZelda)",
+        "∀x (OnTop10List(x) → JapaneseGameCompany(x))",
+        "∀x (SellsMoreThanOneMillion(x) → OnTop10List(x))",
+        "SellsMoreThanOneMillion(theLegendOfZelda)"
+      ],
+      "translated_conclusion": "OnTop10List(theLegendOfZelda)",
+      "elapsed_sec": 7.74
+    },
+    {
+      "example_id": "58",
+      "story_id": "20",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "JapaneseGameCompany(x) ∧ CreatedGame(x, theLegendOfZelda)",
+        "∀x (Top10List(x) → JapaneseGameCompany(x))",
+        "∀x (SellsMoreThanOneMillion(x) → IncludedInTop10List(x))",
+        "SellsMoreThanOneMillion(theLegendOfZelda)"
+      ],
+      "translated_conclusion": "JapaneseGameCompany(fifa22)",
+      "elapsed_sec": 7.49
+    },
+    {
+      "example_id": "59",
+      "story_id": "20",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "JapaneseGameCompany(x) ∧ CreatedGame(x, theLegendOfZelda)",
+        "∀x (OnTop10List(x) → JapaneseGameCompany(x))",
+        "∀x (SellsMoreThanOneMillion(x) → OnTop10List(x))",
+        "SellsMoreThanOneMillion(theLegendOfZelda)"
+      ],
+      "translated_conclusion": "¬OnTop10List(theLegendOfZelda)",
+      "elapsed_sec": 7.78
+    },
+    {
+      "example_id": "726",
+      "story_id": "282",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Square(x) → FourSided(x))",
+        "∀x (FourSided(x) → Shape(x))"
+      ],
+      "translated_conclusion": "∀x (Square(x) → Shape(x))",
+      "elapsed_sec": 4.11
+    },
+    {
+      "example_id": "1361",
+      "story_id": "471",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (SpotNearCampus(x, rabbit) → Cute(x))",
+        "∃x (SpotNearCampus(x, turtle))",
+        "∀x (SpotNearCampus(x, animal) → (Rabbit(x) ∨ Squirrel(x)))",
+        "∀x (Skittish(x) → ¬Calm(x))",
+        "∀x (SpotNearCampus(x, squirrel) → Skittish(x))",
+        "SpotNearCampus(rockie, animal) ∧ Calm(rockie)"
+      ],
+      "translated_conclusion": "SpotNearCampus(rockie, turtle) → Turtle(rockie)",
+      "elapsed_sec": 11.39
+    },
+    {
+      "example_id": "1362",
+      "story_id": "471",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (SpotNearCampus(x, rabbit) → Cute(x))",
+        "∃x (SpotNearCampus(x, turtle))",
+        "∀x (SpotNearCampus(x, animal) → (Rabbit(x) ∨ Squirrel(x)))",
+        "∀x (Skittish(x) → ¬Calm(x))",
+        "∀x (SpotNearCampus(x, squirrel) → Skittish(x))",
+        "SpotNearCampus(rockie, animal) ∧ Calm(rockie)"
+      ],
+      "translated_conclusion": "¬Turtle(rockie)",
+      "elapsed_sec": 10.65
+    },
+    {
+      "example_id": "1363",
+      "story_id": "471",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (SpotNearCampus(x, rabbit) → Cute(x))",
+        "∃x (SpotNearCampus(x, turtle))",
+        "∀x (SpotNearCampus(x, animal) → (Rabbit(x) ∨ Squirrel(x)))",
+        "∀x (Skittish(x) → ¬Calm(x))",
+        "∀x (SpotNearCampus(x, squirrel) → Skittish(x))",
+        "SpotNearCampus(rockie, animal) ∧ Calm(rockie)"
+      ],
+      "translated_conclusion": "SpotNearCampus(rockie, animal) ∨ Cute(rockie)",
+      "elapsed_sec": 11.33
+    },
+    {
+      "example_id": "1364",
+      "story_id": "471",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (SpotNearCampus(x, rabbit) → Cute(x))",
+        "∃x (SpotNearCampus(x, turtle))",
+        "∀x (SpotNearCampus(x, animal) → (Rabbit(x) ∨ Squirrel(x)))",
+        "∀x (Skittish(x) → ¬Calm(x))",
+        "∀x (SpotNearCampus(x, squirrel) → Skittish(x))",
+        "SpotNearCampus(rockie, animal) ∧ Calm(rockie)"
+      ],
+      "translated_conclusion": "∀x (¬(Turtle(x) ∧ Squirrel(x)) → (Cute(x) ∨ Skittish(x)))",
+      "elapsed_sec": 11.93
+    },
+    {
+      "example_id": "1365",
+      "story_id": "471",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (SpotNearCampus(x, rabbit) → Cute(x))",
+        "∃x (Turtle(x) ∧ SpotNearCampus(x, campus))",
+        "∀x (SpotNearCampus(x, animal) → (Rabbit(x) ∨ Squirrel(x)))",
+        "∀x (Skittish(x) → ¬Calm(x))",
+        "∀x (SpotNearCampus(x, squirrel) → Skittish(x))",
+        "SpotNearCampus(rockie, campus) ∧ Calm(rockie)"
+      ],
+      "translated_conclusion": "(Cute(rockie) ∧ Calm(rockie)) → (∃x (Turtle(x) ∧ rockie = x) ∧ Skittish(rockie))",
+      "elapsed_sec": 13.24
+    },
+    {
+      "example_id": "530",
+      "story_id": "184",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '⊃'.  Expected token ')'.\nall x (BingeWatch(x, karen) ⊃ Download(x, karen))\n                            ^",
+      "translated_premises": [
+        "PopularShow(strangerThings) ∧ NetflixShow(strangerThings)",
+        "∀x (PopularShow(x) → BingeWatch(x, karen))",
+        "∀x (BingeWatch(x, karen) ⊃ Download(x, karen))",
+        "¬Download(blackMirror, karen)",
+        "NetflixShow(blackMirror)",
+        "∀x (BingeWatch(x, karen) → Share(x, lisa))"
+      ],
+      "translated_conclusion": "BingeWatch(strangerThings, karen) → Share(strangerThings, lisa)",
+      "elapsed_sec": 10.18
+    },
+    {
+      "example_id": "531",
+      "story_id": "184",
+      "gold_label": "False",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '⊃'.  Expected token ')'.\nall x (BingeWatch(x, karen) ⊃ Download(x, karen))\n                            ^",
+      "translated_premises": [
+        "PopularShow(\"strangerThings\") ∧ NetflixShow(\"strangerThings\")",
+        "∀x (PopularShow(x) → BingeWatch(x, karen))",
+        "∀x (BingeWatch(x, karen) ⊃ Download(x, karen))",
+        "¬Download(\"blackMirror\", karen)",
+        "NetflixShow(\"blackMirror\")",
+        "∀x (BingeWatch(x, karen) → Share(x, lisa))"
+      ],
+      "translated_conclusion": "PopularShow(\"blackMirror\")",
+      "elapsed_sec": 9.32
+    },
+    {
+      "example_id": "532",
+      "story_id": "184",
+      "gold_label": "Uncertain",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '⊃'.  Expected token ')'.\nall x (BingeWatch(x, karen) ⊃ Download(x, karen))\n                            ^",
+      "translated_premises": [
+        "PopularShow(\"strangerThings\") ∧ NetflixShow(\"strangerThings\")",
+        "∀x (PopularShow(x) → BingeWatch(x, karen))",
+        "∀x (BingeWatch(x, karen) ⊃ Download(x, karen))",
+        "¬Download(\"blackMirror\", karen)",
+        "NetflixShow(\"blackMirror\")",
+        "∀x (BingeWatch(x, karen) → Share(x, lisa))"
+      ],
+      "translated_conclusion": "Share(\"blackMirror\", lisa)",
+      "elapsed_sec": 9.37
+    },
+    {
+      "example_id": "657",
+      "story_id": "232",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Capital(peopleSRepublicOfChina, beijing)",
+        "Capital(beijing, worldMostPopulousNation)",
+        "LocatedIn(beijing, northernChina)",
+        "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, summerParalympics2008)",
+        "Hosted(beijing, summerOlympics) ∧ Hosted(beijing, winterOlympics) ∧ Hosted(beijing, summerParalympics) ∧ Hosted(beijing, winterParalympics)",
+        "∀x (University(x) ∧ LocatedIn(x, beijing) → RankedAmongBest(x))"
+      ],
+      "translated_conclusion": "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, winterOlympics)",
+      "elapsed_sec": 13.51
+    },
+    {
+      "example_id": "658",
+      "story_id": "232",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "CapitalOf(beijing, peoplesRepublicOfChina)",
+        "CapitalCityOf(beijing, worldsMostPopulousNation)",
+        "LocatedIn(beijing, northernChina)",
+        "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, summerParalympics2008)",
+        "Hosted(beijing, summerOlympics) ∧ Hosted(beijing, winterOlympics) ∧ Hosted(beijing, summerParalympics) ∧ Hosted(beijing, winterParalympics)",
+        "∀x (University(x) ∧ LocatedIn(x, beijing) → RankedAmongBest(x))"
+      ],
+      "translated_conclusion": "LocatedIn(beijing, southernChina)",
+      "elapsed_sec": 12.5
+    },
+    {
+      "example_id": "659",
+      "story_id": "232",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "CapitalOf(beijing, peoplesRepublicOfChina)",
+        "CapitalCityOf(beijing, worldsMostPopulousNation)",
+        "LocatedIn(beijing, northernChina)",
+        "Hosted(beijing, summerOlympics2008) ∧ Hosted(beijing, summerParalympics2008)",
+        "Hosted(beijing, summerOlympics) ∧ Hosted(beijing, winterOlympics) ∧ Hosted(beijing, summerParalympics) ∧ Hosted(beijing, winterParalympics)",
+        "∀x (University(x) ∧ LocatedIn(x, beijing) → RankedAmongBest(x))"
+      ],
+      "translated_conclusion": "¬(LargestChineseCity(beijing) ∧ SecondLargestChineseCity(beijing))",
+      "elapsed_sec": 13.2
+    },
+    {
+      "example_id": "1301",
+      "story_id": "452",
+      "gold_label": "Uncertain",
+      "predicted_label": "Contradiction",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Alien(x) → Extraterrestrial(x))",
+        "∀x (FromMars(x) → Alien(x))",
+        "∀x (Extraterrestrial(x) → ¬Human(x))",
+        "∀x (HighlyIntelligentBeingFromEarth(x) → Human(x))",
+        "HighlyIntelligentBeingFromEarth(marvin)",
+        "(FromEarth(marvin) ∧ FromMars(marvin)) ∨ ¬(FromEarth(marvin) ∨ FromMars(marvin))",
+        "¬FromEarth(marvin) → Extraterrestrial(marvin)"
+      ],
+      "translated_conclusion": "Alien(marvin)",
+      "elapsed_sec": 11.72
+    },
+    {
+      "example_id": "1302",
+      "story_id": "452",
+      "gold_label": "True",
+      "predicted_label": "False",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Alien(x) → Extraterrestrial(x))",
+        "∀x (FromMars(x) → Alien(x))",
+        "∀x (Extraterrestrial(x) → ¬Human(x))",
+        "∀x (HighlyIntelligentBeingFromEarth(x) → Human(x))",
+        "HighlyIntelligentBeingFromEarth(marvin)",
+        "(FromEarth(marvin) ∧ FromMars(marvin)) ∨ (FromEarth(marvin) → ¬FromMars(marvin))",
+        "¬FromEarth(marvin) → Extraterrestrial(marvin)"
+      ],
+      "translated_conclusion": "¬Human(marvin) ∧ ¬FromMars(marvin)",
+      "elapsed_sec": 12.64
+    },
+    {
+      "example_id": "1303",
+      "story_id": "452",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Alien(x) → Extraterrestrial(x))",
+        "∀x (FromMars(x) → Alien(x))",
+        "∀x (Extraterrestrial(x) → ¬Human(x))",
+        "∀x (HighlyIntelligentBeingFromEarth(x) → Human(x))",
+        "HighlyIntelligentBeingFromEarth(marvin)",
+        "(FromEarth(marvin) ∧ FromMars(marvin)) ∨ (FromEarth(marvin) → ¬FromMars(marvin))",
+        "∀x (¬FromEarth(x) → Extraterrestrial(x))"
+      ],
+      "translated_conclusion": "∀x (¬FromMars(x) → Human(x))",
+      "elapsed_sec": 12.35
+    },
+    {
+      "example_id": "893",
+      "story_id": "340",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (AtMixer(x) → (GrandSlamChampion(x) ∨ OscarNominatedActor(x)))",
+        "∀x (GrandSlamChampion(x) ∧ AtMixer(x) → ProfessionalTennisPlayer(x))",
+        "∀x (OscarNominatedActor(x) ∧ AtMixer(x) → Celebrity(x))",
+        "∀x (ProfessionalTennisPlayer(x) ∧ AtMixer(x) → Athlete(x))",
+        "∀x (Celebrity(x) ∧ AtMixer(x) → WellPaid(x))",
+        "∀x (Athlete(x) ∧ AtMixer(x) → Famous(x))",
+        "∀x (WellPaid(x) ∧ AtMixer(x) → LivesInTaxHaven(x))",
+        "AtMixer(djokovic) → (FamousAthlete(djokovic) → WellPaid(djokovic))"
+      ],
+      "translated_conclusion": "GrandSlamChampion(djokovic)",
+      "elapsed_sec": 17.29
+    },
+    {
+      "example_id": "894",
+      "story_id": "340",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (AtMixer(x) → (GrandSlamChampion(x) ∨ OscarNominatedActor(x)))",
+        "∀x (GrandSlamChampion(x) ∧ AtMixer(x) → ProfessionalTennisPlayer(x))",
+        "∀x (OscarNominatedActor(x) ∧ AtMixer(x) → Celebrity(x))",
+        "∀x (ProfessionalTennisPlayer(x) ∧ AtMixer(x) → Athlete(x))",
+        "∀x (Celebrity(x) ∧ AtMixer(x) → WellPaid(x))",
+        "∀x (Athlete(x) ∧ AtMixer(x) → Famous(x))",
+        "∀x (WellPaid(x) ∧ AtMixer(x) → LivesInTaxHaven(x))",
+        "AtMixer(djokovic) ∧ (Famous(x) ∧ Athlete(x) → WellPaid(x)) → WellPaid(djokovic)"
+      ],
+      "translated_conclusion": "LivesInTaxHaven(djokovic)",
+      "elapsed_sec": 17.63
+    },
+    {
+      "example_id": "895",
+      "story_id": "340",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (AtMixer(x) → (GrandSlamChampion(x) ∨ OscarNominatedActor(x)))",
+        "∀x (GrandSlamChampion(x) ∧ AtMixer(x) → ProfessionalTennisPlayer(x))",
+        "∀x (OscarNominatedActor(x) ∧ AtMixer(x) → Celebrity(x))",
+        "∀x (ProfessionalTennisPlayer(x) ∧ AtMixer(x) → Athlete(x))",
+        "∀x (Celebrity(x) ∧ AtMixer(x) → WellPaid(x))",
+        "∀x (Athlete(x) ∧ AtMixer(x) → Famous(x))",
+        "∀x (WellPaid(x) ∧ AtMixer(x) → LivesInTaxHaven(x))",
+        "AtMixer(djokovic) ∧ (Famous(x) ∧ Athlete(x) → WellPaid(x)) → WellPaid(djokovic)"
+      ],
+      "translated_conclusion": "¬LivesInTaxHaven(djokovic)",
+      "elapsed_sec": 17.86
+    },
+    {
+      "example_id": "289",
+      "story_id": "96",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "ProfessionalWrestlingStable(diamondMine)",
+        "Leader(diamondMine, roderickStrong)",
+        "Member(diamondMine, creedBrothers) ∧ Member(diamondMine, ivyNile)",
+        "Feud(imperium, diamondMine)"
+      ],
+      "translated_conclusion": "Leader(diamondMine, roderickStrong)",
+      "elapsed_sec": 6.66
+    },
+    {
+      "example_id": "290",
+      "story_id": "96",
+      "gold_label": "Uncertain",
+      "predicted_label": "True",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "ProfessionalWrestlingStable(diamondMine)",
+        "Leader(diamondMine, roderickStrong)",
+        "Member(diamondMine, creedBrothers) ∧ Member(diamondMine, ivyNile)",
+        "Feud(imperium, diamondMine)"
+      ],
+      "translated_conclusion": "Leader(diamondMine, roderickStrong) ∧ Member(diamondMine, creedBrothers)",
+      "elapsed_sec": 7.4
+    },
+    {
+      "example_id": "291",
+      "story_id": "96",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "ProfessionalWrestlingStable(diamondMine)",
+        "Leader(diamondMine, roderickStrong)",
+        "Member(diamondMine, creedBrothers) ∧ Member(diamondMine, ivyNile)",
+        "Feud(imperium, diamondMine)"
+      ],
+      "translated_conclusion": "∀x (Feud(imperium, x) → ¬Member(x, ivyNile))",
+      "elapsed_sec": 7.53
+    },
+    {
+      "example_id": "621",
+      "story_id": "219",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "MusicPiece(symphonyNo9)",
+        "∀x (Composer(x) → MusicPiece(x))",
+        "Composer(beethoven) ∧ MusicPiece(symphonyNo9) ∧ Wrote(beethoven, symphonyNo9)",
+        "Premiered(viennaMusicSociety, symphonyNo9)",
+        "Orchestra(viennaMusicSociety)",
+        "Member(beethoven, viennaMusicSociety) ∧ Leader(beethoven, viennaMusicSociety)",
+        "∀x (Orchestra(x) → LedBy(x, conductor))"
+      ],
+      "translated_conclusion": "Composer(beethoven)",
+      "elapsed_sec": 11.01
+    },
+    {
+      "example_id": "622",
+      "story_id": "219",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: WriteMusicPiece/2, WriteMusicPiece/1.\n\n\nFatal error:  The following symbols are used with multiple arities: WriteMusicPiece/2, WriteMusicPiece/1",
+      "translated_premises": [
+        "MusicPiece(symphonyNo9)",
+        "∀x (Composer(x) → WriteMusicPiece(x))",
+        "Composer(beethoven) ∧ WriteMusicPiece(beethoven, symphonyNo9)",
+        "PremieredBy(viennaMusicSociety, symphonyNo9)",
+        "Orchestra(viennaMusicSociety)",
+        "Lead(viennaMusicSociety, beethoven)",
+        "∀x (Orchestra(x) → LedBy(x, conductor))"
+      ],
+      "translated_conclusion": "∃x (Orchestra(x) ∧ WriteMusicPiece(x))",
+      "elapsed_sec": 10.42
+    },
+    {
+      "example_id": "623",
+      "story_id": "219",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "MusicPiece(symphonyNo9)",
+        "∀x (Composer(x) → MusicPiece(x))",
+        "Composer(beethoven) ∧ MusicPiece(symphonyNo9) ∧ Wrote(beethoven, symphonyNo9)",
+        "Premiered(viennaMusicSociety, symphonyNo9)",
+        "Orchestra(viennaMusicSociety)",
+        "Member(beethoven, viennaMusicSociety) ∧ Leader(beethoven, viennaMusicSociety)",
+        "∀x (Orchestra(x) → LedBy(x, conductor))"
+      ],
+      "translated_conclusion": "¬Conductor(beethoven)",
+      "elapsed_sec": 11.11
+    },
+    {
+      "example_id": "927",
+      "story_id": "350",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (DesignStyle(x) ∧ Adores(max, x) ∧ ZahaHadid(x) → InterestingGeometry(x))",
+        "∀x (BrutalistBuilding(x) ∧ Adores(max, x) → ¬InterestingGeometry(x))",
+        "∀x (Adores(max, x) → (ZahaHadid(x) ∨ KellyWearstler(x)))",
+        "∀x (DesignStyle(x) ∧ Adores(max, x) ∧ KellyWearstler(x) → Evocative(x))",
+        "∀x (DesignStyle(x) ∧ Adores(max, x) ∧ KellyWearstler(x) → Dreamy(x))",
+        "∀x (Design(x) ∧ Adores(max, x) ∧ InterestingGeometry(x) → (BrutalistBuilding(x) ∧ Evocative(x)))"
+      ],
+      "translated_conclusion": "∀x (Design(x) ∧ Adores(max, x) → BrutalistBuilding(x))",
+      "elapsed_sec": 16.71
+    },
+    {
+      "example_id": "928",
+      "story_id": "350",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (DesignStyle(x) ∧ Adores(max, x) ∧ ZahaHadid(x) → InterestingGeometry(x))",
+        "∀x (BrutalistBuilding(x) ∧ Adores(max, x) → ¬InterestingGeometry(x))",
+        "∀x (Adores(max, x) → (ZahaHadid(x) ∨ KellyWearstler(x)))",
+        "∀x (DesignStyle(x) ∧ Adores(max, x) ∧ KellyWearstler(x) → Evocative(x))",
+        "∀x (DesignStyle(x) ∧ Adores(max, x) ∧ KellyWearstler(x) → Dreamy(x))",
+        "∀x (Design(x) ∧ Adores(max, x) ∧ InterestingGeometry(x) → (BrutalistBuilding(x) ∧ Evocative(x)))"
+      ],
+      "translated_conclusion": "∀x (Design(x) ∧ Adores(max, x) → (Evocative(x) ∧ Dreamy(x)))",
+      "elapsed_sec": 17.05
+    },
+    {
+      "example_id": "929",
+      "story_id": "350",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (DesignStyle(x) ∧ Adores(max, x) ∧ ZahaHadid(x) → InterestingGeometry(x))",
+        "∀x (BrutalistBuilding(x) ∧ Adores(max, x) → ¬InterestingGeometry(x))",
+        "∀x (Adores(max, x) → (ZahaHadid(x) ∨ KellyWearstler(x)))",
+        "∀x (DesignStyle(x) ∧ Adores(max, x) ∧ KellyWearstler(x) → Evocative(x))",
+        "∀x (DesignStyle(x) ∧ Adores(max, x) ∧ KellyWearstler(x) → Dreamy(x))",
+        "∀x (Design(x) ∧ Adores(max, x) ∧ InterestingGeometry(x) → (BrutalistBuilding(x) ∧ Evocative(x)))"
+      ],
+      "translated_conclusion": "∀x (Design(x) ∧ Adores(max, x) → (Evocative(x) ∨ Dreamy(x)))",
+      "elapsed_sec": 17.12
+    },
+    {
+      "example_id": "1029",
+      "story_id": "385",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (RankedHighlyByWTA(x) → MostActivePlayerInMajorTennis(x))",
+        "∀x (LostTo(x, igaSwiattek) → RankedHighlyByWTA(x))",
+        "∀x (FemaleTennisPlayer(x) ∧ AtRolandGarros2022(x) → LostTo(x, igaSwiattek))",
+        "∀x (AtRolandGarros2022(x) → FemaleTennisPlayer(x) ∨ MaleTennisPlayer(x))",
+        "∀x (MaleTennisPlayer(x) ∧ AtRolandGarros2022(x) ∧ InYr2022(x) → LostTo(x, rafaelNadal))",
+        "∀x (RankedHighlyByWTA(x) ∨ LostTo(x, rafaelNadal) → ¬MaleTennisPlayer(x))",
+        "AtRolandGarros2022(cocoGauff)"
+      ],
+      "translated_conclusion": "MostActivePlayerInMajorTennis(cocoGauff)",
+      "elapsed_sec": 17.78
+    },
+    {
+      "example_id": "1030",
+      "story_id": "385",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (RankedHighlyByWTA(x) → MostActivePlayerInMajorTennis(x))",
+        "∀x (LostTo(x, igaSwiattek) → RankedHighlyByWTA(x))",
+        "∀x (FemaleTennisPlayer(x) ∧ AtRolandGarros2022(x) → LostTo(x, igaSwiattek))",
+        "∀x (AtRolandGarros2022(x) → FemaleTennisPlayer(x) ∨ MaleTennisPlayer(x))",
+        "∀x (MaleTennisPlayer(x) ∧ AtRolandGarros2022(x) ∧ InYr2022(x) → LostTo(x, rafaelNadal))",
+        "∀x (RankedHighlyByWTA(x) ∨ LostTo(x, rafaelNadal) → ¬MaleTennisPlayer(x))",
+        "AtRolandGarros2022(cocoGauff)"
+      ],
+      "translated_conclusion": "LostTo(cocoGauff, rafaelNadal)",
+      "elapsed_sec": 17.72
+    },
+    {
+      "example_id": "1031",
+      "story_id": "385",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (RankedHighlyByWTA(x) → MostActivePlayerInMajorTennis(x))",
+        "∀x (LostToIgaSwiatekAtRolandGarros2022(x) → RankedHighlyByWTA(x))",
+        "∀x (FemaleTennisPlayerAtRolandGarros2022(x) → LostToIgaSwiatekAtRolandGarros2022(x))",
+        "∀x (TennisPlayerAtRolandGarros2022(x) → FemaleTennisPlayerAtRolandGarros2022(x) ∨ MaleTennisPlayerAtRolandGarros2022(x))",
+        "∀x (MaleTennisPlayerAtRolandGarros2022(x) → LostToRafaelNadalAtRolandGarros2022(x))",
+        "∀x (RankedHighlyByWTA(x) ∨ LostToRafaelNadal(x) → ¬MaleTennisPlayerAtRolandGarros2022(x))",
+        "TennisPlayerAtRolandGarros2022(cocoGauff)"
+      ],
+      "translated_conclusion": "∀x (LostToIgaSwiatekAtRolandGarros2022(x) ∧ MostActivePlayerInMajorTennis(x) → ¬Player(x))",
+      "elapsed_sec": 21.69
+    },
+    {
+      "example_id": "700",
+      "story_id": "256",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Cat(x) → Mammal(x))",
+        "∃x (Pet(x) ∧ ¬Mammal(x))"
+      ],
+      "translated_conclusion": "∀x (Pet(x) → ¬Cat(x))",
+      "elapsed_sec": 4.41
+    },
+    {
+      "example_id": "456",
+      "story_id": "159",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '≠'.  Expected token ')'.\nexists x (exists y (exists z (exists w (Season(x) & Season(y) & Season(z) & Season(w) & x ≠ y & y ≠ z & z ≠ w & x ≠ w) & x = spring & y = summer & z = fall & w = winter)))\n                                                                                          ^",
+      "translated_premises": [
+        "∃x (∃y (∃z (∃w (Season(x) ∧ Season(y) ∧ Season(z) ∧ Season(w) ∧ x ≠ y ∧ y ≠ z ∧ z ≠ w ∧ x ≠ w) ∧ x = spring ∧ y = summer ∧ z = fall ∧ w = winter)))",
+        "∀x (Student(x) → (WantLongVacation(x) → FavoriteSeason(x, summer)))",
+        "FavoriteSeason(emma, summer)",
+        "FavoriteSeason(mia, summer) ≠ FavoriteSeason(emma, summer)",
+        "WantLongVacation(james)"
+      ],
+      "translated_conclusion": "FavoriteSeason(james, summer)",
+      "elapsed_sec": 11.57
+    },
+    {
+      "example_id": "457",
+      "story_id": "159",
+      "gold_label": "Uncertain",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '≠'.  Expected token ')'.\nexists x exists y exists z exists w (Season(x) & Season(y) & Season(z) & Season(w) & x ≠ y & x ≠ z & x ≠ w & y ≠ z & y ≠ w & z ≠ w)\n                                                                                       ^",
+      "translated_premises": [
+        "∃x ∃y ∃z ∃w (Season(x) ∧ Season(y) ∧ Season(z) ∧ Season(w) ∧ x ≠ y ∧ x ≠ z ∧ x ≠ w ∧ y ≠ z ∧ y ≠ w ∧ z ≠ w)",
+        "∀x (Student(x) → (WantLongVacation(x) → FavoriteSeason(x, summer)))",
+        "FavoriteSeason(emma, summer)",
+        "FavoriteSeason(mia, summer) → ¬FavoriteSeason(mia, emma)",
+        "WantLongVacation(james)"
+      ],
+      "translated_conclusion": "FavoriteSeason(mia, spring)",
+      "elapsed_sec": 11.03
+    },
+    {
+      "example_id": "904",
+      "story_id": "343",
+      "gold_label": "Uncertain",
+      "predicted_label": "True",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (DigitalMedia(x) → ¬Analog(x))",
+        "∀x (PrintedText(x) → Analog(x))",
+        "∀x (StreamingService(x) → DigitalMedia(x))",
+        "∀x (HardcoverBook(x) → PrintedText(x))",
+        "StreamingService(1984) → HardcoverBook(1984)"
+      ],
+      "translated_conclusion": "HardcoverBook(1984) → PrintedText(1984)",
+      "elapsed_sec": 8.16
+    },
+    {
+      "example_id": "905",
+      "story_id": "343",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (DigitalMedia(x) → ¬Analog(x))",
+        "∀x (PrintedText(x) → Analog(x))",
+        "∀x (StreamingService(x) → DigitalMedia(x))",
+        "∀x (HardcoverBook(x) → PrintedText(x))",
+        "StreamingService(1984) → HardcoverBook(1984)"
+      ],
+      "translated_conclusion": "StreamingService(1984)",
+      "elapsed_sec": 7.59
+    },
+    {
+      "example_id": "906",
+      "story_id": "343",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (DigitalMedia(x) → ¬Analog(x))",
+        "∀x (PrintedText(x) → Analog(x))",
+        "∀x (StreamingService(x) → DigitalMedia(x))",
+        "∀x (HardcoverBook(x) → PrintedText(x))",
+        "StreamingService(1984) → HardcoverBook(1984)"
+      ],
+      "translated_conclusion": "¬StreamingService(1984)",
+      "elapsed_sec": 7.71
+    },
+    {
+      "example_id": "608",
+      "story_id": "213",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (RomanceLanguage(x) → IndoEuropeanLanguage(x))",
+        "LanguageFamily(romanceLanguages)",
+        "∀x ∀y (LanguageFamily(x) ∧ Member(x, y) → Related(x, y))",
+        "RomanceLanguage(french) ∧ RomanceLanguage(spanish)",
+        "Related(german, spanish)",
+        "∀x (Related(basque, x) → ¬Related(x, basque))"
+      ],
+      "translated_conclusion": "RomanceLanguage(basque)",
+      "elapsed_sec": 9.03
+    },
+    {
+      "example_id": "609",
+      "story_id": "213",
+      "gold_label": "Uncertain",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols cannot be used as atomic formulas, because they are variables: False.\n\n\nFatal error:  The following symbols cannot be used as atomic formulas, because they are variables: False",
+      "translated_premises": [
+        "∀x (RomanceLanguage(x) → IndoEuropeanLanguage(x))",
+        "LanguageFamily(romanceLanguages)",
+        "∀x ∀y (LanguageFamily(x) ∧ Member(x, y) → Related(x, y))",
+        "RomanceLanguage(french) ∧ RomanceLanguage(spanish)",
+        "Related(german, spanish)",
+        "∀x (Related(x, basque) → False)"
+      ],
+      "translated_conclusion": "IndoEuropeanLanguage(german)",
+      "elapsed_sec": 8.66
+    },
+    {
+      "example_id": "610",
+      "story_id": "213",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols cannot be used as atomic formulas, because they are variables: False.\n\n\nFatal error:  The following symbols cannot be used as atomic formulas, because they are variables: False",
+      "translated_premises": [
+        "∀x (RomanceLanguage(x) → IndoEuropeanLanguage(x))",
+        "LanguageFamily(romanceLanguages)",
+        "∀x ∀y (LanguageFamily(x) ∧ Member(x, y) → Related(x, y))",
+        "RomanceLanguage(french) ∧ RomanceLanguage(spanish)",
+        "Related(german, spanish)",
+        "∀x (Related(basque, x) → False)"
+      ],
+      "translated_conclusion": "IndoEuropeanLanguage(french)",
+      "elapsed_sec": 8.68
+    },
+    {
+      "example_id": "240",
+      "story_id": "79",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Striker(robertLewandowski)",
+        "∀x (Striker(x) → SoccerPlayer(x))",
+        "LeftTeam(robertLewandowski, bayernMunchen)",
+        "∀x (LeftTeam(x, y) → ¬PlayFor(x, y))"
+      ],
+      "translated_conclusion": "SoccerPlayer(robertLewandowski)",
+      "elapsed_sec": 6.82
+    },
+    {
+      "example_id": "241",
+      "story_id": "79",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Striker(robertLewandowski)",
+        "∀x (Striker(x) → SoccerPlayer(x))",
+        "LeftTeam(robertLewandowski, bayernMunchen)",
+        "∀x (LeftTeam(x, y) → ¬PlayFor(x, y))"
+      ],
+      "translated_conclusion": "PlayFor(robertLewandowski, bayernMunchen)",
+      "elapsed_sec": 7.29
+    },
+    {
+      "example_id": "242",
+      "story_id": "79",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Striker(robertLewandowski)",
+        "∀x (Striker(x) → SoccerPlayer(x))",
+        "Player(robertLewandowski) ∧ LeftTeam(robertLewandowski, bayernMunchen)",
+        "∀x (Player(x) ∧ LeftTeam(x, y) → ¬PlayFor(x, y))"
+      ],
+      "translated_conclusion": "Star(robertLewandowski)",
+      "elapsed_sec": 7.87
+    },
+    {
+      "example_id": "4",
+      "story_id": "2",
+      "gold_label": "False",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '∈'.  Expected token ')'.\nall x (LocatedIn(x, state1) & LocatedIn(x, state2) -> x ∈ {bristol, texarkana, texhoma, unionCity})\n                                                        ^",
+      "translated_premises": [
+        "City(billings) ∧ LocatedIn(billings, montana)",
+        "LocatedIn(butte, montana) ∧ LocatedIn(helena, montana) ∧ LocatedIn(missoula, montana)",
+        "LocatedIn(whiteSulphurSprings, montana) ∧ LocatedIn(butte, montana)",
+        "¬LocatedIn(stPierre, montana)",
+        "∀x (LocatedIn(x, butte) → ¬LocatedIn(x, stPierre))",
+        "∀x (LocatedIn(x, state1) ∧ LocatedIn(x, state2) → x ∈ {bristol, texarkana, texhoma, unionCity})"
+      ],
+      "translated_conclusion": "LocatedIn(butte, state) ∧ LocatedIn(stPierre, state) → state = montana",
+      "elapsed_sec": 14.83
+    },
+    {
+      "example_id": "5",
+      "story_id": "2",
+      "gold_label": "Uncertain",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '∈'.  Expected token ')'.\nall x (LocatedIn(x, state1) & LocatedIn(x, state2) -> x ∈ {bristol, texarkana, texhoma, unionCity})\n                                                        ^",
+      "translated_premises": [
+        "City(billings) ∧ LocatedIn(billings, montana)",
+        "LocatedIn(butte, montana) ∧ LocatedIn(helena, montana) ∧ LocatedIn(missoula, montana)",
+        "LocatedIn(whiteSulphurSprings, montana) ∧ LocatedIn(butte, montana)",
+        "¬LocatedIn(stPierre, montana)",
+        "∀x (LocatedIn(x, butte) → ¬LocatedIn(x, stPierre))",
+        "∀x (LocatedIn(x, state1) ∧ LocatedIn(x, state2) → x ∈ {bristol, texarkana, texhoma, unionCity})"
+      ],
+      "translated_conclusion": "LocatedIn(stPierre, state1) ∧ LocatedIn(bismarck, state1)",
+      "elapsed_sec": 14.62
+    },
+    {
+      "example_id": "6",
+      "story_id": "2",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '∈'.  Expected token ')'.\nall x (LocatedIn(x, state1) & LocatedIn(x, state2) -> x ∈ {bristol, texarkana, texhoma, unionCity})\n                                                        ^",
+      "translated_premises": [
+        "City(billings) ∧ LocatedIn(billings, montana)",
+        "LocatedIn(butte, montana) ∧ LocatedIn(helena, montana) ∧ LocatedIn(missoula, montana)",
+        "LocatedIn(whiteSulphurSprings, montana) ∧ LocatedIn(butte, montana)",
+        "¬LocatedIn(stPierre, montana)",
+        "∀x (LocatedIn(x, butte) → ¬LocatedIn(x, stPierre))",
+        "∀x (LocatedIn(x, state1) ∧ LocatedIn(x, state2) → x ∈ {bristol, texarkana, texhoma, unionCity})"
+      ],
+      "translated_conclusion": "LocatedIn(missoula, montana)",
+      "elapsed_sec": 13.82
+    },
+    {
+      "example_id": "548",
+      "story_id": "192",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (InternationalStudent(x) → (F1Visa(x) ∨ J1Visa(x)))",
+        "∀x (InternationalStudent(x) ∧ F1Visa(x) → (ApplyForCPT(x) ∨ ApplyForOPT(x)))",
+        "InternationalStudent(mike)",
+        "InternationalStudent(mike) ∧ WantsToWorkInUS(mike) → ApplyForCPT(mike)"
+      ],
+      "translated_conclusion": "F1Visa(mike)",
+      "elapsed_sec": 8.42
+    },
+    {
+      "example_id": "549",
+      "story_id": "192",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (InternationalStudent(x) → (F1Visa(x) ∨ J1Visa(x)))",
+        "∀x (InternationalStudent(x) ∧ F1Visa(x) → (ApplyForCPT(x) ∨ ApplyForOPT(x)))",
+        "InternationalStudent(mike)",
+        "InternationalStudent(mike) ∧ F1Visa(mike) → ApplyForCPT(mike)"
+      ],
+      "translated_conclusion": "J1Visa(mike)",
+      "elapsed_sec": 8.47
+    },
+    {
+      "example_id": "1271",
+      "story_id": "442",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BrownSwissCattle(x) → Cow(x))",
+        "∃x (Pet(x) ∧ BrownSwissCattle(x))",
+        "∀x (Cow(x) → DomesticatedAnimal(x))",
+        "∀x (Alligator(x) → ¬DomesticatedAnimal(x))",
+        "Alligator(ted)"
+      ],
+      "translated_conclusion": "Pet(ted)",
+      "elapsed_sec": 7.3
+    },
+    {
+      "example_id": "1272",
+      "story_id": "442",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BrownSwissCattle(x) → Cow(x))",
+        "∃x (Pet(x) ∧ BrownSwissCattle(x))",
+        "∀x (Cow(x) → DomesticatedAnimal(x))",
+        "∀x (Alligator(x) → ¬DomesticatedAnimal(x))",
+        "Alligator(ted)"
+      ],
+      "translated_conclusion": "Pet(ted) ∧ BrownSwissCattle(ted)",
+      "elapsed_sec": 7.95
+    },
+    {
+      "example_id": "1273",
+      "story_id": "442",
+      "gold_label": "True",
+      "predicted_label": "False",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BrownSwissCattle(x) → Cow(x))",
+        "∃x (Pet(x) ∧ BrownSwissCattle(x))",
+        "∀x (Cow(x) → DomesticatedAnimal(x))",
+        "∀x (Alligator(x) → ¬DomesticatedAnimal(x))",
+        "Alligator(ted)"
+      ],
+      "translated_conclusion": "∀x (BrownSwissCattle(x) → Pet(x) → ¬Alligator(x))",
+      "elapsed_sec": 8.48
+    },
+    {
+      "example_id": "663",
+      "story_id": "234",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '.'.  Expected token ')'.\nEndowment(yaleUniversity, $42.3 billion)\n                             ^",
+      "translated_premises": [
+        "IvyLeagueResearchUniversity(yaleUniversity)",
+        "MovedTo(yaleUniversity, newHaven) ∧ MovedInYr(yaleUniversity, yr1716)",
+        "Endowment(yaleUniversity, $42.3 billion)",
+        "ResidentialCollege(yaleUniversity, benjaminFranklinCollege) ∨"
+      ],
+      "translated_conclusion": "IvyLeagueResearchUniversity(yaleUniversity) ∧ MovedTo(yaleUniversity, newHaven)",
+      "elapsed_sec": 21.83
+    },
+    {
+      "example_id": "664",
+      "story_id": "234",
+      "gold_label": "Uncertain",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '.'.  Expected token ')'.\nEndowment(yaleUniversity, $42.3Billion)\n                             ^",
+      "translated_premises": [
+        "IvyLeagueResearchUniversity(yaleUniversity)",
+        "MovedTo(yaleUniversity, newHaven) ∧ MovedInYr(yaleUniversity, yr1716)",
+        "Endowment(yaleUniversity, $42.3Billion)",
+        "ResidentialCollege(yaleUniversity, benjaminFranklinCollege) ∧ ResidentialCollege(yaleUniversity, berkeleyCollege) ∧ ResidentialCollege(yaleUniversity, branfordCollege) ∧ ResidentialCollege(yaleUniversity, davenportCollege) ∧ ResidentialCollege(yaleUniversity, ezraStilesCollege) ∧ ResidentialCollege(yaleUniversity, graceHopperCollege) ∧ ResidentialCollege(yaleUniversity, jonathanEdwardsCollege) ∧ ResidentialCollege(yaleUniversity, morseCollege) ∧ ResidentialCollege(yaleUniversity, pauliMurrayCollege) ∧ ResidentialCollege(yaleUniversity, piersonCollege) ∧ ResidentialCollege(yaleUniversity, saybrookCollege) ∧ ResidentialCollege(yaleUniversity, sillimanCollege) ∧ ResidentialCollege(yaleUniversity, timothyDwightCollege) ∧ ResidentialCollege(yaleUniversity, trumbullCollege)"
+      ],
+      "translated_conclusion": "LargestEndowment(yaleUniversity)",
+      "elapsed_sec": 18.89
+    },
+    {
+      "example_id": "665",
+      "story_id": "234",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '.'.  Expected token ')'.\nEndowment(yaleUniversity, $42.3 billion)\n                             ^",
+      "translated_premises": [
+        "IvyLeagueResearchUniversity(yaleUniversity)",
+        "MovedTo(yaleUniversity, newHaven) ∧ MovedInYr(yaleUniversity, yr1716)",
+        "Endowment(yaleUniversity, $42.3 billion)",
+        "ResidentialCollege(yaleUniversity, benjaminFranklinCollege) ∧"
+      ],
+      "translated_conclusion": "ResidentialCollege(yaleUniversity, piersonCollege)",
+      "elapsed_sec": 21.08
+    },
+    {
+      "example_id": "360",
+      "story_id": "120",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Series(badults) ∧ Starring(badults, pappys)",
+        "Piloted(badults, july2013) ∧ Channel(badults, bbcThree)",
+        "WorkingTitle(badults, theSecretDudeSociety)",
+        "ScriptEditor(badults, andrewCollins)"
+      ],
+      "translated_conclusion": "ScriptEditor(workingTitle(theSecretDudeSociety), andrewCollins)",
+      "elapsed_sec": 7.84
+    },
+    {
+      "example_id": "361",
+      "story_id": "120",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "SitcomSeries(badults) ∧ Starring(badults, pappys)",
+        "PilotedIn(badults, july2013) ∧ Channel(badults, bbcThree)",
+        "WorkingTitle(badults, theSecretDudeSociety)",
+        "ScriptEditor(badults, andrewCollins)"
+      ],
+      "translated_conclusion": "∀x (Starring(x, pappys) → ¬(PilotedIn(x, bbcTwo) ∨ PilotedIn(x, bbcThree)))",
+      "elapsed_sec": 9.42
+    },
+    {
+      "example_id": "819",
+      "story_id": "322",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (GrowthStock(x) → BoughtToEarnProfits(x, rapidPriceAppreciation))",
+        "∀x (BoughtToEarnProfits(x, rapidPriceAppreciation) → ¬SuitableForRetirementFund(x))",
+        "∃x (GrowthStock(x))",
+        "∀x (MatureStock(x) → SuitableForRetirementFund(x))",
+        "MatureStock(ko)"
+      ],
+      "translated_conclusion": "∃x (Stock(x))",
+      "elapsed_sec": 8.92
+    },
+    {
+      "example_id": "820",
+      "story_id": "322",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (GrowthStock(x) → BoughtToEarnProfits(x, rapidPriceAppreciation))",
+        "∀x (BoughtToEarnProfits(x, rapidPriceAppreciation) → ¬SuitableForRetirementFund(x))",
+        "∃x (GrowthStock(x))",
+        "∀x (MatureStock(x) → SuitableForRetirementFund(x))",
+        "MatureStock(ko)"
+      ],
+      "translated_conclusion": "GrowthStock(ko)",
+      "elapsed_sec": 8.74
+    },
+    {
+      "example_id": "821",
+      "story_id": "322",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (GrowthStock(x) → BoughtToEarnProfits(x, rapidPriceAppreciation))",
+        "∀x (BoughtToEarnProfits(x, rapidPriceAppreciation) → ¬SuitableForRetirementFund(x))",
+        "∃x (GrowthStock(x))",
+        "∀x (MatureStock(x) → SuitableForRetirementFund(x))",
+        "MatureStock(ko)"
+      ],
+      "translated_conclusion": "∀x (GrowthStock(x) ∨ BoughtToEarnProfits(x, rapidPriceAppreciation) → (Stock(x) → ¬VolatilePrice(x)))",
+      "elapsed_sec": 11.02
+    },
+    {
+      "example_id": "253",
+      "story_id": "83",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (VehicleRegistrationPlate(x) ∧ From(x, istanbul) → BeginsWith(x, 34))",
+        "∀x (¬BeginsWith(x, 34) → ¬From(x, istanbul))",
+        "From(joe, istanbul)",
+        "BeginsWith(tom, 35)",
+        "∀x (BeginsWith(x, 35) → ¬BeginsWith(x, 34))"
+      ],
+      "translated_conclusion": "From(joe, istanbul) ∧ BeginsWith(joe, 34)",
+      "elapsed_sec": 10.1
+    },
+    {
+      "example_id": "254",
+      "story_id": "83",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (VehicleRegistrationPlate(x) ∧ From(x, istanbul) → BeginsWith(x, 34))",
+        "∀x (¬BeginsWith(x, 34) → ¬From(x, istanbul))",
+        "From(joe, istanbul)",
+        "BeginsWith(tom, 35)",
+        "BeginsWith(x, 35) → ¬BeginsWith(x, 34)"
+      ],
+      "translated_conclusion": "From(tom, istanbul)",
+      "elapsed_sec": 9.1
+    },
+    {
+      "example_id": "979",
+      "story_id": "368",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (WorkInStudentJobsOnCampus(x, marysSchool) → NeedToEarnMoney(x, marysSchool))",
+        "∀x (OrderTakeoutFrequentlyInCollege(x, marysSchool) → WorkInStudentJobsOnCampus(x, marysSchool))",
+        "∀x (OrderTakeoutFrequentlyInCollege(x, marysSchool) ∨ EnjoyDiningHallMeals(x, marysSchool))",
+        "∀x (EnjoyDiningHallMeals(x, marysSchool) → ¬PickyEater(x, marysSchool))",
+        "∀x (EnjoyDiningHallMeals(x, marysSchool) → SpendTimeEating(x, marysSchool))",
+        "AtMarysSchool(hannah)",
+        "WorkInStudentJobsOnCampus(hannah, marysSchool) ∧ NeedToEarnMoney(hannah, marysSchool) → (¬PickyEater(hannah, marysSchool) ∧ ¬NeedToEarnMoney(hannah, marysSchool))"
+      ],
+      "translated_conclusion": "NeedToEarnMoney(hannah, marysSchool)",
+      "elapsed_sec": 19.21
+    },
+    {
+      "example_id": "980",
+      "story_id": "368",
+      "gold_label": "True",
+      "predicted_label": "False",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (WorkInStudentJobsOnCampus(x, marysSchool) → NeedToEarnMoney(x, marysSchool))",
+        "∀x (OrderTakeoutFrequentlyInCollege(x, marysSchool) → WorkInStudentJobsOnCampus(x, marysSchool))",
+        "∀x (OrderTakeoutFrequentlyInCollege(x, marysSchool) ∨ EnjoyDiningHallMeals(x, marysSchool))",
+        "∀x (EnjoyDiningHallMeals(x, marysSchool) → ¬PickyEater(x, marysSchool))",
+        "∀x (EnjoyDiningHallMeals(x, marysSchool) → SpendTimeEating(x, marysSchool))",
+        "AtMarysSchool(hannah)",
+        "WorkInStudentJobsOnCampus(hannah, marysSchool) ∧ NeedToEarnMoney(hannah, marysSchool) → (¬PickyEater(hannah, marysSchool) ∧ ¬NeedToEarnMoney(hannah, marysSchool))"
+      ],
+      "translated_conclusion": "AtMarysSchool(hannah) ∧ PickyEater(hannah, marysSchool) ∧ SpendTimeEating(hannah, marysSchool)",
+      "elapsed_sec": 20.64
+    },
+    {
+      "example_id": "981",
+      "story_id": "368",
+      "gold_label": "False",
+      "predicted_label": "True",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (WorkInStudentJobsOnCampus(x, marysSchool) → NeedToEarnMoney(x, marysSchool))",
+        "∀x (OrderTakeoutFrequentlyInCollege(x, marysSchool) → WorkInStudentJobsOnCampus(x, marysSchool))",
+        "∀x (OrderTakeoutFrequentlyInCollege(x, marysSchool) ∨ EnjoyDiningHallMeals(x, marysSchool))",
+        "∀x (EnjoyDiningHallMeals(x, marysSchool) → ¬PickyEater(x, marysSchool))",
+        "∀x (EnjoyDiningHallMeals(x, marysSchool) → SpendTimeEating(x, marysSchool))",
+        "AtMarysSchool(hannah)",
+        "WorkInStudentJobsOnCampus(hannah, marysSchool) ∧ NeedToEarnMoney(hannah, marysSchool) → (¬PickyEater(hannah, marysSchool) ∨ ¬NeedToEarnMoney(hannah, marysSchool))"
+      ],
+      "translated_conclusion": "AtMarysSchool(hannah) ∧ (¬PickyEater(hannah, marysSchool) ∨ (EnjoyDiningHallMeals(hannah, marysSchool) → SpendTimeEating(hannah, marysSchool)))",
+      "elapsed_sec": 21.99
+    },
+    {
+      "example_id": "805",
+      "story_id": "319",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BakedSweet(x) → ¬Spicy(x))",
+        "∀x (Cupcake(x) → BakedSweet(x))",
+        "∀x (MalaHotpot(x) → Spicy(x))",
+        "∀x (ProductOf(x, bakedByMelissa) → Cupcake(x))",
+        "∀x (Spicy(x) ∨ MalaHotpot(x) ∨ ¬BakedSweet(x))"
+      ],
+      "translated_conclusion": "ProductOf(driedThaiChilies, bakedByMelissa)",
+      "elapsed_sec": 9.52
+    },
+    {
+      "example_id": "806",
+      "story_id": "319",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BakedSweet(x) → ¬Spicy(x))",
+        "∀x (Cupcake(x) → BakedSweet(x))",
+        "∀x (MalaHotpot(x) → Spicy(x))",
+        "∀x (ProductOf(x, bakedByMelissa) → Cupcake(x))",
+        "∀x (Spicy(x) ∨ MalaHotpot(x) ∨ ¬BakedSweet(x))"
+      ],
+      "translated_conclusion": "∀x (ProductOf(x, bakedByMelissa) → ¬Cupcake(x))",
+      "elapsed_sec": 9.94
+    },
+    {
+      "example_id": "807",
+      "story_id": "319",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BakedSweet(x) → ¬Spicy(x))",
+        "∀x (Cupcake(x) → BakedSweet(x))",
+        "∀x (MalaHotpot(x) → Spicy(x))",
+        "∀x (ProductFromBakedByMelissa(x) → Cupcake(x))",
+        "∀x (Spicy(x) ∨ MalaHotpot(x) ∨ ¬BakedSweet(x))"
+      ],
+      "translated_conclusion": "MalaHotpot(driedThaiChilies)",
+      "elapsed_sec": 9.33
+    },
+    {
+      "example_id": "808",
+      "story_id": "319",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BakedSweet(x) → ¬Spicy(x))",
+        "∀x (Cupcake(x) → BakedSweet(x))",
+        "∀x (MalaHotpot(x) → Spicy(x))",
+        "∀x (ProductOf(x, bakedByMelissa) → Cupcake(x))",
+        "∀x (Spicy(x) ∨ MalaHotpot(x) ∨ ¬BakedSweet(x))"
+      ],
+      "translated_conclusion": "∀x (ProductOf(x, bakedByMelissa) ∨ BakedSweet(x) → ¬Spicy(x))",
+      "elapsed_sec": 10.47
+    },
+    {
+      "example_id": "809",
+      "story_id": "319",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BakedSweet(x) → ¬Spicy(x))",
+        "∀x (Cupcake(x) → BakedSweet(x))",
+        "∀x (MalaHotpot(x) → Spicy(x))",
+        "∀x (ProductOf(x, bakedByMelissa) → Cupcake(x))",
+        "∀x (Spicy(x) ∨ MalaHotpot(x) ∨ ¬BakedSweet(x))"
+      ],
+      "translated_conclusion": "Cupcake(driedThaiChilies) ∧ ProductOf(driedThaiChilies, bakedByMelissa)",
+      "elapsed_sec": 10.2
+    },
+    {
+      "example_id": "754",
+      "story_id": "306",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ListedInYelp(x) → FewNegativeReviews(x))",
+        "∀x (Rating(x, greaterThan4) → ListedInYelp(x))",
+        "∃x (NotProvidesTakeOut(x) ∧ ReceivesManyNegativeReviews(x))",
+        "∀x (PopularAmongLocalResidents(x) → Rating(x, greaterThan4))",
+        "Rating(hamdenPlazaSubway, greaterThan4) ∨ PopularAmongLocalResidents(hamdenPlazaSubway)"
+      ],
+      "translated_conclusion": "∀x (ProvidesTakeOut(x) ∧ ReceivesManyNegativeReviews(x) → (Rating(x, greaterThan4) ∧ ¬ProvidesTakeOut(x)))",
+      "elapsed_sec": 12.14
+    },
+    {
+      "example_id": "755",
+      "story_id": "306",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ListedInYelp(x) → FewNegativeReviews(x))",
+        "∀x (Rating(x, greaterThanFour) → ListedInYelp(x))",
+        "∃x (NotProvidesTakeOut(x) ∧ ReceivesManyNegativeReviews(x))",
+        "∀x (PopularAmongLocalResidents(x) → Rating(x, greaterThanFour))",
+        "Rating(hamdenPlazaSubway, greaterThanFour) ∨ PopularAmongLocalResidents(hamdenPlazaSubway)"
+      ],
+      "translated_conclusion": "ProvidesTakeOut(hamdenPlazaSubway) ∨ FewNegativeReviews(hamdenPlazaSubway)",
+      "elapsed_sec": 11.39
+    },
+    {
+      "example_id": "756",
+      "story_id": "306",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ListedInYelp(x) → FewNegativeReviews(x))",
+        "∀x (Rating(x, greaterThanFour) → ListedInYelp(x))",
+        "∃x (NotProvidesTakeOut(x) ∧ ReceivesManyNegativeReviews(x))",
+        "∀x (PopularAmongLocalResidents(x) → Rating(x, greaterThanFour))",
+        "Rating(hamdenPlazaSubway, greaterThanFour) ∨ PopularAmongLocalResidents(hamdenPlazaSubway)"
+      ],
+      "translated_conclusion": "NotProvidesTakeOut(hamdenPlaza)",
+      "elapsed_sec": 10.48
+    },
+    {
+      "example_id": "688",
+      "story_id": "245",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (SuperheroMovie(x) → GoodGuysWin(x))",
+        "SuperheroMovie(sirDigbyChickenCaesar)",
+        "∀x (GoodGuy(x) ∧ BadGuy(x) → Fight(x, x))",
+        "GoodGuy(sirDigby) ∧ BadGuy(nemesisOfSirDigby) ∧ Fight(sirDigby, nemesisOfSirDigby)",
+        "∀x (SuperheroMovieNamedAfter(x) → GoodGuy(x))",
+        "SuperheroMovieNamedAfter(sirDigbyChickenCaesar)",
+        "∀x (Win(x) → ¬Win(opponent(x)))",
+        "∀x (SuperheroMovieNamedAfter(x) → InMovie(x, x))"
+      ],
+      "translated_conclusion": "∀x (InMovie(x, sirDigby) → ¬Win(nemesisOfSirDigby))",
+      "elapsed_sec": 15.21
+    },
+    {
+      "example_id": "171",
+      "story_id": "58",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Book(x) → ContainsKnowledge(x))",
+        "∀x (Person(x) ∧ Reads(x, y) → GainsKnowledge(x))",
+        "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+        "Reads(harry, \"Walden\") ∧ Author(\"Walden\", henryThoreau)"
+      ],
+      "translated_conclusion": "ContainsKnowledge(\"Walden\")",
+      "elapsed_sec": 7.71
+    },
+    {
+      "example_id": "172",
+      "story_id": "58",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Book(x) → ContainsKnowledge(x))",
+        "∀x (Person(x) ∧ Reads(x, y) → GainsKnowledge(x, y))",
+        "∀x (GainsKnowledge(x, y) → BecomesSmarter(x))",
+        "Reads(harry, \"walden\") ∧ Author(\"walden\", henyThoreau)"
+      ],
+      "translated_conclusion": "BecomesSmarter(harry)",
+      "elapsed_sec": 7.84
+    },
+    {
+      "example_id": "173",
+      "story_id": "58",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Book(x) → ContainsKnowledge(x))",
+        "∀x (Person(x) ∧ Reads(x, y) → GainsKnowledge(x, y))",
+        "∀x (GainsKnowledge(x, y) → Smarter(x, y))",
+        "Reads(harry, \"walden\") ∧ Author(\"walden\", henryThoreau)"
+      ],
+      "translated_conclusion": "∀x (Smarter(x, y) → GainsKnowledge(x, y))",
+      "elapsed_sec": 8.58
+    },
+    {
+      "example_id": "546",
+      "story_id": "191",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Task(nlpTask) → (LanguageGenerationTask(nlpTask) ∨ LanguageUnderstandingTask(nlpTask))",
+        "Output(nlpTask, textSequence) → LanguageGenerationTask(nlpTask)",
+        "Task(machineTranslation) ∧ NlpTask(machineTranslation)",
+        "Output(machineTranslation, textSequence)"
+      ],
+      "translated_conclusion": "Task(machineTranslation) → LanguageGenerationTask(machineTranslation)",
+      "elapsed_sec": 7.27
+    },
+    {
+      "example_id": "547",
+      "story_id": "191",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Task(nlpTask) → (LanguageGenerationTask(nlpTask) ∨ LanguageUnderstandingTask(nlpTask))",
+        "Output(nlpTask, textSequence) → LanguageGenerationTask(nlpTask)",
+        "Task(machineTranslation) ∧ NlpTask(machineTranslation)",
+        "Output(machineTranslation, textSequence)"
+      ],
+      "translated_conclusion": "Task(machineTranslation) → LanguageUnderstandingTask(machineTranslation)",
+      "elapsed_sec": 7.37
+    },
+    {
+      "example_id": "476",
+      "story_id": "166",
+      "gold_label": "False",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '>'.  Expected token ')'.\nall x (ManagedBuilding(x) -> SecurityDeposit(x) = MonthlyRent(x) | SecurityDeposit(x) > MonthlyRent(x))\n                                                                                      ^",
+      "translated_premises": [
+        "∃x (ManagedBuilding(x) ∧ PetsAllowedIn(x))",
+        "∀x (ManagedBuilding(x) → DepositRequired(x))",
+        "∀x (ManagedBuilding(x) → SecurityDeposit(x) = MonthlyRent(x) ∨ SecurityDeposit(x) > MonthlyRent(x))",
+        "Pet(fluffy) ∧ Owner(fluffy, tom)",
+        "∀x (Cat(x) → Pet(x))",
+        "ManagedBuilding(theOliveGarden)",
+        "MonthlyRent(theOliveGarden) = $2000",
+        "$2000 > $1500",
+        "ManagedBuilding(theOliveGarden) ∧ PetsAllowedIn(theOliveGarden) ∧ SecurityDeposit(theOliveGarden) ≤ $1500 → TomWillRent(theOliveGarden)",
+        "∀x (ManagedBuilding(x) ∧ PetsAllowedIn(x) → PeopleAllowedToMoveInWithPet(x))"
+      ],
+      "translated_conclusion": "ManagedBuilding(theOliveGarden) ∧ PetsAllowedIn(theOliveGarden) ∧ SecurityDeposit(theOliveGarden) ≤ $1500 → TomWillRent(theOliveGarden)",
+      "elapsed_sec": 20.2
+    },
+    {
+      "example_id": "477",
+      "story_id": "166",
+      "gold_label": "Uncertain",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '>'.  Expected token ')'.\nall x (ManagedBuilding(x) -> SecurityDeposit(x) = MonthlyRent(x) | SecurityDeposit(x) > MonthlyRent(x))\n                                                                                      ^",
+      "translated_premises": [
+        "∃x (ManagedBuilding(x) ∧ PetsAllowedIn(x))",
+        "∀x (ManagedBuilding(x) → DepositRequired(x))",
+        "∀x (ManagedBuilding(x) → SecurityDeposit(x) = MonthlyRent(x) ∨ SecurityDeposit(x) > MonthlyRent(x))",
+        "Pet(fluffy) ∧ Owner(fluffy, tom)",
+        "∀x (Pet(x) → Cat(x))",
+        "ManagedBuilding(theOliveGarden)",
+        "MonthlyRent(theOliveGarden) = $2000",
+        "$2000 > $1500",
+        "ManagedBuilding(theOliveGarden) ∧ PetsAllowedIn(theOliveGarden) ∧ SecurityDeposit(theOliveGarden) ≤ $1500 → AllowedToMoveIn(theOliveGarden, tom, fluffy)",
+        "∀x (ManagedBuilding(x) ∧ PetsAllowedIn(x) → AllowedToMoveIn(x, _, _))"
+      ],
+      "translated_conclusion": "AllowedToMoveIn(theOliveGarden, tom, fluffy)",
+      "elapsed_sec": 18.36
+    },
+    {
+      "example_id": "478",
+      "story_id": "166",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '>'.\n$2000 > $1500\n      ^",
+      "translated_premises": [
+        "∃x (ManagedBuilding(x) ∧ PetsAllowed(x))",
+        "∀x (ManagedBuilding(x) → DepositRequired(x))",
+        "∀x (ManagedBuilding(x) → SecurityDeposit(x) ⊕ MonthlyRent(x))",
+        "Pet(fluffy) ∧ Owner(fluffy, tom)",
+        "∀x (Cat(x) → Pet(x))",
+        "ManagedBuilding(theOliveGarden)",
+        "MonthlyRent(theOliveGarden) = $2000",
+        "$2000 > $1500",
+        "ManagedBuilding(x) ∧ PetsAllowed(x) ∧ SecurityDeposit(x) ≤ $1500 → RentAllowed(tom, x)",
+        "∀x (ManagedBuilding(x) ∧ PetsAllowed(x) → PeopleAllowed(x, Pet(x)))"
+      ],
+      "translated_conclusion": "SecurityDeposit(theOliveGarden) ⊕ MonthlyRent(theOliveGarden)",
+      "elapsed_sec": 15.81
+    },
+    {
+      "example_id": "933",
+      "story_id": "352",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BusinessOrganization(x) → LegalEntity(x))",
+        "∀x (Company(x) → BusinessOrganization(x))",
+        "∀x (PrivateCompany(x) → Company(x))",
+        "∀x (LegalEntity(x) → CreatedUnderLaw(x))",
+        "∀x (LegalEntity(x) → HasLegalObligations(x))",
+        "CreatedUnderLaw(harvardWeeklyBookClub) → ¬PrivateCompany(harvardWeeklyBookClub)"
+      ],
+      "translated_conclusion": "HasLegalObligations(harvardWeeklyBookClub)",
+      "elapsed_sec": 10.01
+    },
+    {
+      "example_id": "934",
+      "story_id": "352",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BusinessOrganization(x) → LegalEntity(x))",
+        "∀x (Company(x) → BusinessOrganization(x))",
+        "∀x (PrivateCompany(x) → Company(x))",
+        "∀x (LegalEntity(x) → CreatedUnderLaw(x))",
+        "∀x (LegalEntity(x) → HasLegalObligations(x))",
+        "CreatedUnderLaw(harvardWeeklyBookClub) → ¬PrivateCompany(harvardWeeklyBookClub)"
+      ],
+      "translated_conclusion": "HasLegalObligations(harvardWeeklyBookClub) ∧ PrivateCompany(harvardWeeklyBookClub)",
+      "elapsed_sec": 10.9
+    },
+    {
+      "example_id": "935",
+      "story_id": "352",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BusinessOrganization(x) → LegalEntity(x))",
+        "∀x (Company(x) → BusinessOrganization(x))",
+        "∀x (PrivateCompany(x) → Company(x))",
+        "∀x (LegalEntity(x) → CreatedUnderLaw(x))",
+        "∀x (LegalEntity(x) → HasLegalObligations(x))",
+        "CreatedUnderLaw(harvardWeeklyBookClub) → ¬PrivateCompany(harvardWeeklyBookClub)"
+      ],
+      "translated_conclusion": "PrivateCompany(harvardWeeklyBookClub) → (HasLegalObligations(harvardWeeklyBookClub) ∨ CreatedUnderLaw(harvardWeeklyBookClub))",
+      "elapsed_sec": 11.83
+    },
+    {
+      "example_id": "1366",
+      "story_id": "472",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Animal(x) → Invertebrate(x) ∨ Vertebrate(x))",
+        "∀x (Animal(x) ∧ Vertebrate(x) → ReproducesByMating(x, male, female))",
+        "∀x (Vertebrate(x) → HasBackbone(x))",
+        "∀x (Bee(x) → ¬ReproducesByMating(x, male, female))",
+        "∀x (QueenBee(x) → Bee(x))",
+        "Bee(harry)"
+      ],
+      "translated_conclusion": "QueenBee(harry)",
+      "elapsed_sec": 10.19
+    },
+    {
+      "example_id": "1367",
+      "story_id": "472",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Animal(x) → Invertebrate(x) ∨ Vertebrate(x))",
+        "∀x (Animal(x) ∧ Vertebrate(x) → ReproducesByMating(x, male, female))",
+        "∀x (Vertebrate(x) → HasBackbone(x))",
+        "∀x (Bee(x) → ¬ReproducesByMating(x, male, female))",
+        "∀x (QueenBee(x) → Bee(x))",
+        "Bee(harry)"
+      ],
+      "translated_conclusion": "Invertebrate(harry) ∨ QueenBee(harry)",
+      "elapsed_sec": 10.96
+    },
+    {
+      "example_id": "1368",
+      "story_id": "472",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Animal(x) → Invertebrate(x) ∨ Vertebrate(x))",
+        "∀x (Animal(x) ∧ Vertebrate(x) → ReproducesByMating(x, male, female))",
+        "∀x (Vertebrate(x) → HasBackbone(x))",
+        "∀x (Bees(x) → ¬ReproducesByMating(x, male, female))",
+        "∀x (QueenBees(x) → Bees(x))",
+        "Bees(harry)"
+      ],
+      "translated_conclusion": "∀x (Bees(x) → (Vertebrate(x) ∧ HasBackbone(x) ∨ ¬Vertebrate(x) ∧ ¬HasBackbone(x)) → ¬(Invertebrate(x) ∨ QueenBees(x)))",
+      "elapsed_sec": 13.88
+    },
+    {
+      "example_id": "1011",
+      "story_id": "379",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BornInMultipleBirth(x) → SpendTimeWithSiblings(x))",
+        "∀x (HaveSiblingsBornTogether(x) → BornInMultipleBirth(x))",
+        "∀x (ComplainAboutSiblings(x) → HaveSiblingsBornTogether(x))",
+        "∀x (LiveAtHome(x) → NotLiveWithStrangers(x))",
+        "∀x (SpendTimeWithSiblings(x) → OftenLiveAtHome(x))",
+        "BabyBornInMultipleBirth(luke) ⊕ NotLiveWithStrangers(luke)"
+      ],
+      "translated_conclusion": "SpendTimeWithSiblings(luke)",
+      "elapsed_sec": 11.35
+    },
+    {
+      "example_id": "1012",
+      "story_id": "379",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BornInMultipleBirth(x) → SpendTimeWithSiblings(x))",
+        "∀x (HaveSiblingsBornTogether(x) → BornInMultipleBirth(x))",
+        "∀x (ComplainAboutSiblings(x) → HaveSiblingsBornTogether(x))",
+        "∀x (LiveAtHome(x) → ¬LiveWithStrangers(x))",
+        "∀x (SpendTimeWithSiblings(x) → LiveOftenAtHome(x))",
+        "(BornInMultipleBirth(luke) ∧ LiveWithStrangers(luke)) ⊕ (¬BornInMultipleBirth(luke) ∧ ¬LiveWithStrangers(luke))"
+      ],
+      "translated_conclusion": "ComplainAboutSiblings(luke)",
+      "elapsed_sec": 12.87
+    },
+    {
+      "example_id": "1013",
+      "story_id": "379",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BornInMultipleBirth(x) → SpendTimeWithSiblings(x))",
+        "∀x (HaveSiblingsBornTogether(x) → BornInMultipleBirth(x))",
+        "∀x (ComplainAboutSiblings(x) → HaveSiblingsBornTogether(x))",
+        "∀x (LiveAtHome(x) → NotLiveWithStrangers(x))",
+        "∀x (SpendTimeWithSiblings(x) → OftenLiveAtHome(x))",
+        "BabyBornInMultipleBirth(luke) ⊕ NotLiveWithStrangers(luke)"
+      ],
+      "translated_conclusion": "¬(BornInMultipleBirth(luke) ∨ ComplainAboutSiblings(luke))",
+      "elapsed_sec": 12.19
+    },
+    {
+      "example_id": "560",
+      "story_id": "197",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '<'.\nCost(greTest, $205) & $205 < $300\n                           ^",
+      "translated_premises": [
+        "Cost(greTest, $205) ∧ $205 < $300",
+        "FinancialAid(ets, x) → EconomicHardship(x)",
+        "EconomicHardship(x) → (SingleParentFamily(x) ∨ FewResources(x))",
+        "SingleParentFamily(tom)",
+        "SingleParentFamily(tom) ∧ FewResources(tom)",
+        "ApplyingToTakeTest(tom, greTest)"
+      ],
+      "translated_conclusion": "FinancialAid(ets, tom)",
+      "elapsed_sec": 9.02
+    },
+    {
+      "example_id": "561",
+      "story_id": "197",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '<'.\nCost(greTest, usd205) & usd205 < usd300\n                               ^",
+      "translated_premises": [
+        "Cost(greTest, usd205) ∧ usd205 < usd300",
+        "FinancialAid(ets, applicant) → EconomicHardship(applicant)",
+        "EconomicHardship(x) → (SingleParentFamily(x) ∨ FewResources(x))",
+        "SingleParentFamily(tom)",
+        "SingleParentFamily(tom) ∧ FewResources(tom)",
+        "ApplyingToTakeTest(tom, greTest)"
+      ],
+      "translated_conclusion": "Cost(greTest, usd300)",
+      "elapsed_sec": 9.5
+    },
+    {
+      "example_id": "562",
+      "story_id": "197",
+      "gold_label": "False",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '<'.\nCost(greTest, $205) & $205 < $300\n                           ^",
+      "translated_premises": [
+        "Cost(greTest, $205) ∧ $205 < $300",
+        "FinancialAid(ets, applicant) ∧ EconomicHardship(applicant)",
+        "EconomicHardship(singleParentFamily) ∨ FewResources(singleParentFamily)",
+        "LivesInSingleParentFamily(tom)",
+        "LivesInSingleParentFamily(tom) ∧ FewResources(tom)",
+        "ApplyingToTakeGreTest(tom)"
+      ],
+      "translated_conclusion": "∀x (ApplyingToTakeGreTest(x) → ¬FinancialAid(ets, x))",
+      "elapsed_sec": 10.03
+    },
+    {
+      "example_id": "958",
+      "story_id": "361",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (SpillFood(x) → ¬NotablyTidy(x))",
+        "∀x (ClumsyFoodie(x) ∧ GoOutFrequently(x) → SpillFood(x))",
+        "∀x (Cleanly(x) → NotablyTidy(x))",
+        "∀x (ValueOrder(x) → Cleanly(x))",
+        "∀x (FamilyPrioritizesOrder(x) → ValueOrder(x))",
+        "(SpillFood(peter) ∧ Cleanly(peter)) ⊕ (¬SpillFood(peter) ∧ ¬Cleanly(peter))"
+      ],
+      "translated_conclusion": "NotablyTidy(peter)",
+      "elapsed_sec": 11.84
+    },
+    {
+      "example_id": "959",
+      "story_id": "361",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (SpillFoodOnClothing(x) → ¬NotablyTidy(x))",
+        "∀x (ClumsyFoodie(x) ∧ GoOutFrequently(x) → SpillFoodOnClothing(x))",
+        "∀x (Cleanly(x) → NotablyTidy(x))",
+        "∀x (ValueOrderAndSpotlessness(x) → Cleanly(x))",
+        "∀x (FamilyPrioritizesOrderAndSpotlessness(x) → ValueOrderAndSpotlessness(x))",
+        "(SpillFoodOnClothing(peter) ∧ Cleanly(peter)) ⊕ (¬SpillFoodOnClothing(peter) ∧ ¬Cleanly(peter))"
+      ],
+      "translated_conclusion": "ClumsyFoodie(peter) ∨ FamilyPrioritizesOrderAndSpotlessness(peter)",
+      "elapsed_sec": 14.58
+    },
+    {
+      "example_id": "960",
+      "story_id": "361",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (SpillFoodOnClothing(x) → ¬NotablyTidy(x))",
+        "∀x (ClumsyFoodie(x) ∧ GoOutFrequently(x) → SpillFoodOnClothing(x))",
+        "∀x (Cleanly(x) → NotablyTidy(x))",
+        "∀x (ValueOrderAndSpotlessness(x) → Cleanly(x))",
+        "∀x (FamilyPrioritizesOrderAndSpotlessness(x) → ValueOrderAndSpotlessness(x))",
+        "(SpillFoodOnClothing(peter) ∧ Cleanly(peter)) ⊕ (¬SpillFoodOnClothing(peter) ∧ ¬Cleanly(peter))"
+      ],
+      "translated_conclusion": "(ClumsyFoodie(peter) ∧ GoOutFrequently(peter) ∧ FamilyPrioritizesOrderAndSpotlessness(peter)) ⊕ (¬ClumsyFoodie(peter) ∧ ¬GoOutFrequently(peter) ∧ ¬FamilyPrioritizesOrderAndSpotlessness(peter))",
+      "elapsed_sec": 17.96
+    },
+    {
+      "example_id": "706",
+      "story_id": "262",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (FirTree(x) → Evergreen(x))",
+        "∃x (ObjectOfWorship(x) ∧ FirTree(x))"
+      ],
+      "translated_conclusion": "∃x (Evergreen(x) ∧ ¬ObjectOfWorship(x))",
+      "elapsed_sec": 5.17
+    },
+    {
+      "example_id": "370",
+      "story_id": "124",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "MountainRange(picurisMountains) ∧ (LocatedIn(picurisMountains, newMexico) ∨ LocatedIn(picurisMountains, texas))",
+        "Visited(juanDeOnate, picurisMountains)",
+        "LocatedIn(hardingPegmatiteMine, picurisMountains) ∧ Donated(hardingPegmatiteMine)",
+        "∀x (MountainRange(x) ∧ LocatedIn(x, texas) → ¬HasMines(x) ∨ ¬Donated(x))"
+      ],
+      "translated_conclusion": "Visited(juanDeOnate, picurisMountains) ∧ ¬LocatedIn(picurisMountains, texas)",
+      "elapsed_sec": 11.87
+    },
+    {
+      "example_id": "371",
+      "story_id": "124",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "MountainRange(picurisMountains) ∧ (LocatedIn(picurisMountains, newMexico) ∨ LocatedIn(picurisMountains, texas))",
+        "Visited(juanDeOnate, picurisMountains)",
+        "LocatedIn(hardingPegmatiteMine, picurisMountains) ∧ Donated(hardingPegmatiteMine)",
+        "∀x (LocatedIn(x, texas) → ¬(MountainRange(x) ∧ HasMine(x) ∧ Donated(x)))"
+      ],
+      "translated_conclusion": "Visited(juanDeOnate, x) ∧ LocatedIn(x, texas)",
+      "elapsed_sec": 11.16
+    },
+    {
+      "example_id": "372",
+      "story_id": "124",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "MountainRange(picurisMountains) ∧ (LocatedIn(picurisMountains, newMexico) ∨ LocatedIn(picurisMountains, texas))",
+        "Visited(juanDeOnate, picurisMountains)",
+        "LocatedIn(hardingPegmatiteMine, picurisMountains) ∧ Donated(hardingPegmatiteMine)",
+        "∀x (LocatedIn(x, texas) → ¬(MountainRange(x) ∧ Donated(Mine(x))))"
+      ],
+      "translated_conclusion": "¬LocatedIn(hardingPegmatiteMine, picurisMountains) ∨ ¬MountainRange(picurisMountains)",
+      "elapsed_sec": 11.71
+    },
+    {
+      "example_id": "527",
+      "story_id": "183",
+      "gold_label": "False",
+      "predicted_label": "True",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (TallerThan(x, y) → CanBlock(x, y))",
+        "Man(michael) ∧ ∀x (InSameClass(x, michael) → TallerThan(michael, x))",
+        "∀x ∀y ∀z (TallerThan(x, y) ∧ TallerThan(y, z) → TallerThan(x, z))",
+        "Man(peter) ∧ TallerThan(peter, michael)",
+        "∀x (Man(x) ∧ CanJumpWhenShooting(x) → CanBlock(michael, x))",
+        "¬CanBlock(michael, windy)",
+        "∀x (Man(x) ∧ CanJumpWhenShooting(x) → GreatShooter(x))"
+      ],
+      "translated_conclusion": "∀x (Man(x) ∧ InSameClass(x, michael) → TallerThan(peter, x))",
+      "elapsed_sec": 15.87
+    },
+    {
+      "example_id": "528",
+      "story_id": "183",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (TallerThan(x, y) → CanBlock(x, y))",
+        "Man(michael) ∧ ∀x (InSameClass(x, michael) → TallerThan(michael, x))",
+        "∀x ∀y ∀z (TallerThan(x, y) ∧ TallerThan(y, z) → TallerThan(x, z))",
+        "Man(peter) ∧ TallerThan(peter, michael)",
+        "∀x (Man(x) ∧ CanJumpWhenShooting(x) → CanBlock(michael, x))",
+        "¬CanBlock(michael, windy)",
+        "∀x (CanJumpWhenShooting(x) → GreatShooter(x))"
+      ],
+      "translated_conclusion": "GreatShooter(windy)",
+      "elapsed_sec": 14.6
+    },
+    {
+      "example_id": "529",
+      "story_id": "183",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (TallerThan(x, y) → CanBlock(x, y))",
+        "Man(michael) ∧ ∀x (InSameClass(x, michael) → TallerThan(michael, x))",
+        "∀x ∀y ∀z (TallerThan(x, y) ∧ TallerThan(y, z) → TallerThan(x, z))",
+        "Man(peter) ∧ TallerThan(peter, michael)",
+        "∀x (Man(x) ∧ CanJumpWhenShooting(x) → CanBlock(michael, x))",
+        "¬CanBlock(michael, windy)",
+        "∀x (CanJumpWhenShooting(x) → GreatShooter(x))"
+      ],
+      "translated_conclusion": "CanBlock(peter, windy)",
+      "elapsed_sec": 15.46
+    },
+    {
+      "example_id": "439",
+      "story_id": "151",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Cove(barutinCove) ∧ NamedAfter(barutinCove, barutin)",
+        "LocatedOn(barutinCove, snowIsland) ∧ LocatedOn(barutinCove, southwestCoast)",
+        "LocatedIn(snowIsland, southShetlandIslands) ∧ LocatedIn(greenwichIsland, southShetlandIslands) ∧ LocatedIn(deceptionIsland, southShetlandIslands)",
+        "LocatedIn(antarctica, southShetlandIslands)",
+        "∀x ∀y ∀z (LocatedIn(x, y) ∧ LocatedIn(y, z) → LocatedIn(x, z))"
+      ],
+      "translated_conclusion": "∀x (Cove(x) ∧ NamedAfter(x, barutin) → LocatedIn(x, antarctica))",
+      "elapsed_sec": 44.19
+    },
+    {
+      "example_id": "440",
+      "story_id": "151",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Cove(barutinCove) ∧ NamedAfter(barutinCove, barutin) ∧ Settlement(barutin, bulgaria)",
+        "LocatedOn(barutinCove, snowIsland) ∧ LocatedOn(snowIsland, southwestCoast)",
+        "LocatedIn(snowIsland, southShetlandIslands) ∧ LocatedIn(greenwichIsland, southShetlandIslands) ∧ LocatedIn(deceptionIsland, southShetlandIslands)",
+        "LocatedIn(antarctica, southShetlandIslands)",
+        "∀x ∀y ∀z (LocatedIn(x, y) ∧ LocatedIn(y, z) → LocatedIn(x, z))"
+      ],
+      "translated_conclusion": "∃x (Cove(x) ∧ NamedAfter(x, bulgaria) ∧ LocatedIn(x, antarctica))",
+      "elapsed_sec": 16.14
+    },
+    {
+      "example_id": "441",
+      "story_id": "151",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Cove(barutinCove) ∧ NamedAfter(barutinCove, barutin)",
+        "LocatedOn(barutinCove, snowIsland) ∧ LocatedOn(barutinCove, southwestCoast)",
+        "LocatedIn(snowIsland, southShetlandIslands) ∧ LocatedIn(greenwichIsland, southShetlandIslands) ∧ LocatedIn(deceptionIsland, southShetlandIslands)",
+        "LocatedIn(antarctica, southShetlandIslands)",
+        "∀x ∀y ∀z (LocatedIn(x, y) ∧ LocatedIn(y, z) → LocatedIn(x, z))"
+      ],
+      "translated_conclusion": "¬LocatedIn(barutinCove, antarctica)",
+      "elapsed_sec": 44.06
+    },
+    {
+      "example_id": "739",
+      "story_id": "295",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (Affection(x) ∧ Love(x))",
+        "∃x (Love(x) ∧ Positive(x))"
+      ],
+      "translated_conclusion": "∃x (Affection(x) ∧ Positive(x))",
+      "elapsed_sec": 4.51
+    },
+    {
+      "example_id": "786",
+      "story_id": "315",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (CanTransportMultiple(x) → NotOneSeater(x))",
+        "∀x (TeslaModel3(x) → CanTransportMultiple(x))",
+        "∀x (SingleSeatElectricCar(x) → OneSeater(x))",
+        "∀x (SoloEV(x) → SingleSeatElectricCar(x))",
+        "∀x (¬TeslaModel3(x) → ¬(TeslaModel3(x) ∨ SingleSeatElectricCar(x)))"
+      ],
+      "translated_conclusion": "TeslaModel3(johnsCar)",
+      "elapsed_sec": 9.96
+    },
+    {
+      "example_id": "787",
+      "story_id": "315",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (CanTransportMultiple(x) → NotOneSeater(x))",
+        "∀x (TeslaModel3(x) → CanTransportMultiple(x))",
+        "∀x (SingleSeatElectricCar(x) → OneSeater(x))",
+        "∀x (SoloEV(x) → SingleSeatElectricCar(x))",
+        "∀x (¬TeslaModel3(x) → ¬(TeslaModel3(x) ∨ SingleSeatElectricCar(x)))"
+      ],
+      "translated_conclusion": "SoloEV(johnsCar)",
+      "elapsed_sec": 10.03
+    },
+    {
+      "example_id": "788",
+      "story_id": "315",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (CanTransportMultiple(x) → NotOneSeater(x))",
+        "∀x (TeslaModel3(x) → CanTransportMultiple(x))",
+        "∀x (SingleSeatElectricCar(x) → OneSeater(x))",
+        "∀x (SoloEV(x) → SingleSeatElectricCar(x))",
+        "∀x (¬TeslaModel3(x) → ¬(TeslaModel3(x) ∨ SingleSeatElectricCar(x)))"
+      ],
+      "translated_conclusion": "¬SoloEV(johnsCar)",
+      "elapsed_sec": 10.15
+    },
+    {
+      "example_id": "1348",
+      "story_id": "467",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (PetOf(peter, x) ∧ Mammal(x) → Animal(x))",
+        "∀x (Monkey(x) → Mammal(x))",
+        "∀x (PetOf(peter, x) → (Monkey(x) ∨ Bird(x)))",
+        "∀x (PetOf(peter, x) ∧ Bird(x) → CanFly(x))",
+        "∀x (PetOf(peter, x) ∧ Animal(x) → CanBreathe(x))",
+        "∀x (PetOf(peter, x) ∧ CanFly(x) → HasWings(x))",
+        "PetOf(peter, rock)",
+        "CanFly(rock) ∨ Bird(rock) ∨ ¬CanBreathe(rock)"
+      ],
+      "translated_conclusion": "Monkey(rock)",
+      "elapsed_sec": 15.13
+    },
+    {
+      "example_id": "1349",
+      "story_id": "467",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (PetOf(peter, x) ∧ Mammal(x) → Animal(x))",
+        "∀x (Monkey(x) → Mammal(x))",
+        "∀x (PetOf(peter, x) → (Monkey(x) ∨ Bird(x)))",
+        "∀x (PetOf(peter, x) ∧ Bird(x) → CanFly(x))",
+        "∀x (PetOf(peter, x) ∧ Animal(x) → CanBreathe(x))",
+        "∀x (PetOf(peter, x) ∧ CanFly(x) → HasWings(x))",
+        "PetOf(peter, rock)",
+        "CanFly(rock) ∨ Bird(rock) ∨ ¬CanBreathe(rock)"
+      ],
+      "translated_conclusion": "HasWings(rock)",
+      "elapsed_sec": 15.43
+    },
+    {
+      "example_id": "1350",
+      "story_id": "467",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (PetOf(peter, x) ∧ Mammal(x) → Animal(x))",
+        "∀x (Monkey(x) → Mammal(x))",
+        "∀x (PetOf(peter, x) → (Monkey(x) ∨ Bird(x)))",
+        "∀x (PetOf(peter, x) ∧ Bird(x) → CanFly(x))",
+        "∀x (PetOf(peter, x) ∧ Animal(x) → CanBreathe(x))",
+        "∀x (PetOf(peter, x) ∧ CanFly(x) → HasWings(x))",
+        "PetOf(peter, rock)",
+        "CanFly(rock) ∨ Bird(rock) ∨ ¬CanBreathe(rock)"
+      ],
+      "translated_conclusion": "¬HasWings(rock)",
+      "elapsed_sec": 15.32
+    },
+    {
+      "example_id": "846",
+      "story_id": "330",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (MakeWeddingPlans(x) → Engaged(x))",
+        "∀x (InviteOthersToCeremony(x) → MakeWeddingPlans(x))",
+        "∀x (WellAttendedWedding(x) → InviteOthersToCeremony(x))",
+        "∃x (WellAttendedWedding(x) ∧ LargerFamily(x))",
+        "Engaged(john) → ¬(InviteFriendsToCeremony(john) ∧ MakeWeddingPlans(john))",
+        "LargerFamily(john) → (WellAttendedWedding(john) ∨ InviteFriendsToCeremony(john))"
+      ],
+      "translated_conclusion": "LargerFamily(john)",
+      "elapsed_sec": 13.21
+    },
+    {
+      "example_id": "847",
+      "story_id": "330",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (MakeWeddingPlans(x) → Engaged(x))",
+        "∀x (InviteOthersToCeremony(x) → MakeWeddingPlans(x))",
+        "∀x (WellAttendedWedding(x) → InviteOthersToCeremony(x))",
+        "∃x (WellAttendedWedding(x) ∧ LargerFamily(x))",
+        "Engaged(john) → ¬(InviteFriendsToCeremony(john) ∧ MakeWeddingPlans(john))",
+        "LargerFamily(john) → (WellAttendedWedding(john) ∨ InviteFriendsToCeremony(john))"
+      ],
+      "translated_conclusion": "¬LargerFamily(john)",
+      "elapsed_sec": 13.52
+    },
+    {
+      "example_id": "848",
+      "story_id": "330",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (MakeWeddingPlans(x) → Engaged(x))",
+        "∀x (InviteOthersToCeremony(x) → MakeWeddingPlans(x))",
+        "∀x (WellAttendedWedding(x) → InviteOthersToCeremony(x))",
+        "∃x (WellAttendedWedding(x) ∧ LargerFamily(x))",
+        "Engaged(john) → ¬(InviteFriendsToCeremony(john) ∧ MakeWeddingPlans(john))",
+        "LargerFamily(john) → (WellAttendedWedding(john) ∨ InviteFriendsToCeremony(john))"
+      ],
+      "translated_conclusion": "Engaged(john)",
+      "elapsed_sec": 13.06
+    },
+    {
+      "example_id": "849",
+      "story_id": "330",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (MakeWeddingPlans(x) → Engaged(x))",
+        "∀x (InviteOthersToCeremony(x) → MakeWeddingPlans(x))",
+        "∀x (WellAttendedWedding(x) → InviteOthersToCeremony(x))",
+        "∃x (WellAttendedWedding(x) ∧ LargerFamily(x))",
+        "Engaged(john) → ¬(InviteFriendsToCeremony(john) ∧ MakeWeddingPlans(john))",
+        "LargerFamily(john) → (WellAttendedWedding(john) ∨ InviteFriendsToCeremony(john))"
+      ],
+      "translated_conclusion": "¬(LargerFamily(john) ∨ InviteOthersToCeremony(john))",
+      "elapsed_sec": 13.99
+    },
+    {
+      "example_id": "74",
+      "story_id": "26",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (Mammal(x) ∧ HasTeeth(x))",
+        "¬HasTeeth(platypus)",
+        "Mammal(platypus)",
+        "HasTeeth(human)"
+      ],
+      "translated_conclusion": "Mammal(platypus) ∧ ¬HasTeeth(platypus)",
+      "elapsed_sec": 6.83
+    },
+    {
+      "example_id": "75",
+      "story_id": "26",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (Mammal(x) ∧ HasTeeth(x))",
+        "¬HasTeeth(platypus)",
+        "Mammal(platypus)",
+        "HasTeeth(human)"
+      ],
+      "translated_conclusion": "Mammal(platypus) → Reptile(platypus)",
+      "elapsed_sec": 6.77
+    },
+    {
+      "example_id": "76",
+      "story_id": "26",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (Mammal(x) ∧ HasTeeth(x))",
+        "¬HasTeeth(platypus)",
+        "Mammal(platypus)",
+        "HasTeeth(human)"
+      ],
+      "translated_conclusion": "Mammal(human)",
+      "elapsed_sec": 5.77
+    },
+    {
+      "example_id": "578",
+      "story_id": "203",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Plunger(x) → Sucks(x))",
+        "∀x (Vacuum(x) → Sucks(x))",
+        "∀x (Vampire(x) → Sucks(x))",
+        "∀x (Space(x) → Vacuum(x))",
+        "∀x (Duster(x) → ¬Sucks(x))"
+      ],
+      "translated_conclusion": "Sucks(space)",
+      "elapsed_sec": 7.57
+    },
+    {
+      "example_id": "579",
+      "story_id": "203",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Plunger(x) → Sucks(x))",
+        "∀x (Vacuum(x) → Sucks(x))",
+        "∀x (Vampire(x) → Sucks(x))",
+        "∀x (Space(x) → Vacuum(x))",
+        "∀x (Duster(x) → ¬Sucks(x))"
+      ],
+      "translated_conclusion": "∀x (Space(x) → Vampire(x))",
+      "elapsed_sec": 8.22
+    },
+    {
+      "example_id": "580",
+      "story_id": "203",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Plunger(x) → Sucks(x))",
+        "∀x (Vacuum(x) → Sucks(x))",
+        "∀x (Vampire(x) → Sucks(x))",
+        "∀x (Space(x) → Vacuum(x))",
+        "∀x (Duster(x) → ¬Sucks(x))"
+      ],
+      "translated_conclusion": "∀x (HouseholdAppliance(x) → Sucks(x))",
+      "elapsed_sec": 8.52
+    },
+    {
+      "example_id": "388",
+      "story_id": "131",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "LearningAlgorithm(x) → (SupervisedLearning(x) ∨ UnsupervisedLearning(x) ∨ ReinforcementLearning(x))",
+        "UnsupervisedLearning(x) → ¬RequiresLabeledData(x)",
+        "TextSummarizationModel(x) → TrainedWith(x, machineLearning)",
+        "ReinforcementLearning(x) → ¬Trains(x, stateOfTheArtTextSummarizationModel)",
+        "TextSummarizationModel(x) → RequiresLabeledData(x)"
+      ],
+      "translated_conclusion": "TextSummarizationModel(x) → SupervisedLearning(x)",
+      "elapsed_sec": 10.95
+    },
+    {
+      "example_id": "389",
+      "story_id": "131",
+      "gold_label": "False",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols cannot be used as atomic formulas, because they are variables: True.\n\n\nFatal error:  The following symbols cannot be used as atomic formulas, because they are variables: True",
+      "translated_premises": [
+        "∀x (MachineLearningAlgorithm(x) → (SupervisedLearning(x) ∨ UnsupervisedLearning(x) ∨ ReinforcementLearning(x)))",
+        "∀x (UnsupervisedLearningAlgorithm(x) → ¬RequiresLabeledData(x))",
+        "TrainedWith(machineLearningAlgorithm) ∧ MachineLearningAlgorithm(stateOfTheArtTextSummarizationModel)",
+        "ReinforcementLearning(stateOfTheArtTextSummarizationModel) → ¬True",
+        "RequiresLabeledData(machineLearningAlgorithmForTextSummarization)"
+      ],
+      "translated_conclusion": "UnsupervisedLearning(stateOfTheArtTextSummarizationModel)",
+      "elapsed_sec": 11.62
+    },
+    {
+      "example_id": "1327",
+      "story_id": "460",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (AppropriateForAllAges(x) → ChildrenCanWatch(x))",
+        "∀x (ExcessiveEroticViolentContent(x) → ChildrenCannotWatch(x))",
+        "∀x (RatedGeneralAudience(x) → AppropriateForAllAges(x))",
+        "∀x (FamilyFriendlyAnimatedFilm(x) → RatedGeneralAudience(x))",
+        "∀x (MovieInFrozenSeries(x) → FamilyFriendlyAnimatedFilm(x))",
+        "Film(hachiADogsTale)",
+        "FamilyFriendlyAnimatedFilm(hachiADogsTale) ∨ AppropriateForAllAges(hachiADogsTale)"
+      ],
+      "translated_conclusion": "RatedGeneralAudience(hachiADogsTale)",
+      "elapsed_sec": 14.04
+    },
+    {
+      "example_id": "1328",
+      "story_id": "460",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (AppropriateForAllAges(x) → ChildrenCanWatch(x))",
+        "∀x (ExcessiveEroticViolentContent(x) → ChildrenCannotWatch(x))",
+        "∀x (RatedGeneralAudience(x) → AppropriateForAllAges(x))",
+        "∀x (FamilyFriendlyAnimatedFilm(x) → RatedGeneralAudience(x))",
+        "∀x (MovieInFrozenSeries(x) → FamilyFriendlyAnimatedFilm(x))",
+        "Film(hachiADogsTale)",
+        "FamilyFriendlyAnimatedFilm(hachiADogsTale) ∨ AppropriateForAllAges(hachiADogsTale)"
+      ],
+      "translated_conclusion": "ExcessiveEroticViolentContent(hachiADogsTale) ∨ MovieInFrozenSeries(hachiADogsTale)",
+      "elapsed_sec": 15.21
+    },
+    {
+      "example_id": "1329",
+      "story_id": "460",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (AppropriateForAllAges(x) → ChildrenCanWatch(x))",
+        "∀x (ExcessiveEroticViolentContent(x) → ChildrenCannotWatch(x))",
+        "∀x (RatedGeneralAudience(x) → AppropriateForAllAges(x))",
+        "∀x (FamilyFriendlyAnimatedFilm(x) → RatedGeneralAudience(x))",
+        "∀x (MovieInFrozenSeries(x) → FamilyFriendlyAnimatedFilm(x))",
+        "Film(hachiADogsTale)",
+        "FamilyFriendlyAnimatedFilm(hachiADogsTale) ∨ AppropriateForAllAges(hachiADogsTale)"
+      ],
+      "translated_conclusion": "ExcessiveEroticViolentContent(hachiADogsTale) ∧ MovieInFrozenSeries(hachiADogsTale) ∨ ¬(ExcessiveEroticViolentContent(hachiADogsTale) ∨ MovieInFrozenSeries(hachiADogsTale))",
+      "elapsed_sec": 17.5
+    },
+    {
+      "example_id": "133",
+      "story_id": "46",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: heckCattle/1, heckCattle/0.\n\n\nFatal error:  The following symbols are used with multiple arities: heckCattle/1, heckCattle/0",
+      "translated_premises": [
+        "ArtificialSelectionByBreedingBack(breedingBack)",
+        "BredBack(heckCattle, yr1920s) ∧ Resemble(heckCattle, aurochs)",
+        "Animal(heckCattle)",
+        "Animal(aurochs)",
+        "∃x ∃y (Animal(x) ∧ Animal(y) ∧ Resemble(x, y) ∧ Extinct(y))"
+      ],
+      "translated_conclusion": "∃x (heckCattle(x) ∧ ArtificialSelectionByBreedingBack(x))",
+      "elapsed_sec": 9.92
+    },
+    {
+      "example_id": "134",
+      "story_id": "46",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "ArtificialSelectionByBreedingBack(breedingBack)",
+        "BredBack(heckCattle, yr1920s) ∧ Resemble(heckCattle, aurochs)",
+        "Animal(heckCattle)",
+        "Animal(aurochs)",
+        "∃x ∃y (Animal(x) ∧ Animal(y) ∧ Resemble(x, y) ∧ Extinct(y))"
+      ],
+      "translated_conclusion": "Animal(aurochs) → Extinct(aurochs)",
+      "elapsed_sec": 9.37
+    },
+    {
+      "example_id": "1410",
+      "story_id": "483",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (CanRegisterToVote(x, unitedStates) → CanParticipateInElection(x, unitedStatesPresidentialElection2024))",
+        "∀x (HasUSCitizenship(x) → CanRegisterToVote(x, unitedStates))",
+        "∀x (HasUSCitizenship(x) ∨ HasTaiwaneseCitizenship(x))",
+        "∀x (RussianFederationOfficial(x) → ¬HasTaiwaneseCitizenship(x))",
+        "¬(HasTaiwaneseCitizenship(vladimir) ∨ IsManagerAtGazprom(vladimir))",
+        "CanRegisterToVote(ekaterina, unitedStates) ∨ RussianFederationOfficial(ekaterina)"
+      ],
+      "translated_conclusion": "RussianFederationOfficial(vladimir)",
+      "elapsed_sec": 14.78
+    },
+    {
+      "example_id": "1411",
+      "story_id": "483",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (CanRegisterToVote(x, unitedStates) → CanParticipateInElection(x, unitedStatesPresidentialElection2024))",
+        "∀x (HasUSCitizenship(x) → CanRegisterToVote(x, unitedStates))",
+        "∀x (HasUSCitizenship(x) ∨ HasTaiwaneseCitizenship(x))",
+        "∀x (RussianFederationOfficial(x) → ¬HasTaiwaneseCitizenship(x))",
+        "¬(HasTaiwaneseCitizenship(vladimir) ∨ IsManagerAtGazprom(vladimir))",
+        "CanRegisterToVote(ekaterina, unitedStates) ∨ RussianFederationOfficial(ekaterina)"
+      ],
+      "translated_conclusion": "¬RussianFederationOfficial(vladimir)",
+      "elapsed_sec": 14.58
+    },
+    {
+      "example_id": "1412",
+      "story_id": "483",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (CanRegisterToVote(x, unitedStates) → CanParticipate(x, presidentialElection2024))",
+        "∀x (HasUSCitizenship(x) → CanRegisterToVote(x, unitedStates))",
+        "∀x (HasUSCitizenship(x) ∨ HasTaiwaneseCitizenship(x))",
+        "∀x (RussianFederationOfficial(x) → ¬HasTaiwaneseCitizenship(x))",
+        "∀x (HasTaiwaneseCitizenship(x) ⊕ ManagerAtGazprom(x))",
+        "CanRegisterToVote(ekaterina, unitedStates) ∨ RussianFederationOfficial(ekaterina)"
+      ],
+      "translated_conclusion": "CanParticipate(ekaterina, presidentialElection2024) ∨ ManagerAtGazprom(ekaterina)",
+      "elapsed_sec": 15.33
+    },
+    {
+      "example_id": "1413",
+      "story_id": "483",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (CanRegisterToVote(x, unitedStates) → CanParticipate(x, presidentialElection2024))",
+        "∀x (HasUSCitizenship(x) → CanRegisterToVote(x, unitedStates))",
+        "∀x (HasUSCitizenship(x) ∨ HasTaiwaneseCitizenship(x))",
+        "∀x (RussianFederationOfficial(x) → ¬HasTaiwaneseCitizenship(x))",
+        "¬(HasTaiwaneseCitizenship(vladimir) ∨ IsManager(vladimir, gazprom))",
+        "CanRegisterToVote(ekaterina, unitedStates) ∨ RussianFederationOfficial(ekaterina)"
+      ],
+      "translated_conclusion": "CanParticipate(ekaterina, presidentialElection2024) ∨ IsManager(vladimir, gazprom)",
+      "elapsed_sec": 15.49
+    },
+    {
+      "example_id": "1414",
+      "story_id": "483",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (CanRegisterToVote(x, unitedStates) → CanParticipateInElection(x, unitedStatesPresidentialElection2024))",
+        "∀x (HasUSCitizenship(x) → CanRegisterToVote(x, unitedStates))",
+        "∀x (HasUSCitizenship(x) ∨ HasTaiwaneseCitizenship(x))",
+        "∀x (RussianFederationOfficial(x) → ¬HasTaiwaneseCitizenship(x))",
+        "¬(HasTaiwaneseCitizenship(vladimir) ∨ IsManagerAtGazprom(vladimir))",
+        "CanRegisterToVote(ekaterina, unitedStates) ∨ RussianFederationOfficial(ekaterina)"
+      ],
+      "translated_conclusion": "¬(CanRegisterToVote(ekaterina, unitedStates) ∧ CanParticipateInElection(vladimir, unitedStatesPresidentialElection2024))",
+      "elapsed_sec": 17.08
+    },
+    {
+      "example_id": "243",
+      "story_id": "80",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "PublishingHouse(newVesselPress) ∧ SpecializesIn(newVesselPress, english, foreignLiterature)",
+        "∀x (PublishedBy(newVesselPress, x) → InLanguage(x, english))",
+        "PublishedBy(newVesselPress, neapolitanChronicles)",
+        "TranslatedFrom(neapolitanChronicles, italian)",
+        "PublishedBy(newVesselPress, palaceOfFlies)"
+      ],
+      "translated_conclusion": "InLanguage(neapolitanChronicles, english)",
+      "elapsed_sec": 9.56
+    },
+    {
+      "example_id": "244",
+      "story_id": "80",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "PublishingHouse(newVesselPress) ∧ SpecializesIn(newVesselPress, english, foreignLiterature)",
+        "∀x (PublishedBy(x, newVesselPress) → InLanguage(x, english))",
+        "PublishedBy(neapolitanChronicles, newVesselPress)",
+        "TranslatedFrom(neapolitanChronicles, italian)",
+        "PublishedBy(palaceOfFlies, newVesselPress)"
+      ],
+      "translated_conclusion": "PublishedBy(harryPotter, newVesselPress)",
+      "elapsed_sec": 10.11
+    },
+    {
+      "example_id": "245",
+      "story_id": "80",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "PublishingHouse(newVesselPress) ∧ SpecializesIn(newVesselPress, english, foreignLiterature)",
+        "∀x (PublishedBy(newVesselPress, x) → InLanguage(x, english))",
+        "PublishedBy(newVesselPress, neapolitanChronicles)",
+        "TranslatedFrom(neapolitanChronicles, italian)",
+        "PublishedBy(newVesselPress, palaceOfFlies)"
+      ],
+      "translated_conclusion": "TranslatedFrom(palaceOfFlies, italian)",
+      "elapsed_sec": 9.75
+    },
+    {
+      "example_id": "964",
+      "story_id": "363",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Hydrocarbon(x) → OrganicCompound(x))",
+        "∀x (Alkane(x) → Hydrocarbon(x))",
+        "∀x (OrganicCompound(x) → ChemicalCompound(x))",
+        "∀x (OrganicCompound(x) → Contains(x, carbon))",
+        "∀x (ChemicalCompound(x) → ¬Contains(x, element1))",
+        "ChemicalCompound(mixture) ⊕ Contains(mixture, element1)"
+      ],
+      "translated_conclusion": "Contains(mixture, carbon)",
+      "elapsed_sec": 9.93
+    },
+    {
+      "example_id": "965",
+      "story_id": "363",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Hydrocarbon(x) → OrganicCompound(x))",
+        "∀x (Alkane(x) → Hydrocarbon(x))",
+        "∀x (OrganicCompound(x) → ChemicalCompound(x))",
+        "∀x (OrganicCompound(x) → ContainsCarbon(x))",
+        "∀x (ChemicalCompound(x) → ¬ContainsOnlyOneElement(x))",
+        "ChemicalCompound(theMixture) ⊕ ContainsOnlyOneElement(theMixture) → ¬(ChemicalCompound(theMixture) ∧ ContainsOnlyOneElement(theMixture))"
+      ],
+      "translated_conclusion": "Alkane(theMixture) ∧ ContainsCarbon(theMixture)",
+      "elapsed_sec": 12.35
+    },
+    {
+      "example_id": "966",
+      "story_id": "363",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Hydrocarbon(x) → OrganicCompound(x))",
+        "∀x (Alkane(x) → Hydrocarbon(x))",
+        "∀x (OrganicCompound(x) → ChemicalCompound(x))",
+        "∀x (OrganicCompound(x) → ContainsCarbon(x))",
+        "∀x (ChemicalCompound(x) → ¬ContainsOnlyOneElement(x))",
+        "∀x (ChemicalCompound(x) ⊕ ContainsOnlyOneElement(x))"
+      ],
+      "translated_conclusion": "∀x ((ContainsOnlyOneElement(x) ∨ ContainsCarbon(x)) → ¬(ChemicalCompound(x) ∧ Alkane(x)))",
+      "elapsed_sec": 12.51
+    },
+    {
+      "example_id": "702",
+      "story_id": "258",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Human(x) → Mortal(x))",
+        "∀x (Greek(x) → Human(x))"
+      ],
+      "translated_conclusion": "∃x (Greek(x) ∧ Mortal(x))",
+      "elapsed_sec": 4.4
+    },
+    {
+      "example_id": "1244",
+      "story_id": "435",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Student(x) ∧ WorksIn(x, library) → ¬FromDepartment(x, computerScience))",
+        "∀x (Student(x) ∧ PartTimeJobOfferedBy(x, university) → WorksIn(x, library))",
+        "∀x (Student(x) ∧ TakingCourse(x, database) → FromDepartment(x, computerScience))",
+        "∀x (Student(x) ∧ TakingClass(x, professorDavid) → TakingCourse(x, database))",
+        "∀x (Student(x) ∧ WorksIn(x, lab) → TakingClass(x, professorDavid))",
+        "Student(james) ∧ WorksIn(james, lab)",
+        "¬WorksIn(james, lab) ∨ ¬PartTimeJobOfferedBy(james, university)"
+      ],
+      "translated_conclusion": "PartTimeJobOfferedBy(james, university)",
+      "elapsed_sec": 15.88
+    },
+    {
+      "example_id": "1245",
+      "story_id": "435",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Student(x) ∧ WorksIn(x, library) → ¬FromDepartment(x, computerScience))",
+        "∀x (Student(x) ∧ PartTimeJobOfferedBy(x, university) → WorksIn(x, library))",
+        "∀x (Student(x) ∧ TakingCourse(x, database) → FromDepartment(x, computerScience))",
+        "∀x (Student(x) ∧ TakingClass(x, professorDavid) → TakingCourse(x, database))",
+        "∀x (Student(x) ∧ WorksIn(x, lab) → TakingClass(x, professorDavid))",
+        "Student(james) ∧ WorksIn(james, lab)",
+        "¬WorksIn(james, lab) ∨ ¬PartTimeJobOfferedBy(james, university)"
+      ],
+      "translated_conclusion": "¬PartTimeJobOfferedBy(james, university)",
+      "elapsed_sec": 15.77
+    },
+    {
+      "example_id": "1246",
+      "story_id": "435",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Student(x) ∧ WorksIn(x, library) → ¬FromDepartment(x, computerScience))",
+        "∀x (Student(x) ∧ PartTimeJobOfferedBy(x, university) → WorksIn(x, library))",
+        "∀x (Student(x) ∧ TakingCourse(x, database) → FromDepartment(x, computerScience))",
+        "∀x (Student(x) ∧ TakingClass(x, professorDavid) → TakingCourse(x, database))",
+        "∀x (Student(x) ∧ WorksIn(x, lab) → TakingClass(x, professorDavid))",
+        "Student(james) ∧ WorksIn(james, lab)",
+        "WorksIn(james, lab) ∨ PartTimeJobOfferedBy(james, university)"
+      ],
+      "translated_conclusion": "TakingCourse(james, database) ∨ PartTimeJobOfferedBy(james, university)",
+      "elapsed_sec": 16.22
+    },
+    {
+      "example_id": "1247",
+      "story_id": "435",
+      "gold_label": "Uncertain",
+      "predicted_label": "True",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Student(x) ∧ WorksIn(x, library) → ¬FromDepartment(x, computerScience))",
+        "∀x (Student(x) ∧ PartTimeJobOfferedBy(x, university) → WorksIn(x, library))",
+        "∀x (Student(x) ∧ TakingCourse(x, database) → FromDepartment(x, computerScience))",
+        "∀x (Student(x) ∧ TakingClass(x, professorDavid) → TakingCourse(x, database))",
+        "∀x (Student(x) ∧ WorksIn(x, lab) → TakingClass(x, professorDavid))",
+        "Student(james) ∧ WorksIn(james, lab)",
+        "WorksIn(james, lab) ∨ PartTimeJobOfferedBy(james, university)"
+      ],
+      "translated_conclusion": "FromDepartment(james, computerScience)",
+      "elapsed_sec": 15.29
+    },
+    {
+      "example_id": "618",
+      "story_id": "217",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Likes(x, music) → WantsToCompose(x))",
+        "∀x (HasAccess(x, program) → CanCompose(x))",
+        "∀x (CanCompose(x) ∧ WantsToCompose(x) → WillCompose(x))"
+      ],
+      "translated_conclusion": "∀x (Likes(x, music) ∧ HasAccess(x, program) → WillCompose(x))",
+      "elapsed_sec": 7.17
+    },
+    {
+      "example_id": "619",
+      "story_id": "217",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Likes(x, music) → WantsToCompose(x))",
+        "∀x (HasAccess(x, program) → CanCompose(x))",
+        "∀x (CanCompose(x) ∧ WantsToCompose(x) → WillCompose(x))"
+      ],
+      "translated_conclusion": "∀x (WillNotCompose(x) → ¬CanCompose(x))",
+      "elapsed_sec": 6.72
+    },
+    {
+      "example_id": "736",
+      "story_id": "292",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Hawk(x) → ¬Swims(x))",
+        "∃x (Bird(x) ∧ Hawk(x))"
+      ],
+      "translated_conclusion": "∀x (Bird(x) → Swims(x))",
+      "elapsed_sec": 4.42
+    },
+    {
+      "example_id": "802",
+      "story_id": "318",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (ShowAiringAt(x, monday, 8) ∧ GivesOutRosesOnTV(x))",
+        "∀x (GivesOutRosesOnTV(x) → EpisodeOfTheBachelor(x))",
+        "EpisodeOfTheBachelor(theBachelor) ∧ PortraysRealPeople(theBachelor)",
+        "∀x (PortraysRealPeople(x) → RealityTVShow(x))",
+        "Show(breakingBad)",
+        "¬RealityTVShow(breakingBad)"
+      ],
+      "translated_conclusion": "ShowAiringAt(breakingBad, monday, 8)",
+      "elapsed_sec": 11.25
+    },
+    {
+      "example_id": "803",
+      "story_id": "318",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (AirTime(x, monday, 8) ∧ GivesOutRosesOnTV(x))",
+        "∀x (GivesOutRosesOnTV(x) → EpisodeOfTheBachelor(x))",
+        "EpisodeOfTheBachelor(theBachelor)",
+        "∀x (EpisodeOfTheBachelor(x) → RealityTVShow(x))",
+        "Show(breakingBad)",
+        "¬RealityTVShow(breakingBad)"
+      ],
+      "translated_conclusion": "AirTime(breakingBad, monday, 8) ∧ GivesOutRosesOnTV(breakingBad)",
+      "elapsed_sec": 11.39
+    },
+    {
+      "example_id": "804",
+      "story_id": "318",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (ShowAiringAt(x, monday, 8) ∧ GivesOutRosesOnTV(x))",
+        "∀x (GivesOutRosesOnTV(x) → EpisodeOfTheBachelor(x))",
+        "EpisodeOfTheBachelor(theBachelor) ∧ PortraysRealPeople(theBachelor)",
+        "∀x (PortraysRealPeople(x) → RealityTVShow(x))",
+        "Show(breakingBad)",
+        "¬RealityTVShow(breakingBad)"
+      ],
+      "translated_conclusion": "∀x (GivesOutRosesOnTV(x) ∧ Show(x) ∧ Show(x) → ShowAiringAt(x, monday, 8))",
+      "elapsed_sec": 12.86
+    },
+    {
+      "example_id": "323",
+      "story_id": "107",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Politician(heinrichSchmidt) ∧ German(heinrichSchmidt)",
+        "MemberOf(heinrichSchmidt, prussianStateParliament) ∧ MemberOf(heinrichSchmidt, naziReichstag)"
+      ],
+      "translated_conclusion": "German(heinrichSchmidt) ∨ Russian(heinrichSchmidt)",
+      "elapsed_sec": 7.13
+    },
+    {
+      "example_id": "324",
+      "story_id": "107",
+      "gold_label": "True",
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Politician(heinrichSchmidt) ∧ German(heinrichSchmidt)",
+        "MemberOf(heinrichSchmidt, prussianStateParliament) ∧ MemberOf(heinrichSchmidt, naziReichstag)"
+      ],
+      "translated_conclusion": "∃x (Politician(x) ∧ German(x) ∧ MemberOf(x, prussianStateParliament) ∧ MemberOf(x, naziReichstag))",
+      "elapsed_sec": 8.55
+    },
+    {
+      "example_id": "325",
+      "story_id": "107",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Politician(heinrichSchmidt)",
+        "MemberOf(heinrichSchmidt, prussianStateParliament) ∧ MemberOf(heinrichSchmidt, naziReichstag)"
+      ],
+      "translated_conclusion": "∀x (Politician(x) → ¬MemberOf(x, naziReichstag))",
+      "elapsed_sec": 6.45
+    },
+    {
+      "example_id": "1032",
+      "story_id": "386",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (DeadlyDisease(x) → LowSurvivalRate(x))",
+        "DeadlyDisease(severeCancer)",
+        "Severe(severeCancer) ∧ Cancer(bileDuctCancer)",
+        "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+        "LowSurvivalRate(mildFlu)",
+        "Cancer(colorectalCancer) ∧ BileDuctCancer(colorectalCancer) → ¬LowSurvivalRate(colorectalCancer)"
+      ],
+      "translated_conclusion": "Cancer(colorectalCancer) ∧ Severe(colorectalCancer)",
+      "elapsed_sec": 12.63
+    },
+    {
+      "example_id": "1033",
+      "story_id": "386",
+      "gold_label": "True",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: Cancer/1, Cancer/2.\n\n\nFatal error:  The following symbols are used with multiple arities: Cancer/1, Cancer/2",
+      "translated_premises": [
+        "∀x (DeadlyDisease(x) → LowSurvivalRate(x))",
+        "DeadlyDisease(severeCancer)",
+        "Severe(severeCancer) ∧ Cancer(bileDuctCancer)",
+        "∀x (Cholangiocarcinoma(x) → Cancer(x, bileDuctCancer))",
+        "LowSurvivalRate(mildFlu)",
+        "Cancer(colorectalCancer, bileDuctCancer) ∧ Cancer(colorectalCancer, mildFlu) → ¬Cholangiocarcinoma(colorectalCancer)"
+      ],
+      "translated_conclusion": "∀x (Cancer(x, bileDuctCancer) ∨ Cancer(x, Cholangiocarcinoma)) → Cancer(x, bileDuctCancer) ∧ Cancer(x, mildFlu)",
+      "elapsed_sec": 15.35
+    },
+    {
+      "example_id": "1034",
+      "story_id": "386",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (DeadlyDisease(x) → LowSurvivalRate(x))",
+        "DeadlyDisease(severeCancer)",
+        "Severe(severeCancer) ∧ Cancer(bileDuctCancer)",
+        "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+        "LowSurvivalRate(mildFlu)",
+        "Cancer(colorectalCancer) ∧ BileDuctCancer(colorectalCancer) → LowSurvivalRate(colorectalCancer)"
+      ],
+      "translated_conclusion": "Cancer(colorectalCancer) ∧ (Cholangiocarcinoma(colorectalCancer) ∨ BileDuctCancer(colorectalCancer) ∨ ∀x (DeadlyDisease(x) → LowSurvivalRate(x)))",
+      "elapsed_sec": 15.29
+    },
+    {
+      "example_id": "941",
+      "story_id": "355",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (EatSaladsRegularly(x) → VeryConscious(x, healthAndEatingHabits))",
+        "∀x (GrewUpInHealthConsciousChildhoodHome(x) → EatSaladsRegularly(x))",
+        "∀x (FulfillDailyNutritionalIntakes(x) → GrewUpInHealthConsciousChildhoodHome(x))",
+        "∀x (DisregardPhysicalWellBeing(x) → ¬VeryConscious(x, healthAndEatingHabits))",
+        "∀x (VisitGymAtLeastOnceADay(x) → FulfillDailyNutritionalIntakes(x))",
+        "GrewUpInHealthConsciousChildhoodHome(taylor) ⊕ DisregardPhysicalWellBeing(taylor)"
+      ],
+      "translated_conclusion": "EatSaladsRegularly(taylor)",
+      "elapsed_sec": 15.35
+    },
+    {
+      "example_id": "942",
+      "story_id": "355",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (EatSaladsRegularly(x) → VeryConscious(x, healthAndEatingHabits))",
+        "∀x (GrewUpInHealthConsciousChildhoodHome(x) → EatSaladsRegularly(x))",
+        "∀x (FulfillDailyNutritionalIntakes(x) → GrewUpInHealthConsciousChildhoodHome(x))",
+        "∀x (DisregardPhysicalWellBeing(x) → ¬VeryConscious(x, healthAndEatingHabits))",
+        "∀x (VisitGymAtLeastOnceADay(x) → FulfillDailyNutritionalIntakes(x))",
+        "GrewUpInHealthConsciousChildhoodHome(taylor) ⊕ DisregardPhysicalWellBeing(taylor)"
+      ],
+      "translated_conclusion": "VisitGymAtLeastOnceADay(taylor)",
+      "elapsed_sec": 15.7
+    },
+    {
+      "example_id": "943",
+      "story_id": "355",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (EatSaladsRegularly(x) → VeryConscious(x, healthAndEatingHabits))",
+        "∀x (GrewUpInHealthConsciousChildhoodHome(x) → EatSaladsRegularly(x))",
+        "∀x (FulfillDailyNutritionalIntakes(x) → GrewUpInHealthConsciousChildhoodHome(x))",
+        "∀x (DisregardPhysicalWellBeing(x) → ¬VeryConscious(x, healthAndEatingHabits))",
+        "∀x (VisitGymAtLeastOnceADay(x) → FulfillDailyNutritionalIntakes(x))",
+        "GrewUpInHealthConsciousChildhoodHome(taylor) ⊕ DisregardPhysicalWellBeing(taylor)"
+      ],
+      "translated_conclusion": "¬GrewUpInHealthConsciousChildhoodHome(taylor) ∧ ¬VisitGymAtLeastOnceADay(taylor)",
+      "elapsed_sec": 17.23
+    },
+    {
+      "example_id": "147",
+      "story_id": "51",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "SportingEvent(summerOlympicGames)",
+        "LastSummerOlympicGamesIn(tokyo)",
+        "WonMostMedalsIn(tokyo, unitedStates)"
+      ],
+      "translated_conclusion": "SportingEvent(worldChampionships)",
+      "elapsed_sec": 5.18
+    },
+    {
+      "example_id": "148",
+      "story_id": "51",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "SportingEvent(summerOlympicGames)",
+        "LastSummerOlympicGamesIn(tokyo)",
+        "WonMostMedalsIn(tokyo, unitedStates)"
+      ],
+      "translated_conclusion": "¬LastSummerOlympicGamesIn(tokyo)",
+      "elapsed_sec": 5.47
+    },
+    {
+      "example_id": "149",
+      "story_id": "51",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "SportingEvent(summerOlympicGames)",
+        "LastSummerOlympicGames(tokyo)",
+        "WonMostMedals(UnitedStates, tokyo)"
+      ],
+      "translated_conclusion": "∀x (LastSummerOlympicGames(x) → WonMostMedals(UnitedStates, x))",
+      "elapsed_sec": 6.26
+    },
+    {
+      "example_id": "703",
+      "story_id": "259",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Horse(x) → HasHooves(x))",
+        "∀x (Human(x) → ¬HasHooves(x))"
+      ],
+      "translated_conclusion": "∃x (Human(x) ∧ Horse(x))",
+      "elapsed_sec": 4.75
+    },
+    {
+      "example_id": "442",
+      "story_id": "152",
+      "gold_label": "False",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '≠'.  Expected token ')'.\nall x all y (Departure(x) & Arrival(y) -> x ≠ y)\n                                            ^",
+      "translated_premises": [
+        "Flies(susan, lgaAirport)",
+        "∀x ∀y (Departure(x) ∧ Arrival(y) → x ≠ y)",
+        "Flies(john, lgaAirport)"
+      ],
+      "translated_conclusion": "Flies(susan, lgaAirport) ∧ ∀x ∀y (Departure(x) ∧ Arrival(y) → x ≠ y) → Flies(susan, lgaAirport)",
+      "elapsed_sec": 7.91
+    },
+    {
+      "example_id": "443",
+      "story_id": "152",
+      "gold_label": "False",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '≠'.  Expected token ')'.\nall x all y (Departure(x) & Arrival(y) -> x ≠ y)\n                                            ^",
+      "translated_premises": [
+        "Flies(susan, lgaAirport)",
+        "∀x ∀y (Departure(x) ∧ Arrival(y) → x ≠ y)",
+        "Flies(john, lgaAirport)"
+      ],
+      "translated_conclusion": "Flies(john, lgaAirport)",
+      "elapsed_sec": 5.58
+    },
+    {
+      "example_id": "1268",
+      "story_id": "441",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (NiceToAnimals(x) → ¬MeanToAnimals(x))",
+        "∃x (Grumpy(x) ∧ MeanToAnimals(x))",
+        "∀x (AnimalLover(x) → NiceToAnimals(x))",
+        "∀x (PetOwner(x) → LovesAnimals(x))",
+        "PetOwner(tom)"
+      ],
+      "translated_conclusion": "Grumpy(tom)",
+      "elapsed_sec": 8.22
+    },
+    {
+      "example_id": "1269",
+      "story_id": "441",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (NiceToAnimals(x) → ¬MeanToAnimals(x))",
+        "∃x (Grumpy(x) ∧ MeanToAnimals(x))",
+        "∀x (AnimalLover(x) → NiceToAnimals(x))",
+        "∀x (PetOwner(x) → LovesAnimals(x))",
+        "PetOwner(tom)"
+      ],
+      "translated_conclusion": "¬(Grumpy(tom) ∧ MeanToAnimals(tom))",
+      "elapsed_sec": 8.97
+    },
+    {
+      "example_id": "1270",
+      "story_id": "441",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (NiceToAnimals(x) ∧ MeanToAnimals(x) → ¬NiceToAnimals(x))",
+        "∃x (Grumpy(x) ∧ MeanToAnimals(x))",
+        "∀x (AnimalLover(x) → NiceToAnimals(x))",
+        "∀x (PetOwner(x) → AnimalLover(x))",
+        "PetOwner(tom)"
+      ],
+      "translated_conclusion": "∀x (Grumpy(x) ∧ MeanToAnimals(x) → PetOwner(x) ∨ AnimalLover(x))",
+      "elapsed_sec": 10.53
+    },
+    {
+      "example_id": "189",
+      "story_id": "64",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "¬Novel(podcast)",
+        "∀x (BornIn(x, americanCity) → American(x))",
+        "∀x (Novel(x) ∧ WrittenBy(x, y) → NovelWriter(y))",
+        "AmericanWriter(daniShapiro)",
+        "WrittenBy(familyHistory, daniShapiro)",
+        "Novel(familyHistory) ∧ WrittenInYr(familyHistory, yr2003)",
+        "CreatedPodcast(daniShapiro, familySecrets)",
+        "AmericanCity(boston)"
+      ],
+      "translated_conclusion": "NovelWriter(daniShapiro)",
+      "elapsed_sec": 11.38
+    },
+    {
+      "example_id": "190",
+      "story_id": "64",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "¬Novel(podcast)",
+        "∀x (BornIn(x, americanCity) → American(x))",
+        "∀x (Novel(x) ∧ WrittenBy(x, y) → NovelWriter(y))",
+        "AmericanWriter(daniShapiro)",
+        "WrittenBy(familyHistory, daniShapiro)",
+        "Novel(familyHistory) ∧ WrittenInYr(familyHistory, yr2003)",
+        "CreatedPodcast(daniShapiro, familySecrets)",
+        "AmericanCity(boston)"
+      ],
+      "translated_conclusion": "Novel(familySecrets)",
+      "elapsed_sec": 11.51
+    },
+    {
+      "example_id": "191",
+      "story_id": "64",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "¬Novel(podcast)",
+        "∀x (BornIn(x, americanCity) → American(x))",
+        "∀x (Novel(x) ∧ WrittenBy(x, y) → NovelWriter(y))",
+        "AmericanWriter(daniShapiro)",
+        "WrittenBy(familyHistory, daniShapiro)",
+        "Novel(familyHistory) ∧ WrittenInYr(familyHistory, yr2003)",
+        "CreatedPodcast(daniShapiro, familySecrets)",
+        "AmericanCity(boston)"
+      ],
+      "translated_conclusion": "BornIn(daniShapiro, boston)",
+      "elapsed_sec": 11.52
+    },
+    {
+      "example_id": "1313",
+      "story_id": "456",
+      "gold_label": "Uncertain",
+      "predicted_label": "False",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+        "∀x (ProfessionalBasketballPlayer(x) → CanJumpShot(x))",
+        "∀x (CanJumpShot(x) → LeapsStraightIntoAir(x))",
+        "∀x (LeapsStraightIntoAir(x) → ActivatesLegMuscles(x))",
+        "¬ActivatesLegMuscles(yuri)"
+      ],
+      "translated_conclusion": "∀x (ProfessionalBasketballPlayer(x) → AmericanNational(x))",
+      "elapsed_sec": 9.72
+    },
+    {
+      "example_id": "1314",
+      "story_id": "456",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+        "∀x (ProfessionalBasketballPlayer(x) → CanJumpShot(x))",
+        "∀x (CanJumpShot(x) → LeapsStraightIntoAir(x))",
+        "∀x (LeapsStraightIntoAir(x) → ActivatesLegMuscles(x))",
+        "¬ActivatesLegMuscles(yuri)"
+      ],
+      "translated_conclusion": "∀x (ProfessionalBasketballPlayer(x) ∧ AmericanNational(x) → ¬AmericanNational(yuri))",
+      "elapsed_sec": 10.21
+    },
+    {
+      "example_id": "1315",
+      "story_id": "456",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+        "∀x (ProfessionalBasketballPlayer(x) → CanJumpShot(x))",
+        "∀x (CanJumpShot(x) → LeapsStraightIntoAir(x))",
+        "∀x (LeapsStraightIntoAir(x) → ActivatesLegMuscles(x))",
+        "¬ActivatesLegMuscles(yuri)"
+      ],
+      "translated_conclusion": "ProfessionalBasketballPlayer(yuri) ∧ AmericanNational(yuri)",
+      "elapsed_sec": 9.65
+    },
+    {
+      "example_id": "1316",
+      "story_id": "456",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+        "∀x (ProfessionalBasketballPlayer(x) → CanJumpShot(x))",
+        "∀x (CanJumpShot(x) → LeapsStraightIntoAir(x))",
+        "∀x (LeapsStraightIntoAir(x) → ActivatesLegMuscles(x))",
+        "¬ActivatesLegMuscles(yuri)"
+      ],
+      "translated_conclusion": "∀x (¬LeapsStraightIntoAir(x) → AmericanNational(x) ∧ ProfessionalBasketballPlayer(x))",
+      "elapsed_sec": 10.56
+    },
+    {
+      "example_id": "1317",
+      "story_id": "456",
+      "gold_label": "False",
+      "predicted_label": "True",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+        "∀x (ProfessionalBasketballPlayer(x) → CanJumpShot(x))",
+        "∀x (CanJumpShot(x) → LeapsStraightIntoAir(x))",
+        "∀x (LeapsStraightIntoAir(x) → ActivatesLegMuscles(x))",
+        "¬ActivatesLegMuscles(yuri)"
+      ],
+      "translated_conclusion": "∀x (¬AmericanNational(x) ∧ ProfessionalBasketballPlayer(x) → CanJumpShot(x))",
+      "elapsed_sec": 10.51
+    },
+    {
+      "example_id": "724",
+      "story_id": "280",
+      "gold_label": "False",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Event(x) → Happy(x) ∨ Sad(x))",
+        "∃x (Event(x) ∧ Happy(x))"
+      ],
+      "translated_conclusion": "∀x (Event(x) → Sad(x))",
+      "elapsed_sec": 4.61
+    },
+    {
+      "example_id": "411",
+      "story_id": "140",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Winner(winner1992duMaurierClassic, steinhauer)",
+        "ParticipatedIn(steinhauer, duMaurierClassic1992)",
+        "∃x (∃y (Leaderboard(x, y) ∧ SixWayTie(x)) ∧ From(x, belgium))",
+        "From(descampe, belgium) ∧ Leaderboard(descampe, duMaurierClassic1992)",
+        "∀x (Leaderboard(x, duMaurierClassic1992) → ParticipatedIn(x, duMaurierClassic1992))"
+      ],
+      "translated_conclusion": "¬Winner(winner1992duMaurierClassic, steinhauer)",
+      "elapsed_sec": 13.02
+    },
+    {
+      "example_id": "412",
+      "story_id": "140",
+      "gold_label": "Uncertain",
+      "predicted_label": "True",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Winner(winner1992duMaurierClassic, steinhauer)",
+        "ParticipatedIn(steinhauer, duMaurierClassic1992)",
+        "∃x (∃y (Leaderboard(x, duMaurierClassic1992) ∧ Tie(x, 6)) ∧ From(x, belgium))",
+        "From(descampe, belgium) ∧ Leaderboard(descampe, duMaurierClassic1992)",
+        "∀x (Leaderboard(x, duMaurierClassic1992) → ParticipatedIn(x, duMaurierClassic1992))"
+      ],
+      "translated_conclusion": "Leaderboard(descampe, duMaurierClassic1992) ∧ ∃y (Leaderboard(y, duMaurierClassic1992) ∧ Tie(y, 6) ∧ From(y, belgium))",
+      "elapsed_sec": 15.94
+    },
+    {
+      "example_id": "1324",
+      "story_id": "459",
+      "gold_label": "Uncertain",
+      "predicted_label": "Uncertain",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Likes(jane, x) → ¬AnimalThatBarks(x))",
+        "∀x (Dog(x) → AnimalThatBarks(x))",
+        "∀x (Animal(x) → Likes(jane, x))",
+        "∀x (HasLegs(x) → Jumps(x))",
+        "∀x (Terricolous(x) → HasLegs(x))",
+        "Animal(kiKi)",
+        "∀x (¬(Jumps(x) ∨ HasLegs(x)) → (Terricolous(x) ∨ HasLegs(x)))"
+      ],
+      "translated_conclusion": "Terricolous(kiKi)",
+      "elapsed_sec": 12.17
+    },
+    {
+      "example_id": "1325",
+      "story_id": "459",
+      "gold_label": "False",
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Likes(jane, x) → ¬(Animal(x) ∧ Barks(x)))",
+        "∀x (Dog(x) → Animal(x) ∧ Barks(x))",
+        "∀x (Animal(x) → Likes(jane, x))",
+        "∀x (HasLegs(x) → Jumps(x))",
+        "∀x (Terricolous(x) → HasLegs(x))",
+        "Animal(kiKi)",
+        "∀x (¬(Jumps(x) ∨ HasLegs(x)) → Terricolous(x) ∨ HasLegs(x))"
+      ],
+      "translated_conclusion": "Dog(kiKi) ∧ Barks(kiKi)",
+      "elapsed_sec": 12.96
+    },
+    {
+      "example_id": "1326",
+      "story_id": "459",
+      "gold_label": "True",
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Likes(jane, x) → ¬(Animal(x) ∧ Barks(x)))",
+        "∀x (Dog(x) → Animal(x) ∧ Barks(x))",
+        "∀x (Animal(x) → Likes(jane, x) → Jumps(x))",
+        "∀x (HasLegs(x) → Jumps(x))",
+        "∀x (Terricolous(x) → HasLegs(x))",
+        "Animal(kiki)",
+        "∀x (¬(Jumps(x) ∨ HasLegs(x)) → Terricolous(x) ∨ HasLegs(x))"
+      ],
+      "translated_conclusion": "¬(Barks(kiki) ∨ Dog(kiki))",
+      "elapsed_sec": 13.13
+    },
+    {
+      "example_id": "304",
+      "story_id": "101",
+      "gold_label": "False",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: Unexpected character (see end of marked string):\n\n%%START ERROR%%\n    (BrazilianFootballer(ailtonSilva) & PlaysFor(ailtonSilva,n�%%END ERROR%%�utico)).\n\nFatal error:  sread_term error",
+      "translated_premises": [
+        "Person(ailtonSilva) ∧ Born(ailtonSilva, yr1995) ∧ CommonlyKnownAs(ailtonSilva, ailton)",
+        "FootballPlayer(ailtonSilva) ∧ LoanedOut(ailtonSilva, braga)",
+        "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, náutico)",
+        "FootballClub(náutico) ∧ FootballClub(braga)",
+        "FootballClub(fluminense)"
+      ],
+      "translated_conclusion": "∀x (PlaysFor(x, náutico) → ¬BrazilianFootballer(x))",
+      "elapsed_sec": 12.26
+    },
+    {
+      "example_id": "305",
+      "story_id": "101",
+      "gold_label": "False",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: Unexpected character (see end of marked string):\n\n%%START ERROR%%\n    (BrazilianFootballer(ailtonSilva) & PlaysFor(ailtonSilva,n�%%END ERROR%%�utico)).\n\nFatal error:  sread_term error",
+      "translated_premises": [
+        "Person(ailtonSilva) ∧ Born(ailtonSilva, yr1995) ∧ CommonlyKnownAs(ailtonSilva, ailton)",
+        "FootballPlayer(ailtonSilva) ∧ LoanedOut(ailtonSilva, braga)",
+        "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, náutico)",
+        "FootballClub(náutico) ∧ FootballClub(braga)",
+        "FootballClub(fluminense)"
+      ],
+      "translated_conclusion": "¬PlaysFor(ailtonSilva, fluminense)",
+      "elapsed_sec": 11.45
+    },
+    {
+      "example_id": "306",
+      "story_id": "101",
+      "gold_label": "False",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: Unexpected character (see end of marked string):\n\n%%START ERROR%%\n    (BrazilianFootballer(ailtonSilva) & PlaysFor(ailtonSilva,n�%%END ERROR%%�utico)).\n\nFatal error:  sread_term error",
+      "translated_premises": [
+        "Person(ailtonSilva) ∧ Born(ailtonSilva, yr1995) ∧ CommonlyKnownAs(ailtonSilva, ailton)",
+        "FootballPlayer(ailtonSilva) ∧ LoanedOut(ailtonSilva, braga)",
+        "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, náutico)",
+        "FootballClub(náutico) ∧ FootballClub(braga)",
+        "FootballClub(fluminense)"
+      ],
+      "translated_conclusion": "¬LoanedOut(ailtonSilva, FootballClub(x))",
+      "elapsed_sec": 11.56
+    },
+    {
+      "example_id": "307",
+      "story_id": "101",
+      "gold_label": "Uncertain",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: Unexpected character (see end of marked string):\n\n%%START ERROR%%\n    (BrazilianFootballer(ailtonSilva) & PlaysFor(ailtonSilva,n�%%END ERROR%%�utico)).\n\nFatal error:  sread_term error",
+      "translated_premises": [
+        "Person(ailtonSilva) ∧ Born(ailtonSilva, yr1995) ∧ CommonlyKnownAs(ailtonSilva, ailton)",
+        "FootballPlayer(ailtonSilva) ∧ LoanedOut(ailtonSilva, braga)",
+        "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, náutico)",
+        "FootballClub(náutico) ∧ FootballClub(braga)",
+        "FootballClub(fluminense)"
+      ],
+      "translated_conclusion": "PlayedFor(ailtonSilva, fluminense)",
+      "elapsed_sec": 11.34
+    },
+    {
+      "example_id": "308",
+      "story_id": "101",
+      "gold_label": "Uncertain",
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: Unexpected character (see end of marked string):\n\n%%START ERROR%%\n    (BrazilianFootballer(ailtonSilva) & PlaysFor(ailtonSilva,n�%%END ERROR%%�utico)).\n\nFatal error:  sread_term error",
+      "translated_premises": [
+        "Person(ailtonSilva) ∧ Born(ailtonSilva, yr1995) ∧ CommonlyKnownAs(ailtonSilva, ailton)",
+        "FootballPlayer(ailtonSilva) ∧ LoanedOut(ailtonSilva, braga)",
+        "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, náutico)",
+        "FootballClub(náutico) ∧ FootballClub(braga)",
+        "FootballClub(fluminense)"
+      ],
+      "translated_conclusion": "LoanedOut(ailtonSilva, FootballClub(x))",
+      "elapsed_sec": 11.4
+    }
+  ]
+}
