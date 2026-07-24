@@ -16,8 +16,15 @@ through `wsl -d Ubuntu -- ...` instead. This means every teammate running
 this grounder on Windows needs WSL (Ubuntu) enabled -- document this
 alongside the CUDA/HF setup steps, it's a genuine team-wide setup
 requirement, not just this machine's quirk.
+
+Added 2026-07-24 (Phase 3.1): GPU work (LlamaHarness translation) runs on
+Kaggle, which is Linux, so the WSL wrapper doesn't apply there -- `LinuxProver9`
+runs the same vendored binary directly instead. `get_prover9()` picks the
+right one for the current OS at call time; `check_entailment` always goes
+through it rather than hardcoding either class.
 """
 
+import platform
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
@@ -147,15 +154,13 @@ def parse_fol(text: str) -> Expression:
     return Expression.fromstring(normalize_fol(text))
 
 
-class WSLProver9(Prover9):
-    """Routes NLTK's Prover9 subprocess calls through `wsl -d Ubuntu --`,
-    since the vendored prover9 binary is a Linux ELF executable.
+class _Prover9CommonMixin:
+    """Shared logic between the Windows (WSL-wrapped) and Linux (native)
+    Prover9 runners -- everything except the actual subprocess invocation in
+    `_call`, which differs per platform. Splitting it out this way means the
+    `prolog_style_variables` fix (below) and error-classification logic can't
+    silently drift apart between the two paths.
     """
-
-    def __init__(self, timeout: int = 60, wsl_distro: str = WSL_DISTRO, wsl_binary_path: str = WSL_PROVER9_PATH):
-        super().__init__(timeout)
-        self._wsl_distro = wsl_distro
-        self._wsl_binary_path = wsl_binary_path
 
     def _call_prover9(self, input_str, args=None, verbose=False):
         args = args or []
@@ -188,12 +193,9 @@ class WSLProver9(Prover9):
                 raise Prover9FatalException(returncode, errormsg)
         return stdout, returncode
 
-    def _call(self, input_str, binary, args=None, verbose=False):
-        args = args or []
-        cmd = ["wsl", "-d", self._wsl_distro, "--", self._wsl_binary_path] + args
+    def _run_subprocess(self, cmd, input_str, verbose=False):
         if verbose:
             print("Calling:", cmd)
-
         p = subprocess.Popen(
             cmd,
             stdout=subprocess.PIPE,
@@ -207,6 +209,55 @@ class WSLProver9(Prover9):
         # cosmetic mangling in the echoed text doesn't crash the actual
         # proof result, which Prover9 computed correctly regardless.
         return stdout.decode("utf-8", errors="replace"), p.returncode
+
+
+class WSLProver9(_Prover9CommonMixin, Prover9):
+    """Routes NLTK's Prover9 subprocess calls through `wsl -d Ubuntu --`,
+    since the vendored prover9 binary is a Linux ELF executable and this
+    class is used when the calling process itself is Windows.
+    """
+
+    def __init__(self, timeout: int = 60, wsl_distro: str = WSL_DISTRO, wsl_binary_path: str = WSL_PROVER9_PATH):
+        super().__init__(timeout)
+        self._wsl_distro = wsl_distro
+        self._wsl_binary_path = wsl_binary_path
+
+    def _call(self, input_str, binary, args=None, verbose=False):
+        cmd = ["wsl", "-d", self._wsl_distro, "--", self._wsl_binary_path] + (args or [])
+        return self._run_subprocess(cmd, input_str, verbose)
+
+
+class LinuxProver9(_Prover9CommonMixin, Prover9):
+    """Runs the vendored Linux prover9 binary directly -- no WSL wrapper
+    needed because the calling process is already Linux (e.g. a Kaggle
+    kernel, which is where Phase 3+ translation work runs since it needs a
+    GPU). Added 2026-07-24 for Phase 3.1: until now the grounder only ever
+    ran on Windows (Phase 2.1's ceiling check is CPU-only and local), so
+    this path was never needed. `git clone` doesn't preserve the execute
+    bit reliably, so `chmod` it defensively rather than assume it's set.
+    """
+
+    def __init__(self, timeout: int = 60, binary_path: Path = _VENDOR_BIN):
+        super().__init__(timeout)
+        self._binary_path = binary_path
+        mode = self._binary_path.stat().st_mode
+        if not mode & 0o111:
+            self._binary_path.chmod(mode | 0o111)
+
+    def _call(self, input_str, binary, args=None, verbose=False):
+        cmd = [str(self._binary_path)] + (args or [])
+        return self._run_subprocess(cmd, input_str, verbose)
+
+
+def get_prover9(timeout: int = 60):
+    """Picks the right Prover9 runner for the current OS -- WSL-wrapped on
+    Windows (dev machine), native on Linux (Kaggle). See module docstring:
+    same solver either way, just a different way of invoking the same
+    vendored binary, so results stay comparable across environments.
+    """
+    if platform.system() == "Windows":
+        return WSLProver9(timeout=timeout)
+    return LinuxProver9(timeout=timeout)
 
 
 @dataclass
@@ -228,7 +279,7 @@ def check_entailment(premises: List[str], conclusion: str, timeout: int = 60) ->
     goal = parse_fol(conclusion)
     negated_goal = Expression.fromstring(f"-({normalize_fol(conclusion)})")
 
-    prover = WSLProver9(timeout=timeout)
+    prover = get_prover9(timeout=timeout)
 
     def _try_prove(target):
         try:
