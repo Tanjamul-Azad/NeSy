@@ -89,20 +89,24 @@ class LlamaHarness:
 
         prompt = PROMPT_TEMPLATE.format(premise=premise)
         messages = [{"role": "user", "content": prompt}]
+        # return_dict=True: newer transformers versions return a BatchEncoding
+        # (dict-like, no .shape) from apply_chat_template unless explicitly
+        # told to, so unpack it into generate() rather than pass positionally.
         inputs = self.tokenizer.apply_chat_template(
-            messages, add_generation_prompt=True, return_tensors="pt"
+            messages, add_generation_prompt=True, return_tensors="pt", return_dict=True
         ).to(self.model.device)
 
         with torch.no_grad():
             output_ids = self.model.generate(
-                inputs,
+                **inputs,
                 max_new_tokens=max_new_tokens,
                 do_sample=False,  # temperature=0 / greedy: determinism is the point
                 num_beams=1,
             )
 
+        input_length = inputs["input_ids"].shape[-1]
         raw_output = self.tokenizer.decode(
-            output_ids[0][inputs.shape[-1]:], skip_special_tokens=True
+            output_ids[0][input_length:], skip_special_tokens=True
         ).strip()
         fol = raw_output.strip()
 
