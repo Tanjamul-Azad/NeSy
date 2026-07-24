@@ -59,6 +59,15 @@ class ClassifiedResult:
     outcome: str  # "correct" | "loud_failure" | "silent_failure"
     error: Optional[str] = None
     entailment: Optional[EntailmentResult] = None
+    # Sub-reason for a loud failure. Both are loud (visibly broken, no gold
+    # label needed to notice), but they mean different things and lumping
+    # them together would hide which one dominates:
+    #   "translation_format" -- the model's output couldn't be parsed into
+    #       one formula per statement at all (refusal, truncation, wrong
+    #       shape). A prompting/decoding problem, not an FOL problem.
+    #   "fol_parse" -- formulas were extracted fine, but the grounder or
+    #       Prover9 rejected the FOL itself.
+    failure_stage: Optional[str] = None
 
 
 def classify_example(
@@ -77,6 +86,7 @@ def classify_example(
             predicted_label=None,
             outcome="loud_failure",
             error=f"{type(e).__name__}: {e}",
+            failure_stage="fol_parse",
         )
 
     outcome = "correct" if result.label == gold_label else "silent_failure"
@@ -100,6 +110,14 @@ def summarize(results: List[ClassifiedResult]) -> dict:
         "correct": correct,
         "loud_failure": loud,
         "silent_failure": silent,
+        # Split the loud bucket by cause -- a run dominated by
+        # translation_format failures means the prompt/decoding needs fixing
+        # before any prevalence number is meaningful, which a single combined
+        # loud count would hide.
+        "loud_failure_translation_format": sum(
+            r.failure_stage == "translation_format" for r in results
+        ),
+        "loud_failure_fol_parse": sum(r.failure_stage == "fol_parse" for r in results),
         "accuracy": correct / n if n else 0.0,
         "loud_failure_rate": loud / n if n else 0.0,
         # Overall prevalence (denominator = all examples run)
