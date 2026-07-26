@@ -61,8 +61,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="gpt-4o-mini",
                     help="gpt-4o-mini (cheap, capability midpoint) or gpt-4o (strongest test)")
+    ap.add_argument("--dataset", default="folio",
+                    choices=["folio", "proofwriter", "prontoqa"])
     ap.add_argument("--limit", type=int, default=50,
-                    help="use 203 for the full validation split")
+                    help="use the full split (203/600/500) by passing 0 or the exact size")
     ap.add_argument("--phase", default="both", choices=["vanilla", "self_refine", "both"])
     ap.add_argument("--timeout", type=int, default=30, help="Prover9 timeout (seconds)")
     ap.add_argument("--max-rounds", type=int, default=2)
@@ -74,7 +76,7 @@ def main():
     est = estimate(args.model, args.phase, n)
 
     print("=" * 68)
-    print(f"Phase 3.3 / 4.2  |  model={args.model}  n={n}  phase={args.phase}")
+    print(f"Phase 3.3 / 4.2  |  dataset={args.dataset}  model={args.model}  n={n}  phase={args.phase}")
     print("=" * 68)
     print(f"Estimated cost: ~${est:.2f}  (rough; pricing table may be stale — verify)")
     print("Same prompts, parser and Prover9 grounder as the Llama arm (imported, not copied).")
@@ -94,12 +96,14 @@ def main():
     )
 
     tag = args.model.replace(".", "").replace("-", "")
+    nsuffix = f"_n{args.limit}" if args.limit else ""
 
     if args.phase in ("vanilla", "both"):
         print("\n" + "#" * 68)
-        print(f"# PHASE 3.3 — vanilla silent-failure prevalence on {args.model}")
+        print(f"# PHASE 3.3 — vanilla silent-failure prevalence on {args.model} / {args.dataset}")
         print("#" * 68)
         run_vanilla_pipeline(
+            dataset=args.dataset,
             split="validation",
             limit=args.limit,
             timeout=args.timeout,
@@ -109,16 +113,16 @@ def main():
             sample="random",
             sample_seed=args.sample_seed,
             out_path=str(PROJECT_ROOT / "experiments" / "logs"
-                         / f"vanilla_pipeline_{tag}_validation"
-                           f"{f'_n{args.limit}' if args.limit else ''}.json"),
+                         / f"vanilla_pipeline_{args.dataset}_{tag}_validation{nsuffix}.json"),
         )
         print(f"\n  cost so far: {harness.cost_report()}")
 
     if args.phase in ("self_refine", "both"):
         print("\n" + "#" * 68)
-        print(f"# PHASE 4.2 — Self-Refine falsification gate on {args.model}")
+        print(f"# PHASE 4.2 — Self-Refine falsification gate on {args.model} / {args.dataset}")
         print("#" * 68)
         self_refine_pipeline.run(
+            dataset=args.dataset,
             split="validation",
             limit=args.limit,
             timeout=args.timeout,
@@ -127,8 +131,7 @@ def main():
             sample="random",
             sample_seed=args.sample_seed,
             out_path=str(PROJECT_ROOT / "experiments" / "logs"
-                         / f"self_refine_{tag}_validation"
-                           f"{f'_n{args.limit}' if args.limit else ''}.json"),
+                         / f"self_refine_{args.dataset}_{tag}_validation{nsuffix}.json"),
         )
 
     print("\n" + "=" * 68)

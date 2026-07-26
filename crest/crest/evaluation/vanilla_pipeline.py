@@ -52,7 +52,7 @@ if hasattr(sys.stdout, "reconfigure"):
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from data.loaders.folio_loader import load_folio
+from data.loaders.registry import load_dataset_by_name
 from crest.inference.llama_harness import LlamaHarness, StoryFormatError
 from crest.evaluation.silent_failure_metrics import (
     ClassifiedResult,
@@ -104,6 +104,7 @@ def run_vanilla_pipeline(
     few_shot: bool = True,
     sample: str = "random",
     sample_seed: int = 42,
+    dataset: str = "folio",
 ):
     """`harness` lets a caller pass an already-loaded LlamaHarness. Loading
     Llama-3.1-8B twice (once for a notebook smoke test, once here) wastes
@@ -125,7 +126,7 @@ def run_vanilla_pipeline(
     if mode not in ("story", "per_premise"):
         raise ValueError(f"unknown mode {mode!r}; expected 'story' or 'per_premise'")
 
-    data = load_folio(split=split)
+    data = load_dataset_by_name(dataset, split=split)
     if limit:
         data = subsample(data, limit, strategy=sample, seed=sample_seed)
 
@@ -184,6 +185,9 @@ def run_vanilla_pipeline(
             "example_id": ex.example_id,
             "story_id": ex.story_id,
             "gold_label": ex.label,
+            # Carried so severity code can tell a binary dataset (PrOntoQA)
+            # from a 3-way one without re-loading the dataset.
+            "label_space": list(getattr(ex, "label_space", ("False", "True", "Uncertain"))),
             "predicted_label": result.predicted_label,
             "outcome": result.outcome,
             "failure_stage": result.failure_stage,
@@ -199,7 +203,7 @@ def run_vanilla_pipeline(
         )
 
     summary = summarize(classified)
-    print(f"\n=== Vanilla pipeline on {split} (n={summary['n']}, mode={mode}) ===")
+    print(f"\n=== Vanilla pipeline: {dataset} {split} (n={summary['n']}, mode={mode}) ===")
     print(f"correct: {summary['correct']} ({summary['accuracy']:.1%})")
     print(f"loud_failure: {summary['loud_failure']} ({summary['loud_failure_rate']:.1%})")
     print(f"  - translation_format:    {summary['loud_failure_translation_format']}")
@@ -215,16 +219,16 @@ def run_vanilla_pipeline(
 
     if out_path is None:
         suffix = f"_n{limit}" if limit else ""
-        # Mode is in the filename: a "story" run and a "per_premise" ablation
-        # of the same split are different experiments and must not overwrite
-        # each other.
+        # Dataset, mode and shot are all in the filename: different datasets or
+        # a "story" run vs a "per_premise" ablation are different experiments
+        # and must not overwrite each other.
         shot = "fewshot" if few_shot else "zeroshot"
         out_path = (PROJECT_ROOT / "experiments" / "logs"
-                    / f"vanilla_pipeline_{mode}_{shot}_{split}{suffix}.json")
+                    / f"vanilla_pipeline_{dataset}_{mode}_{shot}_{split}{suffix}.json")
     out_file = Path(out_path)
     out_file.parent.mkdir(parents=True, exist_ok=True)
     with open(out_file, "w", encoding="utf-8") as f:
-        json.dump({"split": split, "limit": limit, "mode": mode,
+        json.dump({"dataset": dataset, "split": split, "limit": limit, "mode": mode,
                    "few_shot": few_shot,
                    "sample": sample, "sample_seed": sample_seed,
                    "summary": summary, "results": records}, f, indent=2, ensure_ascii=False)
@@ -237,6 +241,8 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
+    parser.add_argument("--dataset", default="folio",
+                        choices=["folio", "proofwriter", "prontoqa"])
     parser.add_argument("--split", default="validation", choices=["train", "validation"])
     parser.add_argument("--limit", type=int, default=50, help="Phase 3.1: start with a 50-100 example subset")
     parser.add_argument("--timeout", type=int, default=60)
@@ -257,6 +263,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     run_vanilla_pipeline(
+        dataset=args.dataset,
         split=args.split,
         limit=args.limit,
         timeout=args.timeout,
