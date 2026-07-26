@@ -234,7 +234,8 @@ def run_vanilla_pipeline(
     out_file = Path(out_path)
     out_file.parent.mkdir(parents=True, exist_ok=True)
     with open(out_file, "w", encoding="utf-8") as f:
-        json.dump({"dataset": dataset, "split": split, "limit": limit, "mode": mode,
+        json.dump({"dataset": dataset, "model": getattr(harness, "model_name", "unknown"),
+                   "split": split, "limit": limit, "mode": mode,
                    "few_shot": few_shot,
                    "sample": sample, "sample_seed": sample_seed,
                    "summary": summary, "results": records}, f, indent=2, ensure_ascii=False)
