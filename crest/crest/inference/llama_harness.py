@@ -24,6 +24,8 @@ from typing import List, Tuple
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
+from crest.inference.confidence import _confidence_stats
+
 MODEL_NAME = "NousResearch/Meta-Llama-3.1-8B-Instruct"
 SEED = 42
 
@@ -307,6 +309,9 @@ class LlamaHarness:
             torch_dtype=torch.float16,
         )
         self.model.eval()
+        # Confidence of the most recent generation; the pipeline reads this
+        # after translate_story to log the story translation's confidence.
+        self.last_confidence = None
 
     def _generate(self, prompt: str, max_new_tokens: int) -> Tuple[str, bool]:
         """Returns (text, hit_token_cap). The flag matters: output that ran
@@ -325,17 +330,36 @@ class LlamaHarness:
         ).to(self.model.device)
 
         with torch.no_grad():
-            output_ids = self.model.generate(
+            output = self.model.generate(
                 **inputs,
                 max_new_tokens=max_new_tokens,
                 do_sample=False,  # temperature=0 / greedy: determinism is the point
                 num_beams=1,
+                # Per-step scores so we can recover the logprob the model
+                # assigned to each generated token -- the "internal reasoning"
+                # confidence signal, matching what the OpenAI logprobs API
+                # gives, so both arms are directly comparable.
+                return_dict_in_generate=True,
+                output_scores=True,
             )
 
+        output_ids = output.sequences
         input_length = inputs["input_ids"].shape[-1]
         generated = output_ids[0][input_length:]
         hit_cap = len(generated) >= max_new_tokens
         text = self.tokenizer.decode(generated, skip_special_tokens=True).strip()
+
+        # Recover per-token logprob of each chosen (greedy) token via
+        # log_softmax over that step's logits. output.scores is one tensor per
+        # generated step; guard against an empty generation.
+        token_logprobs = []
+        for step, score in enumerate(output.scores):
+            if step >= len(generated):
+                break
+            logp = torch.log_softmax(score[0].float(), dim=-1)
+            token_logprobs.append(logp[generated[step]].item())
+        self.last_confidence = _confidence_stats(token_logprobs)
+
         return text, hit_cap
 
     def translate(self, premise: str, max_new_tokens: int = 200) -> str:
