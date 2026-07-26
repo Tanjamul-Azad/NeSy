@@ -38,6 +38,7 @@ from typing import List, Optional, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
+from crest.inference.confidence import _confidence_stats
 from crest.inference.llama_harness import (
     PROMPT_TEMPLATE,
     PROMPT_VERSION,
@@ -111,6 +112,9 @@ class OpenAIHarness:
         self.prompt_tokens = 0
         self.completion_tokens = 0
         self.n_calls = 0
+        # Confidence of the most recent generation; the pipeline reads this
+        # after translate_story to log the story translation's confidence.
+        self.last_confidence = None
 
     # ---- cost ------------------------------------------------------------
     @property
@@ -142,6 +146,12 @@ class OpenAIHarness:
                     temperature=0,
                     seed=self.seed,
                     max_tokens=max_new_tokens,
+                    # Token-level confidence, free with the same call. This is
+                    # the "internal reasoning" signal: does the model's own
+                    # uncertainty over the FOL it produced predict whether that
+                    # FOL will silently fail? Captured here for every call so
+                    # the detection analysis needs no re-run.
+                    logprobs=True,
                 )
                 break
             except Exception as e:  # rate limits, transient 5xx
@@ -162,6 +172,9 @@ class OpenAIHarness:
         self.n_calls += 1
         self.prompt_tokens += resp.usage.prompt_tokens
         self.completion_tokens += resp.usage.completion_tokens
+        self.last_confidence = _confidence_stats(
+            [t.logprob for t in choice.logprobs.content] if choice.logprobs and choice.logprobs.content else []
+        )
         self._last_meta = {
             "system_fingerprint": getattr(resp, "system_fingerprint", None),
             "prompt_tokens": resp.usage.prompt_tokens,

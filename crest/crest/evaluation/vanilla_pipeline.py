@@ -156,6 +156,11 @@ def run_vanilla_pipeline(
             translated_premises = [harness.translate(p) for p in ex.premises]
             translated_conclusion = harness.translate(ex.conclusion)
 
+        # Confidence of the whole-story translation, captured whether or not
+        # the output parsed -- a format failure with very low confidence is
+        # itself a data point for the detection analysis.
+        confidence = getattr(harness, "last_confidence", None)
+
         if format_error is not None:
             result = ClassifiedResult(
                 example_id=ex.example_id,
@@ -194,6 +199,7 @@ def run_vanilla_pipeline(
             "error": result.error,
             "translated_premises": translated_premises,
             "translated_conclusion": translated_conclusion,
+            "confidence": confidence,
             "elapsed_sec": round(elapsed, 2),
         }
         records.append(record)
