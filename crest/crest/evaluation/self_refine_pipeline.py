@@ -22,7 +22,7 @@ if hasattr(sys.stdout, "reconfigure"):
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from data.loaders.folio_loader import load_folio
+from data.loaders.registry import load_dataset_by_name
 from crest.inference.llama_harness import LlamaHarness
 from crest.baselines.self_refine import run_self_refine, SELF_REFINE_VERSION
 from crest.evaluation.silent_failure_metrics import (
@@ -50,8 +50,9 @@ def run(
     sample: str = "random",
     sample_seed: int = 42,
     out_path: str = None,
+    dataset: str = "folio",
 ):
-    data = load_folio(split=split)
+    data = load_dataset_by_name(dataset, split=split)
     if limit:
         data = subsample(data, limit, strategy=sample, seed=sample_seed)
 
@@ -91,6 +92,7 @@ def run(
             "example_id": ex.example_id,
             "story_id": ex.story_id,
             "gold_label": ex.label,
+            "label_space": list(getattr(ex, "label_space", ("False", "True", "Uncertain"))),
             "vanilla_predicted": van.predicted_label,
             "vanilla_outcome": van.outcome,
             "vanilla_severity": _severity(ex.label, van.predicted_label, van.outcome),
@@ -157,6 +159,7 @@ def run(
 
     payload = {
         "version": SELF_REFINE_VERSION,
+        "dataset": dataset,
         "split": split, "limit": limit, "max_rounds": max_rounds,
         "sample": sample, "sample_seed": sample_seed,
         "vanilla_summary": van_sum,
@@ -168,7 +171,7 @@ def run(
     if out_path is None:
         suffix = f"_n{limit}" if limit else ""
         out_path = (PROJECT_ROOT / "experiments" / "logs"
-                    / f"self_refine_{split}{suffix}.json")
+                    / f"self_refine_{dataset}_{split}{suffix}.json")
     out_file = Path(out_path)
     out_file.parent.mkdir(parents=True, exist_ok=True)
     out_file.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -180,6 +183,8 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
+    parser.add_argument("--dataset", default="folio",
+                        choices=["folio", "proofwriter", "prontoqa"])
     parser.add_argument("--split", default="validation", choices=["train", "validation"])
     parser.add_argument("--limit", type=int, default=50)
     parser.add_argument("--timeout", type=int, default=30)
@@ -187,5 +192,5 @@ if __name__ == "__main__":
     parser.add_argument("--sample", default="random", choices=["random", "head"])
     parser.add_argument("--sample-seed", type=int, default=42)
     args = parser.parse_args()
-    run(split=args.split, limit=args.limit, timeout=args.timeout,
+    run(dataset=args.dataset, split=args.split, limit=args.limit, timeout=args.timeout,
         max_rounds=args.max_rounds, sample=args.sample, sample_seed=args.sample_seed)
