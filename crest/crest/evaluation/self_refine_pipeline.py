@@ -160,6 +160,7 @@ def run(
     payload = {
         "version": SELF_REFINE_VERSION,
         "dataset": dataset,
+        "model": getattr(harness, "model_name", "unknown"),
         "split": split, "limit": limit, "max_rounds": max_rounds,
         "sample": sample, "sample_seed": sample_seed,
         "vanilla_summary": van_sum,
