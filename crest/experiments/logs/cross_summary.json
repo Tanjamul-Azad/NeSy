@@ -1,0 +1,205 @@
+[
+  {
+    "dataset": "folio",
+    "model": "Llama-3.1-8B",
+    "file": "vanilla_pipeline_story_fewshot_validation.json",
+    "n_total": 203,
+    "n_gradeable": 171,
+    "n_stories": 65,
+    "loud": 32,
+    "accuracy": {
+      "point": 0.5964912280701754,
+      "lo": 0.5212121212121212,
+      "hi": 0.6726217532467532
+    },
+    "silent": {
+      "point": 0.40350877192982454,
+      "lo": 0.3273782467532468,
+      "hi": 0.47878787878787876
+    },
+    "wrong_direction": {
+      "point": 0.07017543859649122,
+      "lo": 0.029411764705882353,
+      "hi": 0.11695906432748537
+    },
+    "under_determination": {
+      "point": 0.3333333333333333,
+      "lo": 0.2569832402234637,
+      "hi": 0.4101123595505618
+    }
+  },
+  {
+    "dataset": "folio",
+    "model": "gpt-4o",
+    "file": "vanilla_pipeline_gpt4o_validation_n203.json",
+    "n_total": 203,
+    "n_gradeable": 188,
+    "n_stories": 69,
+    "loud": 15,
+    "accuracy": {
+      "point": 0.7127659574468085,
+      "lo": 0.6352885419570672,
+      "hi": 0.7868852459016393
+    },
+    "silent": {
+      "point": 0.2872340425531915,
+      "lo": 0.21311475409836064,
+      "hi": 0.3647114580429327
+    },
+    "wrong_direction": {
+      "point": 0.031914893617021274,
+      "lo": 0.0051813471502590676,
+      "hi": 0.07229352191374186
+    },
+    "under_determination": {
+      "point": 0.2553191489361702,
+      "lo": 0.18226600985221675,
+      "hi": 0.3333333333333333
+    }
+  },
+  {
+    "dataset": "proofwriter",
+    "model": "Llama-3.1-8B",
+    "file": "vanilla_pipeline_proofwriter_story_fewshot_validation.json",
+    "n_total": 600,
+    "n_gradeable": 585,
+    "n_stories": 339,
+    "loud": 15,
+    "accuracy": {
+      "point": 0.8547008547008547,
+      "lo": 0.8206896551724138,
+      "hi": 0.8860764794436315
+    },
+    "silent": {
+      "point": 0.1452991452991453,
+      "lo": 0.11392352055636834,
+      "hi": 0.1793103448275862
+    },
+    "wrong_direction": {
+      "point": 0.06324786324786325,
+      "lo": 0.04139044302352136,
+      "hi": 0.08672588947083258
+    },
+    "under_determination": {
+      "point": 0.08205128205128205,
+      "lo": 0.0577924057729766,
+      "hi": 0.10824742268041238
+    }
+  },
+  {
+    "dataset": "proofwriter",
+    "model": "gpt-4o-mini",
+    "file": "vanilla_pipeline_proofwriter_gpt4omini_validation.json",
+    "n_total": 600,
+    "n_gradeable": 591,
+    "n_stories": 340,
+    "loud": 9,
+    "accuracy": {
+      "point": 0.9627749576988156,
+      "lo": 0.9452991452991453,
+      "hi": 0.9778920948685077
+    },
+    "silent": {
+      "point": 0.03722504230118443,
+      "lo": 0.022107905131492328,
+      "hi": 0.0547008547008547
+    },
+    "wrong_direction": {
+      "point": 0.02707275803722504,
+      "lo": 0.014657980456026058,
+      "hi": 0.041736227045075125
+    },
+    "under_determination": {
+      "point": 0.01015228426395939,
+      "lo": 0.0017667065517477769,
+      "hi": 0.020654044750430294
+    }
+  },
+  {
+    "dataset": "proofwriter",
+    "model": "gpt-4o",
+    "file": "vanilla_pipeline_proofwriter_gpt4o_validation.json",
+    "n_total": 600,
+    "n_gradeable": 600,
+    "n_stories": 345,
+    "loud": 0,
+    "accuracy": {
+      "point": 0.9716666666666667,
+      "lo": 0.9569707401032702,
+      "hi": 0.9846945272166592
+    },
+    "silent": {
+      "point": 0.028333333333333332,
+      "lo": 0.01530547278334084,
+      "hi": 0.043029259896729774
+    },
+    "wrong_direction": {
+      "point": 0.025,
+      "lo": 0.012924071082390954,
+      "hi": 0.03921729084432461
+    },
+    "under_determination": {
+      "point": 0.0033333333333333335,
+      "lo": 0.0,
+      "hi": 0.008445945945945946
+    }
+  },
+  {
+    "dataset": "prontoqa",
+    "model": "Llama-3.1-8B",
+    "file": "vanilla_pipeline_prontoqa_story_fewshot_validation.json",
+    "n_total": 500,
+    "n_gradeable": 481,
+    "n_stories": 481,
+    "loud": 19,
+    "accuracy": {
+      "point": 0.6382536382536382,
+      "lo": 0.5945945945945946,
+      "hi": 0.6798336798336798
+    },
+    "silent": {
+      "point": 0.36174636174636177,
+      "lo": 0.3201663201663202,
+      "hi": 0.40540540540540543
+    },
+    "wrong_direction": {
+      "point": 0.05197505197505198,
+      "lo": 0.033264033264033266,
+      "hi": 0.07276507276507277
+    },
+    "under_determination": {
+      "point": 0.3097713097713098,
+      "lo": 0.2702702702702703,
+      "hi": 0.35135135135135137
+    }
+  },
+  {
+    "dataset": "prontoqa",
+    "model": "gpt-4o",
+    "file": "vanilla_pipeline_prontoqa_gpt4o_validation.json",
+    "n_total": 500,
+    "n_gradeable": 500,
+    "n_stories": 500,
+    "loud": 0,
+    "accuracy": {
+      "point": 1.0,
+      "lo": 1.0,
+      "hi": 1.0
+    },
+    "silent": {
+      "point": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+    },
+    "wrong_direction": {
+      "point": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+    },
+    "under_determination": {
+      "point": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+    }
+  }
+]
