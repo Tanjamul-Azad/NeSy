@@ -202,7 +202,25 @@ class _Prover9CommonMixin:
             stderr=subprocess.STDOUT,
             stdin=subprocess.PIPE,
         )
-        stdout, _ = p.communicate(input=input_str.encode("utf-8"))
+        # Hard wall-clock timeout so a wedged WSL launch or a hung Prover9
+        # process can never block the whole run indefinitely. Prover9's own
+        # `assign(max_seconds, timeout)` normally self-terminates, but if WSL
+        # itself glitches, communicate() would otherwise wait forever -- this
+        # is exactly what stalled a batch on 2026-07-27. Give a generous grace
+        # over the internal budget; on breach, kill the process tree and treat
+        # it as a limit-exceeded (inconclusive) result rather than crashing.
+        grace = (self._timeout if self._timeout and self._timeout > 0 else 60) + 30
+        try:
+            stdout, _ = p.communicate(input=input_str.encode("utf-8"), timeout=grace)
+        except subprocess.TimeoutExpired:
+            p.kill()
+            try:
+                stdout, _ = p.communicate(timeout=10)
+            except Exception:
+                stdout = b""
+            # returncode 4 = Prover9's "max_seconds" family, handled upstream
+            # as Prover9LimitExceededException -> inconclusive / Uncertain.
+            return stdout.decode("utf-8", errors="replace"), 4
         # Prover9 (a decades-old C program) doesn't reliably round-trip
         # non-ASCII identifiers (confirmed 2026-07-18, e.g. "świątek") when
         # echoing them back in its own output -- decode leniently so that
