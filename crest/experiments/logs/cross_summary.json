@@ -30,6 +30,35 @@
   },
   {
     "dataset": "folio",
+    "model": "gpt-4o-mini",
+    "file": "vanilla_pipeline_folio_gpt4omini_validation.json",
+    "n_total": 203,
+    "n_gradeable": 184,
+    "n_stories": 68,
+    "loud": 19,
+    "accuracy": {
+      "point": 0.6141304347826086,
+      "lo": 0.532608695652174,
+      "hi": 0.6961325966850829
+    },
+    "silent": {
+      "point": 0.3858695652173913,
+      "lo": 0.30386740331491713,
+      "hi": 0.4673913043478261
+    },
+    "wrong_direction": {
+      "point": 0.08695652173913043,
+      "lo": 0.03409090909090909,
+      "hi": 0.15083798882681565
+    },
+    "under_determination": {
+      "point": 0.29891304347826086,
+      "lo": 0.22448979591836735,
+      "hi": 0.3756906077348066
+    }
+  },
+  {
+    "dataset": "folio",
     "model": "gpt-4o",
     "file": "vanilla_pipeline_gpt4o_validation_n203.json",
     "n_total": 203,
@@ -171,6 +200,35 @@
       "point": 0.3097713097713098,
       "lo": 0.2702702702702703,
       "hi": 0.35135135135135137
+    }
+  },
+  {
+    "dataset": "prontoqa",
+    "model": "gpt-4o-mini",
+    "file": "vanilla_pipeline_prontoqa_gpt4omini_validation.json",
+    "n_total": 500,
+    "n_gradeable": 500,
+    "n_stories": 500,
+    "loud": 0,
+    "accuracy": {
+      "point": 0.896,
+      "lo": 0.868,
+      "hi": 0.922
+    },
+    "silent": {
+      "point": 0.104,
+      "lo": 0.078,
+      "hi": 0.132
+    },
+    "wrong_direction": {
+      "point": 0.014,
+      "lo": 0.004,
+      "hi": 0.026
+    },
+    "under_determination": {
+      "point": 0.09,
+      "lo": 0.066,
+      "hi": 0.116
     }
   },
   {
