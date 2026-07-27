@@ -49,6 +49,8 @@ def _identify(path: Path, payload: dict):
     model = payload.get("model")
     if model in (None, "unknown"):
         model = None
+    elif model and "Llama" in model:
+        model = "Llama-3.1-8B"  # normalise the full HF path for display
     name = path.name
     if dataset is None:
         m = re.search(r"vanilla_pipeline_(folio|proofwriter|prontoqa)_", name)
