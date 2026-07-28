@@ -49,21 +49,21 @@ accuracy.
 | folio | gpt-4o-mini | 203 | 39% | 42% | −10 | 0.690 |
 | folio | gpt-4o | 203 | 29% | 29% | −3 | 1.000 |
 | proofwriter | Llama-3.1-8B | 100 | 16% | 38% | **−29** | **0.000** |
+| proofwriter | gpt-4o-mini | 600 | 4% | 16% | **−79** | **0.000** |
 | prontoqa | Llama-3.1-8B | 100 | 40% | 39% | −5 | 0.392 |
 | prontoqa | gpt-4o-mini | 500 | 11% | 13% | −10 | 0.397 |
 
 **Finding.** Self-Refine never helps. It ranges from neutral (frontier, where
-there is little to fix) to significantly harmful (ProofWriter/Llama, p = 0.000,
-silent 16%→38%). At full n the FOLIO/Llama damage is net −31 on accuracy. This
+there is little to fix) to significantly harmful — on both ProofWriter cells it
+significantly *increases* silent failure (Llama 16%→38% and gpt-4o-mini 4%→16%,
+both p = 0.000), and at full n the FOLIO/Llama accuracy damage is net −31. This
 is a robust falsification-gate result across the whole matrix: a free,
 training-free critique-and-revise loop does not close the silent-failure gap
 and often widens it, because the model cannot tell *when* to revise.
 
-*Missing cell:* ProofWriter × gpt-4o-mini Self-Refine (a run hung on a WSL
-Prover9 glitch and was killed; the grounder now has a hard subprocess timeout —
-re-run pending). gpt-4o Self-Refine on the synthetic datasets was deliberately
-skipped: gpt-4o already solves them, so there is no gap for Self-Refine to
-close (no headroom).
+Matrix is complete. gpt-4o Self-Refine on the synthetic datasets was
+deliberately skipped: gpt-4o already solves them, so there is no gap for
+Self-Refine to close (no headroom).
 
 ---
 
