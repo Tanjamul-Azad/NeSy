@@ -156,6 +156,114 @@ the thesis (Chapter 3/5 material) simultaneously.
 
 ---
 
+## 3.5 Real-world naturalistic domain — the strongest motivation for the second dataset
+
+**Added 2026-08-03, Tanjamul's insight.** FOLIO is naturalistic in *language*
+(human-written English, not templated) but not in *domain* — it's
+Wikipedia-trivia-style logic puzzles, not the kind of text a deployed
+symbolic-reasoning system would actually see. The places a symbolic layer
+(FOL, SMT, Datalog, any formal system) is genuinely needed in the real world
+— legal contracts, regulatory compliance, business rules, policy documents —
+are exactly where natural language is at its most naturalistic: long,
+ambiguous, implicit-knowledge-heavy, human-drafted. If CREST's pipeline
+can't handle that register, a clean FOLIO number doesn't establish real-world
+relevance. **The second naturalistic dataset should come from this domain,
+not from another academic logic-puzzle benchmark.**
+
+This substantially strengthens the paper's "why should anyone care" answer:
+not just "naturalistic vs synthetic language" in the abstract, but "the exact
+register real deployed systems (contract review, compliance checking, policy
+enforcement) would need to handle."
+
+### Candidate real-world datasets (web-verified 2026-08-03, not guessed)
+
+**Top candidate — ContractNLI** (real NDAs, ~607 contracts, entailment/
+contradiction/neutral labels).
+[ContractNLI paper](https://www.researchgate.net/publication/357391523_ContractNLI_A_Dataset_for_Document-level_Natural_Language_Inference_for_Contracts) ·
+[EmergentMind summary](https://www.emergentmind.com/topics/contractnli).
+A 2026 paper, **"Know Your Limits: On the Faithfulness of LLMs as Solvers
+and Autoformalizers in Legal Reasoning"**
+([arxiv 2606.16118](https://arxiv.org/html/2606.16118)), already re-annotated
+a 400–610 example subset of ContractNLI with strict formal-entailment labels
+(P∧¬H unsatisfiable) specifically for autoformalization evaluation — this is
+close to reusable groundwork, and it independently confirms our FOLIO
+pattern: **Claude only reaches 83.0% accuracy and diverges from Z3 on
+real legal text, i.e. this naturalistic domain is NOT saturated at frontier
+scale either.** That's an external, independent replication of exactly the
+capability-resistance finding on FOLIO — genuinely strengthens the paper.
+
+**Second candidate — statutory/tax-law reasoning.** Search surfaced
+[A Dataset for Statutory Reasoning in Tax Law Entailment and QA](https://arxiv.org/pdf/2005.05257)
+(likely the SARA dataset, Holzenberger et al.) — real U.S. tax statute text
+with reasoning problems. Needs a closer read to confirm it has FOL-level (not
+just entailment-level) gold annotations before committing to it.
+
+**Other symbolic layers, per Tanjamul's question ("shudhu FOL na, SMT and
+others dekhbo?") — yes, worth scoping, with an important caveat each:**
+- **SMT-LIB**: an [NL2SMT dataset](https://www.sciencedirect.com/science/article/abs/pii/S0950584926002181)
+  of 5000+ NL–SMT pairs exists (2026), but it was built by *reverse*-generating
+  natural language from existing SMT-LIB formulas via few-shot prompting —
+  not organically human-authored NL. That's the wrong direction for our
+  purpose (we need naturalistic NL as the *source*, not the target of
+  generation) — treat as a weak candidate unless a genuinely NL-first SMT
+  dataset turns up.
+- **LTL (Linear Temporal Logic)**: [Verifiable NL-to-LTL Translation: a Benchmark Dataset and Evaluation Suite](https://openreview.net/forum?id=RUs4KC34yT)
+  — naturalistic requirements-engineering documents (robotics/systems
+  specs) translated to LTL. A genuinely different symbolic layer with
+  naturalistic source text — good candidate if the paper wants a
+  cross-formalism generality claim ("the phenomenon isn't FOL-specific").
+- **Datalog/Prolog for policy/authorization**: mostly frameworks and
+  position papers so far (SBVR, Delegation Logic, RT), not off-the-shelf
+  annotated evaluation datasets with gold translations — not yet usable,
+  worth re-checking closer to the second-dataset decision point.
+
+### ⚠️ Prior-work risk — two papers to read in full before finalizing the paper's framing
+
+Found during this search, both close enough to our research question that
+they must be read carefully and explicitly differentiated from, not just
+cited:
+
+1. **"Know Your Limits" (arxiv 2606.16118)** — legal-domain autoformalization
+   faithfulness. Their failure mode is different from ours: they measure
+   **"scope laundering"** (LLM reports a solver-consistent answer *without
+   actually running* the formal solver reasoning — the model fakes having
+   done symbolic reasoning). We measure something distinct: the LLM *does*
+   produce FOL, the solver *does* run on it, but the FOL was a silently wrong
+   translation, so the solver's real output is confidently wrong. Different
+   mechanism, complementary finding, likely both citable and clearly
+   separable — but confirm this distinction holds up on a full read, not just
+   the abstract.
+2. **"Do LLMs Really Struggle at NL-FOL Translation? Revealing their
+   Strengths via a Novel Benchmarking Strategy"** ([arxiv 2511.11816](https://arxiv.org/pdf/2511.11816))
+   — argues prior negative results about LLM NL-FOL performance stem from
+   *flawed benchmarking methodology*, not genuine model weakness. This is
+   a direct challenge to the standard framing of the whole subfield and
+   could be read as pre-empting our story if we're not careful. Our
+   methodology already guards against the most obvious version of this
+   critique (Phase 2.1's gold-FOL ceiling check + Phase 3.2's strict filter
+   separate dataset/annotation noise from genuine translation failure,
+   which is exactly the kind of benchmarking flaw this paper likely targets)
+   — but this needs a full read and an explicit differentiation paragraph in
+   the paper, not just a citation.
+
+**Action item added to the 4-week plan:** read both papers in full during
+Week 1–2 (alongside the literature-currency check), and write one paragraph
+each explaining precisely how CREST's methodology and claim differ.
+
+### Does CREST remain a valid thing to try here?
+
+Yes — if the second (legal/policy) dataset confirms the same
+capability-resistant gap, that's exactly the regime CREST's detect-and-repair
+approach was designed for. Nothing about moving to a legal/policy domain
+changes CREST's architecture; it changes what the *evidence base* for
+"the problem is real and worth mitigating" looks like. Run CREST on whichever
+dataset(s) confirm the gap, not on the ones that don't (running it on
+PrOntoQA, where gpt-4o is already at 100%, would only produce a vacuous
+"nothing to fix" result — already the reasoning behind skipping GPT-4o
+Self-Refine on the synthetic datasets in Section 1, Track A).
+
+---
+
 ## 4. Where to find the underlying evidence
 
 - `docs/RESULTS_SNAPSHOT.md` — the three headline tables (capability ×
