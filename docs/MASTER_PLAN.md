@@ -16,6 +16,8 @@ date: "July 2026"
 
 > **Standing rule (2026-07-18):** this document is the single source of truth for what the plan actually is, across every session and every chat. Whenever a real plan change happens — a phase's approach changes, a tool/library decision changes, a gate's threshold changes, something gets unblocked or reblocked — update this document immediately, in the same session, not as a followup. Don't let the plan drift out of sync with what's actually being done.
 
+> **Research direction decision (2026-08-03):** after the multi-dataset study completed, the project split into two explicit parallel tracks — a paper (empirical characterization, CREST as one mitigation experiment, not the title contribution) and a thesis (broader "semantic reliability" umbrella with CREST as one chapter). Full reasoning, the ground-truth correction ("frontier solves synthetic reasoning but NOT naturalistic FOLIO"), and the concrete 4-week plan are in `docs/RESEARCH_DIRECTION.md` — read that file for anything about where this project is headed, not just what's been measured so far.
+
 ---
 
 ## How to read this document
