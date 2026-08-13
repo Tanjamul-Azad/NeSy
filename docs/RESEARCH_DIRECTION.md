@@ -248,9 +248,60 @@ cited:
    — but this needs a full read and an explicit differentiation paragraph in
    the paper, not just a citation.
 
-**Action item added to the 4-week plan:** read both papers in full during
-Week 1–2 (alongside the literature-currency check), and write one paragraph
-each explaining precisely how CREST's methodology and claim differ.
+**Both papers read in full 2026-08-03 (step 1 of the sequential plan,
+complete). Neither scoops our work — both ask a genuinely different
+question, on close inspection:**
+
+**"Know Your Limits" (arxiv 2606.16118) — full read.** Their pipeline: an
+LLM both (a) translates NL to FOL/Z3 code AND (b) itself reports the
+entailment verdict, which is then separately checked against actually
+running Z3 on that code. Their central failure mode, **"scope laundering"**
+(15.3–52.5% of outputs depending on model), is the LLM claiming a
+solver-consistent answer *without the solver having actually been executed
+correctly* — i.e., the LLM fakes/bypasses the formal reasoning step itself.
+**This is a pipeline-honesty failure, not a translation-fidelity failure.**
+Our mechanism is different and, on this evidence, not yet studied by them:
+the solver (Prover9) is *always genuinely executed* on the LLM's FOL in our
+pipeline; our failure is that the FOL itself was a silently wrong
+translation, so the solver's real, honestly-computed output is confidently
+wrong. Their fix (verify the solver was actually run) would not catch our
+failure mode (the solver was run, correctly, on bad input) and vice versa —
+genuinely complementary contributions, citable as related work establishing
+that legal-domain neuro-symbolic pipelines have *multiple* independent
+failure modes, of which silent mistranslation (our focus) is one.
+**Bonus finding worth citing:** they independently found ContractNLI's own
+gold labels needed correction under strict formal semantics (71/400
+examples relabeled from entailment to neutral) — an independent replication,
+in a different domain, of our own Phase 2.1 finding that FOLIO's gold FOL is
+~30% malformed. Strengthens our general methodological point that naive
+accuracy on these benchmarks is unreliable without a ceiling/noise-correction
+step (our strict filter; their re-annotation).
+
+**"Do LLMs Really Struggle at NL-FOL Translation?" (arxiv 2511.11816) — full
+abstract read.** Their question is orthogonal to ours: whether **published
+NL-FOL accuracy numbers reflect genuine sentence-level logical understanding
+or are inflated/deflated by dataset contamination and memorization**, and
+they compare "dialogue-oriented" vs "embedding-centric" model families on
+that axis. They do not address (per the abstract) whether a downstream
+solver can silently accept a semantically wrong but syntactically valid
+translation — our exact mechanism — and their unit of analysis is
+single-sentence translation quality, not whether a *set* of translated
+formulas remains internally consistent enough for reliable multi-premise
+solver inference (our predicate-schema-divergence finding). Their positive
+claim ("strong models have genuine sentence-level logic skill") does not
+contradict ours: a model can translate individual sentences correctly in
+isolation while still failing to keep predicate/argument schemas consistent
+*across* the sentences in a story — which is precisely what Section 2's
+taxonomy documents. If anything, their finding narrows where our residual
+failure must be coming from (not raw per-sentence mistranslation, but
+cross-fragment inconsistency), which sharpens rather than threatens our
+framing. **Still recommend a full (not abstract-only) read before the paper
+is finalized**, since their "critically examine existing datasets and
+protocols" section may contain a critique of FOLIO or Prover9-based
+evaluation specifically that needs a direct response.
+
+**Step 1 of the sequential plan is now complete. Proceeding to step 2: the
+FOLIO failure-case classification.**
 
 ### Does CREST remain a valid thing to try here?
 
