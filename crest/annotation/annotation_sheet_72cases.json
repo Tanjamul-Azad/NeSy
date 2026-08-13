@@ -1,0 +1,2591 @@
+[
+  {
+    "case_id": "C001",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "563",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "When the Monkeypox virus occurs in a being, it may get Monkeypox.",
+      "Monkeypox virus can occur in certain animals.",
+      "Humans are mammals.",
+      "Mammals are animals.",
+      "Symptoms of Monkeypox include fever, headache, muscle pains, and tiredness.",
+      "People feel tired when they get the flu."
+    ],
+    "conclusion_nl": "There is an animal.",
+    "gold_fol": [
+      "∃x (OccurIn(monkeypoxVirus, x) ∧ Get(x, monkeypoxVirus))",
+      "∃x (Animal(x) ∧ OccurIn(monkeypoxVirus, x))",
+      "∀x (Human(x) → Mammal(x))",
+      "∀x (Mammal(x) → Animal(x))",
+      "∃x (SymptonOf(x, monkeypoxVirus) ∧ (Fever(x) ∨ Headache(x) ∨ MusclePain(x) ∨ Tired(x)))",
+      "∀x (Human(x) ∧ Get(x, flu) → Feel(x, tired))",
+      "∃x (Animal(x))"
+    ],
+    "llm_fol": [
+      "∀x (Monkeypox(x) → MayGetMonkeypox(x))",
+      "∃x (Monkeypox(x) ∧ Animal(x))",
+      "∀x (Human(x) → Mammal(x))",
+      "∀x (Mammal(x) → Animal(x))",
+      "∀x (Monkeypox(x) → (Fever(x) ∧ Headache(x) ∧ MusclePains(x) ∧ Tiredness(x)))",
+      "∀x (Flu(x) → Tiredness(x))",
+      "∃x (Animal(x) ∧ ¬Human(x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C002",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "1364",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "All rabbits that can be spotted near the campus are cute.",
+      "Some turtles can be spotted near the campus.",
+      "The only animals that can be spotted near the campus are rabbits and squirrels.",
+      "If something is skittish, then it is not calm.",
+      "All the squirrels that can be spotted near the campus are skittish.",
+      "Rockie can be spotted near the campus, and it is calm."
+    ],
+    "conclusion_nl": "If Rockie is not both a turtle and a squirrel, then Rockie is either cute or skittish.",
+    "gold_fol": [
+      "∀x (Rabbit(x) ∧ CanBeSpottedNear(x, campus) → Cute(x))",
+      "∃x (Turtle(x) ∧ CanBeSpottedNear(x, campus))",
+      "∀x (CanBeSpottedNear(x, campus) → (Rabbit(x) ⊕ Squirrel(x)))",
+      "∀x (Skittish(x) → ¬Calm(x))",
+      "∀x (Squirrel(x) ∧ CanBeSpottedNear(x, campus) → Skittish(x))",
+      "CanBeSpottedNear(rockie, campus) ∧ Calm(rockie)",
+      "¬(Turtle(rockie) ∧ Squirrel(rockie)) → Cute(rockie) ⊕ Skittish(rockie)"
+    ],
+    "llm_fol": [
+      "∀x (SpotNearCampus(x, rabbit) → Cute(x))",
+      "∃x (SpotNearCampus(x, turtle))",
+      "∀x (SpotNearCampus(x, animal) → (Rabbit(x) ∨ Squirrel(x)))",
+      "∀x (Skittish(x) → ¬Calm(x))",
+      "∀x (SpotNearCampus(x, squirrel) → Skittish(x))",
+      "SpotNearCampus(rockie, animal) ∧ Calm(rockie)",
+      "∀x (¬(Turtle(x) ∧ Squirrel(x)) → (Cute(x) ∨ Skittish(x)))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C003",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "1365",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "All rabbits that can be spotted near the campus are cute.",
+      "Some turtles can be spotted near the campus.",
+      "The only animals that can be spotted near the campus are rabbits and squirrels.",
+      "If something is skittish, then it is not calm.",
+      "All the squirrels that can be spotted near the campus are skittish.",
+      "Rockie can be spotted near the campus, and it is calm."
+    ],
+    "conclusion_nl": "If Rockie is cute and calm, then Rockie is a skittish turtle.",
+    "gold_fol": [
+      "∀x (Rabbit(x) ∧ CanBeSpottedNear(x, campus) → Cute(x))",
+      "∃x (Turtle(x) ∧ CanBeSpottedNear(x, campus))",
+      "∀x (CanBeSpottedNear(x, campus) → (Rabbit(x) ⊕ Squirrel(x)))",
+      "∀x (Skittish(x) → ¬Calm(x))",
+      "∀x (Squirrel(x) ∧ CanBeSpottedNear(x, campus) → Skittish(x))",
+      "CanBeSpottedNear(rockie, campus) ∧ Calm(rockie)",
+      "Cute(rockie) ∧ Calm(rockie) → Turtle(rockie) ∧ Skittish(rockie)"
+    ],
+    "llm_fol": [
+      "∀x (SpotNearCampus(x, rabbit) → Cute(x))",
+      "∃x (Turtle(x) ∧ SpotNearCampus(x, campus))",
+      "∀x (SpotNearCampus(x, animal) → (Rabbit(x) ∨ Squirrel(x)))",
+      "∀x (Skittish(x) → ¬Calm(x))",
+      "∀x (SpotNearCampus(x, squirrel) → Skittish(x))",
+      "SpotNearCampus(rockie, campus) ∧ Calm(rockie)",
+      "(Cute(rockie) ∧ Calm(rockie)) → (∃x (Turtle(x) ∧ rockie = x) ∧ Skittish(rockie))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C004",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "1301",
+    "severity": "wrong_direction",
+    "gold_label": "Uncertain",
+    "predicted_label": "Contradiction",
+    "premises_nl": [
+      "All aliens are extraterrestrials.",
+      "If someone is from Mars, then they are an alien.",
+      "No extraterrestrials are human.",
+      "All highly intelligent beings from Earth are humans.",
+      "Marvin is a highly intelligent being.",
+      "Marvin is either from Earth and from Mars, or he is from neither.",
+      "If Marvin is not from Earth, then Marvin is an extraterrestrial."
+    ],
+    "conclusion_nl": "Marvin is an alien.",
+    "gold_fol": [
+      "∀x (Alien(x) → Extraterrestrial(x))",
+      "∀x (From(x, mars) → Alien(x))",
+      "∀x (Extraterrestrial(x) → ¬Human(x))",
+      "∀x (HighlyIntelligentBeing(x) ∧ From(x, earth) → Human(x))",
+      "HighlyIntelligentBeing(marvin)",
+      "¬(From(marvin, earth) ⊕ From(marvin, mars))",
+      "¬From(marvin, earth) → Extraterrestrial(marvin)",
+      "Alien(marvin)"
+    ],
+    "llm_fol": [
+      "∀x (Alien(x) → Extraterrestrial(x))",
+      "∀x (FromMars(x) → Alien(x))",
+      "∀x (Extraterrestrial(x) → ¬Human(x))",
+      "∀x (HighlyIntelligentBeingFromEarth(x) → Human(x))",
+      "HighlyIntelligentBeingFromEarth(marvin)",
+      "(FromEarth(marvin) ∧ FromMars(marvin)) ∨ ¬(FromEarth(marvin) ∨ FromMars(marvin))",
+      "¬FromEarth(marvin) → Extraterrestrial(marvin)",
+      "Alien(marvin)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C005",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "1302",
+    "severity": "wrong_direction",
+    "gold_label": "True",
+    "predicted_label": "False",
+    "premises_nl": [
+      "All aliens are extraterrestrials.",
+      "If someone is from Mars, then they are an alien.",
+      "No extraterrestrials are human.",
+      "All highly intelligent beings from Earth are humans.",
+      "Marvin is a highly intelligent being.",
+      "Marvin is either from Earth and from Mars, or he is from neither.",
+      "If Marvin is not from Earth, then Marvin is an extraterrestrial."
+    ],
+    "conclusion_nl": "Marvin is neither a human nor from Mars.",
+    "gold_fol": [
+      "∀x (Alien(x) → Extraterrestrial(x))",
+      "∀x (From(x, mars) → Alien(x))",
+      "∀x (Extraterrestrial(x) → ¬Human(x))",
+      "∀x (HighlyIntelligentBeing(x) ∧ From(x, earth) → Human(x))",
+      "HighlyIntelligentBeing(marvin)",
+      "¬(From(marvin, earth) ⊕ From(marvin, mars))",
+      "¬From(marvin, earth) → Extraterrestrial(marvin)",
+      "¬Human(marvin) ∧ ¬From(marvin, mars)"
+    ],
+    "llm_fol": [
+      "∀x (Alien(x) → Extraterrestrial(x))",
+      "∀x (FromMars(x) → Alien(x))",
+      "∀x (Extraterrestrial(x) → ¬Human(x))",
+      "∀x (HighlyIntelligentBeingFromEarth(x) → Human(x))",
+      "HighlyIntelligentBeingFromEarth(marvin)",
+      "(FromEarth(marvin) ∧ FromMars(marvin)) ∨ (FromEarth(marvin) → ¬FromMars(marvin))",
+      "¬FromEarth(marvin) → Extraterrestrial(marvin)",
+      "¬Human(marvin) ∧ ¬FromMars(marvin)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C006",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "1303",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "All aliens are extraterrestrials.",
+      "If someone is from Mars, then they are an alien.",
+      "No extraterrestrials are human.",
+      "All highly intelligent beings from Earth are humans.",
+      "Marvin is a highly intelligent being.",
+      "Marvin is either from Earth and from Mars, or he is from neither.",
+      "If Marvin is not from Earth, then Marvin is an extraterrestrial."
+    ],
+    "conclusion_nl": "If Marvin is not from Mars, then Marvin is a human.",
+    "gold_fol": [
+      "∀x (Alien(x) → Extraterrestrial(x))",
+      "∀x (From(x, mars) → Alien(x))",
+      "∀x (Extraterrestrial(x) → ¬Human(x))",
+      "∀x (HighlyIntelligentBeing(x) ∧ From(x, earth) → Human(x))",
+      "HighlyIntelligentBeing(marvin)",
+      "¬(From(marvin, earth) ⊕ From(marvin, mars))",
+      "¬From(marvin, earth) → Extraterrestrial(marvin)",
+      "¬From(marvin, mars) → Human(marvin)"
+    ],
+    "llm_fol": [
+      "∀x (Alien(x) → Extraterrestrial(x))",
+      "∀x (FromMars(x) → Alien(x))",
+      "∀x (Extraterrestrial(x) → ¬Human(x))",
+      "∀x (HighlyIntelligentBeingFromEarth(x) → Human(x))",
+      "HighlyIntelligentBeingFromEarth(marvin)",
+      "(FromEarth(marvin) ∧ FromMars(marvin)) ∨ (FromEarth(marvin) → ¬FromMars(marvin))",
+      "∀x (¬FromEarth(x) → Extraterrestrial(x))",
+      "∀x (¬FromMars(x) → Human(x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C007",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "290",
+    "severity": "wrong_direction",
+    "gold_label": "Uncertain",
+    "predicted_label": "True",
+    "premises_nl": [
+      "Diamond Mine is a professional wrestling stable formed in WWE.",
+      "Roderick Strong leads Diamond Mine.",
+      "Diamond Mine includes the Creed Brothers and Ivy Nile.",
+      "Imperium has a feud with Diamond Mine."
+    ],
+    "conclusion_nl": "Roderick Strong leads the Creed Brothers.",
+    "gold_fol": [
+      "ProfessionalWrestlingStable(diamondMine) ∧ In(diamondMine, wWE)",
+      "Leads(roderickStrong, diamondMine)",
+      "Includes(diamondMine, creedBrothers) ∧ Includes(diamondMine, ivyNile)",
+      "Feuds(imperium, diamondMine)",
+      "Leads(roderickstrong, creedbrothers)"
+    ],
+    "llm_fol": [
+      "ProfessionalWrestlingStable(diamondMine)",
+      "Leader(diamondMine, roderickStrong)",
+      "Member(diamondMine, creedBrothers) ∧ Member(diamondMine, ivyNile)",
+      "Feud(imperium, diamondMine)",
+      "Leader(diamondMine, roderickStrong) ∧ Member(diamondMine, creedBrothers)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C008",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "904",
+    "severity": "wrong_direction",
+    "gold_label": "Uncertain",
+    "predicted_label": "True",
+    "premises_nl": [
+      "No digital media are analog.",
+      "Every printed text is analog media.",
+      "All streaming services are digital media.",
+      "If an object is a hardcover book, then it is printed text.",
+      "If 1984 is a streaming service, then 1984 is a hardcover book."
+    ],
+    "conclusion_nl": "1984 is printed text.",
+    "gold_fol": [
+      "∀x (DigitalMedia(x) → ¬AnalogMedia(x))",
+      "∀x (PrintedText(x) → AnalogMedia(x))",
+      "∀x (StreamingService(x) → DigitalMedia(x))",
+      "∀x (HardcoverBook(x) → PrintedText(x))",
+      "StreamingService(1984) → HardcoverBook(1984)",
+      "PrintedText(y1984)"
+    ],
+    "llm_fol": [
+      "∀x (DigitalMedia(x) → ¬Analog(x))",
+      "∀x (PrintedText(x) → Analog(x))",
+      "∀x (StreamingService(x) → DigitalMedia(x))",
+      "∀x (HardcoverBook(x) → PrintedText(x))",
+      "StreamingService(1984) → HardcoverBook(1984)",
+      "HardcoverBook(1984) → PrintedText(1984)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C009",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "241",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Robert Lewandowski is a striker.",
+      "Strikers are soccer players.",
+      "Robert Lewandowski left Bayern Munchen.",
+      "If a player leaves a team they no longer play for that team."
+    ],
+    "conclusion_nl": "Robert Lewandowski plays for Bayern Munchen.",
+    "gold_fol": [
+      "Striker(robertLewandowski)",
+      "∀x (Striker(x) → SoccerPlayer(x))",
+      "Left(robertLewandowski, bayernMunchen)",
+      "∀x ∀y (Left(x, y) → ¬PlaysFor(x, y))",
+      "PlaysFor(robertLewandowski, bayernMunchen)"
+    ],
+    "llm_fol": [
+      "Striker(robertLewandowski)",
+      "∀x (Striker(x) → SoccerPlayer(x))",
+      "LeftTeam(robertLewandowski, bayernMunchen)",
+      "∀x (LeftTeam(x, y) → ¬PlayFor(x, y))",
+      "PlayFor(robertLewandowski, bayernMunchen)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C010",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "1273",
+    "severity": "wrong_direction",
+    "gold_label": "True",
+    "predicted_label": "False",
+    "premises_nl": [
+      "All Brown Swiss cattle are cows.",
+      "Some pets are Brown Swiss Cattle.",
+      "All cows are domesticated animals.",
+      "Alligators are not domesticated animals.",
+      "Ted is an alligator."
+    ],
+    "conclusion_nl": "If Ted is a Brown Swiss cattle, then Ted is not a pet.",
+    "gold_fol": [
+      "∀x (BrownSwissCattle(x) → Cow(x))",
+      "∃x (Pet(x) ∧ BrownSwissCattle(x))",
+      "∀x (Cow(x) → DomesticatedAnimal(x))",
+      "∀x (Aligator(x) → ¬DomesticatedAnimal(x))",
+      "Aligator(ted)",
+      "BrownSwissCattle(ted) → ¬Pet(ted)"
+    ],
+    "llm_fol": [
+      "∀x (BrownSwissCattle(x) → Cow(x))",
+      "∃x (Pet(x) ∧ BrownSwissCattle(x))",
+      "∀x (Cow(x) → DomesticatedAnimal(x))",
+      "∀x (Alligator(x) → ¬DomesticatedAnimal(x))",
+      "Alligator(ted)",
+      "∀x (BrownSwissCattle(x) → Pet(x) → ¬Alligator(x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C011",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "360",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Badults is a British Sitcom series starring members of Pappy's.",
+      "Badults was piloted in July 2013 on BBC Three.",
+      "The Working title \"The Secret Dude Society\" was used for Badults.",
+      "Andrew Collins was the script editor for Badults."
+    ],
+    "conclusion_nl": "Andrew Collins was the script editor for a series with the working title \"The Secret Dude Society\".",
+    "gold_fol": [
+      "∃x (BritishSitcom(badults) ∧ Series(badults) ∧ MemberOf(x, pappys) ∧ Starring(badults, x))",
+      "PilotedIn(badults, july2013) ∧ PilotedOn(badults, bBCThree)",
+      "WorkingTitle(theSecretDudeSociety, badults) ∧ UsedFor(theSecretDudeSociety, badults)",
+      "ScriptEditorFor(andrewCollins, badults)",
+      "∃x (ScriptEditorFor(andrewCollins, x) ∧ Series(x) ∧ WorkingTitle(theSecretDudeSociety, x))"
+    ],
+    "llm_fol": [
+      "Series(badults) ∧ Starring(badults, pappys)",
+      "Piloted(badults, july2013) ∧ Channel(badults, bbcThree)",
+      "WorkingTitle(badults, theSecretDudeSociety)",
+      "ScriptEditor(badults, andrewCollins)",
+      "ScriptEditor(workingTitle(theSecretDudeSociety), andrewCollins)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C012",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "361",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Badults is a British Sitcom series starring members of Pappy's.",
+      "Badults was piloted in July 2013 on BBC Three.",
+      "The Working title \"The Secret Dude Society\" was used for Badults.",
+      "Andrew Collins was the script editor for Badults."
+    ],
+    "conclusion_nl": "No members of Pappy's have starred in a show piloting on BBC Two or BBC Three.",
+    "gold_fol": [
+      "∃x (BritishSitcom(badults) ∧ Series(badults) ∧ MemberOf(x, pappys) ∧ Starring(badults, x))",
+      "PilotedIn(badults, july2013) ∧ PilotedOn(badults, bBCThree)",
+      "WorkingTitle(theSecretDudeSociety, badults) ∧ UsedFor(theSecretDudeSociety, badults)",
+      "ScriptEditorFor(andrewCollins, badults)",
+      "∀x ∀y (MemberOf(x, pappys) ∧ Starring(y, x) → ¬(PilotedOn(y, bBCTwo) ∨ PilotedOn(y, bBCThree)))"
+    ],
+    "llm_fol": [
+      "SitcomSeries(badults) ∧ Starring(badults, pappys)",
+      "PilotedIn(badults, july2013) ∧ Channel(badults, bbcThree)",
+      "WorkingTitle(badults, theSecretDudeSociety)",
+      "ScriptEditor(badults, andrewCollins)",
+      "∀x (Starring(x, pappys) → ¬(PilotedIn(x, bbcTwo) ∨ PilotedIn(x, bbcThree)))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C013",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "171",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Books contain tons of knowledge.",
+      "When a person reads a book, that person gains knowledge.",
+      "If a person gains knowledge, they become smarter.",
+      "Harry read the book “Walden” by Henry Thoreau."
+    ],
+    "conclusion_nl": "Walden contains knowledge.",
+    "gold_fol": [
+      "∀x (Book(x) → Contains(x, knowledge))",
+      "∀x ∀y (ReadBook(x, y) → Gains(x, knowledge))",
+      "∀x (Gains(x, knowledge) → Smarter(x))",
+      "ReadBook(harry, walden) ∧ Book(walden)",
+      "Gains(harry, knowledge)"
+    ],
+    "llm_fol": [
+      "∀x (Book(x) → ContainsKnowledge(x))",
+      "∀x (Person(x) ∧ Reads(x, y) → GainsKnowledge(x))",
+      "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+      "Reads(harry, \"Walden\") ∧ Author(\"Walden\", henryThoreau)",
+      "ContainsKnowledge(\"Walden\")"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C014",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "172",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Books contain tons of knowledge.",
+      "When a person reads a book, that person gains knowledge.",
+      "If a person gains knowledge, they become smarter.",
+      "Harry read the book “Walden” by Henry Thoreau."
+    ],
+    "conclusion_nl": "Harry is smarter than before.",
+    "gold_fol": [
+      "∀x (Book(x) → Contains(x, knowledge))",
+      "∀x ∀y (ReadBook(x, y) → Gains(x, knowledge))",
+      "∀x (Gains(x, knowledge) → Smarter(x))",
+      "ReadBook(harry, walden) ∧ Book(walden)",
+      "Smarter(harry)"
+    ],
+    "llm_fol": [
+      "∀x (Book(x) → ContainsKnowledge(x))",
+      "∀x (Person(x) ∧ Reads(x, y) → GainsKnowledge(x, y))",
+      "∀x (GainsKnowledge(x, y) → BecomesSmarter(x))",
+      "Reads(harry, \"walden\") ∧ Author(\"walden\", henyThoreau)",
+      "BecomesSmarter(harry)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C015",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "370",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "The Picuris Mountains are a mountain range in New Mexico or Texas.",
+      "Juan de Onate visited the Picuris Mountains.",
+      "The Harding Pegmatite Mine, located in the Picuris Mountains, was donated.",
+      "There are no mountain ranges in texas that have mines that have been donated."
+    ],
+    "conclusion_nl": "Juan de Onate visited a mountain range in New Mexico.",
+    "gold_fol": [
+      "MountainRange(thePicurisMountains) ∧ (In(thePicurisMountains, newMexico) ⊕ In(thePicurisMountains, texas))",
+      "Visited(juanDeOnate, thePicurisMountains)",
+      "In(hardingPegmatiteMine, thePicurisMountains) ∧ Mine(hardingPegmatiteMine) ∧ Donated(hardingPegmatiteMine)",
+      "∀x ∀y (Mine(x) ∧ Donated(x) ∧ In(x, y) ∧ MountainRange(y) → ¬In(y, texas))",
+      "∃x (Visited(juanDeOnate, x) ∧ MountainRange(x) ∧ In(x, newMexico))"
+    ],
+    "llm_fol": [
+      "MountainRange(picurisMountains) ∧ (LocatedIn(picurisMountains, newMexico) ∨ LocatedIn(picurisMountains, texas))",
+      "Visited(juanDeOnate, picurisMountains)",
+      "LocatedIn(hardingPegmatiteMine, picurisMountains) ∧ Donated(hardingPegmatiteMine)",
+      "∀x (MountainRange(x) ∧ LocatedIn(x, texas) → ¬HasMines(x) ∨ ¬Donated(x))",
+      "Visited(juanDeOnate, picurisMountains) ∧ ¬LocatedIn(picurisMountains, texas)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C016",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "527",
+    "severity": "wrong_direction",
+    "gold_label": "False",
+    "predicted_label": "True",
+    "premises_nl": [
+      "If a man is taller than another man, the taller one can block the other's shooting.",
+      "Michael is a man who is taller than everyone else in his class.",
+      "If person x is taller than person y, and person y is taller than person z, then x is taller than z",
+      "Peter is a man who is taller than Michael.",
+      "Michael can block any shooting from a person as long as the person does not jump when shooting.",
+      "Michael cannot block Windy's shooting.",
+      "Every shooter who can jump when shooting is a great shooter."
+    ],
+    "conclusion_nl": "Peter is shorter than a man in Michael's class.",
+    "gold_fol": [
+      "∀x ∀y (Man(x) ∧ Man(y) ∧ Taller(x, y) → CanBlock(x, y))",
+      "∀x (Man(x) ∧ SameClass(x, michael) ∧ ¬(x=michael) → Taller(michael, x))",
+      "∀x ∀y ∀z ((Taller(x, y) ∧ Taller(y, z)) → Taller(x, z))",
+      "Man(peter) ∧ Taller(peter, michael)",
+      "∀x (¬JumpWhenShooting(x) → CanBlock(michael, x))",
+      "¬CanBlock(michael, windy)",
+      "∀x (JumpWhenShooting(x) → GreatShooter(x))",
+      "∃x (Man(x) ∧ SameClass(x, michael) ∧ ¬Taller(peter, x))"
+    ],
+    "llm_fol": [
+      "∀x ∀y (TallerThan(x, y) → CanBlock(x, y))",
+      "Man(michael) ∧ ∀x (InSameClass(x, michael) → TallerThan(michael, x))",
+      "∀x ∀y ∀z (TallerThan(x, y) ∧ TallerThan(y, z) → TallerThan(x, z))",
+      "Man(peter) ∧ TallerThan(peter, michael)",
+      "∀x (Man(x) ∧ CanJumpWhenShooting(x) → CanBlock(michael, x))",
+      "¬CanBlock(michael, windy)",
+      "∀x (Man(x) ∧ CanJumpWhenShooting(x) → GreatShooter(x))",
+      "∀x (Man(x) ∧ InSameClass(x, michael) → TallerThan(peter, x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C017",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "528",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "If a man is taller than another man, the taller one can block the other's shooting.",
+      "Michael is a man who is taller than everyone else in his class.",
+      "If person x is taller than person y, and person y is taller than person z, then x is taller than z",
+      "Peter is a man who is taller than Michael.",
+      "Michael can block any shooting from a person as long as the person does not jump when shooting.",
+      "Michael cannot block Windy's shooting.",
+      "Every shooter who can jump when shooting is a great shooter."
+    ],
+    "conclusion_nl": "Windy is a great shooter.",
+    "gold_fol": [
+      "∀x ∀y (Man(x) ∧ Man(y) ∧ Taller(x, y) → CanBlock(x, y))",
+      "∀x (Man(x) ∧ SameClass(x, michael) ∧ ¬(x=michael) → Taller(michael, x))",
+      "∀x ∀y ∀z ((Taller(x, y) ∧ Taller(y, z)) → Taller(x, z))",
+      "Man(peter) ∧ Taller(peter, michael)",
+      "∀x (¬JumpWhenShooting(x) → CanBlock(michael, x))",
+      "¬CanBlock(michael, windy)",
+      "∀x (JumpWhenShooting(x) → GreatShooter(x))",
+      "GreatShooter(windy)"
+    ],
+    "llm_fol": [
+      "∀x ∀y (TallerThan(x, y) → CanBlock(x, y))",
+      "Man(michael) ∧ ∀x (InSameClass(x, michael) → TallerThan(michael, x))",
+      "∀x ∀y ∀z (TallerThan(x, y) ∧ TallerThan(y, z) → TallerThan(x, z))",
+      "Man(peter) ∧ TallerThan(peter, michael)",
+      "∀x (Man(x) ∧ CanJumpWhenShooting(x) → CanBlock(michael, x))",
+      "¬CanBlock(michael, windy)",
+      "∀x (CanJumpWhenShooting(x) → GreatShooter(x))",
+      "GreatShooter(windy)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C018",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "441",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Barutin Cove is a cove named after the Bulgarian settlement of Barutin.",
+      "Barutin Cove is on the southwest coast of Snow Island.",
+      "Snow Island, Greenwich Island, and Deception Island are located in the South Shetland Islands.",
+      "Antarctica is located on the South Shetland Islands.",
+      "If place A is located in place B and place B is located in place C, then place A is located in place C."
+    ],
+    "conclusion_nl": "Barutin Cove is not located in Antarctica.",
+    "gold_fol": [
+      "Cove(barutinCove) ∧ NamedAfter(barutinCove, barutinSettlement) ∧ LocatedIn(barutinSettlement, bulgaria)",
+      "LocatedIn(barutinCove, snowIsland)",
+      "LocatedIn(snowIsland, southShetlandIslands) ∧ LocatedIn(greenwichIsland, southShetlandIslands) ∧ LocatedIn(deceptionIsland, southShetlandIslands)",
+      "LocatedIn(southShetlandIslands, antarctica)",
+      "∀x ∀y ∀z ((LocatedIn(x, y) ∧ LocatedIn(y, z)) → LocatedIn(x, z))",
+      "¬LocatedIn(barutinCove, antarctica)"
+    ],
+    "llm_fol": [
+      "Cove(barutinCove) ∧ NamedAfter(barutinCove, barutin)",
+      "LocatedOn(barutinCove, snowIsland) ∧ LocatedOn(barutinCove, southwestCoast)",
+      "LocatedIn(snowIsland, southShetlandIslands) ∧ LocatedIn(greenwichIsland, southShetlandIslands) ∧ LocatedIn(deceptionIsland, southShetlandIslands)",
+      "LocatedIn(antarctica, southShetlandIslands)",
+      "∀x ∀y ∀z (LocatedIn(x, y) ∧ LocatedIn(y, z) → LocatedIn(x, z))",
+      "¬LocatedIn(barutinCove, antarctica)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C019",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "578",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Plungers suck.",
+      "Vacuums suck.",
+      "Vampires suck.",
+      "Space is a vacuum.",
+      "A duster is a household appliance that doesn't suck."
+    ],
+    "conclusion_nl": "Space sucks.",
+    "gold_fol": [
+      "∀x (Plunger(x) → Suck(x))",
+      "∀x (Vacuum(x) → Suck(x))",
+      "∀x (Vampire(x) → Suck(x))",
+      "Vacuum(space)",
+      "HouseholdAppliance(duster) ∧ ¬Suck(duster)",
+      "Suck(space)"
+    ],
+    "llm_fol": [
+      "∀x (Plunger(x) → Sucks(x))",
+      "∀x (Vacuum(x) → Sucks(x))",
+      "∀x (Vampire(x) → Sucks(x))",
+      "∀x (Space(x) → Vacuum(x))",
+      "∀x (Duster(x) → ¬Sucks(x))",
+      "Sucks(space)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C020",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "965",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "All hydrocarbons are organic compounds .",
+      "All alkanes are hydrocarbons",
+      "All organic compounds are chemical compounds.",
+      "All organic compounds contain carbon.",
+      "No chemical compounds contain only one element.",
+      "The mixture either both is a chemical compound and contains only one element, or neither."
+    ],
+    "conclusion_nl": "The mixture is an alkane and contains carbon.",
+    "gold_fol": [
+      "∀x (Hydrocarbon(x) → Orgranic(x) ∧ Compound(x))",
+      "∀x (Alkane(x) → Hydrocarbon(x))",
+      "∀x (Orgranic(x) ∧ Compound(x) → Chemical(x) ∧ Compound(x))",
+      "∀x (Orgranic(x) ∧ Compound(x) → Contain(x, carbon))",
+      "∀x (Chemical(x) ∧ Compound(x) → ∀y ∀z (¬(Contain(x, y) ∧ Contain(x, z) ∧ (y=z))))",
+      "¬((Chemical(mixture) ∧ Compound(mixture)) ⊕ (∀y ∀z (Contain(x, y) ∧ Contain(x, z) ∧ y=z)))",
+      "Alkane(mixture) ∧ Contain(mixture, carbon)"
+    ],
+    "llm_fol": [
+      "∀x (Hydrocarbon(x) → OrganicCompound(x))",
+      "∀x (Alkane(x) → Hydrocarbon(x))",
+      "∀x (OrganicCompound(x) → ChemicalCompound(x))",
+      "∀x (OrganicCompound(x) → ContainsCarbon(x))",
+      "∀x (ChemicalCompound(x) → ¬ContainsOnlyOneElement(x))",
+      "ChemicalCompound(theMixture) ⊕ ContainsOnlyOneElement(theMixture) → ¬(ChemicalCompound(theMixture) ∧ ContainsOnlyOneElement(theMixture))",
+      "Alkane(theMixture) ∧ ContainsCarbon(theMixture)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C021",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "1034",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "If something is a deadly disease, then it comes with a low survival rate.",
+      "Severe cancers are deadly diseases.",
+      "Bile duct cancer is a severe form cancer.",
+      "All Cholangiocarcinoma is bile duct cancer.",
+      "Mild flu comes with a low survival rate.",
+      "Colorectal cancer is not both a bile duct cancer and with a low survival rate."
+    ],
+    "conclusion_nl": "Colorectal cancer is a form of Cholangiocarcinoma and it is a kind of mild flu or a kind of bile duct cancer, or all of the above.",
+    "gold_fol": [
+      "∀x (DeadlyDiseases(x) → ComeWith(x, lowSurvivalRate))",
+      "∀x (SevereCancer(x) → DeadlyDiseases(x))",
+      "∀x (BileDuctCancer(x) → SevereCancer(x))",
+      "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+      "∀x (MildFlu(x) → ¬ComeWith(x, lowSurvivalRate))",
+      "¬(BileDuctCancer(colorectalCancer) ∧ ComeWith(colorectalCancer, lowSurvivalRate))",
+      "Cholangiocarcinoma(colorectalCancer) ∧ (MildFlu(colorectalCancer) ∨ BileDuctCancer(colorectalCancer))"
+    ],
+    "llm_fol": [
+      "∀x (DeadlyDisease(x) → LowSurvivalRate(x))",
+      "DeadlyDisease(severeCancer)",
+      "Severe(severeCancer) ∧ Cancer(bileDuctCancer)",
+      "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+      "LowSurvivalRate(mildFlu)",
+      "Cancer(colorectalCancer) ∧ BileDuctCancer(colorectalCancer) → LowSurvivalRate(colorectalCancer)",
+      "Cancer(colorectalCancer) ∧ (Cholangiocarcinoma(colorectalCancer) ∨ BileDuctCancer(colorectalCancer) ∨ ∀x (DeadlyDisease(x) → LowSurvivalRate(x)))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C022",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "149",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "The summer Olympic games is a sporting event.",
+      "The last summer Olympic games was in Tokyo.",
+      "The United States won the most medals in Tokyo."
+    ],
+    "conclusion_nl": "The United States won the most medals in the last summer Olympic games.",
+    "gold_fol": [
+      "SportingEvent(olympics)",
+      "LastSummerOlympics(tokyo)",
+      "MostMedals(unitedStates, tokyo)",
+      "∃x (LastSummerOlympics(x) ∧ MostMedals(unitedStates, x))"
+    ],
+    "llm_fol": [
+      "SportingEvent(summerOlympicGames)",
+      "LastSummerOlympicGames(tokyo)",
+      "WonMostMedals(UnitedStates, tokyo)",
+      "∀x (LastSummerOlympicGames(x) → WonMostMedals(UnitedStates, x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C023",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "1269",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "No one nice to animals is also mean to animals.",
+      "Some grumpy people are mean to animals.",
+      "All animal lovers are nice to animals.",
+      "All pet owners love animals.",
+      "Tom is a pet owner."
+    ],
+    "conclusion_nl": "Tom is not both a grumpy person and mean to animals.",
+    "gold_fol": [
+      "∀x (NiceTo(x, animal) → ¬MeanTo(x, animal))",
+      "∃x (Grumpy(x) ∧ MeanTo(x, animal))",
+      "∀x (AnimalLover(x) → NiceTo(x, animal))",
+      "∀x (PetOwner(x) → AnimalLover(x))",
+      "PetOwner(tom)",
+      "¬(Grumpy(tom) ∧ MeanTo(tom, animal))"
+    ],
+    "llm_fol": [
+      "∀x (NiceToAnimals(x) → ¬MeanToAnimals(x))",
+      "∃x (Grumpy(x) ∧ MeanToAnimals(x))",
+      "∀x (AnimalLover(x) → NiceToAnimals(x))",
+      "∀x (PetOwner(x) → LovesAnimals(x))",
+      "PetOwner(tom)",
+      "¬(Grumpy(tom) ∧ MeanToAnimals(tom))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C024",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "1313",
+    "severity": "wrong_direction",
+    "gold_label": "Uncertain",
+    "predicted_label": "False",
+    "premises_nl": [
+      "Some professional basketball players are not American nationals.",
+      "All professional basketball players can do jump shots.",
+      "If someone can jump shots, they leap straight into the air.",
+      "If someone leaps straight into the air, they activate their leg muscles.",
+      "Yuri does not activate his leg muscles."
+    ],
+    "conclusion_nl": "Yuri is an American national.",
+    "gold_fol": [
+      "∃x (Professional(x) ∧ BasketballPlayer(x) ∧ ¬AmericanNational(x))",
+      "∀x (Professional(x) ∧ BasketballPlayer(x) → CanDo(x, jumpShot))",
+      "∀x (CanDo(x, jumpShot) → LeapStraightIntoAir(x))",
+      "∀x (LeapStraightIntoAir(x) → Activate(x, legMuscle))",
+      "¬Activate(yuri, legMuscle)",
+      "AmericanNational(yuri)"
+    ],
+    "llm_fol": [
+      "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+      "∀x (ProfessionalBasketballPlayer(x) → CanJumpShot(x))",
+      "∀x (CanJumpShot(x) → LeapsStraightIntoAir(x))",
+      "∀x (LeapsStraightIntoAir(x) → ActivatesLegMuscles(x))",
+      "¬ActivatesLegMuscles(yuri)",
+      "∀x (ProfessionalBasketballPlayer(x) → AmericanNational(x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C025",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "1314",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Some professional basketball players are not American nationals.",
+      "All professional basketball players can do jump shots.",
+      "If someone can jump shots, they leap straight into the air.",
+      "If someone leaps straight into the air, they activate their leg muscles.",
+      "Yuri does not activate his leg muscles."
+    ],
+    "conclusion_nl": "Yuri is not an American professional basketball player.",
+    "gold_fol": [
+      "∃x (Professional(x) ∧ BasketballPlayer(x) ∧ ¬AmericanNational(x))",
+      "∀x (Professional(x) ∧ BasketballPlayer(x) → CanDo(x, jumpShot))",
+      "∀x (CanDo(x, jumpShot) → LeapStraightIntoAir(x))",
+      "∀x (LeapStraightIntoAir(x) → Activate(x, legMuscle))",
+      "¬Activate(yuri, legMuscle)",
+      "¬(AmericanNational(yuri) ∧ Professional(yuri) ∧ BasketballPlayer(yuri))"
+    ],
+    "llm_fol": [
+      "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+      "∀x (ProfessionalBasketballPlayer(x) → CanJumpShot(x))",
+      "∀x (CanJumpShot(x) → LeapsStraightIntoAir(x))",
+      "∀x (LeapsStraightIntoAir(x) → ActivatesLegMuscles(x))",
+      "¬ActivatesLegMuscles(yuri)",
+      "∀x (ProfessionalBasketballPlayer(x) ∧ AmericanNational(x) → ¬AmericanNational(yuri))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C026",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "1317",
+    "severity": "wrong_direction",
+    "gold_label": "False",
+    "predicted_label": "True",
+    "premises_nl": [
+      "Some professional basketball players are not American nationals.",
+      "All professional basketball players can do jump shots.",
+      "If someone can jump shots, they leap straight into the air.",
+      "If someone leaps straight into the air, they activate their leg muscles.",
+      "Yuri does not activate his leg muscles."
+    ],
+    "conclusion_nl": "If Yuri is not an American professional basketball player, then Yuri is a professional basketball player.",
+    "gold_fol": [
+      "∃x (Professional(x) ∧ BasketballPlayer(x) ∧ ¬AmericanNational(x))",
+      "∀x (Professional(x) ∧ BasketballPlayer(x) → CanDo(x, jumpShot))",
+      "∀x (CanDo(x, jumpShot) → LeapStraightIntoAir(x))",
+      "∀x (LeapStraightIntoAir(x) → Activate(x, legMuscle))",
+      "¬Activate(yuri, legMuscle)",
+      "¬(AmericanNational(yuri) ∧ Professional(yuri) ∧ BasketballPlayer(yuri)) → (Professional(yuri) ∧ BasketballPlayer(yuri))"
+    ],
+    "llm_fol": [
+      "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+      "∀x (ProfessionalBasketballPlayer(x) → CanJumpShot(x))",
+      "∀x (CanJumpShot(x) → LeapsStraightIntoAir(x))",
+      "∀x (LeapsStraightIntoAir(x) → ActivatesLegMuscles(x))",
+      "¬ActivatesLegMuscles(yuri)",
+      "∀x (¬AmericanNational(x) ∧ ProfessionalBasketballPlayer(x) → CanJumpShot(x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C027",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "724",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Events are either happy or sad.",
+      "At least one event is happy."
+    ],
+    "conclusion_nl": "All events are sad.",
+    "gold_fol": [
+      "∀x (Event(x) → Happy(x) ⊕ Sad(x))",
+      "∃x (Event(x) ∧ Happy(x))",
+      "∀x (Event(x) → Sad(x))"
+    ],
+    "llm_fol": [
+      "∀x (Event(x) → Happy(x) ∨ Sad(x))",
+      "∃x (Event(x) ∧ Happy(x))",
+      "∀x (Event(x) → Sad(x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C028",
+    "model": "Llama-3.1-8B",
+    "folio_example_id": "1326",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Jane does not like any animals that bark.",
+      "All dogs are animals that bark.",
+      "Jane likes all animals that jump.",
+      "If an animal has legs, then it jumps.",
+      "If an animal is terricolous, then it has legs.",
+      "KiKi is an animal.",
+      "If KiKi neither jumps nor has legs, then KiKi is terricolous or has legs."
+    ],
+    "conclusion_nl": "KiKi does not bark and he is not a dog.",
+    "gold_fol": [
+      "∀x (Animal(x) ∧ Bark(x) → ¬Like(jane, x))",
+      "∀x (Dog(x) → Animal(x) ∧ Bark(x))",
+      "∀x (Animal(x) ∧ Jump(x) → Like(jane, x))",
+      "∀x (∃y ∃z (¬(y=z) ∧ Leg(y) ∧ Leg(z) ∧ Have(x, y) ∧ Have(x, z)) → Jump(x))",
+      "∀x (Terricolous(x) → ∃y ∃z (¬(y=z) ∧ Leg(y) ∧ Leg(z) ∧ Have(x, y) ∧ Have(x, z)))",
+      "Animal(kiki)",
+      "¬Jump(kiki) ∧ ¬(∃y ∃z (¬(y=z) ∧ Leg(y) ∧ Leg(z) ∧ Have(kiki, y) ∧ Have(kiki, z))) → Terricolous(kiki) ∨ ∃y ∃z (¬(y=z) ∧ Leg(y) ∧ Leg(z) ∧ Have(kiki, y) ∧ Have(kiki, z))",
+      "¬Bark(kiki) ∧ ¬Dog(kiki)"
+    ],
+    "llm_fol": [
+      "∀x (Likes(jane, x) → ¬(Animal(x) ∧ Barks(x)))",
+      "∀x (Dog(x) → Animal(x) ∧ Barks(x))",
+      "∀x (Animal(x) → Likes(jane, x) → Jumps(x))",
+      "∀x (HasLegs(x) → Jumps(x))",
+      "∀x (Terricolous(x) → HasLegs(x))",
+      "Animal(kiki)",
+      "∀x (¬(Jumps(x) ∨ HasLegs(x)) → Terricolous(x) ∨ HasLegs(x))",
+      "¬(Barks(kiki) ∨ Dog(kiki))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C029",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "0",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "There are six types of wild turkeys: Eastern wild turkey, Osceola wild turkey, Gould’s wild turkey, Merriam’s wild turkey, Rio Grande wild turkey, and Ocellated wild turkey.",
+      "Tom is not an Eastern wild turkey.",
+      "Tom is not an Osceola wild turkey.",
+      "Tom is not a Gould's wild turkey.",
+      "Tom is neither a Merriam's wild turkey nor a Rio Grande wild turkey.",
+      "Tom is a wild turkey."
+    ],
+    "conclusion_nl": "Tom is an Ocellated wild turkey.",
+    "gold_fol": [
+      "∀x (WildTurkey(x) → (EasternWildTurkey(x) ∨ OsceolaWildTurkey(x) ∨ GouldsWildTurkey(x) ∨ MerriamsWildTurkey(x) ∨ RiograndeWildTurkey(x) ∨ OcellatedWildTurkey(x)))",
+      "¬(EasternWildTurkey(tom))",
+      "¬(OsceolaWildTurkey(tom))",
+      "¬(GouldsWildTurkey(tom))",
+      "¬(MerriamsWildTurkey(tom) ∨ RiograndeWildTurkey(tom))",
+      "WildTurkey(tom)",
+      "OcellatedWildTurkey(tom)"
+    ],
+    "llm_fol": [
+      "∃x (WildTurkeyType(x) ∧ (x = easternWildTurkey ∨ x = osceolaWildTurkey ∨ x = gouldsWildTurkey ∨ x = merriamsWildTurkey ∨ x = rioGrandeWildTurkey ∨ x = ocellatedWildTurkey))",
+      "¬EasternWildTurkey(tom)",
+      "¬OsceolaWildTurkey(tom)",
+      "¬GouldsWildTurkey(tom)",
+      "¬MerriamsWildTurkey(tom) ∧ ¬RioGrandeWildTurkey(tom)",
+      "WildTurkey(tom)",
+      "OcellatedWildTurkey(tom)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C030",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "530",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "\"Stranger Things\" is a popular Netflix show.",
+      "If a Netflix show is popular, Karen will binge-watch it.",
+      "If and only if Karen binge-watches a Netflix show, she will download it.",
+      "Karen does not download \"Black Mirror.\"",
+      "\"Black Mirror\" is a Netflix show.",
+      "If Karen binge-watches a Netflix show, she will share it with Lisa."
+    ],
+    "conclusion_nl": "Karen will share \"Stranger Things\" with Lisa.",
+    "gold_fol": [
+      "NetflixShow(strangerThings) ∧ Popular(strangerThings)",
+      "∀x ((NetflixShow(x) ∧ Popular(x)) → BingeWatch(karen, x))",
+      "∀x ((NetflixShow(x) ∧ BingeWatch(karen, x)) ↔ Download(karen, x))",
+      "¬Download(karen, blackMirror)",
+      "NetflixShow(blackMirror)",
+      "∀x ((NetflixShow(x) ∧ BingeWatch(karen, x)) → ShareWith(karen, x, lisa))",
+      "ShareWith(karen, strangerThings, lisa)"
+    ],
+    "llm_fol": [
+      "PopularShow(strangerThings)",
+      "∀x (NetflixShow(x) ∧ PopularShow(x) → BingeWatch(karen, x))",
+      "∀x (BingeWatch(karen, x) ↔ Download(karen, x))",
+      "¬Download(karen, blackMirror)",
+      "NetflixShow(blackMirror)",
+      "∀x (BingeWatch(karen, x) ∧ NetflixShow(x) → Share(karen, lisa, x))",
+      "Share(karen, lisa, strangerThings)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C031",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "1302",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "All aliens are extraterrestrials.",
+      "If someone is from Mars, then they are an alien.",
+      "No extraterrestrials are human.",
+      "All highly intelligent beings from Earth are humans.",
+      "Marvin is a highly intelligent being.",
+      "Marvin is either from Earth and from Mars, or he is from neither.",
+      "If Marvin is not from Earth, then Marvin is an extraterrestrial."
+    ],
+    "conclusion_nl": "Marvin is neither a human nor from Mars.",
+    "gold_fol": [
+      "∀x (Alien(x) → Extraterrestrial(x))",
+      "∀x (From(x, mars) → Alien(x))",
+      "∀x (Extraterrestrial(x) → ¬Human(x))",
+      "∀x (HighlyIntelligentBeing(x) ∧ From(x, earth) → Human(x))",
+      "HighlyIntelligentBeing(marvin)",
+      "¬(From(marvin, earth) ⊕ From(marvin, mars))",
+      "¬From(marvin, earth) → Extraterrestrial(marvin)",
+      "¬Human(marvin) ∧ ¬From(marvin, mars)"
+    ],
+    "llm_fol": [
+      "∀x (Alien(x) → Extraterrestrial(x))",
+      "∀x (FromMars(x) → Alien(x))",
+      "∀x (Extraterrestrial(x) → ¬Human(x))",
+      "∀x (HighlyIntelligentBeingFromEarth(x) → Human(x))",
+      "HighlyIntelligentBeing(marvin)",
+      "¬(FromEarth(marvin) ∧ FromMars(marvin))",
+      "¬FromEarth(marvin) → Extraterrestrial(marvin)",
+      "¬Human(marvin) ∧ ¬FromMars(marvin)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C032",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "1303",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "All aliens are extraterrestrials.",
+      "If someone is from Mars, then they are an alien.",
+      "No extraterrestrials are human.",
+      "All highly intelligent beings from Earth are humans.",
+      "Marvin is a highly intelligent being.",
+      "Marvin is either from Earth and from Mars, or he is from neither.",
+      "If Marvin is not from Earth, then Marvin is an extraterrestrial."
+    ],
+    "conclusion_nl": "If Marvin is not from Mars, then Marvin is a human.",
+    "gold_fol": [
+      "∀x (Alien(x) → Extraterrestrial(x))",
+      "∀x (From(x, mars) → Alien(x))",
+      "∀x (Extraterrestrial(x) → ¬Human(x))",
+      "∀x (HighlyIntelligentBeing(x) ∧ From(x, earth) → Human(x))",
+      "HighlyIntelligentBeing(marvin)",
+      "¬(From(marvin, earth) ⊕ From(marvin, mars))",
+      "¬From(marvin, earth) → Extraterrestrial(marvin)",
+      "¬From(marvin, mars) → Human(marvin)"
+    ],
+    "llm_fol": [
+      "∀x (Alien(x) → Extraterrestrial(x))",
+      "∀x (FromMars(x) → Alien(x))",
+      "∀x (Extraterrestrial(x) → ¬Human(x))",
+      "∀x (HighlyIntelligentBeingFromEarth(x) → Human(x))",
+      "HighlyIntelligentBeing(marvin)",
+      "¬(FromEarth(marvin) ∧ FromMars(marvin))",
+      "¬FromEarth(marvin) → Extraterrestrial(marvin)",
+      "¬FromMars(marvin) → Human(marvin)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C033",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "241",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Robert Lewandowski is a striker.",
+      "Strikers are soccer players.",
+      "Robert Lewandowski left Bayern Munchen.",
+      "If a player leaves a team they no longer play for that team."
+    ],
+    "conclusion_nl": "Robert Lewandowski plays for Bayern Munchen.",
+    "gold_fol": [
+      "Striker(robertLewandowski)",
+      "∀x (Striker(x) → SoccerPlayer(x))",
+      "Left(robertLewandowski, bayernMunchen)",
+      "∀x ∀y (Left(x, y) → ¬PlaysFor(x, y))",
+      "PlaysFor(robertLewandowski, bayernMunchen)"
+    ],
+    "llm_fol": [
+      "Striker(robertLewandowski)",
+      "∀x (Striker(x) → SoccerPlayer(x))",
+      "Left(robertLewandowski, bayernMunchen)",
+      "∀x (Leaves(x, y) → ¬PlaysFor(x, y))",
+      "¬PlaysFor(robertLewandowski, bayernMunchen)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C034",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "360",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Badults is a British Sitcom series starring members of Pappy's.",
+      "Badults was piloted in July 2013 on BBC Three.",
+      "The Working title \"The Secret Dude Society\" was used for Badults.",
+      "Andrew Collins was the script editor for Badults."
+    ],
+    "conclusion_nl": "Andrew Collins was the script editor for a series with the working title \"The Secret Dude Society\".",
+    "gold_fol": [
+      "∃x (BritishSitcom(badults) ∧ Series(badults) ∧ MemberOf(x, pappys) ∧ Starring(badults, x))",
+      "PilotedIn(badults, july2013) ∧ PilotedOn(badults, bBCThree)",
+      "WorkingTitle(theSecretDudeSociety, badults) ∧ UsedFor(theSecretDudeSociety, badults)",
+      "ScriptEditorFor(andrewCollins, badults)",
+      "∃x (ScriptEditorFor(andrewCollins, x) ∧ Series(x) ∧ WorkingTitle(theSecretDudeSociety, x))"
+    ],
+    "llm_fol": [
+      "Sitcom(badults) ∧ Stars(badults, pappys)",
+      "Piloted(badults, july2013) ∧ AiredOn(badults, bbcThree)",
+      "WorkingTitle(badults, secretDudeSociety)",
+      "ScriptEditor(andrewCollins, badults)",
+      "ScriptEditor(andrewCollins, x) ∧ WorkingTitle(x, secretDudeSociety) → Series(x)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C035",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "171",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Books contain tons of knowledge.",
+      "When a person reads a book, that person gains knowledge.",
+      "If a person gains knowledge, they become smarter.",
+      "Harry read the book “Walden” by Henry Thoreau."
+    ],
+    "conclusion_nl": "Walden contains knowledge.",
+    "gold_fol": [
+      "∀x (Book(x) → Contains(x, knowledge))",
+      "∀x ∀y (ReadBook(x, y) → Gains(x, knowledge))",
+      "∀x (Gains(x, knowledge) → Smarter(x))",
+      "ReadBook(harry, walden) ∧ Book(walden)",
+      "Gains(harry, knowledge)"
+    ],
+    "llm_fol": [
+      "∀x (Book(x) → ContainsKnowledge(x))",
+      "∀x (Person(x) ∧ Reads(x, y) → GainsKnowledge(x))",
+      "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+      "Reads(harry, walden)",
+      "ContainsKnowledge(walden)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C036",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "172",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Books contain tons of knowledge.",
+      "When a person reads a book, that person gains knowledge.",
+      "If a person gains knowledge, they become smarter.",
+      "Harry read the book “Walden” by Henry Thoreau."
+    ],
+    "conclusion_nl": "Harry is smarter than before.",
+    "gold_fol": [
+      "∀x (Book(x) → Contains(x, knowledge))",
+      "∀x ∀y (ReadBook(x, y) → Gains(x, knowledge))",
+      "∀x (Gains(x, knowledge) → Smarter(x))",
+      "ReadBook(harry, walden) ∧ Book(walden)",
+      "Smarter(harry)"
+    ],
+    "llm_fol": [
+      "∀x (Book(x) → ContainsKnowledge(x))",
+      "∀x (Person(x) ∧ Reads(x, y) → GainsKnowledge(x))",
+      "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+      "Reads(harry, walden)",
+      "Smarter(harry)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C037",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "370",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "The Picuris Mountains are a mountain range in New Mexico or Texas.",
+      "Juan de Onate visited the Picuris Mountains.",
+      "The Harding Pegmatite Mine, located in the Picuris Mountains, was donated.",
+      "There are no mountain ranges in texas that have mines that have been donated."
+    ],
+    "conclusion_nl": "Juan de Onate visited a mountain range in New Mexico.",
+    "gold_fol": [
+      "MountainRange(thePicurisMountains) ∧ (In(thePicurisMountains, newMexico) ⊕ In(thePicurisMountains, texas))",
+      "Visited(juanDeOnate, thePicurisMountains)",
+      "In(hardingPegmatiteMine, thePicurisMountains) ∧ Mine(hardingPegmatiteMine) ∧ Donated(hardingPegmatiteMine)",
+      "∀x ∀y (Mine(x) ∧ Donated(x) ∧ In(x, y) ∧ MountainRange(y) → ¬In(y, texas))",
+      "∃x (Visited(juanDeOnate, x) ∧ MountainRange(x) ∧ In(x, newMexico))"
+    ],
+    "llm_fol": [
+      "MountainRange(picurisMountains) ∧ (LocatedIn(picurisMountains, newMexico) ∨ LocatedIn(picurisMountains, texas))",
+      "Visited(juanDeOnate, picurisMountains)",
+      "Donated(hardingPegmatiteMine) ∧ LocatedIn(hardingPegmatiteMine, picurisMountains)",
+      "∀x (MountainRange(x) ∧ LocatedIn(x, texas) → ¬∃y (Mine(y) ∧ Donated(y)))",
+      "∃x (MountainRange(x) ∧ LocatedIn(x, newMexico) ∧ Visited(juanDeOnate, x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C038",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "372",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "The Picuris Mountains are a mountain range in New Mexico or Texas.",
+      "Juan de Onate visited the Picuris Mountains.",
+      "The Harding Pegmatite Mine, located in the Picuris Mountains, was donated.",
+      "There are no mountain ranges in texas that have mines that have been donated."
+    ],
+    "conclusion_nl": "The Harding Pegmatite Mine is not located in a mountain range in New Mexico.",
+    "gold_fol": [
+      "MountainRange(thePicurisMountains) ∧ (In(thePicurisMountains, newMexico) ⊕ In(thePicurisMountains, texas))",
+      "Visited(juanDeOnate, thePicurisMountains)",
+      "In(hardingPegmatiteMine, thePicurisMountains) ∧ Mine(hardingPegmatiteMine) ∧ Donated(hardingPegmatiteMine)",
+      "∀x ∀y (Mine(x) ∧ Donated(x) ∧ In(x, y) ∧ MountainRange(y) → ¬In(y, texas))",
+      "∀x (In(hardingPegmatiteMine, x) → ¬(MountainRange(x) ∧ In(x, newMexico)))"
+    ],
+    "llm_fol": [
+      "MountainRange(picurisMountains) ∧ (LocatedIn(picurisMountains, newMexico) ∨ LocatedIn(picurisMountains, texas))",
+      "Visited(juanDeOnate, picurisMountains)",
+      "Donated(hardingPegmatiteMine) ∧ LocatedIn(hardingPegmatiteMine, picurisMountains)",
+      "∀x (MountainRange(x) ∧ LocatedIn(x, texas) → ¬∃y (Mine(y) ∧ Donated(y)))",
+      "¬LocatedIn(hardingPegmatiteMine, x) ∧ MountainRange(x) ∧ LocatedIn(x, newMexico)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C039",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "527",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "If a man is taller than another man, the taller one can block the other's shooting.",
+      "Michael is a man who is taller than everyone else in his class.",
+      "If person x is taller than person y, and person y is taller than person z, then x is taller than z",
+      "Peter is a man who is taller than Michael.",
+      "Michael can block any shooting from a person as long as the person does not jump when shooting.",
+      "Michael cannot block Windy's shooting.",
+      "Every shooter who can jump when shooting is a great shooter."
+    ],
+    "conclusion_nl": "Peter is shorter than a man in Michael's class.",
+    "gold_fol": [
+      "∀x ∀y (Man(x) ∧ Man(y) ∧ Taller(x, y) → CanBlock(x, y))",
+      "∀x (Man(x) ∧ SameClass(x, michael) ∧ ¬(x=michael) → Taller(michael, x))",
+      "∀x ∀y ∀z ((Taller(x, y) ∧ Taller(y, z)) → Taller(x, z))",
+      "Man(peter) ∧ Taller(peter, michael)",
+      "∀x (¬JumpWhenShooting(x) → CanBlock(michael, x))",
+      "¬CanBlock(michael, windy)",
+      "∀x (JumpWhenShooting(x) → GreatShooter(x))",
+      "∃x (Man(x) ∧ SameClass(x, michael) ∧ ¬Taller(peter, x))"
+    ],
+    "llm_fol": [
+      "∀x ∀y (Man(x) ∧ TallerThan(x, y) → CanBlockShooting(x, y))",
+      "Man(michael) ∧ ∀y (InClass(michael, y) → TallerThan(michael, y))",
+      "∀x ∀y ∀z (TallerThan(x, y) ∧ TallerThan(y, z) → TallerThan(x, z))",
+      "Man(peter) ∧ TallerThan(peter, michael)",
+      "∀y (CanJump(y) → CanBlockShooting(michael, y))",
+      "¬CanBlockShooting(michael, windy)",
+      "∀y (Shooter(y) ∧ CanJump(y) → GreatShooter(y))",
+      "∃z (Man(z) ∧ InClass(michael, z) ∧ TallerThan(z, peter))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C040",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "528",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "If a man is taller than another man, the taller one can block the other's shooting.",
+      "Michael is a man who is taller than everyone else in his class.",
+      "If person x is taller than person y, and person y is taller than person z, then x is taller than z",
+      "Peter is a man who is taller than Michael.",
+      "Michael can block any shooting from a person as long as the person does not jump when shooting.",
+      "Michael cannot block Windy's shooting.",
+      "Every shooter who can jump when shooting is a great shooter."
+    ],
+    "conclusion_nl": "Windy is a great shooter.",
+    "gold_fol": [
+      "∀x ∀y (Man(x) ∧ Man(y) ∧ Taller(x, y) → CanBlock(x, y))",
+      "∀x (Man(x) ∧ SameClass(x, michael) ∧ ¬(x=michael) → Taller(michael, x))",
+      "∀x ∀y ∀z ((Taller(x, y) ∧ Taller(y, z)) → Taller(x, z))",
+      "Man(peter) ∧ Taller(peter, michael)",
+      "∀x (¬JumpWhenShooting(x) → CanBlock(michael, x))",
+      "¬CanBlock(michael, windy)",
+      "∀x (JumpWhenShooting(x) → GreatShooter(x))",
+      "GreatShooter(windy)"
+    ],
+    "llm_fol": [
+      "∀x ∀y (Man(x) ∧ TallerThan(x, y) → CanBlockShooting(x, y))",
+      "Man(michael) ∧ ∀y (InClass(y, michaelClass) → TallerThan(michael, y))",
+      "∀x ∀y ∀z (TallerThan(x, y) ∧ TallerThan(y, z) → TallerThan(x, z))",
+      "Man(peter) ∧ TallerThan(peter, michael)",
+      "∀y (¬Jumping(y) → CanBlockShooting(michael, y))",
+      "¬CanBlockShooting(michael, windy)",
+      "∀y (CanJump(y) → GreatShooter(y))",
+      "GreatShooter(windy)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C041",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "441",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Barutin Cove is a cove named after the Bulgarian settlement of Barutin.",
+      "Barutin Cove is on the southwest coast of Snow Island.",
+      "Snow Island, Greenwich Island, and Deception Island are located in the South Shetland Islands.",
+      "Antarctica is located on the South Shetland Islands.",
+      "If place A is located in place B and place B is located in place C, then place A is located in place C."
+    ],
+    "conclusion_nl": "Barutin Cove is not located in Antarctica.",
+    "gold_fol": [
+      "Cove(barutinCove) ∧ NamedAfter(barutinCove, barutinSettlement) ∧ LocatedIn(barutinSettlement, bulgaria)",
+      "LocatedIn(barutinCove, snowIsland)",
+      "LocatedIn(snowIsland, southShetlandIslands) ∧ LocatedIn(greenwichIsland, southShetlandIslands) ∧ LocatedIn(deceptionIsland, southShetlandIslands)",
+      "LocatedIn(southShetlandIslands, antarctica)",
+      "∀x ∀y ∀z ((LocatedIn(x, y) ∧ LocatedIn(y, z)) → LocatedIn(x, z))",
+      "¬LocatedIn(barutinCove, antarctica)"
+    ],
+    "llm_fol": [
+      "Cove(barutinCove) ∧ NamedAfter(barutinCove, barutin)",
+      "On(barutinCove, southwestCoast(snowIsland))",
+      "LocatedIn(snowIsland, southShetlandIslands) ∧ LocatedIn(greenwichIsland, southShetlandIslands) ∧ LocatedIn(deceptionIsland, southShetlandIslands)",
+      "LocatedIn(antarctica, southShetlandIslands)",
+      "∀x ∀y ∀z ((LocatedIn(x, y) ∧ LocatedIn(y, z)) → LocatedIn(x, z))",
+      "¬LocatedIn(barutinCove, antarctica)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C042",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "75",
+    "severity": "wrong_direction",
+    "gold_label": "Uncertain",
+    "predicted_label": "False",
+    "premises_nl": [
+      "Some mammals have teeth.",
+      "Platypuses have no teeth.",
+      "Platypuses are mammals.",
+      "Humans have teeth."
+    ],
+    "conclusion_nl": "Platypuses are reptiles.",
+    "gold_fol": [
+      "∃x ∃y (Mammal(x) ∧ Mammal(y) ∧ (¬(x=y)) ∧ Have(x, teeth) ∧ Have(y, teeth))",
+      "¬Have(platypus, teeth)",
+      "Mammal(platypus)",
+      "Have(humans, teeth)",
+      "Reptile(platypus)"
+    ],
+    "llm_fol": [
+      "∃x (Mammal(x) ∧ HasTeeth(x))",
+      "¬HasTeeth(platypus)",
+      "Mammal(platypus)",
+      "HasTeeth(human)",
+      "¬Mammal(platypus)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C043",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "389",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Machine Learning algorithms can be categorized as supervised learning, unsupervised learning, and reinforcement learning.",
+      "Unsupervised learning algorithms do not require labeled data.",
+      "The state-of-the-art text summarization model is trained with machine learning algorithms.",
+      "Reinforcement learning is not used to train the state-of-the-art text summarization model.",
+      "The Machine Learning algorithm for training text summarization models requires labeled data."
+    ],
+    "conclusion_nl": "Unsupervised learning is used to train the state-of-the-art text summarization model.",
+    "gold_fol": [
+      "∀x (MachineLearningAlgorithm(x) → SupervisedLearningAlgorithm(x) ∨ UnsupervisedLearningAlgorithm(x) ∨ ReinforcementLearningAlgorithm(x))",
+      "∀x (UnsupervisedLearningAlgorithm(x) → ¬Require(x, labeledData))",
+      "∀x (TrainedWith(stateOfTheArtTextSummarizationModel, x) → MachineLearningAlgorithm(x))",
+      "∀x (ReinforcementLearningAlgorithm(x) → ¬TrainedWith(stateOfTheArtTextSummarizationModel, x))",
+      "∀x ((MachineLearningAlgorithm(x) ∧ TrainedWith(stateOfTheArtTextSummarizationModel, x)) → Require(x, labeledData))",
+      "∃x (UnsupervisedLearningAlgorithm(x) ∧ TrainedWith(stateOfTheArtTextSummarizationModel, x))"
+    ],
+    "llm_fol": [
+      "∀x (MachineLearningAlgorithm(x) → (CategorizedAs(x, supervisedLearning) ∨ CategorizedAs(x, unsupervisedLearning) ∨ CategorizedAs(x, reinforcementLearning)))",
+      "∀x (UnsupervisedLearningAlgorithm(x) → ¬RequiresLabeledData(x))",
+      "∃x (StateOfTheArtTextSummarizationModel(y) ∧ TrainedWith(y, x) ∧ MachineLearningAlgorithm(x))",
+      "¬UsedToTrain(reinforcementLearning, stateOfTheArtTextSummarizationModel)",
+      "RequiresLabeledData(trainingAlgorithmForTextSummarization)",
+      "UsedToTrain(unsupervisedLearning, stateOfTheArtTextSummarizationModel)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C044",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "736",
+    "severity": "wrong_direction",
+    "gold_label": "False",
+    "predicted_label": "True",
+    "premises_nl": [
+      "A hawk never swims.",
+      "Some birds are hawks."
+    ],
+    "conclusion_nl": "All birds swim.",
+    "gold_fol": [
+      "∀x (Hawk(x) → ¬Swim(x))",
+      "∃x ∃y (Bird(x) ∧ Bird(y) ∧ Hawk(x) ∧ Hawk(y) ∧ ¬(x=y))",
+      "∀x (Bird(x) → Swim(x))"
+    ],
+    "llm_fol": [
+      "∀x (Hawk(x) → ¬Swims(x))",
+      "∃x (Bird(x) ∧ Hawk(x))",
+      "¬∀x (Bird(x) → Swims(x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C045",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "1034",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "If something is a deadly disease, then it comes with a low survival rate.",
+      "Severe cancers are deadly diseases.",
+      "Bile duct cancer is a severe form cancer.",
+      "All Cholangiocarcinoma is bile duct cancer.",
+      "Mild flu comes with a low survival rate.",
+      "Colorectal cancer is not both a bile duct cancer and with a low survival rate."
+    ],
+    "conclusion_nl": "Colorectal cancer is a form of Cholangiocarcinoma and it is a kind of mild flu or a kind of bile duct cancer, or all of the above.",
+    "gold_fol": [
+      "∀x (DeadlyDiseases(x) → ComeWith(x, lowSurvivalRate))",
+      "∀x (SevereCancer(x) → DeadlyDiseases(x))",
+      "∀x (BileDuctCancer(x) → SevereCancer(x))",
+      "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+      "∀x (MildFlu(x) → ¬ComeWith(x, lowSurvivalRate))",
+      "¬(BileDuctCancer(colorectalCancer) ∧ ComeWith(colorectalCancer, lowSurvivalRate))",
+      "Cholangiocarcinoma(colorectalCancer) ∧ (MildFlu(colorectalCancer) ∨ BileDuctCancer(colorectalCancer))"
+    ],
+    "llm_fol": [
+      "∀x (DeadlyDisease(x) → LowSurvivalRate(x))",
+      "∀x (SevereCancer(x) → DeadlyDisease(x))",
+      "SevereCancer(bileDuctCancer)",
+      "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+      "LowSurvivalRate(mildFlu)",
+      "¬(BileDuctCancer(colorectalCancer) ∧ LowSurvivalRate(colorectalCancer))",
+      "(Cholangiocarcinoma(colorectalCancer) ∧ (MildFlu(colorectalCancer) ∨ BileDuctCancer(colorectalCancer))) ∨ (MildFlu(colorectalCancer) ∧ BileDuctCancer(colorectalCancer))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C046",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "149",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "The summer Olympic games is a sporting event.",
+      "The last summer Olympic games was in Tokyo.",
+      "The United States won the most medals in Tokyo."
+    ],
+    "conclusion_nl": "The United States won the most medals in the last summer Olympic games.",
+    "gold_fol": [
+      "SportingEvent(olympics)",
+      "LastSummerOlympics(tokyo)",
+      "MostMedals(unitedStates, tokyo)",
+      "∃x (LastSummerOlympics(x) ∧ MostMedals(unitedStates, x))"
+    ],
+    "llm_fol": [
+      "SportingEvent(summerOlympicGames)",
+      "LastSummerOlympicGames(wasInTokyo)",
+      "WonMostMedals(unitedStates, tokyo)",
+      "WonMostMedals(unitedStates, lastSummerOlympicGames)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C047",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "1269",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "No one nice to animals is also mean to animals.",
+      "Some grumpy people are mean to animals.",
+      "All animal lovers are nice to animals.",
+      "All pet owners love animals.",
+      "Tom is a pet owner."
+    ],
+    "conclusion_nl": "Tom is not both a grumpy person and mean to animals.",
+    "gold_fol": [
+      "∀x (NiceTo(x, animal) → ¬MeanTo(x, animal))",
+      "∃x (Grumpy(x) ∧ MeanTo(x, animal))",
+      "∀x (AnimalLover(x) → NiceTo(x, animal))",
+      "∀x (PetOwner(x) → AnimalLover(x))",
+      "PetOwner(tom)",
+      "¬(Grumpy(tom) ∧ MeanTo(tom, animal))"
+    ],
+    "llm_fol": [
+      "∀x (NiceToAnimals(x) → ¬MeanToAnimals(x))",
+      "∃x (Grumpy(x) ∧ MeanToAnimals(x))",
+      "∀x (AnimalLover(x) → NiceToAnimals(x))",
+      "∀x (PetOwner(x) → LovesAnimals(x))",
+      "PetOwner(tom)",
+      "¬(Grumpy(tom) ∧ MeanToAnimals(tom))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C048",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "1314",
+    "severity": "wrong_direction",
+    "gold_label": "True",
+    "predicted_label": "False",
+    "premises_nl": [
+      "Some professional basketball players are not American nationals.",
+      "All professional basketball players can do jump shots.",
+      "If someone can jump shots, they leap straight into the air.",
+      "If someone leaps straight into the air, they activate their leg muscles.",
+      "Yuri does not activate his leg muscles."
+    ],
+    "conclusion_nl": "Yuri is not an American professional basketball player.",
+    "gold_fol": [
+      "∃x (Professional(x) ∧ BasketballPlayer(x) ∧ ¬AmericanNational(x))",
+      "∀x (Professional(x) ∧ BasketballPlayer(x) → CanDo(x, jumpShot))",
+      "∀x (CanDo(x, jumpShot) → LeapStraightIntoAir(x))",
+      "∀x (LeapStraightIntoAir(x) → Activate(x, legMuscle))",
+      "¬Activate(yuri, legMuscle)",
+      "¬(AmericanNational(yuri) ∧ Professional(yuri) ∧ BasketballPlayer(yuri))"
+    ],
+    "llm_fol": [
+      "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+      "∀x (ProfessionalBasketballPlayer(x) → CanDoJumpShots(x))",
+      "∀x (CanDoJumpShots(x) → LeapsStraightIntoAir(x))",
+      "∀x (LeapsStraightIntoAir(x) → ActivatesLegMuscles(x))",
+      "¬ActivatesLegMuscles(yuri)",
+      "¬AmericanNational(yuri) ∧ ProfessionalBasketballPlayer(yuri)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C049",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "1317",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Some professional basketball players are not American nationals.",
+      "All professional basketball players can do jump shots.",
+      "If someone can jump shots, they leap straight into the air.",
+      "If someone leaps straight into the air, they activate their leg muscles.",
+      "Yuri does not activate his leg muscles."
+    ],
+    "conclusion_nl": "If Yuri is not an American professional basketball player, then Yuri is a professional basketball player.",
+    "gold_fol": [
+      "∃x (Professional(x) ∧ BasketballPlayer(x) ∧ ¬AmericanNational(x))",
+      "∀x (Professional(x) ∧ BasketballPlayer(x) → CanDo(x, jumpShot))",
+      "∀x (CanDo(x, jumpShot) → LeapStraightIntoAir(x))",
+      "∀x (LeapStraightIntoAir(x) → Activate(x, legMuscle))",
+      "¬Activate(yuri, legMuscle)",
+      "¬(AmericanNational(yuri) ∧ Professional(yuri) ∧ BasketballPlayer(yuri)) → (Professional(yuri) ∧ BasketballPlayer(yuri))"
+    ],
+    "llm_fol": [
+      "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+      "∀x (ProfessionalBasketballPlayer(x) → CanDoJumpShots(x))",
+      "∀x (CanDoJumpShots(x) → LeapsStraightIntoAir(x))",
+      "∀x (LeapsStraightIntoAir(x) → ActivatesLegMuscles(x))",
+      "¬ActivatesLegMuscles(yuri)",
+      "¬AmericanNational(yuri) → ProfessionalBasketballPlayer(yuri)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C050",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "724",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Events are either happy or sad.",
+      "At least one event is happy."
+    ],
+    "conclusion_nl": "All events are sad.",
+    "gold_fol": [
+      "∀x (Event(x) → Happy(x) ⊕ Sad(x))",
+      "∃x (Event(x) ∧ Happy(x))",
+      "∀x (Event(x) → Sad(x))"
+    ],
+    "llm_fol": [
+      "∀x (Event(x) → (Happy(x) ∨ Sad(x)))",
+      "∃x (Event(x) ∧ Happy(x))",
+      "∀x (Event(x) → Sad(x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C051",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "1325",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Jane does not like any animals that bark.",
+      "All dogs are animals that bark.",
+      "Jane likes all animals that jump.",
+      "If an animal has legs, then it jumps.",
+      "If an animal is terricolous, then it has legs.",
+      "KiKi is an animal.",
+      "If KiKi neither jumps nor has legs, then KiKi is terricolous or has legs."
+    ],
+    "conclusion_nl": "KiKi is a barking dog.",
+    "gold_fol": [
+      "∀x (Animal(x) ∧ Bark(x) → ¬Like(jane, x))",
+      "∀x (Dog(x) → Animal(x) ∧ Bark(x))",
+      "∀x (Animal(x) ∧ Jump(x) → Like(jane, x))",
+      "∀x (∃y ∃z (¬(y=z) ∧ Leg(y) ∧ Leg(z) ∧ Have(x, y) ∧ Have(x, z)) → Jump(x))",
+      "∀x (Terricolous(x) → ∃y ∃z (¬(y=z) ∧ Leg(y) ∧ Leg(z) ∧ Have(x, y) ∧ Have(x, z)))",
+      "Animal(kiki)",
+      "¬Jump(kiki) ∧ ¬(∃y ∃z (¬(y=z) ∧ Leg(y) ∧ Leg(z) ∧ Have(kiki, y) ∧ Have(kiki, z))) → Terricolous(kiki) ∨ ∃y ∃z (¬(y=z) ∧ Leg(y) ∧ Leg(z) ∧ Have(kiki, y) ∧ Have(kiki, z))",
+      "Bark(kiki) ∧ Dog(kiki)"
+    ],
+    "llm_fol": [
+      "¬∃x (Likes(jane, x) ∧ Barks(x))",
+      "∀x (Dog(x) → AnimalThatBarks(x))",
+      "∀x (Likes(jane, x) ↔ AnimalThatJumps(x))",
+      "∀x (HasLegs(x) → Jumps(x))",
+      "∀x (Terricolous(x) → HasLegs(x))",
+      "Animal(kiki)",
+      "¬(Jumps(kiki) ∨ HasLegs(kiki)) → (Terricolous(kiki) ∨ HasLegs(kiki))",
+      "BarkingDog(kiki)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C052",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "1326",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Jane does not like any animals that bark.",
+      "All dogs are animals that bark.",
+      "Jane likes all animals that jump.",
+      "If an animal has legs, then it jumps.",
+      "If an animal is terricolous, then it has legs.",
+      "KiKi is an animal.",
+      "If KiKi neither jumps nor has legs, then KiKi is terricolous or has legs."
+    ],
+    "conclusion_nl": "KiKi does not bark and he is not a dog.",
+    "gold_fol": [
+      "∀x (Animal(x) ∧ Bark(x) → ¬Like(jane, x))",
+      "∀x (Dog(x) → Animal(x) ∧ Bark(x))",
+      "∀x (Animal(x) ∧ Jump(x) → Like(jane, x))",
+      "∀x (∃y ∃z (¬(y=z) ∧ Leg(y) ∧ Leg(z) ∧ Have(x, y) ∧ Have(x, z)) → Jump(x))",
+      "∀x (Terricolous(x) → ∃y ∃z (¬(y=z) ∧ Leg(y) ∧ Leg(z) ∧ Have(x, y) ∧ Have(x, z)))",
+      "Animal(kiki)",
+      "¬Jump(kiki) ∧ ¬(∃y ∃z (¬(y=z) ∧ Leg(y) ∧ Leg(z) ∧ Have(kiki, y) ∧ Have(kiki, z))) → Terricolous(kiki) ∨ ∃y ∃z (¬(y=z) ∧ Leg(y) ∧ Leg(z) ∧ Have(kiki, y) ∧ Have(kiki, z))",
+      "¬Bark(kiki) ∧ ¬Dog(kiki)"
+    ],
+    "llm_fol": [
+      "¬∃x (Likes(jane, x) ∧ Barks(x))",
+      "∀x (Dog(x) → AnimalThatBarks(x))",
+      "∀x (Likes(jane, x) ↔ AnimalThatJumps(x))",
+      "∀x (HasLegs(x) → Jumps(x))",
+      "∀x (Terricolous(x) → HasLegs(x))",
+      "Animal(kiki)",
+      "¬(Jumps(kiki) ∧ HasLegs(kiki)) → (Terricolous(kiki) ∨ HasLegs(kiki))",
+      "¬Barks(kiki) ∧ ¬Dog(kiki)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C053",
+    "model": "gpt-4o-mini",
+    "folio_example_id": "308",
+    "severity": "wrong_direction",
+    "gold_label": "Uncertain",
+    "predicted_label": "True",
+    "premises_nl": [
+      "Ailton Silva, born in 1995, is commonly known as Ailton.",
+      "Ailton is a football player who was loaned out to Braga.",
+      "Ailton Silva is a Brazilian footballer who plays for Náutico.",
+      "Náutico is a football club along with Braga.",
+      "Fluminense is a football club."
+    ],
+    "conclusion_nl": "Ailton Silva was loaned out to a football club.",
+    "gold_fol": [
+      "BornIn(ailtonSilva, year1995) ∧ CommonlyKnownAs(ailtonSilva, ailton)",
+      "FootballPlayer(ailton) ∧ LoanedTo(ailton, braga)",
+      "Brazilian(ailtonSilva) ∧ Footballplayer(ailtonSilva) ∧ PlayFor(ailtonSilva, nautico)",
+      "FootballClub(nautico) ∧ FootballClub(braga)",
+      "FootballClub(fluminense)",
+      "∃x (FootballClub(x) ∧ LoanedTo(ailtonSilva, x))"
+    ],
+    "llm_fol": [
+      "BornIn(ailtonSilva, yr1995) ∧ CommonlyKnownAs(ailtonSilva, ailton)",
+      "FootballPlayer(ailtonSilva) ∧ LoanedOutTo(ailtonSilva, braga)",
+      "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, nautico)",
+      "FootballClub(nautico) ∧ FootballClub(braga)",
+      "FootballClub(fluminense)",
+      "∃x (FootballClub(x) ∧ LoanedOutTo(ailtonSilva, x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C054",
+    "model": "gpt-4o",
+    "folio_example_id": "0",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "There are six types of wild turkeys: Eastern wild turkey, Osceola wild turkey, Gould’s wild turkey, Merriam’s wild turkey, Rio Grande wild turkey, and Ocellated wild turkey.",
+      "Tom is not an Eastern wild turkey.",
+      "Tom is not an Osceola wild turkey.",
+      "Tom is not a Gould's wild turkey.",
+      "Tom is neither a Merriam's wild turkey nor a Rio Grande wild turkey.",
+      "Tom is a wild turkey."
+    ],
+    "conclusion_nl": "Tom is an Ocellated wild turkey.",
+    "gold_fol": [
+      "∀x (WildTurkey(x) → (EasternWildTurkey(x) ∨ OsceolaWildTurkey(x) ∨ GouldsWildTurkey(x) ∨ MerriamsWildTurkey(x) ∨ RiograndeWildTurkey(x) ∨ OcellatedWildTurkey(x)))",
+      "¬(EasternWildTurkey(tom))",
+      "¬(OsceolaWildTurkey(tom))",
+      "¬(GouldsWildTurkey(tom))",
+      "¬(MerriamsWildTurkey(tom) ∨ RiograndeWildTurkey(tom))",
+      "WildTurkey(tom)",
+      "OcellatedWildTurkey(tom)"
+    ],
+    "llm_fol": [
+      "∀x (WildTurkeyType(x) ↔ (x = easternWildTurkey ∨ x = osceolaWildTurkey ∨ x = gouldsWildTurkey ∨ x = merriamsWildTurkey ∨ x = rioGrandeWildTurkey ∨ x = ocellatedWildTurkey))",
+      "¬IsType(tom, easternWildTurkey)",
+      "¬IsType(tom, osceolaWildTurkey)",
+      "¬IsType(tom, gouldsWildTurkey)",
+      "¬IsType(tom, merriamsWildTurkey) ∧ ¬IsType(tom, rioGrandeWildTurkey)",
+      "WildTurkey(tom)",
+      "IsType(tom, ocellatedWildTurkey)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C055",
+    "model": "gpt-4o",
+    "folio_example_id": "361",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Badults is a British Sitcom series starring members of Pappy's.",
+      "Badults was piloted in July 2013 on BBC Three.",
+      "The Working title \"The Secret Dude Society\" was used for Badults.",
+      "Andrew Collins was the script editor for Badults."
+    ],
+    "conclusion_nl": "No members of Pappy's have starred in a show piloting on BBC Two or BBC Three.",
+    "gold_fol": [
+      "∃x (BritishSitcom(badults) ∧ Series(badults) ∧ MemberOf(x, pappys) ∧ Starring(badults, x))",
+      "PilotedIn(badults, july2013) ∧ PilotedOn(badults, bBCThree)",
+      "WorkingTitle(theSecretDudeSociety, badults) ∧ UsedFor(theSecretDudeSociety, badults)",
+      "ScriptEditorFor(andrewCollins, badults)",
+      "∀x ∀y (MemberOf(x, pappys) ∧ Starring(y, x) → ¬(PilotedOn(y, bBCTwo) ∨ PilotedOn(y, bBCThree)))"
+    ],
+    "llm_fol": [
+      "BritishSitcom(badults) ∧ Stars(badults, pappysMembers)",
+      "PilotedOn(badults, july2013, bbcThree)",
+      "WorkingTitle(badults, theSecretDudeSociety)",
+      "ScriptEditor(andrewCollins, badults)",
+      "∀x (MemberOf(x, pappys) → ¬StarredInShowPilotingOn(x, bbcTwo) ∧ ¬StarredInShowPilotingOn(x, bbcThree))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C056",
+    "model": "gpt-4o",
+    "folio_example_id": "806",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "No baked sweets are spicy.",
+      "All cupcakes are baked sweets.",
+      "All mala hotpots are spicy.",
+      "All products from Baked by Melissa are cupcakes.",
+      "Dried Thai chilies are spicy or mala hotpots or not baked sweets."
+    ],
+    "conclusion_nl": "Dried Thai chilies are not products of Baked by Melissa.",
+    "gold_fol": [
+      "∀x (BakedSweet(x) → ¬Spicy(x))",
+      "∀x (Cupcake(x) → BakedSweet(x))",
+      "∀x (MalaHotpot(x) → Spicy(x))",
+      "∀x (Product(x) ∧ From(x, bakedByMelissa) → Cupcake(x))",
+      "Spicy(driedThaiChili) ∨ MalaHotpot(driedThaiChili)∨ ¬BakedSweet(driedThaiChili)",
+      "¬(Product(driedThaiChili) ∧ From(driedThaiChili, bakedByMelissa))"
+    ],
+    "llm_fol": [
+      "∀x (BakedSweet(x) → ¬Spicy(x))",
+      "∀x (Cupcake(x) → BakedSweet(x))",
+      "∀x (MalaHotpot(x) → Spicy(x))",
+      "∀x (ProductOf(x, bakedByMelissa) → Cupcake(x))",
+      "∀x (DriedThaiChili(x) → Spicy(x) ∨ MalaHotpot(x) ∨ ¬BakedSweet(x))",
+      "¬ProductOf(driedThaiChili, bakedByMelissa)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C057",
+    "model": "gpt-4o",
+    "folio_example_id": "172",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Books contain tons of knowledge.",
+      "When a person reads a book, that person gains knowledge.",
+      "If a person gains knowledge, they become smarter.",
+      "Harry read the book “Walden” by Henry Thoreau."
+    ],
+    "conclusion_nl": "Harry is smarter than before.",
+    "gold_fol": [
+      "∀x (Book(x) → Contains(x, knowledge))",
+      "∀x ∀y (ReadBook(x, y) → Gains(x, knowledge))",
+      "∀x (Gains(x, knowledge) → Smarter(x))",
+      "ReadBook(harry, walden) ∧ Book(walden)",
+      "Smarter(harry)"
+    ],
+    "llm_fol": [
+      "∀x (Book(x) → ContainsKnowledge(x))",
+      "∀x ∀y ((Person(x) ∧ Book(y) ∧ Reads(x, y)) → GainsKnowledge(x))",
+      "∀x (GainsKnowledge(x) → BecomesSmarter(x))",
+      "Reads(harry, walden)",
+      "BecomesSmarter(harry)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C058",
+    "model": "gpt-4o",
+    "folio_example_id": "370",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "The Picuris Mountains are a mountain range in New Mexico or Texas.",
+      "Juan de Onate visited the Picuris Mountains.",
+      "The Harding Pegmatite Mine, located in the Picuris Mountains, was donated.",
+      "There are no mountain ranges in texas that have mines that have been donated."
+    ],
+    "conclusion_nl": "Juan de Onate visited a mountain range in New Mexico.",
+    "gold_fol": [
+      "MountainRange(thePicurisMountains) ∧ (In(thePicurisMountains, newMexico) ⊕ In(thePicurisMountains, texas))",
+      "Visited(juanDeOnate, thePicurisMountains)",
+      "In(hardingPegmatiteMine, thePicurisMountains) ∧ Mine(hardingPegmatiteMine) ∧ Donated(hardingPegmatiteMine)",
+      "∀x ∀y (Mine(x) ∧ Donated(x) ∧ In(x, y) ∧ MountainRange(y) → ¬In(y, texas))",
+      "∃x (Visited(juanDeOnate, x) ∧ MountainRange(x) ∧ In(x, newMexico))"
+    ],
+    "llm_fol": [
+      "MountainRange(picurisMountains) ∧ (LocatedIn(picurisMountains, newMexico) ∨ LocatedIn(picurisMountains, texas))",
+      "Visited(juanDeOnate, picurisMountains)",
+      "LocatedIn(hardingPegmatiteMine, picurisMountains) ∧ Donated(hardingPegmatiteMine)",
+      "∀x (MountainRange(x) ∧ LocatedIn(x, texas) → ¬∃y (Mine(y) ∧ LocatedIn(y, x) ∧ Donated(y)))",
+      "∃x (MountainRange(x) ∧ LocatedIn(x, newMexico) ∧ Visited(juanDeOnate, x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C059",
+    "model": "gpt-4o",
+    "folio_example_id": "372",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "The Picuris Mountains are a mountain range in New Mexico or Texas.",
+      "Juan de Onate visited the Picuris Mountains.",
+      "The Harding Pegmatite Mine, located in the Picuris Mountains, was donated.",
+      "There are no mountain ranges in texas that have mines that have been donated."
+    ],
+    "conclusion_nl": "The Harding Pegmatite Mine is not located in a mountain range in New Mexico.",
+    "gold_fol": [
+      "MountainRange(thePicurisMountains) ∧ (In(thePicurisMountains, newMexico) ⊕ In(thePicurisMountains, texas))",
+      "Visited(juanDeOnate, thePicurisMountains)",
+      "In(hardingPegmatiteMine, thePicurisMountains) ∧ Mine(hardingPegmatiteMine) ∧ Donated(hardingPegmatiteMine)",
+      "∀x ∀y (Mine(x) ∧ Donated(x) ∧ In(x, y) ∧ MountainRange(y) → ¬In(y, texas))",
+      "∀x (In(hardingPegmatiteMine, x) → ¬(MountainRange(x) ∧ In(x, newMexico)))"
+    ],
+    "llm_fol": [
+      "MountainRange(picurisMountains) ∧ (LocatedIn(picurisMountains, newMexico) ∨ LocatedIn(picurisMountains, texas))",
+      "Visited(juanDeOnate, picurisMountains)",
+      "LocatedIn(hardingPegmatiteMine, picurisMountains) ∧ Donated(hardingPegmatiteMine)",
+      "∀x (MountainRange(x) ∧ LocatedIn(x, texas) → ¬∃y (Mine(y) ∧ LocatedIn(y, x) ∧ Donated(y)))",
+      "¬LocatedIn(hardingPegmatiteMine, newMexico)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C060",
+    "model": "gpt-4o",
+    "folio_example_id": "527",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "If a man is taller than another man, the taller one can block the other's shooting.",
+      "Michael is a man who is taller than everyone else in his class.",
+      "If person x is taller than person y, and person y is taller than person z, then x is taller than z",
+      "Peter is a man who is taller than Michael.",
+      "Michael can block any shooting from a person as long as the person does not jump when shooting.",
+      "Michael cannot block Windy's shooting.",
+      "Every shooter who can jump when shooting is a great shooter."
+    ],
+    "conclusion_nl": "Peter is shorter than a man in Michael's class.",
+    "gold_fol": [
+      "∀x ∀y (Man(x) ∧ Man(y) ∧ Taller(x, y) → CanBlock(x, y))",
+      "∀x (Man(x) ∧ SameClass(x, michael) ∧ ¬(x=michael) → Taller(michael, x))",
+      "∀x ∀y ∀z ((Taller(x, y) ∧ Taller(y, z)) → Taller(x, z))",
+      "Man(peter) ∧ Taller(peter, michael)",
+      "∀x (¬JumpWhenShooting(x) → CanBlock(michael, x))",
+      "¬CanBlock(michael, windy)",
+      "∀x (JumpWhenShooting(x) → GreatShooter(x))",
+      "∃x (Man(x) ∧ SameClass(x, michael) ∧ ¬Taller(peter, x))"
+    ],
+    "llm_fol": [
+      "∀x ∀y ((Man(x) ∧ Man(y) ∧ TallerThan(x, y)) → CanBlockShooting(x, y))",
+      "∀y (Man(y) → TallerThan(michael, y))",
+      "∀x ∀y ∀z ((TallerThan(x, y) ∧ TallerThan(y, z)) → TallerThan(x, z))",
+      "Man(peter) ∧ TallerThan(peter, michael)",
+      "∀y ((Person(y) ∧ ¬JumpsWhenShooting(y)) → CanBlockShooting(michael, y))",
+      "¬CanBlockShooting(michael, windy)",
+      "∀x (Shooter(x) ∧ JumpsWhenShooting(x) → GreatShooter(x))",
+      "∃y (Man(y) ∧ InClass(y, michael) ∧ TallerThan(y, peter))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C061",
+    "model": "gpt-4o",
+    "folio_example_id": "528",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "If a man is taller than another man, the taller one can block the other's shooting.",
+      "Michael is a man who is taller than everyone else in his class.",
+      "If person x is taller than person y, and person y is taller than person z, then x is taller than z",
+      "Peter is a man who is taller than Michael.",
+      "Michael can block any shooting from a person as long as the person does not jump when shooting.",
+      "Michael cannot block Windy's shooting.",
+      "Every shooter who can jump when shooting is a great shooter."
+    ],
+    "conclusion_nl": "Windy is a great shooter.",
+    "gold_fol": [
+      "∀x ∀y (Man(x) ∧ Man(y) ∧ Taller(x, y) → CanBlock(x, y))",
+      "∀x (Man(x) ∧ SameClass(x, michael) ∧ ¬(x=michael) → Taller(michael, x))",
+      "∀x ∀y ∀z ((Taller(x, y) ∧ Taller(y, z)) → Taller(x, z))",
+      "Man(peter) ∧ Taller(peter, michael)",
+      "∀x (¬JumpWhenShooting(x) → CanBlock(michael, x))",
+      "¬CanBlock(michael, windy)",
+      "∀x (JumpWhenShooting(x) → GreatShooter(x))",
+      "GreatShooter(windy)"
+    ],
+    "llm_fol": [
+      "∀x ∀y ((Man(x) ∧ Man(y) ∧ TallerThan(x, y)) → CanBlockShooting(x, y))",
+      "∀y (Man(michael) ∧ Classmate(y, michael) → TallerThan(michael, y))",
+      "∀x ∀y ∀z ((TallerThan(x, y) ∧ TallerThan(y, z)) → TallerThan(x, z))",
+      "Man(peter) ∧ TallerThan(peter, michael)",
+      "∀y ((Person(y) ∧ ¬JumpsWhenShooting(y)) → CanBlockShooting(michael, y))",
+      "¬CanBlockShooting(michael, windy)",
+      "∀x (Shooter(x) ∧ JumpsWhenShooting(x) → GreatShooter(x))",
+      "GreatShooter(windy)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C062",
+    "model": "gpt-4o",
+    "folio_example_id": "441",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Barutin Cove is a cove named after the Bulgarian settlement of Barutin.",
+      "Barutin Cove is on the southwest coast of Snow Island.",
+      "Snow Island, Greenwich Island, and Deception Island are located in the South Shetland Islands.",
+      "Antarctica is located on the South Shetland Islands.",
+      "If place A is located in place B and place B is located in place C, then place A is located in place C."
+    ],
+    "conclusion_nl": "Barutin Cove is not located in Antarctica.",
+    "gold_fol": [
+      "Cove(barutinCove) ∧ NamedAfter(barutinCove, barutinSettlement) ∧ LocatedIn(barutinSettlement, bulgaria)",
+      "LocatedIn(barutinCove, snowIsland)",
+      "LocatedIn(snowIsland, southShetlandIslands) ∧ LocatedIn(greenwichIsland, southShetlandIslands) ∧ LocatedIn(deceptionIsland, southShetlandIslands)",
+      "LocatedIn(southShetlandIslands, antarctica)",
+      "∀x ∀y ∀z ((LocatedIn(x, y) ∧ LocatedIn(y, z)) → LocatedIn(x, z))",
+      "¬LocatedIn(barutinCove, antarctica)"
+    ],
+    "llm_fol": [
+      "NamedAfter(barutinCove, barutin)",
+      "On(barutinCove, southwestCoastSnowIsland)",
+      "LocatedIn(snowIsland, southShetlandIslands) ∧ LocatedIn(greenwichIsland, southShetlandIslands) ∧ LocatedIn(deceptionIsland, southShetlandIslands)",
+      "LocatedIn(antarctica, southShetlandIslands)",
+      "∀x ∀y ∀z ((LocatedIn(x, y) ∧ LocatedIn(y, z)) → LocatedIn(x, z))",
+      "¬LocatedIn(barutinCove, antarctica)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C063",
+    "model": "gpt-4o",
+    "folio_example_id": "578",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Plungers suck.",
+      "Vacuums suck.",
+      "Vampires suck.",
+      "Space is a vacuum.",
+      "A duster is a household appliance that doesn't suck."
+    ],
+    "conclusion_nl": "Space sucks.",
+    "gold_fol": [
+      "∀x (Plunger(x) → Suck(x))",
+      "∀x (Vacuum(x) → Suck(x))",
+      "∀x (Vampire(x) → Suck(x))",
+      "Vacuum(space)",
+      "HouseholdAppliance(duster) ∧ ¬Suck(duster)",
+      "Suck(space)"
+    ],
+    "llm_fol": [
+      "Sucks(plunger)",
+      "Sucks(vacuum)",
+      "Sucks(vampire)",
+      "Vacuum(space)",
+      "HouseholdAppliance(duster) ∧ ¬Sucks(duster)",
+      "Sucks(space)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C064",
+    "model": "gpt-4o",
+    "folio_example_id": "389",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Machine Learning algorithms can be categorized as supervised learning, unsupervised learning, and reinforcement learning.",
+      "Unsupervised learning algorithms do not require labeled data.",
+      "The state-of-the-art text summarization model is trained with machine learning algorithms.",
+      "Reinforcement learning is not used to train the state-of-the-art text summarization model.",
+      "The Machine Learning algorithm for training text summarization models requires labeled data."
+    ],
+    "conclusion_nl": "Unsupervised learning is used to train the state-of-the-art text summarization model.",
+    "gold_fol": [
+      "∀x (MachineLearningAlgorithm(x) → SupervisedLearningAlgorithm(x) ∨ UnsupervisedLearningAlgorithm(x) ∨ ReinforcementLearningAlgorithm(x))",
+      "∀x (UnsupervisedLearningAlgorithm(x) → ¬Require(x, labeledData))",
+      "∀x (TrainedWith(stateOfTheArtTextSummarizationModel, x) → MachineLearningAlgorithm(x))",
+      "∀x (ReinforcementLearningAlgorithm(x) → ¬TrainedWith(stateOfTheArtTextSummarizationModel, x))",
+      "∀x ((MachineLearningAlgorithm(x) ∧ TrainedWith(stateOfTheArtTextSummarizationModel, x)) → Require(x, labeledData))",
+      "∃x (UnsupervisedLearningAlgorithm(x) ∧ TrainedWith(stateOfTheArtTextSummarizationModel, x))"
+    ],
+    "llm_fol": [
+      "∀x (MachineLearningAlgorithm(x) → (SupervisedLearning(x) ∨ UnsupervisedLearning(x) ∨ ReinforcementLearning(x)))",
+      "∀x (UnsupervisedLearning(x) → ¬RequiresLabeledData(x))",
+      "TrainedWith(stateOfTheArtTextSummarizationModel, machineLearningAlgorithm)",
+      "¬UsedToTrain(reinforcementLearning, stateOfTheArtTextSummarizationModel)",
+      "RequiresLabeledData(machineLearningAlgorithmForTextSummarization)",
+      "UsedToTrain(unsupervisedLearning, stateOfTheArtTextSummarizationModel)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C065",
+    "model": "gpt-4o",
+    "folio_example_id": "1033",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "If something is a deadly disease, then it comes with a low survival rate.",
+      "Severe cancers are deadly diseases.",
+      "Bile duct cancer is a severe form cancer.",
+      "All Cholangiocarcinoma is bile duct cancer.",
+      "Mild flu comes with a low survival rate.",
+      "Colorectal cancer is not both a bile duct cancer and with a low survival rate."
+    ],
+    "conclusion_nl": "If colorectal cancer is a kind of bile duct cancer or a form of Cholangiocarcinoma, then colorectal cancer is a kind of bile duct cancer and a kind of mild flu.",
+    "gold_fol": [
+      "∀x (DeadlyDiseases(x) → ComeWith(x, lowSurvivalRate))",
+      "∀x (SevereCancer(x) → DeadlyDiseases(x))",
+      "∀x (BileDuctCancer(x) → SevereCancer(x))",
+      "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+      "∀x (MildFlu(x) → ¬ComeWith(x, lowSurvivalRate))",
+      "¬(BileDuctCancer(colorectalCancer) ∧ ComeWith(colorectalCancer, lowSurvivalRate))",
+      "¬(BileDuctCancer(colorectalCancer) ∨ Cholangiocarcinoma(colorectalCancer)) ∨ (BileDuctCancer(colorectalCancer) ∧ MildFlu(colorectalCancer))"
+    ],
+    "llm_fol": [
+      "∀x (DeadlyDisease(x) → LowSurvivalRate(x))",
+      "∀x (SevereCancer(x) → DeadlyDisease(x))",
+      "SevereCancer(bileDuctCancer)",
+      "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+      "LowSurvivalRate(mildFlu)",
+      "¬(BileDuctCancer(colorectalCancer) ∧ LowSurvivalRate(colorectalCancer))",
+      "(BileDuctCancer(colorectalCancer) ∨ Cholangiocarcinoma(colorectalCancer)) → (BileDuctCancer(colorectalCancer) ∧ MildFlu(colorectalCancer))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C066",
+    "model": "gpt-4o",
+    "folio_example_id": "1034",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "If something is a deadly disease, then it comes with a low survival rate.",
+      "Severe cancers are deadly diseases.",
+      "Bile duct cancer is a severe form cancer.",
+      "All Cholangiocarcinoma is bile duct cancer.",
+      "Mild flu comes with a low survival rate.",
+      "Colorectal cancer is not both a bile duct cancer and with a low survival rate."
+    ],
+    "conclusion_nl": "Colorectal cancer is a form of Cholangiocarcinoma and it is a kind of mild flu or a kind of bile duct cancer, or all of the above.",
+    "gold_fol": [
+      "∀x (DeadlyDiseases(x) → ComeWith(x, lowSurvivalRate))",
+      "∀x (SevereCancer(x) → DeadlyDiseases(x))",
+      "∀x (BileDuctCancer(x) → SevereCancer(x))",
+      "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+      "∀x (MildFlu(x) → ¬ComeWith(x, lowSurvivalRate))",
+      "¬(BileDuctCancer(colorectalCancer) ∧ ComeWith(colorectalCancer, lowSurvivalRate))",
+      "Cholangiocarcinoma(colorectalCancer) ∧ (MildFlu(colorectalCancer) ∨ BileDuctCancer(colorectalCancer))"
+    ],
+    "llm_fol": [
+      "∀x (DeadlyDisease(x) → LowSurvivalRate(x))",
+      "∀x (SevereCancer(x) → DeadlyDisease(x))",
+      "SevereCancer(bileDuctCancer)",
+      "∀x (Cholangiocarcinoma(x) → BileDuctCancer(x))",
+      "LowSurvivalRate(mildFlu)",
+      "¬(BileDuctCancer(colorectalCancer) ∧ LowSurvivalRate(colorectalCancer))",
+      "(Cholangiocarcinoma(colorectalCancer) ∧ (MildFlu(colorectalCancer) ∨ BileDuctCancer(colorectalCancer))) ∨ (Cholangiocarcinoma(colorectalCancer) ∧ MildFlu(colorectalCancer) ∧ BileDuctCancer(colorectalCancer))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C067",
+    "model": "gpt-4o",
+    "folio_example_id": "149",
+    "severity": "under_determination",
+    "gold_label": "True",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "The summer Olympic games is a sporting event.",
+      "The last summer Olympic games was in Tokyo.",
+      "The United States won the most medals in Tokyo."
+    ],
+    "conclusion_nl": "The United States won the most medals in the last summer Olympic games.",
+    "gold_fol": [
+      "SportingEvent(olympics)",
+      "LastSummerOlympics(tokyo)",
+      "MostMedals(unitedStates, tokyo)",
+      "∃x (LastSummerOlympics(x) ∧ MostMedals(unitedStates, x))"
+    ],
+    "llm_fol": [
+      "SportingEvent(summerOlympicGames)",
+      "LastSummerOlympicGames(tokyo)",
+      "WonMostMedals(unitedStates, tokyo)",
+      "WonMostMedals(unitedStates, lastSummerOlympicGames)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C068",
+    "model": "gpt-4o",
+    "folio_example_id": "442",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Susan flies to LGA airport.",
+      "The departure and arrival can not be at the same airport.",
+      "John flies from LGA airport."
+    ],
+    "conclusion_nl": "Susan flies from LGA airport.",
+    "gold_fol": [
+      "FlyTo(susan, lgaAirport)",
+      "∀x ∀y (FlyFrom(x, y) ⊕ FlyTo(x, y))",
+      "FlyFrom(john, lgaAirport)",
+      "FlyFrom(susan, lgaAirport)"
+    ],
+    "llm_fol": [
+      "FliesTo(susan, lgaAirport)",
+      "∀x ∀y (¬(Departure(x) = Arrival(y)))",
+      "FliesFrom(john, lgaAirport)",
+      "FliesFrom(susan, lgaAirport)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C069",
+    "model": "gpt-4o",
+    "folio_example_id": "443",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Susan flies to LGA airport.",
+      "The departure and arrival can not be at the same airport.",
+      "John flies from LGA airport."
+    ],
+    "conclusion_nl": "John flies to LGA airport.",
+    "gold_fol": [
+      "FlyTo(susan, lgaAirport)",
+      "∀x ∀y (FlyFrom(x, y) ⊕ FlyTo(x, y))",
+      "FlyFrom(john, lgaAirport)",
+      "FlyTo(john, lgaAirport)"
+    ],
+    "llm_fol": [
+      "FliesTo(susan, lgaAirport)",
+      "∀x ∀y (¬(Departure(x, y) ∧ Arrival(x, y)))",
+      "FliesFrom(john, lgaAirport)",
+      "FliesTo(john, lgaAirport)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C070",
+    "model": "gpt-4o",
+    "folio_example_id": "1317",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Some professional basketball players are not American nationals.",
+      "All professional basketball players can do jump shots.",
+      "If someone can jump shots, they leap straight into the air.",
+      "If someone leaps straight into the air, they activate their leg muscles.",
+      "Yuri does not activate his leg muscles."
+    ],
+    "conclusion_nl": "If Yuri is not an American professional basketball player, then Yuri is a professional basketball player.",
+    "gold_fol": [
+      "∃x (Professional(x) ∧ BasketballPlayer(x) ∧ ¬AmericanNational(x))",
+      "∀x (Professional(x) ∧ BasketballPlayer(x) → CanDo(x, jumpShot))",
+      "∀x (CanDo(x, jumpShot) → LeapStraightIntoAir(x))",
+      "∀x (LeapStraightIntoAir(x) → Activate(x, legMuscle))",
+      "¬Activate(yuri, legMuscle)",
+      "¬(AmericanNational(yuri) ∧ Professional(yuri) ∧ BasketballPlayer(yuri)) → (Professional(yuri) ∧ BasketballPlayer(yuri))"
+    ],
+    "llm_fol": [
+      "∃x (ProfessionalBasketballPlayer(x) ∧ ¬AmericanNational(x))",
+      "∀x (ProfessionalBasketballPlayer(x) → CanDoJumpShots(x))",
+      "∀x (CanDoJumpShots(x) → LeapStraightIntoAir(x))",
+      "∀x (LeapStraightIntoAir(x) → ActivateLegMuscles(x))",
+      "¬ActivateLegMuscles(yuri)",
+      "¬AmericanProfessionalBasketballPlayer(yuri) → ProfessionalBasketballPlayer(yuri)"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C071",
+    "model": "gpt-4o",
+    "folio_example_id": "724",
+    "severity": "under_determination",
+    "gold_label": "False",
+    "predicted_label": "Uncertain",
+    "premises_nl": [
+      "Events are either happy or sad.",
+      "At least one event is happy."
+    ],
+    "conclusion_nl": "All events are sad.",
+    "gold_fol": [
+      "∀x (Event(x) → Happy(x) ⊕ Sad(x))",
+      "∃x (Event(x) ∧ Happy(x))",
+      "∀x (Event(x) → Sad(x))"
+    ],
+    "llm_fol": [
+      "∀x (Event(x) → Happy(x) ∨ Sad(x))",
+      "∃x (Event(x) ∧ Happy(x))",
+      "∀x (Event(x) → Sad(x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  },
+  {
+    "case_id": "C072",
+    "model": "gpt-4o",
+    "folio_example_id": "308",
+    "severity": "wrong_direction",
+    "gold_label": "Uncertain",
+    "predicted_label": "True",
+    "premises_nl": [
+      "Ailton Silva, born in 1995, is commonly known as Ailton.",
+      "Ailton is a football player who was loaned out to Braga.",
+      "Ailton Silva is a Brazilian footballer who plays for Náutico.",
+      "Náutico is a football club along with Braga.",
+      "Fluminense is a football club."
+    ],
+    "conclusion_nl": "Ailton Silva was loaned out to a football club.",
+    "gold_fol": [
+      "BornIn(ailtonSilva, year1995) ∧ CommonlyKnownAs(ailtonSilva, ailton)",
+      "FootballPlayer(ailton) ∧ LoanedTo(ailton, braga)",
+      "Brazilian(ailtonSilva) ∧ Footballplayer(ailtonSilva) ∧ PlayFor(ailtonSilva, nautico)",
+      "FootballClub(nautico) ∧ FootballClub(braga)",
+      "FootballClub(fluminense)",
+      "∃x (FootballClub(x) ∧ LoanedTo(ailtonSilva, x))"
+    ],
+    "llm_fol": [
+      "Born(ailtonSilva, yr1995) ∧ KnownAs(ailtonSilva, ailton)",
+      "FootballPlayer(ailton) ∧ LoanedTo(ailton, braga)",
+      "BrazilianFootballer(ailtonSilva) ∧ PlaysFor(ailtonSilva, nautico)",
+      "FootballClub(nautico) ∧ FootballClub(braga)",
+      "FootballClub(fluminese)",
+      "∃x (FootballClub(x) ∧ LoanedTo(ailton, x))"
+    ],
+    "category": null,
+    "secondary_category": null,
+    "gold_label_defensible": null,
+    "notes": ""
+  }
+]

@@ -410,6 +410,44 @@ opportunistically now.
 
 **Proceeding to step 4: annotation protocol + second annotator for the FOLIO taxonomy.**
 
+---
+
+### Step 4 — annotation protocol + second annotator (protocol ready 2026-08-03; execution needs a human, hands off here)
+
+**What's ready:**
+- `crest/annotation/guidelines.md` — the full protocol: 9 category
+  definitions (the original 7 from step 2, plus `unstated_assumption_injection`
+  and `OTHER`), the classification procedure, the gold-label-defensibility
+  question (per the "dried Thai chilies" finding), disagreement resolution
+  process, and the κ target (≥0.6).
+- `crest/annotation/annotation_sheet_72cases.json` — all 72 strict-set FOLIO
+  silent failures across **all three models** (28 Llama-3.1-8B + 25
+  GPT-4o-mini + 19 GPT-4o, not just the GPT-4o cases from step 2), with NL
+  premises/conclusion and both FOLs filled in, `category` /
+  `secondary_category` / `gold_label_defensible` / `notes` blank for a
+  second annotator to fill in independently.
+
+**What's honestly NOT done:** Claude's own reference classification only
+covers the original 19 (GPT-4o) cases from step 2 — extending it to all 72
+was judged too large to do carefully in the same pass as building the
+protocol (the risk of rushing 53 more classifications to hit a deadline is
+exactly the kind of corner-cutting the project's standing rigor instruction
+warns against). Two ways to proceed, and Tanjamul should pick:
+(a) Claude classifies the remaining 53 as a separate, deliberate pass before
+the second annotator starts, so a complete reference key exists on day one;
+or (b) the second annotator classifies all 72 fresh, and Claude's reference
+labels for the 53 get filled in independently and compared afterward, same
+as the original 19. Either is methodologically fine — (a) is faster to get
+a first κ number, (b) has zero risk of Claude's later pass being
+subconsciously anchored by having just written the protocol.
+
+**This step now requires a human** (a teammate, doing the actual second
+annotation pass) — Claude can prepare everything up to this point but cannot
+be the second, independent annotator for its own first-pass classification.
+**Sequential plan pauses here until that pass is done and κ is computed**;
+steps 5–6 (detector prototype, paper draft) both depend on the taxonomy
+being validated, not just proposed.
+
 ### Does CREST remain a valid thing to try here?
 
 Yes — if the second (legal/policy) dataset confirms the same
