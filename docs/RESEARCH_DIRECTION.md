@@ -122,19 +122,21 @@ is one chapter, not the whole thesis.
 
 ---
 
-## 2. The 4-week plan (concrete, tied to actual project infra)
+## 2. The plan — STRICTLY SEQUENTIAL, not parallel (decided 2026-08-03)
 
-| Week | Task | How (with what we already have) |
+Tanjamul explicitly wants one task fully finished before the next starts, not
+a parallel week-by-week schedule. Order and reasoning:
+
+| Order | Task | Why this position in the sequence |
 |---|---|---|
-| 1 | Manually classify the ~29 remaining gpt-4o strict-set failures on FOLIO (wrong_direction + under_determination) by linguistic phenomenon: nested quantifiers, multi-hop dependency chains, negation scope, rare/compound predicates, comparative/numeric constructions | Data already collected, zero new API cost — start immediately |
-| 1–2 | Investigate feasibility of a second naturalistic dataset | Literature/dataset search |
-| 2 | Write an annotation protocol and get a second annotator (teammate) to label 50–100 cases; compute Cohen's κ | `crest/annotation/guidelines.md` exists as a starting point, needs scaling |
-| 3 | Build a schema-consistency detector proof-of-concept; measure precision/recall on the 28 hand-analyzed cases | Per the schema-first detect→repair design discussed earlier (predicate-role consistency, argument-type consistency, NL↔FOL content-mismatch signals) |
-| 4 | Start the paper draft; prepare a one-page supervisor meeting brief covering both tracks separately | — |
+| **1** | Read both flagged prior-work papers in full ("Know Your Limits" 2606.16118, "Do LLMs Really Struggle at NL-FOL Translation?" 2511.11816) and write one differentiation paragraph each | Cheapest task, but blocking risk — if either paper already covers our exact claim or invalidates the framing, everything downstream needs to change. Must know this before investing in anything else. |
+| **2** | Manually classify the ~29 remaining gpt-4o strict-set FOLIO failures (wrong_direction + under_determination) by linguistic phenomenon: nested quantifiers, multi-hop dependency chains, negation scope, rare/compound predicates, comparative/numeric constructions | Zero new cost, data already collected. This is the paper's core empirical content ("where exactly does frontier still fail") and its classification scheme should reflect whatever framing survives step 1. |
+| **3** | Deep-dive the second naturalistic dataset (ContractNLI first; tax-law/SARA second) — confirm actual data structure, licensing, size, whether gold FOL-level annotation exists or must be built | Biggest single investment (structure, licensing, feasibility). Only worth doing once steps 1–2 have confirmed the framing and the failure taxonomy are solid — otherwise risk redoing this work if the framing shifts. |
+| **4** | Annotation protocol + second annotator, κ computation | Depends on the taxonomy being stable from step 2. |
+| **5** | Schema-consistency detector proof-of-concept; measure precision/recall on the hand-analyzed cases | Depends on steps 2–4 (needs the confirmed failure categories and, ideally, the second dataset to test generality). |
+| **6** | Paper draft + one-page supervisor brief (both tracks presented separately) | Last — needs everything above settled. |
 
-**Recommended starting point: Week 1's task.** It's free, can start today, and
-feeds both the paper (the "where exactly does frontier still fail" RQ) and
-the thesis (Chapter 3/5 material) simultaneously.
+**Currently on step 1.**
 
 ---
 
