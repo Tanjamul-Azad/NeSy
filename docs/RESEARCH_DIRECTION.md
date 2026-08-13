@@ -300,8 +300,50 @@ is finalized**, since their "critically examine existing datasets and
 protocols" section may contain a critique of FOLIO or Prover9-based
 evaluation specifically that needs a direct response.
 
-**Step 1 of the sequential plan is now complete. Proceeding to step 2: the
-FOLIO failure-case classification.**
+**Step 1 of the sequential plan is now complete.**
+
+---
+
+### Step 2 — FOLIO strict-set failure classification (DONE 2026-08-03)
+
+**Correction: the count is 19, not the "~29" estimated earlier** (1
+wrong_direction + 18 under_determination, from the strict/verified set on
+`vanilla_pipeline_gpt4o_validation_n203.json`). Full classification with
+worked examples: `crest/annotation/gpt4o_folio_strict_failures_classified.md`.
+
+| Category | Count | % |
+|---|---|---|
+| **Generic/bare-plural class-vs-individual ambiguity** (NEW — not in the earlier taxonomy) | **6** | **32%** |
+| Predicate-schema divergence (matches earlier taxonomy) | 4 | 21% |
+| XOR (⊕) mistranslated as inclusive OR | 3 | 16% |
+| Dropped restrictive conjunct in a quantified antecedent | 2 | 11% |
+| Entity coreference / definite-description resolution | 2 | 11% |
+| Missing implicit/common-sense ground facts | 1 | 5% |
+| Predicate compound atomization | 1 | 5% |
+
+**Headline finding: the single largest category (32%) is new and wasn't in
+the original semantic taxonomy** — English generic/bare-plural sentences
+("Plungers suck", "Cupcakes are baked sweets") get mistranslated between a
+ground fact about one individual and a universally-quantified class rule,
+in either direction. This is a specific, nameable, previously-undocumented
+failure mode. It plausibly explains part of why ProofWriter/PrOntoQA (which
+are template-generated and rarely use bare generic constructions) don't
+show this failure while FOLIO does — a candidate causal link between the
+capability × language-type interaction (Section 0) and *why* naturalistic
+text specifically resists capability scaling.
+
+**Important methodological catch, worth its own note in the paper:** one
+case (example 806, "dried Thai chilies") shows FOLIO's own gold annotation
+making the arguably *less* linguistically natural choice for how to formalize
+an English generic, while GPT-4o's "error" is arguably more defensible. This
+parallels "Know Your Limits"'s ContractNLI gold-label-drift finding (Section
+3.5) — not every counted "failure" is unambiguously a model error; some are
+gold-annotation-convention disagreements. This must be flagged explicitly in
+the paper rather than silently counted as pure model failure, and argues for
+having the second annotator (step 4) also assess gold-label defensibility on
+ambiguous cases, not just score the model's output.
+
+**Proceeding to step 3: deep-dive the second (legal/policy) naturalistic dataset.**
 
 ### Does CREST remain a valid thing to try here?
 
