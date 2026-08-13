@@ -345,6 +345,71 @@ ambiguous cases, not just score the model's output.
 
 **Proceeding to step 3: deep-dive the second (legal/policy) naturalistic dataset.**
 
+---
+
+### Step 3 — ContractNLI deep-dive (substantively DONE 2026-08-03, no model runs)
+
+**Feasibility confirmed by direct inspection of the real data**, not just
+reading about it. Downloaded the official release
+([stanfordnlp.github.io/contract-nli](https://stanfordnlp.github.io/contract-nli/),
+CC BY 4.0, 65MB), wrote and tested
+`crest/data/loaders/contractnli_loader.py` structurally (no API calls):
+
+| Split | Usable examples (Entailment/Contradiction) | Distinct NDAs |
+|---|---|---|
+| train | 4,371 | 423 |
+| dev | 614 | 61 |
+| test | 1,188 | 123 |
+
+Real legal clause text as premises, real legal hypothesis as conclusion —
+confirmed by inspecting actual output, e.g.:
+```
+premise:    "The Recipient shall immediately return and redeliver to the
+             other all tangible material embodying the JEA Confidential
+             Information provided hereunder..."
+conclusion: "Receiving Party shall destroy or return some Confidential
+             Information upon the termination of Agreement."
+label:      True
+```
+This is exactly the naturalistic *domain* (real drafted legal text) that
+Section 3.5 argued FOLIO lacks, with a clean structural mapping to the
+existing `LogicExample` schema — the dataset's own evidence-span annotations
+serve as the premise set, avoiding any dependency on "Know Your Limits"'s
+re-annotation (which may not be public; not needed).
+
+**Two open design decisions, deliberately NOT resolved under time pressure
+(documented in the loader's docstring rather than silently picked):**
+
+1. **NotMentioned (would-be "Uncertain") examples are currently excluded.**
+   Verified directly: evidence spans are non-empty for 100% of Entailment/
+   Contradiction examples and empty for 100% of NotMentioned examples — a
+   structural property of the dataset. There is no natural evidence-span
+   analogue to a FOLIO premise set for "the document says nothing relevant."
+   Modelling this properly needs a deliberate choice (whole document as
+   context? a retrieval step over topically related sentences?) — each
+   option is a real experimental design decision with its own confound.
+   **Current loader is binary (True/False only), like PrOntoQA, not 3-way
+   like FOLIO/ProofWriter.** Must be stated as a known limitation if used
+   before this is resolved.
+2. **Clustering axis for statistics is not `story_id`, unlike the other
+   three datasets.** Each (document, hypothesis) pair has its own premise
+   set — there's no shared-premises grouping the way FOLIO stories work.
+   The real non-independence to cluster on is DOCUMENT (multiple hypotheses
+   share a source NDA and drafting style) and/or HYPOTHESIS TEMPLATE (the
+   same 17 templates recur verbatim across all 607 documents). `stats.py`'s
+   clustered bootstrap must not reuse `story_id` blindly here — flagged in
+   the loader docstring, not yet wired into `stats.py`.
+
+**Recommendation: ContractNLI is a validated, usable second naturalistic
+dataset for the paper.** No further model runs needed to *confirm this* —
+that was the point of step 3. The next model run (when the plan reaches it)
+is a small pilot (e.g. n=50–100, reusing the existing OpenAI/Llama harnesses
+unchanged) to test whether the same capability × language-type gap shows up
+on real legal text — that is a later, deliberate step, not something to run
+opportunistically now.
+
+**Proceeding to step 4: annotation protocol + second annotator for the FOLIO taxonomy.**
+
 ### Does CREST remain a valid thing to try here?
 
 Yes — if the second (legal/policy) dataset confirms the same
