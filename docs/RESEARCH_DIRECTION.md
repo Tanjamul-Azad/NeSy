@@ -448,6 +448,41 @@ be the second, independent annotator for its own first-pass classification.
 steps 5–6 (detector prototype, paper draft) both depend on the taxonomy
 being validated, not just proposed.
 
+---
+
+### Interim: Gemini cross-check (2026-08-13, informative but not sufficient)
+
+Tanjamul obtained a full 72-case classification from Gemini using the
+guidelines + blank sheet. Full analysis:
+`crest/annotation/gemini_cross_check_analysis.md`.
+
+**Result on the 19 cases with an existing reference (Claude's step-2
+GPT-4o classification): raw agreement 84.2%, Cohen's κ = 0.81** — well
+above the 0.6 target. A genuinely positive signal that the category
+definitions are specific enough for independent convergence.
+
+**But this is not step 4's requirement, and one confirmed error was found
+on cross-checking against the raw FOL, not just the labels:** for FOLIO ids
+1033/1034, Gemini's stated justification ("fuses 'Severe' and 'Cancer' into
+'SevereCancer'") is factually wrong — gold uses the identical single
+predicate `SevereCancer(x)`, no fusion occurs; the real error is a
+universal rule collapsed into a ground fact (Claude's original
+`generic_bare_plural` category), not `compound_atomization`. This shows
+category-level agreement can mask reasoning-level error, and confirms why
+IAA is meant to measure human-to-human reliability, not AI-to-AI label
+overlap — reported as a preliminary cross-check, not a substitute for
+step 4's human pass.
+
+**Status of the other 53 cases (C001–C053):** Gemini's labels are currently
+the *only* classification for these — treat as an unverified draft, not
+ground truth, until a human reviews them (which is now faster: review/
+correct Gemini's stated reasoning per case rather than classify from
+scratch — still the same protocol, just starting from a draft instead of
+blank).
+
+**Plan remains paused at step 4** until a human does that review and κ is
+computed against a genuine independent human pass.
+
 ### Does CREST remain a valid thing to try here?
 
 Yes — if the second (legal/policy) dataset confirms the same
