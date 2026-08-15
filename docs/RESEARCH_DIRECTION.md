@@ -483,6 +483,58 @@ blank).
 **Plan remains paused at step 4** until a human does that review and κ is
 computed against a genuine independent human pass.
 
+---
+
+### Interim: Claude's independent second pass on the remaining 53 cases (2026-08-14)
+
+Per Tanjamul's instruction ("tmi tomar ta korte thako, ami human annotator
+er ans een dihi" — continue your part while I get the human's answers),
+Claude classified all 53 remaining cases (C001–C053: 28 Llama-3.1-8B + 25
+GPT-4o-mini) **independently, without looking at Gemini's labels**, to
+preserve an unbiased second data point once the human's pass arrives (per
+option (b) noted above). Full output:
+`crest/annotation/claude_second_pass_53cases.json`.
+
+**This is now the third independent classification pass (Claude step-2
+original 19, Gemini's 72, Claude's fresh 53) — none of the three have been
+cross-compared for the 53-case subset yet; that comparison, plus the
+eventual human pass, is what will produce a real κ.**
+
+**Three findings worth carrying into the paper/thesis:**
+
+1. **8 of the 53 cases (~15%) don't fit any of the 9 existing categories.**
+   Marked `OTHER` with detailed notes: implication-direction reversal
+   (antecedent/consequent swapped relative to gold), conclusion-polarity
+   pre-judgment (model writes the negation of the claim being tested
+   directly into its own conclusion formula, e.g. `¬∀x(Bird(x)→Swim(x))`
+   instead of the positive `∀x(Bird(x)→Swim(x))` gold asks the solver to
+   test), conclusion-content substitution (NL asks about "reptile", model's
+   conclusion is about "¬mammal" — a different claim entirely), and
+   incomplete De Morgan's/negated-XOR expansions. **This is a genuine
+   taxonomy-completeness gap** — worth deciding, once the human pass exists,
+   whether these deserve 1-2 new named categories or stay pooled as OTHER.
+2. **A dropped-∀y quantifier bug recurs identically across two different
+   models on the same story** (case ids 241/pairs C009 [Llama] and C033
+   [gpt-4o-mini]): both write `∀x(LeftTeam(x,y)→¬PlayFor(x,y))`, leaving `y`
+   free/unbound, instead of gold's `∀x∀y(...)`. Same failure, same story,
+   two architecturally different models — plausibly systematic rather than
+   coincidental, worth flagging as a candidate finding rather than noise.
+3. **One case (C053, id 308, "Ailton") likely has a non-defensible gold
+   label, not a model error.** Unlike the original gpt-4o version of this
+   example (which splits `ailton`/`ailtonSilva` into two unbridged
+   constants), gpt-4o-mini's version uses `ailtonSilva` consistently
+   throughout — internally coherent, and the conclusion should follow
+   trivially from its own premises. The disagreement with gold most likely
+   traces back to FOLIO's own inconsistent constant-naming (same root cause
+   already documented for the gpt-4o case in step 2), not a fresh
+   translation error. Marked `gold_label_defensible: "unsure"` rather than
+   forcing a verdict — flagged for the human to adjudicate.
+
+**Plan remains paused at step 4** — nothing here substitutes for the human
+pass; this only ensures Claude's own reference labels for all 72 cases will
+exist and be genuinely independent (not anchored on Gemini) once the human's
+answers are in hand, so all three passes can be compared honestly.
+
 ### Does CREST remain a valid thing to try here?
 
 Yes — if the second (legal/policy) dataset confirms the same
