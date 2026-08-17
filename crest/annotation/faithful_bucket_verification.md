@@ -28,7 +28,24 @@ is established and where a rule needs it, (b) added preconditions
 (`Person(x)`, `Man(x)`, etc.) whose ground instance is never asserted, and
 (c) reversed relation-argument order.
 
-## Result: 18 of 20 have a confirmable translation-level bug; 2 are genuinely faithful
+## ⚠️ Correction (2026-08-17, later same day): C068/C069 verdict was also too narrow
+
+Same mistake as the C065/C066 correction in `needs_scrutiny_bucket_verification.md`:
+the "Faithful" verdict below for C068/C069 only checked the
+Susan-flies-to/John-flies-from premise-conclusion pair (the part the
+human's first prose pass had narrated). It never checked premise 2, the
+actual departure/arrival exclusivity rule. Checked directly: gold's
+premise 2 is `∀x∀y(FlyFrom(x,y)⊕FlyTo(x,y))`; the LLM's is
+`∀x∀y(¬(Departure(x)=Arrival(y)))` — completely disconnected predicates
+with no link to `FliesTo`/`FliesFrom` at all. This is exactly why the
+pipeline fails (gold can derive the false conclusion via the exclusivity
+rule; the LLM's disconnected rule cannot). **Corrected: C068 and C069 are
+real `predicate_schema_divergence` failures, not faithful.** See
+`crest/annotation/human_direct_categories_72cases.md` for the full
+re-check. Only **C003** now remains confirmed genuinely faithful across
+the entire 72-case set.
+
+## Result (superseded by the correction above for C068/C069): originally 18 of 20 confirmable, 2 "faithful" — now effectively 20 of 20 in this bucket have a confirmed bug
 
 | Case | Model | Story | Bug found |
 |---|---|---|---|

@@ -826,6 +826,73 @@ pre-judgment, negation-scope errors, biconditional over-strengthening).
 Worth considering a schema expansion before the paper's taxonomy section is
 finalized, once the real (human-direct) category labels are in hand.
 
+---
+
+### Step 4 — the real human category picks arrived; κ computed honestly (2026-08-17, same day)
+
+Tanjamul obtained the human's actual per-case category picks — a table
+with a primary category (and often secondary) directly chosen from
+`guidelines.md`'s list for all 72 cases, with a one-line reason each. This
+supersedes the earlier free-form prose passes for IAA purposes. Full table:
+`crest/annotation/human_direct_categories_72cases.md`.
+
+**Result: κ = 0.430 (Human vs Claude, "moderate"), κ = 0.446 (Human vs
+Gemini, "moderate"). Both below the project's pre-registered 0.6 target.**
+This is the real number — no Claude-authored mapping in between this time
+— and it must be reported honestly rather than as a success. A coarsened
+version (folding `compound_atomization`, `missing_implicit_fact`,
+`generic_bare_plural` into `predicate_schema_divergence`, to test whether
+disagreement is just granularity) made agreement *worse* (κ≈0.29), which
+rules out "the human just used one broad bucket where Claude/Gemini split
+it into sub-types" as the explanation — the disagreement is substantive,
+not merely a labeling-granularity artifact.
+
+**Dominant driver of the disagreement:** the human used
+`predicate_schema_divergence` for 33/72 cases (46%) — much more broadly
+than Claude or Gemini, who reserved it for cases matching its original,
+narrower definition (predicate renaming/argument restructuring
+specifically) and used other categories (`compound_atomization`,
+`missing_implicit_fact`, `generic_bare_plural`, `unstated_assumption_injection`)
+for related but distinguishable mechanisms. This looks like a genuine
+category-boundary problem in `guidelines.md` itself:
+`predicate_schema_divergence`'s definition is broad enough to plausibly
+cover almost any translation error that touches a predicate or relation,
+which is most of them — exactly the kind of definitional looseness that
+produces low κ even between careful annotators.
+
+**Second correction, found while double-checking the human's own stated
+reasoning for C068/C069:** their note explicitly separates the (correctly
+translated) to/from propositions from a separately mistranslated
+"exclusivity rule" — which directly contradicts Claude's earlier "✅
+Faithful" verdict for C068/C069 in `faithful_bucket_verification.md`. That
+verdict only checked the premise-conclusion pair the human's first prose
+pass had narrated, never premise 2 (the actual departure/arrival
+exclusivity rule: gold `∀x∀y(FlyFrom(x,y)⊕FlyTo(x,y))` vs LLM's completely
+disconnected `∀x∀y(¬(Departure(x)=Arrival(y)))`). **Corrected: C068/C069
+are real failures. Only C003 remains confirmed genuinely translation-
+faithful across the entire 72-case set** — down from the 5 originally
+reported, then 3 after the C065/C066 correction, now 1. Both verification
+files updated with pointers to this correction.
+
+**What this means for the paper, stated plainly:** the taxonomy's IAA is a
+genuine negative/mixed result on the first attempt, not a validated
+κ≥0.6 finding. Per `guidelines.md`'s own disagreement-resolution process
+(written into the protocol from the start, for exactly this situation),
+the honest next step is a reconciliation pass — reviewing the 35
+Human-vs-Claude disagreements together, tightening
+`predicate_schema_divergence`'s definition (likely by carving out
+sub-categories it's currently absorbing), and re-measuring — rather than
+either hiding the number or reporting it as-is without attempting
+resolution. This is a real decision point requiring Tanjamul's input on
+how to proceed, not something to resolve unilaterally.
+
+**Step 4's data-collection work is now complete** (all three independent
+passes — Claude's 72, Gemini's 72, human's 72 — exist with real category
+picks, all cross-checked against raw FOL where verification was done).
+**Step 4's validation goal (κ≥0.6) is not yet met.** Whether to treat this
+as "step 4 done, report the honest κ and discuss as a limitation" or
+"step 4 continues into a reconciliation round" is the next decision.
+
 ### Does CREST remain a valid thing to try here?
 
 Yes — if the second (legal/policy) dataset confirms the same
