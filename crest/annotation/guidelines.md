@@ -52,6 +52,23 @@ Full worked examples for each: `crest/annotation/gpt4o_folio_strict_failures_cla
    restructures predicates/arguments in a way that disconnects premises from
    each other (e.g. a type name moved from predicate position into an
    argument position; two predicates fused into one with a different arity).
+   **Tightened 2026-08-17 after round-1 reconciliation found this category
+   being used as a catch-all** (κ dropped to 0.43 before reconciliation,
+   driven mainly by this): reserve it for renaming/argument-restructuring
+   that doesn't fit one of the more specific categories below it. In
+   particular, do NOT default here when the error is actually:
+   - two properties fused into one compound predicate name → use
+     `compound_atomization` instead, even though it's technically a schema
+     change;
+   - a rule gains a precondition whose ground instance is never separately
+     asserted → use `missing_implicit_fact`, not this category;
+   - a class/type name is treated as an individual constant → use
+     `generic_bare_plural`;
+   - the error doesn't touch predicate structure at all but is a genuinely
+     different mechanism (implication-direction reversal, conclusion-
+     polarity pre-judgment, incomplete XOR-negation expansion,
+     constraint-to-tautology collapse) → use `OTHER`, don't force it here
+     just because a predicate happens to be involved somewhere in the case.
 3. **xor_to_or** — FOLIO's `⊕` (exclusive or) is translated as `∨`
    (inclusive or), dropping mutual exclusivity. Check carefully: a `⊕`
    inside a negation sometimes has a *correct* DNF expansion that looks
