@@ -43,6 +43,18 @@ class LogicExample:
     has_gold_fol: bool
     premises_fol: Optional[List[str]] = None
     conclusion_fol: Optional[str] = None
+    # Statistical clustering axis. For FOLIO/ProofWriter/PrOntoQA this is
+    # `story_id` (examples in a story share premises), and leaving it None
+    # means downstream code falls back to story_id -- no behaviour change for
+    # the three original datasets. ContractNLI needs it because its
+    # `story_id` is unique per example and therefore clusters nothing: the
+    # real non-independence there is the source DOCUMENT (shared NDA text and
+    # drafting style) and, separately, the HYPOTHESIS template (the same 17
+    # hypotheses recur verbatim across all documents). See the NOTE in
+    # contractnli_loader.py -- reusing story_id blindly would silently give
+    # unclustered, too-narrow confidence intervals.
+    cluster_id: Optional[str] = None
+    hypothesis_id: Optional[str] = None
 
 
 def _split_lines(text: str) -> List[str]:

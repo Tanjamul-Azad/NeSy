@@ -62,7 +62,11 @@ def main():
     ap.add_argument("--model", default="gpt-4o-mini",
                     help="gpt-4o-mini (cheap, capability midpoint) or gpt-4o (strongest test)")
     ap.add_argument("--dataset", default="folio",
-                    choices=["folio", "proofwriter", "prontoqa"])
+                    choices=["folio", "proofwriter", "prontoqa", "contractnli"])
+    ap.add_argument("--split", default="validation",
+                    choices=["train", "validation", "test"],
+                    help="ContractNLI only: its release uses train/dev/test; "
+                         "registry.py maps 'validation' -> 'dev'")
     ap.add_argument("--limit", type=int, default=50,
                     help="use the full split (203/600/500) by passing 0 or the exact size")
     ap.add_argument("--phase", default="both", choices=["vanilla", "self_refine", "both"])
@@ -104,7 +108,7 @@ def main():
         print("#" * 68)
         run_vanilla_pipeline(
             dataset=args.dataset,
-            split="validation",
+            split=args.split,
             limit=args.limit,
             timeout=args.timeout,
             harness=harness,
@@ -123,7 +127,7 @@ def main():
         print("#" * 68)
         self_refine_pipeline.run(
             dataset=args.dataset,
-            split="validation",
+            split=args.split,
             limit=args.limit,
             timeout=args.timeout,
             max_rounds=args.max_rounds,

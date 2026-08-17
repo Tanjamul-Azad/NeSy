@@ -997,6 +997,115 @@ to pick this up cold is recorded here.
   answer is a reportable, useful result — a negative result here (gap
   doesn't replicate) is scientifically valuable too, not a failed pilot.
 
+### Step 5 in progress — plumbing done, then the ceiling gate fired BEFORE any model run (2026-08-17)
+
+**What was built and verified (zero API cost):**
+- ContractNLI wired into `crest/data/loaders/registry.py` (with an explicit
+  `validation -> dev` split alias, since ContractNLI's release uses
+  train/dev/test), and into `vanilla_pipeline.py` / `run_gpt4o_phases.py`
+  as `--dataset contractnli --split test`.
+- The clustering problem flagged in step 3 is now fixed rather than noted:
+  `LogicExample` gained `cluster_id` (source NDA) and `hypothesis_id` (one of
+  the 17 templates), the ContractNLI loader fills both, and the pipeline
+  writes them into every results record. FOLIO/ProofWriter/PrOntoQA leave
+  them `None` and fall back to `story_id`, so nothing about the existing
+  three datasets changes. `stats.py` needed no change — its bootstrap already
+  takes an arbitrary cluster vector.
+- Loader verified end-to-end on the real extracted data: test = 1,188
+  usable examples across 123 NDAs and 17 hypothesis templates; the seeded
+  n=100 pilot sample covers 65 documents and all 17 hypotheses.
+- **Label imbalance, worth stating before any accuracy number is quoted:**
+  ContractNLI test is 968 Entailment / 220 Contradiction, so the
+  majority-class baseline is **81.5%** (the n=100 sample is 82/18). FOLIO's
+  was 35.5%. An accuracy figure on this dataset means very little without
+  that number printed beside it.
+
+**Then the pre-flight ceiling check, which is where this stopped.**
+ContractNLI ships no gold FOL, so Phase 2.1's rule — never interpret a
+silent-failure number before you know what the grounder scores on a *correct*
+formalisation — had no free answer. Claude hand-formalised a seeded 10-case
+probe (6 Entailment / 4 Contradiction) from the pilot sample and ran it
+through the identical Prover9 grounder:
+`crest/crest/evaluation/contractnli_ceiling_probe.py`, results in
+`crest/experiments/logs/contractnli_ceiling_probe.json`.
+
+| Annotation convention | Gold label reproduced |
+|---|---|
+| **Literal** (each sentence on its own terms, no vocabulary unification, no dropped exceptions, no injected knowledge) | **0/10 (0%)** |
+| **Charitable** (align the hypothesis's generic vocabulary with the NDA's own drafting vocabulary; treat procedural provisos as side-conditions) | **6/10 (60%)** |
+| **Assumption-augmented** (additionally inject whatever unstated legal-context assumption is needed as an explicit premise — what "Know Your Limits" did) | **10/10 (100%)** |
+
+Compare FOLIO: 81.1%. **Phase 2's pre-registered gate says below 70% means
+do not interpret downstream silent-failure numbers as translation quality.
+Under the two defensible conventions, ContractNLI-from-evidence-spans is at
+0% and 60% — the gate fires.**
+
+**The five structural blockers, which are the actual content of this result**
+(each names why a *correct* translation still fails to derive the gold label):
+1. `obligation_outside_evidence_spans` — the annotated spans are often pure
+   definitions ("Confidential Information means...") while the obligation the
+   hypothesis asserts ("shall not disclose") lives elsewhere in the NDA. No
+   convention recovers a premise that isn't there.
+2. `open_world_permission_gap` — Contradiction labels routinely need the
+   closed-world assumption that permission was *not* granted. FOL is
+   open-world; the prohibition is conditional on an absence that cannot be
+   asserted.
+3. `needs_world_knowledge_witness` — contradicting "CI shall only include
+   technical information" requires an instance that is confidential and
+   non-technical. The contract never supplies one.
+4. `missing_deontic_bridge` — "X is excluded from Confidential Information"
+   entails "the party may do X" only via an unstated legal default. This is
+   a deontic inference, not a first-order one.
+5. `vocabulary_alignment` / `lexical_variation` — the hypothesis says
+   "grant", the clause says "confer"; the hypothesis says "Confidential
+   Information", the NDA says "Information" or "Evaluation Material". Under
+   a literal convention these are simply different predicates.
+
+**The sharpest point, and the one to carry into the paper:** blockers 1–4 are
+not translation failures at all. A perfect autoformalizer fails them. And the
+third convention shows the flip side — once arbitrary assumption injection is
+permitted, the ceiling goes to 100% *by construction*, because the annotator
+can always manufacture the premise that yields the gold label. **On
+ContractNLI the ceiling is set by the annotation convention, not by the
+dataset.** That is a reason to read prior work's high strict-entailment
+retention rate carefully rather than inherit it, and it is why the pilot's
+convention must be pre-registered before any model output is seen.
+
+**Independent corroboration, found while checking whether their data was
+reusable:** "Know Your Limits" (arxiv 2606.16118) states its re-annotation
+"reveals a systematic and measurable gap between pragmatic legal
+interpretation and strict formal entailment, where a substantial proportion
+of legally sound inferences are not formally grounded without additional
+unstated assumptions" — 71/400 Entailment→Neutral and 18/400
+Contradiction→Neutral, i.e. 22% relabelled. Our probe measured the same
+phenomenon independently, with our own pipeline, and more harshly (we use
+evidence spans only, and our charitable convention aligns vocabulary without
+injecting assumptions). **Their 78% retention rate came from explicitly
+allowing assumption injection** — which is our third convention, the one
+that trivially reaches 100%. **Their re-annotated subset is not publicly
+released** (checked: no data/code availability statement, no repo link), so
+it cannot be reused.
+
+**Honest provenance caveat, same standing as step 4's:** the probe's FOL is
+Claude's hand formalisation, not an independent human's. It is sufficient to
+decide how to run the pilot; it is **not** citable as a human-verified
+ceiling. A human should re-formalise the same 10 cases independently before
+any ceiling number from it appears in the paper.
+
+**Decision required before spending API budget** — the pilot as specified
+would measure the task's formalisability, not the models' translation
+quality, and both Llama and GPT-4o would collapse toward Uncertain for
+reasons that have nothing to do with the capability×language-type question.
+Options are on the table with Tanjamul; step 5 is paused at this gate, not
+abandoned.
+
+**Separately blocking, unrelated to the science:** the `OPENAI_API_KEY` in
+the environment now returns HTTP 401 (invalid key). No GPT run can proceed
+until it is refreshed. Nothing was logged or exposed; the harness's env-var
+handling is unchanged.
+
+---
+
 ### Does CREST remain a valid thing to try here?
 
 Yes — if the second (legal/policy) dataset confirms the same

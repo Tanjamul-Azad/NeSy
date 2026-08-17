@@ -114,6 +114,13 @@ def _load_split(path: Path) -> List[LogicExample]:
                 has_gold_fol=False,
                 premises_fol=None,
                 conclusion_fol=None,
+                # The two real non-independence axes (see the NOTE above):
+                # cluster_id = source NDA, hypothesis_id = one of the 17
+                # fixed hypothesis templates. Both are carried through to the
+                # results file so the bootstrap can be run on either without
+                # re-loading the dataset.
+                cluster_id=str(doc["id"]),
+                hypothesis_id=hyp_key,
             ))
             examples[-1].label_space = ("False", "True")  # binary, like PrOntoQA
     return examples

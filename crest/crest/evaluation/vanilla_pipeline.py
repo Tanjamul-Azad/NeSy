@@ -189,6 +189,13 @@ def run_vanilla_pipeline(
         record = {
             "example_id": ex.example_id,
             "story_id": ex.story_id,
+            # Clustering axis for the bootstrap CI. None for FOLIO/
+            # ProofWriter/PrOntoQA (story_id is the right axis there and
+            # downstream code falls back to it); the source NDA / hypothesis
+            # template for ContractNLI, where story_id is unique per example
+            # and clusters nothing -- see contractnli_loader.py's NOTE.
+            "cluster_id": getattr(ex, "cluster_id", None),
+            "hypothesis_id": getattr(ex, "hypothesis_id", None),
             "gold_label": ex.label,
             # Carried so severity code can tell a binary dataset (PrOntoQA)
             # from a 3-way one without re-loading the dataset.
@@ -249,8 +256,11 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", default="folio",
-                        choices=["folio", "proofwriter", "prontoqa"])
-    parser.add_argument("--split", default="validation", choices=["train", "validation"])
+                        choices=["folio", "proofwriter", "prontoqa", "contractnli"])
+    # "test" exists for ContractNLI only, whose own release names its splits
+    # train/dev/test; registry.py maps "validation" -> "dev" for it.
+    parser.add_argument("--split", default="validation",
+                        choices=["train", "validation", "test"])
     parser.add_argument("--limit", type=int, default=50, help="Phase 3.1: start with a 50-100 example subset")
     parser.add_argument("--timeout", type=int, default=60)
     parser.add_argument("--log-path", default=None)
