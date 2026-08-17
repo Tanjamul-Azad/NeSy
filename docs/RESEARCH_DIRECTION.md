@@ -917,17 +917,20 @@ numbers existed, for exactly this situation).
 | Pair | Before reconciliation | After |
 |---|---|---|
 | Human vs Claude | κ=0.430 (moderate) | **κ=0.725 (substantial)** — clears the 0.6 target |
-| Human vs Gemini | κ=0.446 (moderate) | κ=0.448 (moderate) — unchanged, not part of this round |
 
-**Human vs Claude κ=0.725 is the citable IAA result for the paper's
-taxonomy validation claim.** Human vs Gemini remains below target, but
-Gemini has been treated as a preliminary AI cross-check throughout this
-project (never the primary IAA partner — see the earlier Gemini
-cross-check section), so this doesn't block using the taxonomy; it can be
-noted as an open item for a possible second reconciliation round if there's
-time before submission.
+**Human vs Claude κ=0.725 is THE citable IAA result for the paper's
+taxonomy validation claim — Claude is the designated primary annotator for
+this project, and this is the number reported.** Gemini's cross-check
+(κ=0.690 vs Claude on the raw label pass, κ=0.448 vs the human, both
+computed earlier — see `gemini_cross_check_analysis.md` and
+`kappa_real_human_full72.md`) remains in the record only as the
+preliminary/supplementary AI cross-check it was always framed as from the
+start of step 4 (it caught one real Claude-independent-of-human error along
+the way — the SevereCancer misdiagnosis — so it's not discarded, just not
+part of the paper's headline IAA claim). No further Gemini reconciliation
+is planned.
 
-**Step 4 is now substantively complete**: a validated (κ≥0.6, human-vs-Claude)
+**Step 4 is now complete**: a validated (κ=0.725, human-vs-Claude)
 9-category taxonomy exists, with full reasoning trails, raw-FOL
 verification on the disputed cases, and an honest, documented
 reconciliation process. Proceeding to step 5 (schema-consistency detector
