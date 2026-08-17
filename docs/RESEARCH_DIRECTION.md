@@ -1265,6 +1265,129 @@ Self-Refine on the synthetic datasets in Section 1, Track A).
 
 ---
 
+## 3.9 The plan from here (set 2026-08-17, at Tanjamul's direction)
+
+His requirements, in his words: the gaps must stay visible in front of us, all
+edges checked, all findings in hand — *then* detection and mitigation. And the
+work must carry our own strongest novelty, building a dataset or a framework
+if that is what it takes. Not time pass.
+
+`docs/GAPS.md` is the live register that satisfies the first requirement. It
+is the file to open at the start of any session; it holds every open gap (A),
+every unverified edge (B), everything closed with its evidence (C), and every
+claim we have had to retract (D). Nothing below may assume a row is closed
+that GAPS.md still marks OPEN.
+
+### Where the novelty actually is — an honest ranking, not a pep talk
+
+**What will NOT carry a paper**, stated plainly so effort stops going there:
+predicate inconsistency as a phenomenon (prior work owns it); "LLMs make FOL
+translation errors" (thoroughly covered); a detector that flags naming
+inconsistency (engineering, not a contribution); prevalence numbers alone
+(benchmarking, and the weakest thing to be reviewed on).
+
+**N1 — Formalizability auditing. The strongest asset, and it is ours.**
+Every NL→FOL evaluation in this literature reports accuracy against a gold
+label without ever asking whether that gold label is *derivable* from the
+premises the model was given. We now have the measurement showing why that
+matters: on ContractNLI the ceiling moves 0% → 60% → 100% purely by changing
+the annotation convention, and four of five failure blockers defeat a
+*perfect* translator. That reframes an evaluation practice rather than adding
+one more number to it, it comes with a reusable protocol, and it generalises
+beyond FOL to SMT/LTL/Datalog. Papers that correct how a field measures get
+cited by everyone who measures.
+
+**N2 — Reachability as a gold-label-free pre-solver triage signal.** If a
+conclusion's predicates appear nowhere in its premises, the goal is
+unreachable by construction — computable in milliseconds, no gold label, no
+model. It fires on 21–47% of legal-domain silent failures. Combined with N1's
+blocker taxonomy it becomes something no existing method does: a pre-solver
+diagnosis that separates *repairable* (translation-level) from *unrepairable*
+(task- or formalism-level) failure. Reactive baselines cannot do this even in
+principle — the solver returns a well-formed answer and raises nothing.
+
+**N3 — The capability × language-type interaction with the severity split.**
+Real, measured, ours. But most exposed to a "this is benchmarking" review and
+the most likely to be duplicated by someone else. It should be a section, not
+the thesis of the paper.
+
+**Recommended position: the paper is about formalizability, and CREST is the
+mitigation arm for the subset that formalizability analysis says is
+repairable.** That ordering makes every existing result load-bearing —
+including the ContractNLI floor, which becomes evidence rather than a failed
+pilot.
+
+### Sequenced plan — gaps → edges → findings → detection → mitigation
+
+Deliberately in the order Tanjamul asked for. Each phase has a close-condition;
+no phase starts before the previous one's condition is met and pointed at.
+
+**P1 — Close the edges (mostly free, ~$0.5 total, no new datasets).**
+Work GAPS.md section B top-down. Highest value first:
+- E1: a human re-formalises the 10 ceiling-probe cases blind. *Everything in
+  N1 rests on this; it is currently one non-independent annotator.*
+- E8: audit how many `Uncertain` verdicts are actually Prover9 timeouts —
+  those are our limitation being scored as model under-determination, and
+  they contaminate the headline number.
+- E3: domain-matched few-shot ablation on ContractNLI, to kill the
+  demonstration-mismatch confound.
+- E6: hand-classify ~30 of the overlap group into the five blockers.
+- E10, E11, E12: cheap verifications.
+**Close-condition:** every row in section B is CLOSED or explicitly ACCEPTED,
+with a pointer.
+
+**P2 — Build the resource that makes N1 real.** A formalizability-annotated
+benchmark: naturalistic NLI items, each annotated with (a) is the gold label
+derivable under convention X, (b) which blocker applies if not, (c) is the
+gold label itself defensible. Target 150–300 items across FOLIO + ContractNLI
+(+ SARA if adopted), multi-annotator with κ reported. **This is the dataset
+Tanjamul offered to build, and it is the right one** — not another logic
+corpus, but the resource that explains why the existing ones cannot be
+evaluated naively. A five-person team is the right size for it; our
+guidelines/reconciliation process from step 4 is the template.
+**Close-condition:** released annotation set + κ ≥ 0.6 on the blocker
+labels + the ceiling measured with real intervals instead of n=10.
+
+**P3 — Detection (G2).** Reachability + schema-divergence detector, evaluated
+for precision/recall against data **already committed** — 72 annotated FOLIO
+cases, 300 ContractNLI runs, the full three-dataset runs. Zero API cost.
+Report where it fires, where it misses, and its false-positive rate against
+the Self-Refine lesson: *a detector that over-fires degrades into Self-Refine,
+so precision is the critical quantity, not recall.*
+**Close-condition:** a precision/recall table on both FOLIO and ContractNLI,
+plus the calibration analysis (ECE/Brier) Phase 7.3 specifies.
+
+**P4 — Mitigation (G3).** Repair only the subset P3 marks repairable.
+Endpoint is **reachability restored**, not accuracy — accuracy is
+ceiling-capped on ContractNLI and would understate a real repair. Ablate
+risk-guided pairing against random pairing (Phase 8.4) since that is the one
+algorithmic-novelty candidate.
+**Close-condition:** the ablation result, whichever way it goes, with the
+pre-registered fallback from Phase 8 applied if it is null.
+
+**P5 — Write, with the limitations section generated from GAPS.md B and D.**
+
+### Decisions still open, and they are Tanjamul's
+
+1. **Does SARA get adopted** as the third dataset (its hand-written Prolog
+   means a real ceiling exists by construction), or does the paper take the
+   N1 reframing where ContractNLI's floor is itself the evidence and no third
+   dataset is needed? Both are defensible; the second is cheaper and, on
+   current evidence, more novel.
+2. **Self-Refine on ContractNLI** — the earlier pre-registration said skip it.
+   That reasoning holds for the accuracy endpoint but not for the
+   *reachability* endpoint, which is not ceiling-capped: ContractNLI's
+   dominant defect (`GrantsRights` vs `GrantsRight`) is visible from the
+   formulas alone without a gold label, so blind self-critique might actually
+   fix it here even though it failed on FOLIO. If it does, CREST's selective
+   detector is less necessary; if it does not, that is a stronger argument for
+   CREST than any we currently have. ~$2. **This would be a NEW
+   pre-registration for a new question, not a re-analysis of the old one
+   hunting for significance** — that distinction must be written down before
+   the run, not after.
+
+---
+
 ## 4. Where to find the underlying evidence
 
 - `docs/RESULTS_SNAPSHOT.md` — the three headline tables (capability ×

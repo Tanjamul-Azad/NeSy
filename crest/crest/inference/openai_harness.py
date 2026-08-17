@@ -66,7 +66,8 @@ PRICING_PER_1M = {
 @dataclass
 class TranslationRecord:
     timestamp: str
-    model: str
+    model: str            # the alias requested, e.g. "gpt-4o"
+    resolved_model: str   # the dated snapshot that actually answered
     prompt_version: str
     seed: int
     temperature: float
@@ -176,6 +177,13 @@ class OpenAIHarness:
             [t.logprob for t in choice.logprobs.content] if choice.logprobs and choice.logprobs.content else []
         )
         self._last_meta = {
+            # The RESOLVED snapshot, not the alias we asked for. "gpt-4o" is a
+            # moving pointer: today it resolves to one dated snapshot, in six
+            # months to another, and a paper that reports "gpt-4o" without this
+            # cannot be reproduced or even identified. Three distinct
+            # system_fingerprints already appear across our own runs, so the
+            # backend demonstrably changed mid-study.
+            "resolved_model": getattr(resp, "model", None),
             "system_fingerprint": getattr(resp, "system_fingerprint", None),
             "prompt_tokens": resp.usage.prompt_tokens,
             "completion_tokens": resp.usage.completion_tokens,
@@ -228,6 +236,7 @@ class OpenAIHarness:
         record = TranslationRecord(
             timestamp=time.strftime("%Y-%m-%dT%H:%M:%S"),
             model=self.model_name,
+            resolved_model=meta.get("resolved_model"),
             prompt_version=prompt_version,
             seed=self.seed,
             temperature=0.0,
