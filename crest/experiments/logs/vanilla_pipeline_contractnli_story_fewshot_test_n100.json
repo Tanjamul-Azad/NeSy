@@ -1,0 +1,2681 @@
+{
+  "dataset": "contractnli",
+  "model": "NousResearch/Meta-Llama-3.1-8B-Instruct",
+  "split": "test",
+  "limit": 100,
+  "mode": "story",
+  "few_shot": true,
+  "sample": "random",
+  "sample_seed": 42,
+  "summary": {
+    "n": 100,
+    "correct": 4,
+    "loud_failure": 44,
+    "silent_failure": 52,
+    "loud_failure_translation_format": 10,
+    "loud_failure_translation_truncated": 1,
+    "loud_failure_fol_parse": 33,
+    "accuracy": 0.04,
+    "loud_failure_rate": 0.44,
+    "silent_failure_rate": 0.52,
+    "silent_failure_rate_excluding_loud": 0.9285714285714286
+  },
+  "results": [
+    {
+      "example_id": "2_nda-11",
+      "story_id": "2_nda-11",
+      "cluster_id": "2",
+      "hypothesis_id": "nda-11",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "translation_format",
+      "error": "StoryFormatError: duplicate label P1 in model output",
+      "translated_premises": null,
+      "translated_conclusion": null,
+      "confidence": {
+        "mean_logprob": -0.11372795917598645,
+        "min_logprob": -1.951831340789795,
+        "perplexity": 1.1204472760201327,
+        "n_tokens": 268
+      },
+      "elapsed_sec": 21.09
+    },
+    {
+      "example_id": "8_nda-3",
+      "story_id": "8_nda-3",
+      "cluster_id": "8",
+      "hypothesis_id": "nda-3",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (Recipient(x) ∧ Discloser(y) → (¬Disclose(x, y) ∧ Access(x, y, ConfidentialInformation)))"
+      ],
+      "translated_conclusion": "∃x ∃y (ConfidentialInformation(x) ∧ VerbalConveyance(y, x))",
+      "confidence": {
+        "mean_logprob": -0.24300774979133552,
+        "min_logprob": -1.6226202249526978,
+        "perplexity": 1.275078505672525,
+        "n_tokens": 59
+      },
+      "elapsed_sec": 5.32
+    },
+    {
+      "example_id": "11_nda-15",
+      "story_id": "11_nda-15",
+      "cluster_id": "11",
+      "hypothesis_id": "nda-15",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (Assignment(x, y) → ¬GrantRights(x, y))"
+      ],
+      "translated_conclusion": "∀x (GrantRights(x, ReceivingParty) → ¬GrantRights(x, ConfidentialInformation))",
+      "confidence": {
+        "mean_logprob": -0.2704777831117388,
+        "min_logprob": -1.289146065711975,
+        "perplexity": 1.3105904791657832,
+        "n_tokens": 44
+      },
+      "elapsed_sec": 4.21
+    },
+    {
+      "example_id": "11_nda-5",
+      "story_id": "11_nda-5",
+      "cluster_id": "11",
+      "hypothesis_id": "nda-5",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Receiver(x) → Shall(x))",
+        "∀x (Receiver(x) → ∀y (Personnel(y, x) → NeedToKnow(y, x)))",
+        "∀x (Receiver(x) → ∀y (Personnel(y, x) → BoundByConfidentialityAgreement(y, x)))",
+        "∀x (Receiver(x) → ∀y (Personnel(y, x) → ConfidentialityAgreement(y, x)))",
+        "∀x (Personnel(x, Receiver) → PartyToAgreement(x))"
+      ],
+      "translated_conclusion": "∃x ∃y (Receiver(x) ∧ Personnel(y, x) ∧ NeedToKnow(y, x))",
+      "confidence": {
+        "mean_logprob": -0.19023779186124698,
+        "min_logprob": -2.4768245220184326,
+        "perplexity": 1.2095371815609912,
+        "n_tokens": 145
+      },
+      "elapsed_sec": 11.85
+    },
+    {
+      "example_id": "18_nda-3",
+      "story_id": "18_nda-3",
+      "cluster_id": "18",
+      "hypothesis_id": "nda-3",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "translation_format",
+      "error": "StoryFormatError: expected P1..P1, missing=[], extra=[2]",
+      "translated_premises": null,
+      "translated_conclusion": null,
+      "confidence": {
+        "mean_logprob": -0.4246756797672599,
+        "min_logprob": -1.5908379554748535,
+        "perplexity": 1.5290944229777041,
+        "n_tokens": 77
+      },
+      "elapsed_sec": 6.66
+    },
+    {
+      "example_id": "22_nda-8",
+      "story_id": "22_nda-8",
+      "cluster_id": "22",
+      "hypothesis_id": "nda-8",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: ')'.\nall x (ReceivingParty(x) -> (RequiredByLaw(x) | RequiredByRegulation(x) | RequiredByJudicialProcess(x)) -> Notify(x, DisclosingParty)))\n                                                                                                                                      ^",
+      "translated_premises": [
+        "∀x (ReceivingParty(x) → (∃y (ConfidentialInfo(y) ∧ DisclosedTo(x, y)) → Notify(x, DisclosingParty)))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) → (RequiredByLaw(x) ∨ RequiredByRegulation(x) ∨ RequiredByJudicialProcess(x)) → Notify(x, DisclosingParty)))",
+      "confidence": {
+        "mean_logprob": -0.13628785440932217,
+        "min_logprob": -1.0882983207702637,
+        "perplexity": 1.1460117306498614,
+        "n_tokens": 78
+      },
+      "elapsed_sec": 6.82
+    },
+    {
+      "example_id": "23_nda-10",
+      "story_id": "23_nda-10",
+      "cluster_id": "23",
+      "hypothesis_id": "nda-10",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: Contains/4, Contains/5.\n\n\nFatal error:  The following symbols are used with multiple arities: Contains/4, Contains/5",
+      "translated_premises": [
+        "∀x (Confidential(x) ∧ RelatesTo(x, project, discloser, recipient, recipientRepresentatives) → ConfidentialInformation(x))",
+        "∀x (ConfidentialInformation(x) ∧ Contains(x, analysis, compilation, study, document) → Contains(x, information, discussions, negotiations))"
+      ],
+      "translated_conclusion": "∀x (Agreement(x) → ¬Disclose(x, fact, agreement, negotiated))",
+      "confidence": {
+        "mean_logprob": -0.33661441693647215,
+        "min_logprob": -1.377535343170166,
+        "perplexity": 1.400199066592703,
+        "n_tokens": 87
+      },
+      "elapsed_sec": 7.66
+    },
+    {
+      "example_id": "23_nda-19",
+      "story_id": "23_nda-19",
+      "cluster_id": "23",
+      "hypothesis_id": "nda-19",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Obligation(x, confidentiality) ∨ Obligation(x, nonDisclose) ∨ Obligation(x, nonUse)) → Survive(x, terminationOfAgreement)"
+      ],
+      "translated_conclusion": "∃x (Obligation(x, confidentiality) ∨ Obligation(x, nonDisclose) ∨ Obligation(x, nonUse)) ∧ Survive(x, terminationOfAgreement)",
+      "confidence": {
+        "mean_logprob": -0.13852895364916099,
+        "min_logprob": -0.965319037437439,
+        "perplexity": 1.14858293675613,
+        "n_tokens": 81
+      },
+      "elapsed_sec": 7.06
+    },
+    {
+      "example_id": "25_nda-19",
+      "story_id": "25_nda-19",
+      "cluster_id": "25",
+      "hypothesis_id": "nda-19",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Obligation(x) ∧ AccruePriorToTermination(x) → SurviveTermination(x, 2, thisAgreement))"
+      ],
+      "translated_conclusion": "∃x (Obligation(x) ∧ ObligationOfAgreement(x) ∧ SurviveTermination(x, _, thisAgreement))",
+      "confidence": {
+        "mean_logprob": -0.21105511840130983,
+        "min_logprob": -1.3442609310150146,
+        "perplexity": 1.234980423332053,
+        "n_tokens": 67
+      },
+      "elapsed_sec": 6.07
+    },
+    {
+      "example_id": "30_nda-15",
+      "story_id": "30_nda-15",
+      "cluster_id": "30",
+      "hypothesis_id": "nda-15",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ConfidentialInfo(x) ∧ DisclosedBy(x, disclosingParty, receivingParty) → AcknowledgedBy(x, receivingParty))",
+        "∀x (ConfidentialInfo(x) ∧ DisclosedBy(x, disclosingParty, receivingParty) → ¬ConferRights(x, receivingParty))"
+      ],
+      "translated_conclusion": "∀x (ConfidentialInfo(x) → ¬GrantRights(x, receivingParty))",
+      "confidence": {
+        "mean_logprob": -0.1402545350628432,
+        "min_logprob": -1.1363494396209717,
+        "perplexity": 1.1505666211360939,
+        "n_tokens": 86
+      },
+      "elapsed_sec": 7.5
+    },
+    {
+      "example_id": "30_nda-18",
+      "story_id": "30_nda-18",
+      "cluster_id": "30",
+      "hypothesis_id": "nda-18",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '<'.  Expected token ')'.\nall x all y (Party(x) & Party(y) -> (Agreed(x, y) -> all t (t < Now & t > Expiry(x, y) -> -Action(x, y, t))))\n                                                              ^",
+      "translated_premises": [
+        "∀x ∀y (Party(x) ∧ Party(y) → (Agreed(x, y) → ∀t (t < Now ∧ t > Expiry(x, y) → ¬Action(x, y, t))))",
+        "∀x ∀y ∀z ∀w (Party(x) ∧ Party(y) ∧ Employee(z, y) ∧ ProspectiveEmployer(w) → (Information(x, z) ∨ Advice(x, z) → ¬Termination(z, y, w))))"
+      ],
+      "translated_conclusion": "∀x ∀y (Party(x) ∧ Party(y) → (Representative(z, x) ∧ Representative(z, y) → ¬Solicit(x, y, z)))",
+      "confidence": {
+        "mean_logprob": -0.27823212156806515,
+        "min_logprob": -2.1499581336975098,
+        "perplexity": 1.3207927461127296,
+        "n_tokens": 142
+      },
+      "elapsed_sec": 11.88
+    },
+    {
+      "example_id": "31_nda-7",
+      "story_id": "31_nda-7",
+      "cluster_id": "31",
+      "hypothesis_id": "nda-7",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "Borrower(x) → MayDisclose(x, Information, legalCounsel)"
+      ],
+      "translated_conclusion": "ReceivingParty(y) → ∃z (∃w (ThirdParty(w) ∧ (Consultant(w) ∨ Agent(w) ∨ ProfessionalAdvisor(w))) ∧ Share(y, ConfidentialInformation, z))",
+      "confidence": {
+        "mean_logprob": -0.21198608585033857,
+        "min_logprob": -1.2076141834259033,
+        "perplexity": 1.2361306852514877,
+        "n_tokens": 63
+      },
+      "elapsed_sec": 5.73
+    },
+    {
+      "example_id": "36_nda-15",
+      "story_id": "36_nda-15",
+      "cluster_id": "36",
+      "hypothesis_id": "nda-15",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Party(x) → ∀y (ConfidentialInfo(y) → ¬AcquireRight(x, y)))"
+      ],
+      "translated_conclusion": "∀x (Agreement(x) → ∀y (ConfidentialInfo(y) → ¬GrantRight(x, y)))",
+      "confidence": {
+        "mean_logprob": -0.1681370150062557,
+        "min_logprob": -1.022993803024292,
+        "perplexity": 1.1830987018191266,
+        "n_tokens": 54
+      },
+      "elapsed_sec": 5.01
+    },
+    {
+      "example_id": "38_nda-3",
+      "story_id": "38_nda-3",
+      "cluster_id": "38",
+      "hypothesis_id": "nda-3",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "translation_format",
+      "error": "StoryFormatError: expected P1..P3, missing=[], extra=[4]",
+      "translated_premises": null,
+      "translated_conclusion": null,
+      "confidence": {
+        "mean_logprob": -0.19789476298298225,
+        "min_logprob": -1.431667685508728,
+        "perplexity": 1.2188341206051239,
+        "n_tokens": 172
+      },
+      "elapsed_sec": 13.82
+    },
+    {
+      "example_id": "38_nda-8",
+      "story_id": "38_nda-8",
+      "cluster_id": "38",
+      "hypothesis_id": "nda-8",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Recipient(x) → ∀y (SubpoenaOrLegalProcess(y) ∧ Receives(x, y) → Notify(x, State, y)))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) → ∀y (RequiredByLawOrRegulation(x, y) ∨ RequiredByJudicialProcess(x, y) → Notify(x, DisclosingParty, y)))",
+      "confidence": {
+        "mean_logprob": -0.12932860021098833,
+        "min_logprob": -0.9722586870193481,
+        "perplexity": 1.1380640308101084,
+        "n_tokens": 81
+      },
+      "elapsed_sec": 6.98
+    },
+    {
+      "example_id": "41_nda-4",
+      "story_id": "41_nda-4",
+      "cluster_id": "41",
+      "hypothesis_id": "nda-4",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '≠'.  Expected token ')'.\nall x (ReceivingParty(x) -> all y (ConfidentialInformation(y) -> -Use(x, y) | Purpose(x, y) ≠ PurposesInAgreement(x, y))))\n                                                                                            ^",
+      "translated_premises": [
+        "∀x (Contractor(x) → ∀y (ConfidentialInformation(y) → ¬(Copy(x, y) ∨ Disclose(x, y) ∨ Publish(x, y) ∨ Release(x, y) ∨ Transfer(x, y) ∨ Disseminate(x, y) ∨ Use(x, y) ∨ AllowAccess(x, y)) ∧ (Purpose(x, y) = PurposeOfContract)))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) → ∀y (ConfidentialInformation(y) → ¬Use(x, y) ∨ Purpose(x, y) ≠ PurposesInAgreement(x, y))))",
+      "confidence": {
+        "mean_logprob": -0.1616633374135894,
+        "min_logprob": -1.1552376747131348,
+        "perplexity": 1.1754644398004193,
+        "n_tokens": 128
+      },
+      "elapsed_sec": 10.43
+    },
+    {
+      "example_id": "42_nda-8",
+      "story_id": "42_nda-8",
+      "cluster_id": "42",
+      "hypothesis_id": "nda-8",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: ')'.\nall x all y (ConfidentialInfo(x, y) -> MayDisclose(x, y) -> (RequiredByLaw(x, y) | RequiredByReg(x, y) | RequiredByJudicialProcess(x, y)) -> Notify(x, y)))\n                                                                                                                                                          ^",
+      "translated_premises": [
+        "∀x ∀y (ConfidentialInfo(x, y) → (CourtOrder(x, y) ∨ GovtDemand(x, y)) → MayDisclose(x, y))",
+        "∀x ∀y (ConfidentialInfo(x, y) → (MayDisclose(x, y) → (SeekProtection(x, y) ∧ PriorNotice(x, y))))"
+      ],
+      "translated_conclusion": "∀x ∀y (ConfidentialInfo(x, y) → MayDisclose(x, y) → (RequiredByLaw(x, y) ∨ RequiredByReg(x, y) ∨ RequiredByJudicialProcess(x, y)) → Notify(x, y)))",
+      "confidence": {
+        "mean_logprob": -0.1407029967629776,
+        "min_logprob": -1.344644546508789,
+        "perplexity": 1.1510827219161934,
+        "n_tokens": 134
+      },
+      "elapsed_sec": 11.07
+    },
+    {
+      "example_id": "42_nda-4",
+      "story_id": "42_nda-4",
+      "cluster_id": "42",
+      "hypothesis_id": "nda-4",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (Agreement(x, y) → (ConfidentialInfo(x, y) → UseForBusinessPurpose(x, y)))",
+        "∀x ∀y (ConfidentialInfo(x, y) → (UseForBusinessPurpose(x, y) ∧ DiscloseForBusinessPurpose(x, y)))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) → ∀y (ConfidentialInfo(x, y) → ¬UseForOtherPurpose(x, y)))",
+      "confidence": {
+        "mean_logprob": -0.19345533919090255,
+        "min_logprob": -1.3336936235427856,
+        "perplexity": 1.2134351923438529,
+        "n_tokens": 99
+      },
+      "elapsed_sec": 8.38
+    },
+    {
+      "example_id": "43_nda-2",
+      "story_id": "43_nda-2",
+      "cluster_id": "43",
+      "hypothesis_id": "nda-2",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (CoveredByAgreement(x, y) → (Design(x) ∨ Concept(x) ∨ Idea(x) ∨ TechnicalInfo(x) ∨ ScientificInfo(x) ∨ CommercialInfo(x) ∨ KnowHow(x) ∨ TradeSecret(x) ∨ Process(x)))"
+      ],
+      "translated_conclusion": "∀x (ConfidentialInfo(x) → TechnicalInfo(x))",
+      "confidence": {
+        "mean_logprob": -0.1540896203718148,
+        "min_logprob": -1.9374024868011475,
+        "perplexity": 1.1665954328100883,
+        "n_tokens": 75
+      },
+      "elapsed_sec": 6.74
+    },
+    {
+      "example_id": "46_nda-2",
+      "story_id": "46_nda-2",
+      "cluster_id": "46",
+      "hypothesis_id": "nda-2",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ConfidentialInfo(x) → (Confidential(x) ∧ (InElectronicForm(x) ∨ InHardCopy(x) ∨ GivenVerbally(x)) ∧ (GroupCorporateStrategy(x) ∨ CustomerInfo(x) ∨ TargetInfo(x) ∨ ProprietaryTech(x) ∨ ProprietaryFinancial(x) ∨ ProprietaryPersonnel(x) ∨ ProprietaryCommercial(x))))"
+      ],
+      "translated_conclusion": "∀x (ConfidentialInfo(x) → TechnicalInfo(x))",
+      "confidence": {
+        "mean_logprob": -0.19181315346466882,
+        "min_logprob": -1.9309195280075073,
+        "perplexity": 1.2114441416762205,
+        "n_tokens": 98
+      },
+      "elapsed_sec": 8.41
+    },
+    {
+      "example_id": "47_nda-2",
+      "story_id": "47_nda-2",
+      "cluster_id": "47",
+      "hypothesis_id": "nda-2",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Agreement(x, seller) → (NonDisclosure(x) ∧ FinancialAbility(x) → DiscloseNameAndLocation(x)))",
+        "Confidential(x)",
+        "∀x (Broker(x) → (Information(x) → (Sensitive(x) ∧ Confidential(x) → Disclosure(x) → Damage(x))))",
+        "∀x (Information(x) → (Fact(x) ∧ Data(x) → Confidential(x)))",
+        "∀x (Information(x) → (Sensitive(x) ∧ Confidential(x) → Disclosure(x) → Damage(x)))",
+        "∀x (Information(x) → (Fact(x) ∧ Data(x) → Confidential(x)))",
+        "∀x (Confidential(x) → (NonDisclosure(x) ∧ Period(x, 3) → SimilarBusiness(x) → Solicit(x) → Contact(x)))"
+      ],
+      "translated_conclusion": "∀x (Confidential(x) → ¬Technical(x))",
+      "confidence": {
+        "mean_logprob": -0.2342801336455044,
+        "min_logprob": -1.6997467279434204,
+        "perplexity": 1.2639985311327937,
+        "n_tokens": 190
+      },
+      "elapsed_sec": 15.29
+    },
+    {
+      "example_id": "48_nda-2",
+      "story_id": "48_nda-2",
+      "cluster_id": "48",
+      "hypothesis_id": "nda-2",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ConfidentialInfo(x) → (HasCommercialValue(x) ∨ HasUtilityInBusiness(x)))"
+      ],
+      "translated_conclusion": "∀x (ConfidentialInfo(x) → TechnicalInfo(x))",
+      "confidence": {
+        "mean_logprob": -0.14063259030129902,
+        "min_logprob": -0.7028967142105103,
+        "perplexity": 1.1510016811075756,
+        "n_tokens": 41
+      },
+      "elapsed_sec": 4.07
+    },
+    {
+      "example_id": "49_nda-17",
+      "story_id": "49_nda-17",
+      "cluster_id": "49",
+      "hypothesis_id": "nda-17",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ReceivingParty(x) ∧ Disclosed(x, thisAgreement) ∧ OnOrAfter(x, effectiveDate) → Copies(x, Information(x)))",
+        "∀x (ReceivingParty(x) ∧ Disclosed(x, thisAgreement) ∧ OnOrAfter(x, effectiveDate) → Copies(x, Information(x)) ∧ Marked(x, confidential))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) ∧ Disclosed(x, thisAgreement) ∧ OnOrAfter(x, effectiveDate) → Copies(x, Information(x)) ∧ (Purpose(x) ∧ Marked(x, confidential)))",
+      "confidence": {
+        "mean_logprob": -0.23274118785173228,
+        "min_logprob": -1.8806102275848389,
+        "perplexity": 1.2620548019405249,
+        "n_tokens": 127
+      },
+      "elapsed_sec": 10.58
+    },
+    {
+      "example_id": "49_nda-4",
+      "story_id": "49_nda-4",
+      "cluster_id": "49",
+      "hypothesis_id": "nda-4",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ReceivingParty(x) ∧ Information(x) ∧ DisclosedBy(x, DisclosingParty, EffectiveDate) → Confidential(x))",
+        "∀x (ReceivingParty(x) ∧ Information(x) ∧ NotDisclosed(x) → NotDisclosedToThirdParty(x))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) ∧ ConfidentialInformation(x) → Purpose(x, Agreement))",
+      "confidence": {
+        "mean_logprob": -0.3204332474345695,
+        "min_logprob": -1.9176048040390015,
+        "perplexity": 1.3777245306713375,
+        "n_tokens": 84
+      },
+      "elapsed_sec": 7.38
+    },
+    {
+      "example_id": "53_nda-8",
+      "story_id": "53_nda-8",
+      "cluster_id": "53",
+      "hypothesis_id": "nda-8",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols/arities are used as both relation and function symbols: RequiredByLaw/2.\n\n\nFatal error:  The following symbols/arities are used as both relation and function symbols: RequiredByLaw/2",
+      "translated_premises": [
+        "∀x (Believes(x, RequiredByLaw(x, discloseInfo)) → Shall(x, provideNotice(x, DisclosingParty, relevantEvidence)))",
+        "∀x (Believes(x, RequiredByLaw(x, discloseInfo)) → Shall(x, provideNotice(x, DisclosingParty, relevantEvidence)))"
+      ],
+      "translated_conclusion": "∀x (RequiredByLaw(x, discloseInfo) → Shall(x, notify(DisclosingParty)))",
+      "confidence": {
+        "mean_logprob": -0.2304199142129063,
+        "min_logprob": -1.6974952220916748,
+        "perplexity": 1.259128624940722,
+        "n_tokens": 90
+      },
+      "elapsed_sec": 7.87
+    },
+    {
+      "example_id": "58_nda-2",
+      "story_id": "58_nda-2",
+      "cluster_id": "58",
+      "hypothesis_id": "nda-2",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '←'.\nConfidential(x) ← (Financial(x) | Technical(x) | NonPublic(x)) & Disclosed(x) & NonPublicOrProprietary(x)\n                ^",
+      "translated_premises": [
+        "∀x (Information(x) → Confidential(x))",
+        "Confidential(x) ← (Financial(x) ∨ Technical(x) ∨ NonPublic(x)) ∧ Disclosed(x) ∧ NonPublicOrProprietary(x)",
+        "Confidential(x) ← PersonalInformation(x) ∧ ISAExhibit(x)",
+        "Confidential(x) ← CustomerInformation(x) ∧ CustomerInformationDefined(x)"
+      ],
+      "translated_conclusion": "∀x (Confidential(x) → Technical(x))",
+      "confidence": {
+        "mean_logprob": -0.19205194915711649,
+        "min_logprob": -1.2747688293457031,
+        "perplexity": 1.2117334638619648,
+        "n_tokens": 95
+      },
+      "elapsed_sec": 8.28
+    },
+    {
+      "example_id": "58_nda-12",
+      "story_id": "58_nda-12",
+      "cluster_id": "58",
+      "hypothesis_id": "nda-12",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols cannot be used as atomic formulas, because they are variables: NonDisclosureAgreement.\n\n\nFatal error:  The following symbols cannot be used as atomic formulas, because they are variables: NonDisclosureAgreement",
+      "translated_premises": [
+        "∀x (NonDisclosureAgreement(x) → ¬ApplyTo(x, Information, IsDevelopedBy(x, Recipient, IndependentlyOf(InformationDisclosedBy(DisclosingParty)))))",
+        "NonDisclosureAgreement",
+        "∀x (Information(x) ∧ IsDevelopedBy(x, Recipient, IndependentlyOf(InformationDisclosedBy(DisclosingParty))) → ¬SimilarTo(x, ConfidentialInformation))"
+      ],
+      "translated_conclusion": "∀x (NonDisclosureAgreement(x) → ¬MayIndependentlyDevelop(x, Information, SimilarTo(Information, ConfidentialInformation)))",
+      "confidence": {
+        "mean_logprob": -0.23893216605167897,
+        "min_logprob": -2.2282326221466064,
+        "perplexity": 1.269892391847219,
+        "n_tokens": 120
+      },
+      "elapsed_sec": 9.95
+    },
+    {
+      "example_id": "58_nda-4",
+      "story_id": "58_nda-4",
+      "cluster_id": "58",
+      "hypothesis_id": "nda-4",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: Use/2, Use/3.\n\n\nFatal error:  The following symbols are used with multiple arities: Use/2, Use/3",
+      "translated_premises": [
+        "∀x (Recipient(x) ∧ Representative(x) → (Use(x, Information) ∧ Purpose(x, Information) ∧ ¬Use(x, Information, PurposeOther)))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) → ∀y (ConfidentialInformation(y) → ¬Use(x, y, PurposeOther)))",
+      "confidence": {
+        "mean_logprob": -0.2526105649718016,
+        "min_logprob": -1.302501916885376,
+        "perplexity": 1.2873818276216817,
+        "n_tokens": 66
+      },
+      "elapsed_sec": 5.94
+    },
+    {
+      "example_id": "62_nda-8",
+      "story_id": "62_nda-8",
+      "cluster_id": "62",
+      "hypothesis_id": "nda-8",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "translation_format",
+      "error": "StoryFormatError: duplicate label P3 in model output",
+      "translated_premises": null,
+      "translated_conclusion": null,
+      "confidence": {
+        "mean_logprob": -0.12286230541081007,
+        "min_logprob": -1.9561560153961182,
+        "perplexity": 1.1307287150019047,
+        "n_tokens": 596
+      },
+      "elapsed_sec": 46.59
+    },
+    {
+      "example_id": "65_nda-19",
+      "story_id": "65_nda-19",
+      "cluster_id": "65",
+      "hypothesis_id": "nda-19",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Disclosure(x, ConfidentialInformation, ReceivingParty) ∧ MadeDuring(x, InitialTerm) → SubjectTo(x, Agreement, 2, years))",
+        "∀x (Disclosure(x, ConfidentialInformation, ReceivingParty) ∧ MadeDuring(x, InitialTerm) → (DerivativeMaterials(x) ∨ Reports(x)) → Obligation(x, ReceivingParty, PermittedPurpose))"
+      ],
+      "translated_conclusion": "∃x (Obligation(x, Agreement, termination) ∧ Obligation(x, Agreement, termination))",
+      "confidence": {
+        "mean_logprob": -0.25726156902748626,
+        "min_logprob": -1.8232641220092773,
+        "perplexity": 1.293383391553524,
+        "n_tokens": 109
+      },
+      "elapsed_sec": 9.25
+    },
+    {
+      "example_id": "65_nda-4",
+      "story_id": "65_nda-4",
+      "cluster_id": "65",
+      "hypothesis_id": "nda-4",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ReceivingParty(x) → ∀y (ConfidentialInfo(x, y) → (PermittedPurpose(y) ∧ (LimitDisclosure(x, y) → PermittedRecipient(y)))))"
+      ],
+      "translated_conclusion": "∀x (ConfidentialInfo(x, y) → ¬(ReceivingParty(x) ∧ ¬(PurposeInAgreement(y))))",
+      "confidence": {
+        "mean_logprob": -0.2338597023256109,
+        "min_logprob": -1.4630401134490967,
+        "perplexity": 1.2634672182601185,
+        "n_tokens": 74
+      },
+      "elapsed_sec": 6.52
+    },
+    {
+      "example_id": "66_nda-15",
+      "story_id": "66_nda-15",
+      "cluster_id": "66",
+      "hypothesis_id": "nda-15",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: GrantRights/5, GrantRights/3.\n\n\nFatal error:  The following symbols are used with multiple arities: GrantRights/5, GrantRights/3",
+      "translated_premises": [
+        "∀x ∀y (Disclosure(x, y, ProprietaryInformation) → ¬GrantRights(x, y, matters, inventions, discoveries))",
+        "∀x ∀y (Disclosure(x, y, information) → Property(x, y))"
+      ],
+      "translated_conclusion": "∀x ∀y (Agreement(x, y) → ¬GrantRights(x, y, ConfidentialInformation))",
+      "confidence": {
+        "mean_logprob": -0.22761486208165502,
+        "min_logprob": -1.4224027395248413,
+        "perplexity": 1.255601652491217,
+        "n_tokens": 78
+      },
+      "elapsed_sec": 7.01
+    },
+    {
+      "example_id": "66_nda-7",
+      "story_id": "66_nda-7",
+      "cluster_id": "66",
+      "hypothesis_id": "nda-7",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "translation_truncated",
+      "error": "StoryFormatError: output truncated at max_new_tokens=740 (harness budget, not a model error): expected P1..P2, missing=[2], extra=[]",
+      "translated_premises": null,
+      "translated_conclusion": null,
+      "confidence": {
+        "mean_logprob": -0.06996381674050575,
+        "min_logprob": -1.7177703380584717,
+        "perplexity": 1.072469375114455,
+        "n_tokens": 740
+      },
+      "elapsed_sec": 56.98
+    },
+    {
+      "example_id": "66_nda-17",
+      "story_id": "66_nda-17",
+      "cluster_id": "66",
+      "hypothesis_id": "nda-17",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "False",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ReceivingParty(x) ∧ ValidityPeriod(x, thisAgreement) → ConfidentialInfo(x, ProprietaryInfo, disclosingParty, 5))",
+        "∀x (ConfidentialInfo(x, ProprietaryInfo, disclosingParty, 5) → ¬(Copy(x) ∨ Reproduce(x) ∨ Duplicate(x)))"
+      ],
+      "translated_conclusion": "∃x (Copy(x) ∧ SomeCircumstances(x) ∧ ConfidentialInfo(x, ProprietaryInfo, disclosingParty, 5))",
+      "confidence": {
+        "mean_logprob": -0.21192071310513658,
+        "min_logprob": -1.4447640180587769,
+        "perplexity": 1.2360498786364682,
+        "n_tokens": 108
+      },
+      "elapsed_sec": 9.15
+    },
+    {
+      "example_id": "68_nda-19",
+      "story_id": "68_nda-19",
+      "cluster_id": "68",
+      "hypothesis_id": "nda-19",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BackupComputerFile(x) → (NonUseObligation(x) ∧ ConfidentialityObligation(x)))",
+        "∀x (BackupComputerFile(x) → (NonUseObligation(x) ∧ ConfidentialityObligation(x)) ∧ (∀y (ExpirationOrTermination(y) → (NonUseObligation(x) ∧ ConfidentialityObligation(x)))))"
+      ],
+      "translated_conclusion": "∃x (Obligation(x) ∧ (NonUseObligation(x) ∧ ConfidentialityObligation(x)) ∧ Termination(x))",
+      "confidence": {
+        "mean_logprob": -0.2015863781690469,
+        "min_logprob": -1.8887025117874146,
+        "perplexity": 1.2233419025328083,
+        "n_tokens": 118
+      },
+      "elapsed_sec": 9.72
+    },
+    {
+      "example_id": "78_nda-8",
+      "story_id": "78_nda-8",
+      "cluster_id": "78",
+      "hypothesis_id": "nda-8",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (Party(x) ∨ ThirdParty(x, y) ∧ HasProvidedConfidentialInfo(x, y) → (LegallyCompelled(x, y) → Notify(x, y)))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) → (RequiredToDisclose(x) → Notify(x, DisclosingParty(x))))",
+      "confidence": {
+        "mean_logprob": -0.20975948215495357,
+        "min_logprob": -1.1252062320709229,
+        "perplexity": 1.2333813740488393,
+        "n_tokens": 73
+      },
+      "elapsed_sec": 6.48
+    },
+    {
+      "example_id": "83_nda-19",
+      "story_id": "83_nda-19",
+      "cluster_id": "83",
+      "hypothesis_id": "nda-19",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (Nondisclosure(x, y) ∧ (Event(x) ∨ Occurrence(x)) → Nondisclosure(x, y))"
+      ],
+      "translated_conclusion": "∃x ∃y (Obligation(x, y) ∧ ¬Terminated(x, y))",
+      "confidence": {
+        "mean_logprob": -0.2859668061256039,
+        "min_logprob": -1.995306372642517,
+        "perplexity": 1.3310482718698353,
+        "n_tokens": 60
+      },
+      "elapsed_sec": 5.53
+    },
+    {
+      "example_id": "90_nda-8",
+      "story_id": "90_nda-8",
+      "cluster_id": "90",
+      "hypothesis_id": "nda-8",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Data(x) ∧ DisclosedTo(x, mdhhs) → Agree(x, mdhhs))",
+        "∀x (Data(x) ∧ RequiredByLaw(x) → Notify(x, reportingEntity))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) ∧ RequiredByLaw(x) → Notify(x, disclosingParty))",
+      "confidence": {
+        "mean_logprob": -0.18401350720012813,
+        "min_logprob": -1.2649134397506714,
+        "perplexity": 1.2020320590742322,
+        "n_tokens": 73
+      },
+      "elapsed_sec": 6.54
+    },
+    {
+      "example_id": "97_nda-16",
+      "story_id": "97_nda-16",
+      "cluster_id": "97",
+      "hypothesis_id": "nda-16",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Employee(x) ∨ Consultant(x) ∨ Subcontractor(x) → (Completion(x) → ∀y (PCIIManager(y) ∨ PCIIofficer(y) → Surrender(x, y))))",
+        "∀x (Access(x, information) ∨ Possess(x, information) → Return(x, information))",
+        "∀x (Duties(x) ∨ Association(x) ∨ Support(x) → (Termination(x) → ∀y (Destruction(y, information) ∨ Return(y, information))))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) → (Termination(x) → ∀y (Destruction(y, information) ∨ Return(y, information))))",
+      "confidence": {
+        "mean_logprob": -0.19188057045493193,
+        "min_logprob": -1.200080394744873,
+        "perplexity": 1.2115258163472236,
+        "n_tokens": 145
+      },
+      "elapsed_sec": 11.99
+    },
+    {
+      "example_id": "99_nda-15",
+      "story_id": "99_nda-15",
+      "cluster_id": "99",
+      "hypothesis_id": "nda-15",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (Parties(x, y) ∧ Agree(x, y) → ¬Waiver(x, y, Information(x, y)))"
+      ],
+      "translated_conclusion": "∀x (Agreement(x) → ¬GrantRight(x, ReceivingParty, ConfidentialInformation))",
+      "confidence": {
+        "mean_logprob": -0.27014803156293965,
+        "min_logprob": -1.5124258995056152,
+        "perplexity": 1.3101583811718436,
+        "n_tokens": 56
+      },
+      "elapsed_sec": 5.25
+    },
+    {
+      "example_id": "99_nda-12",
+      "story_id": "99_nda-12",
+      "cluster_id": "99",
+      "hypothesis_id": "nda-12",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Information(x) → ¬(Confidential(x) ∧ IndependentlyDeveloped(x)))",
+        "IndependentlyDeveloped(x) ∨ Confidential(x)"
+      ],
+      "translated_conclusion": "IndependentlyDeveloped(x) → ¬SimilarTo(x, ConfidentialInformation)",
+      "confidence": {
+        "mean_logprob": -0.195540725726527,
+        "min_logprob": -1.3768278360366821,
+        "perplexity": 1.2159683141068174,
+        "n_tokens": 54
+      },
+      "elapsed_sec": 5.02
+    },
+    {
+      "example_id": "99_nda-4",
+      "story_id": "99_nda-4",
+      "cluster_id": "99",
+      "hypothesis_id": "nda-4",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols cannot be used as atomic formulas, because they are variables: False.\n\n\nFatal error:  The following symbols cannot be used as atomic formulas, because they are variables: False",
+      "translated_premises": [
+        "∀x (Representative(x) → (Possess(x, Information) ∧ Use(x, Information) → NeedToKnow(x, Information)))",
+        "∀x (Representative(x) → (Use(x, Information) → SolelyFor(x, BusinessUnderDiscussion)))",
+        "∀x (Representative(x) → (Disclose(x, Information) → False))",
+        "∀x (Representative(x) → (Disclose(x, Fact) → False))",
+        "∀x (Modification(x) → (Binding(x) → Written(x) ∧ Signed(x, Party)))"
+      ],
+      "translated_conclusion": "∀x (Representative(x) → (Use(x, ConfidentialInformation) → Purposes(x, Agreement)))",
+      "confidence": {
+        "mean_logprob": -0.16023607003847548,
+        "min_logprob": -1.4760981798171997,
+        "perplexity": 1.1737879344501807,
+        "n_tokens": 150
+      },
+      "elapsed_sec": 12.45
+    },
+    {
+      "example_id": "117_nda-2",
+      "story_id": "117_nda-2",
+      "cluster_id": "117",
+      "hypothesis_id": "nda-2",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ConfidentialInfo(x) → NonPublic(x))"
+      ],
+      "translated_conclusion": "∀x (ConfidentialInfo(x) → Technical(x))",
+      "confidence": {
+        "mean_logprob": -0.14811433580448904,
+        "min_logprob": -0.5403013825416565,
+        "perplexity": 1.1596454777820522,
+        "n_tokens": 31
+      },
+      "elapsed_sec": 3.34
+    },
+    {
+      "example_id": "117_nda-7",
+      "story_id": "117_nda-7",
+      "cluster_id": "117",
+      "hypothesis_id": "nda-7",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: End of input found.  Expected token ')'.\nall x (Recipient(x) -> (ConfidentialInfo(x) -> (exists y (Employee(y) & Disclose(x, y)) | (exists y (Agent(y) & Disclose(x, y)) | (exists y (Consultant(y) & Disclose(x, y)) | (exists y (Contractor(y) & Disclose(x, y)))) & (all y (Disclose(x, y) -> WrittenAgreement(y, x))))))\n                                                                                                                                                                                                                                                                                   ^",
+      "translated_premises": [
+        "∀x (Recipient(x) → (ConfidentialInfo(x) → (∃y (Employee(y) ∧ Disclose(x, y)) ∨ (∃y (Agent(y) ∧ Disclose(x, y)) ∨ (∃y (Consultant(y) ∧ Disclose(x, y)) ∨ (∃y (Contractor(y) ∧ Disclose(x, y)))) ∧ (∀y (Disclose(x, y) → WrittenAgreement(y, x))))))"
+      ],
+      "translated_conclusion": "∃x ∃y (Recipient(x) ∧ ConfidentialInfo(x) ∧ ThirdParty(y) ∧ Disclose(x, y))",
+      "confidence": {
+        "mean_logprob": -0.18125756568704787,
+        "min_logprob": -2.0702691078186035,
+        "perplexity": 1.1987238896771173,
+        "n_tokens": 128
+      },
+      "elapsed_sec": 10.56
+    },
+    {
+      "example_id": "127_nda-15",
+      "story_id": "127_nda-15",
+      "cluster_id": "127",
+      "hypothesis_id": "nda-15",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: RightsGranted/2, RightsGranted/3.\n\n\nFatal error:  The following symbols are used with multiple arities: RightsGranted/2, RightsGranted/3",
+      "translated_premises": [
+        "∀x (ConfidentialInfo(x) ∧ AtAllTimes(x) → PropertyOf(x, discloser)) ∧ ∀x (ConfidentialInfo(x) → ¬RightsGranted(x, recipient))"
+      ],
+      "translated_conclusion": "∀x (Agreement(x) → ¬RightsGranted(x, receivingParty, confidentialInfo))",
+      "confidence": {
+        "mean_logprob": -0.2023392740178025,
+        "min_logprob": -1.2442388534545898,
+        "perplexity": 1.2242632983868662,
+        "n_tokens": 64
+      },
+      "elapsed_sec": 5.74
+    },
+    {
+      "example_id": "127_nda-8",
+      "story_id": "127_nda-8",
+      "cluster_id": "127",
+      "hypothesis_id": "nda-8",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Recipient(x) → (∃y (LegallyRequired(x, y) ∧ ConfidentialInfo(x, y)) → Notify(x, y)))"
+      ],
+      "translated_conclusion": "∀x (Recipient(x) → (∃y (LegallyRequired(x, y) ∧ ConfidentialInfo(x, y)) → Notify(x, disclosingParty)))",
+      "confidence": {
+        "mean_logprob": -0.1941940559610911,
+        "min_logprob": -1.1258463859558105,
+        "perplexity": 1.2143319084388047,
+        "n_tokens": 69
+      },
+      "elapsed_sec": 6.14
+    },
+    {
+      "example_id": "127_nda-4",
+      "story_id": "127_nda-4",
+      "cluster_id": "127",
+      "hypothesis_id": "nda-4",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (Disclose(x, y, ConfidentialInformation) → Ensure(x, y, ConfidentialInformation, Purpose))",
+        "∀x ∀y (Disclose(x, y, ConfidentialInformation) → (OnlyUse(x, y, ConfidentialInformation, Purpose) ∧ Purpose(x, y, ConfidentialInformation)))"
+      ],
+      "translated_conclusion": "∀x ∀y (Disclose(x, y, ConfidentialInformation) → ¬Use(x, y, ConfidentialInformation, PurposeOtherThan(Purpose)))",
+      "confidence": {
+        "mean_logprob": -0.20171562899244236,
+        "min_logprob": -1.3575596809387207,
+        "perplexity": 1.2235000306998827,
+        "n_tokens": 100
+      },
+      "elapsed_sec": 8.45
+    },
+    {
+      "example_id": "129_nda-8",
+      "story_id": "129_nda-8",
+      "cluster_id": "129",
+      "hypothesis_id": "nda-8",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ReceivingParty(x) ∧ RequiredByLaw(x) ∨ RequiredByCourtOrder(x)) → Notify(x, DisclosingParty)",
+        "∀x (Disclosure(x, DataAndStudies) ∧ NonEURegulatoryRequirements(x) → (PriorApproval(x, SteeringCommittee) ∨ PriorApproval(x, IMOAExecutiveCommittee)))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) ∧ RequiredByLaw(x) ∨ RequiredByRegulation(x) ∨ RequiredByJudicialProcess(x)) → Notify(x, DisclosingParty)",
+      "confidence": {
+        "mean_logprob": -0.1550306882988416,
+        "min_logprob": -1.0715229511260986,
+        "perplexity": 1.1676937950914195,
+        "n_tokens": 114
+      },
+      "elapsed_sec": 9.48
+    },
+    {
+      "example_id": "165_nda-15",
+      "story_id": "165_nda-15",
+      "cluster_id": "165",
+      "hypothesis_id": "nda-15",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: Rights/2, Rights/3.\n\n\nFatal error:  The following symbols are used with multiple arities: Rights/2, Rights/3",
+      "translated_premises": [
+        "∀x (Document(x) ∨ TangibleObject(x)) → (Disclosed(x) ∧ Returned(x) → PropertyOf(x, disclosingParty))",
+        "∀x (Patent(x) ∨ MaskWorkRight(x) ∨ Copyright(x)) → (Rights(x, otherParty) → ¬Rights(x, otherParty))"
+      ],
+      "translated_conclusion": "∀x (Agreement(x) → ¬Rights(x, receivingParty, ConfidentialInformation(otherParty)))",
+      "confidence": {
+        "mean_logprob": -0.28155582853654104,
+        "min_logprob": -1.7149540185928345,
+        "perplexity": 1.3251899776734595,
+        "n_tokens": 92
+      },
+      "elapsed_sec": 7.97
+    },
+    {
+      "example_id": "165_nda-12",
+      "story_id": "165_nda-12",
+      "cluster_id": "165",
+      "hypothesis_id": "nda-12",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ConfidentialInfo(x) → ¬(IndependentlyDeveloped(x) ∨ ReferenceTo(x, disclosingParty)))",
+        "IndependentlyDeveloped(x) ∨ (ReferenceTo(x, disclosingParty) → ¬ConfidentialInfo(x))"
+      ],
+      "translated_conclusion": "IndependentlyDeveloped(x) ⊕ SimilarTo(x, ConfidentialInfo)",
+      "confidence": {
+        "mean_logprob": -0.2274105170286725,
+        "min_logprob": -1.411072015762329,
+        "perplexity": 1.255345102718245,
+        "n_tokens": 71
+      },
+      "elapsed_sec": 6.26
+    },
+    {
+      "example_id": "212_nda-1",
+      "story_id": "212_nda-1",
+      "cluster_id": "212",
+      "hypothesis_id": "nda-1",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ConfidentialInfo(x) → (ExpresslyMarked(x) ∨ DesignatedInWriting(x, disclosingParty, mannerIndicatingConfidentiality)))"
+      ],
+      "translated_conclusion": "∀x (ConfidentialInfo(x) → ∃y (DisclosingParty(y) ∧ ExpresslyIdentified(y, x)))",
+      "confidence": {
+        "mean_logprob": -0.2270248920999145,
+        "min_logprob": -1.7874352931976318,
+        "perplexity": 1.2548611036794877,
+        "n_tokens": 67
+      },
+      "elapsed_sec": 5.99
+    },
+    {
+      "example_id": "212_nda-20",
+      "story_id": "212_nda-20",
+      "cluster_id": "212",
+      "hypothesis_id": "nda-20",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: writtenConfidentialInformation/1, writtenConfidentialInformation/0.\n\n\nFatal error:  The following symbols are used with multiple arities: writtenConfidentialInformation/1, writtenConfidentialInformation/0",
+      "translated_premises": [
+        "∀x (Recipient(x) → (Destroy(x, writtenConfidentialInformation) ∨ Deliver(x, writtenConfidentialInformation, disclosingParty)))",
+        "∀x (writtenConfidentialInformation(x) ∧ foundIn(x, analysis, compilation, document) → (subjectTo(x, termsOfAgreement) ∨ Destroy(x, writtenConfidentialInformation)))",
+        "∀x (Recipient(x) ∧ reasonablyBelieve(x, requiredToRetain(x, applicableLaws, bankingRegulations, internalPolicies)) → retain(x, writtenConfidentialInformation))"
+      ],
+      "translated_conclusion": "∃x (Recipient(x) ∧ retain(x, writtenConfidentialInformation) ∧ ¬destroy(x, writtenConfidentialInformation))",
+      "confidence": {
+        "mean_logprob": -0.19913790390288216,
+        "min_logprob": -1.2426574230194092,
+        "perplexity": 1.220350245358127,
+        "n_tokens": 145
+      },
+      "elapsed_sec": 11.96
+    },
+    {
+      "example_id": "212_nda-3",
+      "story_id": "212_nda-3",
+      "cluster_id": "212",
+      "hypothesis_id": "nda-3",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "translation_format",
+      "error": "StoryFormatError: expected P1..P1, missing=[], extra=[2]",
+      "translated_premises": null,
+      "translated_conclusion": null,
+      "confidence": {
+        "mean_logprob": -0.31215510877922903,
+        "min_logprob": -1.8176963329315186,
+        "perplexity": 1.3663666120509792,
+        "n_tokens": 54
+      },
+      "elapsed_sec": 5.12
+    },
+    {
+      "example_id": "212_nda-5",
+      "story_id": "212_nda-5",
+      "cluster_id": "212",
+      "hypothesis_id": "nda-5",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "False",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ConfidentialInfo(x) → (DisclosingParty(x) ∨ Purpose(x)))",
+        "∀x (Recipient(x) → ∀y (Representative(y, x) → ∀z (ConfidentialInfo(z) → ¬Disclose(z, x, y))))",
+        "∀x (Recipient(x) → ∀y (Representative(y, x) → ∀z (ConfidentialInfo(z) → ¬DiscloseToThirdParty(z, x, y))))",
+        "∀x (Recipient(x) → ∀y (Representative(y, x) → ∀z (ConfidentialInfo(z) → ¬DiscloseWithoutConsent(z, x, y))))"
+      ],
+      "translated_conclusion": "∃x ∃y (Recipient(x) ∧ Representative(y, x) ∧ ConfidentialInfo(z) ∧ Disclose(z, x, y))",
+      "confidence": {
+        "mean_logprob": -0.13170844217609814,
+        "min_logprob": -1.6134766340255737,
+        "perplexity": 1.1407756687046267,
+        "n_tokens": 175
+      },
+      "elapsed_sec": 14.3
+    },
+    {
+      "example_id": "213_nda-16",
+      "story_id": "213_nda-16",
+      "cluster_id": "213",
+      "hypothesis_id": "nda-16",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: ',' is an illegal variable name.  Constants may not be quantified.\nexists x (ReceivingParty(x) & DestroyOrReturn(x, some, ConfidentialInformation, uponTerminationOfAgreement))\n                                                     ^",
+      "translated_premises": [
+        "∀x (Within(x, workingDays(5, dateOfTermination)) ∧ DateOfTermination(y) → DestroyOrReturn(x, y, media, ConfidentialInformation))"
+      ],
+      "translated_conclusion": "∃x (ReceivingParty(x) ∧ DestroyOrReturn(x, some, ConfidentialInformation, uponTerminationOfAgreement))",
+      "confidence": {
+        "mean_logprob": -0.37898136039376185,
+        "min_logprob": -1.583622694015503,
+        "perplexity": 1.460795806831031,
+        "n_tokens": 69
+      },
+      "elapsed_sec": 6.15
+    },
+    {
+      "example_id": "213_nda-19",
+      "story_id": "213_nda-19",
+      "cluster_id": "213",
+      "hypothesis_id": "nda-19",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: ')'.  Expression expected.\nTermination()\n            ^",
+      "translated_premises": [
+        "∀x (Force(x) ∧ Date(x) ∧ DateOfExecution(x) ∧ ContinuesInForce(x) ∧ Terminate(x) → TerminateAutomatically(x))",
+        "Termination()",
+        "∀x ((Provisions(x) ∧ CeaseToHaveEffect(x)) ∧ (Survive(x) ∧ ContinueToHaveEffect(x)) → (Clauses(x) ∧ SurviveIndefinitely(x)))"
+      ],
+      "translated_conclusion": "∃x (Obligations(x) ∧ Survive(x) ∧ Terminate(x))",
+      "confidence": {
+        "mean_logprob": -0.3161830773496805,
+        "min_logprob": -1.609812617301941,
+        "perplexity": 1.3718813930460696,
+        "n_tokens": 112
+      },
+      "elapsed_sec": 9.43
+    },
+    {
+      "example_id": "218_nda-12",
+      "story_id": "218_nda-12",
+      "cluster_id": "218",
+      "hypothesis_id": "nda-12",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Confidential(x) → (PubliclyKnown(x) ∨ AlreadyKnown(x) ∨ ApprovedForRelease(x) ∨ RightfullyReceived(x) ∨ DisclosedByParty(x) ∨ IndependentlyDeveloped(x)))"
+      ],
+      "translated_conclusion": "∀x (Confidential(x) → IndependentlyDeveloped(x) → SimilarTo(x, ConfidentialInfo))",
+      "confidence": {
+        "mean_logprob": -0.20528635624914263,
+        "min_logprob": -1.9130122661590576,
+        "perplexity": 1.2278766247697805,
+        "n_tokens": 73
+      },
+      "elapsed_sec": 6.58
+    },
+    {
+      "example_id": "218_nda-13",
+      "story_id": "218_nda-13",
+      "cluster_id": "218",
+      "hypothesis_id": "nda-13",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Confidential(x) → (PubliclyKnown(x) ∨ AlreadyKnown(x) ∨ ApprovedForRelease(x) ∨ RightfullyReceived(x) ∨ DisclosedByParty(x) ∨ IndependentlyDeveloped(x)))"
+      ],
+      "translated_conclusion": "∀x (Confidential(x) → ¬AcquiredFromThirdParty(x))",
+      "confidence": {
+        "mean_logprob": -0.19675525601877467,
+        "min_logprob": -1.3532721996307373,
+        "perplexity": 1.2174460416494979,
+        "n_tokens": 67
+      },
+      "elapsed_sec": 6.12
+    },
+    {
+      "example_id": "227_nda-5",
+      "story_id": "227_nda-5",
+      "cluster_id": "227",
+      "hypothesis_id": "nda-5",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: End of input found.  Expected token ')'.\nall x (Recipient(x) -> (exists y (AuthorisedPerson(y) & Disclose(x, y)) & (exists z (DutyOfConfidence(z) & Inform(x, z)) & (exists w (Undertake(w) & Ensure(x, w)) & (exists v (KeepAccount(v) & Record(x, v)) & (exists u (Advise(u) & Immediate(x, u)) & (exists t (Evidence(t) & Request(x, t))))))))\n                                                                                                                                                                                                                                                                                                        ^",
+      "translated_premises": [
+        "∀x (AuthorisedPerson(x) → (∃y (Officer(y) ∧ EngagedIn(x, y)) ∨ ∃y (Director(y) ∧ EngagedIn(x, y)) ∨ ∃y (Employee(y) ∧ EngagedIn(x, y)) ∨ ∃y (ApprovedPerson(y) ∧ EngagedIn(x, y))))",
+        "∀x (Recipient(x) → (∃y (AuthorisedPerson(y) ∧ Disclose(x, y)) ∧ (∃z (DutyOfConfidence(z) ∧ Inform(x, z)) ∧ (∃w (Undertake(w) ∧ Ensure(x, w)) ∧ (∃v (KeepAccount(v) ∧ Record(x, v)) ∧ (∃u (Advise(u) ∧ Immediate(x, u)) ∧ (∃t (Evidence(t) ∧ Request(x, t))))))))"
+      ],
+      "translated_conclusion": "∀x (Recipient(x) → ∃y (AuthorisedPerson(y) ∧ Employee(y) ∧ Disclose(x, y)))",
+      "confidence": {
+        "mean_logprob": -0.18248434407488096,
+        "min_logprob": -1.8307161331176758,
+        "perplexity": 1.2001953606377938,
+        "n_tokens": 212
+      },
+      "elapsed_sec": 16.89
+    },
+    {
+      "example_id": "289_nda-15",
+      "story_id": "289_nda-15",
+      "cluster_id": "289",
+      "hypothesis_id": "nda-15",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols cannot be used as atomic formulas, because they are variables: Agreement.\n\n\nFatal error:  The following symbols cannot be used as atomic formulas, because they are variables: Agreement",
+      "translated_premises": [
+        "∀x ∀y (Party(x) ∧ Party(y) → (ConfidentialInfo(x) → ConfidentialInfo(x)))"
+      ],
+      "translated_conclusion": "¬(Agreement → RightTo(ReceivingParty, ConfidentialInfo))",
+      "confidence": {
+        "mean_logprob": -0.28544672089228695,
+        "min_logprob": -1.514777660369873,
+        "perplexity": 1.3303561933043249,
+        "n_tokens": 45
+      },
+      "elapsed_sec": 4.33
+    },
+    {
+      "example_id": "310_nda-15",
+      "story_id": "310_nda-15",
+      "cluster_id": "310",
+      "hypothesis_id": "nda-15",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ReceivingParty(x) → (HoldConfidential(x, SensitiveInformation(x)) ∧ Benefit(x, DisclosingParty)))"
+      ],
+      "translated_conclusion": "∀x (Agreement(x) → ¬GrantRight(x, ReceivingParty, ConfidentialInformation))",
+      "confidence": {
+        "mean_logprob": -0.19029796733967588,
+        "min_logprob": -0.9947271347045898,
+        "perplexity": 1.2096099682295336,
+        "n_tokens": 54
+      },
+      "elapsed_sec": 5.02
+    },
+    {
+      "example_id": "310_nda-1",
+      "story_id": "310_nda-1",
+      "cluster_id": "310",
+      "hypothesis_id": "nda-1",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '-'.  Expected token ')'.\nall x (SensitiveInfo(x) & (PhysicalForm(x) | ElectronicForm(x))) -> LabelWarning(x, OFFICIAL-SENSITIVE)\n                                                                                            ^",
+      "translated_premises": [
+        "∀x (SensitiveInfo(x) ∧ (PhysicalForm(x) ∨ ElectronicForm(x))) → LabelWarning(x, OFFICIAL-SENSITIVE)",
+        "∀x (SensitiveInfo(x) ∧ OralTransmission(x)) → ProvideWriting(x)"
+      ],
+      "translated_conclusion": "∀x (ConfidentialInfo(x) → ExpresslyIdentified(x))",
+      "confidence": {
+        "mean_logprob": -0.19328641141870062,
+        "min_logprob": -1.568626880645752,
+        "perplexity": 1.2132302267527766,
+        "n_tokens": 70
+      },
+      "elapsed_sec": 6.31
+    },
+    {
+      "example_id": "321_nda-8",
+      "story_id": "321_nda-8",
+      "cluster_id": "321",
+      "hypothesis_id": "nda-8",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (SoughtByThirdParty(x) → InformRecipient(x, sufficientTime))"
+      ],
+      "translated_conclusion": "∀x (RequiredToDisclose(x) → NotifyDisclosingParty(x))",
+      "confidence": {
+        "mean_logprob": -0.20881075198412874,
+        "min_logprob": -1.1923860311508179,
+        "perplexity": 1.2322117828281132,
+        "n_tokens": 40
+      },
+      "elapsed_sec": 4.04
+    },
+    {
+      "example_id": "357_nda-8",
+      "story_id": "357_nda-8",
+      "cluster_id": "357",
+      "hypothesis_id": "nda-8",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (Party(x) ∧ Party(y) → (ConfidentialInfo(x, y) → ¬(RequiredToDiscloseByLaw(x, y) ∨ ConfidentialInfo(x, y))))",
+        "∀x ∀y (Party(x) ∧ Party(y) → (RequiredToDiscloseByLaw(x, y) → (Notify(x, y) ∧ Cooperate(x, y))))"
+      ],
+      "translated_conclusion": "∀x ∀y (Party(x) ∧ Party(y) → (RequiredToDiscloseByLaw(x, y) → Notify(x, y)))",
+      "confidence": {
+        "mean_logprob": -0.1739202779894093,
+        "min_logprob": -1.7094956636428833,
+        "perplexity": 1.1899606959795983,
+        "n_tokens": 118
+      },
+      "elapsed_sec": 9.87
+    },
+    {
+      "example_id": "361_nda-3",
+      "story_id": "361_nda-3",
+      "cluster_id": "361",
+      "hypothesis_id": "nda-3",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (BCSI(x) → Definition(x))",
+        "∀x (ConfidentialInfo(x) → (VELCO(x) ∧ (Oral(x) ∨ Written(x) ∨ RecordedElectronic(x))))",
+        "∀x (CEII(x) → Definition(x))",
+        "∀x (ConfidentialInfo(x) → (VELCO(x) ∧ (Oral(x) ∨ Written(x) ∨ RecordedElectronic(x))))",
+        "∀x (ConfidentialInfo(x) → (Intangible(x) ∨ Tangible(x)))"
+      ],
+      "translated_conclusion": "ConfidentialInfo(x) → Verbal(x)",
+      "confidence": {
+        "mean_logprob": -0.1264433256895404,
+        "min_logprob": -1.4024544954299927,
+        "perplexity": 1.1347851361884715,
+        "n_tokens": 126
+      },
+      "elapsed_sec": 10.69
+    },
+    {
+      "example_id": "387_nda-12",
+      "story_id": "387_nda-12",
+      "cluster_id": "387",
+      "hypothesis_id": "nda-12",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: ')'.\nall x (Recipient(x) -> Obligation(x, Section1_1, ObligationApplicable(x, Section1_1)) -> -DevelopedIndependently(x, Section1_1, Information(x))))\n                                                                                                                                                ^",
+      "translated_premises": [
+        "∀x (Recipient(x) → ¬Obligation(x, Section1_1, ObligationApplicable(x, Section1_1)))",
+        "∀x (Recipient(x) → Obligation(x, Section1_1, ObligationApplicable(x, Section1_1)) → ¬DevelopedIndependently(x, Section1_1, Information(x))))"
+      ],
+      "translated_conclusion": "∀x (Recipient(x) → DevelopedIndependently(x, Section1_1, Information(x)) → SimilarTo(x, ConfidentialInformation(x)))",
+      "confidence": {
+        "mean_logprob": -0.27530731774166434,
+        "min_logprob": -2.089761257171631,
+        "perplexity": 1.3169353302771623,
+        "n_tokens": 110
+      },
+      "elapsed_sec": 9.25
+    },
+    {
+      "example_id": "392_nda-4",
+      "story_id": "392_nda-4",
+      "cluster_id": "392",
+      "hypothesis_id": "nda-4",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Recipient(x) → (ConfidentialInfo(x) → PermittedPurpose(x)))"
+      ],
+      "translated_conclusion": "∀x (Recipient(x) → (ConfidentialInfo(x) → ¬(Purpose(x) ∧ ¬PermittedPurpose(x))))",
+      "confidence": {
+        "mean_logprob": -0.21085770400089793,
+        "min_logprob": -1.4205296039581299,
+        "perplexity": 1.2347366444757806,
+        "n_tokens": 51
+      },
+      "elapsed_sec": 4.86
+    },
+    {
+      "example_id": "400_nda-20",
+      "story_id": "400_nda-20",
+      "cluster_id": "400",
+      "hypothesis_id": "nda-20",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Request(x) ∧ Company(x) → (PromptlyDeliver(x) ∨ Destroy(x)) ∧ ∀y (WrittenMaterial(y) ∧ Copy(y, x) → ¬Retain(x, y)))"
+      ],
+      "translated_conclusion": "∃x (ConfidentialInformation(x) ∧ ReceivingParty(x) ∧ ¬(Return(x) ∨ Destroy(x)))",
+      "confidence": {
+        "mean_logprob": -0.26254625961111744,
+        "min_logprob": -1.3424906730651855,
+        "perplexity": 1.3002366152174714,
+        "n_tokens": 75
+      },
+      "elapsed_sec": 6.6
+    },
+    {
+      "example_id": "400_nda-13",
+      "story_id": "400_nda-13",
+      "cluster_id": "400",
+      "hypothesis_id": "nda-13",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (EvaluationMaterials(x) → ¬IncludesInformation(x, nonConfidential, sourceOtherThanCompany))",
+        "∀x ((ii) ∧ (wasOrBecomesAvailable(x, nonConfidential, sourceOtherThanCompany)) → (sourceNotProhibited(x) ∧ sourceNotCompanyRepresentative(x)))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) → (AcquiresSimilarInformation(x, thirdParty) ∧ ¬ConfidentialInformation(x)))",
+      "confidence": {
+        "mean_logprob": -0.34130100290235765,
+        "min_logprob": -1.8673419952392578,
+        "perplexity": 1.406776620985535,
+        "n_tokens": 97
+      },
+      "elapsed_sec": 8.23
+    },
+    {
+      "example_id": "400_nda-5",
+      "story_id": "400_nda-5",
+      "cluster_id": "400",
+      "hypothesis_id": "nda-5",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "translation_format",
+      "error": "StoryFormatError: duplicate label P2 in model output",
+      "translated_premises": null,
+      "translated_conclusion": null,
+      "confidence": {
+        "mean_logprob": -0.0838415265951674,
+        "min_logprob": -1.514167070388794,
+        "perplexity": 1.0874565472113666,
+        "n_tokens": 326
+      },
+      "elapsed_sec": 25.53
+    },
+    {
+      "example_id": "401_nda-1",
+      "story_id": "401_nda-1",
+      "cluster_id": "401",
+      "hypothesis_id": "nda-1",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "¬ProprietaryInfo(x) ∨ (DisclosedInTangibleForm(x) ∧ ConspicuouslyMarked(x)) ∨ (DisclosedInNonTangibleForm(x) ∧ OrallyIdentified(x) ∧ SummarizedInTangibleForm(x))",
+        "∀x (ProprietaryInfo(x) → (DisclosedInTangibleForm(x) ∧ ConspicuouslyMarked(x)))",
+        "∀x (ProprietaryInfo(x) → (DisclosedInNonTangibleForm(x) ∧ OrallyIdentified(x) ∧ SummarizedInTangibleForm(x)))"
+      ],
+      "translated_conclusion": "∀x (ConfidentialInfo(x) → IdentifiedByDisclosingParty(x))",
+      "confidence": {
+        "mean_logprob": -0.10751118418236305,
+        "min_logprob": -1.182084083557129,
+        "perplexity": 1.1135033143010236,
+        "n_tokens": 147
+      },
+      "elapsed_sec": 12.09
+    },
+    {
+      "example_id": "408_nda-2",
+      "story_id": "408_nda-2",
+      "cluster_id": "408",
+      "hypothesis_id": "nda-2",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "translation_format",
+      "error": "StoryFormatError: expected P1..P1, missing=[], extra=[2]",
+      "translated_premises": null,
+      "translated_conclusion": null,
+      "confidence": {
+        "mean_logprob": -0.23488101498826022,
+        "min_logprob": -1.3980748653411865,
+        "perplexity": 1.2647582725017699,
+        "n_tokens": 76
+      },
+      "elapsed_sec": 6.81
+    },
+    {
+      "example_id": "413_nda-3",
+      "story_id": "413_nda-3",
+      "cluster_id": "413",
+      "hypothesis_id": "nda-3",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ConfidentialInfo(x) ∧ ReceivedFrom(x, disclosingParty) → InTangibleForm(x))"
+      ],
+      "translated_conclusion": "∃x (ConfidentialInfo(x) ∧ VerbalConveyance(x))",
+      "confidence": {
+        "mean_logprob": -0.14479472379816402,
+        "min_logprob": -1.0921474695205688,
+        "perplexity": 1.1558022872109806,
+        "n_tokens": 46
+      },
+      "elapsed_sec": 4.38
+    },
+    {
+      "example_id": "413_nda-17",
+      "story_id": "413_nda-17",
+      "cluster_id": "413",
+      "hypothesis_id": "nda-17",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ReceivingParty(x) → ∀y (ConfidentialInfo(y) ∧ ReceivedFrom(x, y) → ¬Copy(x, y) ∨ NecessaryFor(x, y)))"
+      ],
+      "translated_conclusion": "∃x ∃y (ReceivingParty(x) ∧ ConfidentialInfo(y) ∧ ReceivedFrom(x, y) ∧ Copy(x, y) ∧ SomeCircumstances(y))",
+      "confidence": {
+        "mean_logprob": -0.1823557499015922,
+        "min_logprob": -1.0477521419525146,
+        "perplexity": 1.2000410324306743,
+        "n_tokens": 82
+      },
+      "elapsed_sec": 7.13
+    },
+    {
+      "example_id": "413_nda-13",
+      "story_id": "413_nda-13",
+      "cluster_id": "413",
+      "hypothesis_id": "nda-13",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols/arities are used as both relation and function symbols: ConfidentialInformation/1.\n\n\nFatal error:  The following symbols/arities are used as both relation and function symbols: ConfidentialInformation/1",
+      "translated_premises": [
+        "∀x (ReceivingParty(x) → ¬Liable(x, ConfidentialInformation(x)))",
+        "∀x (ConfidentialInformation(x) → (RightfullyReceived(x, thirdParty) ∧ NoConfidentialityObligation(x, thirdParty)))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) → ∃y (ConfidentialInformation(y) ∧ SimilarTo(x, y) ∧ RightfullyReceived(y, thirdParty)))",
+      "confidence": {
+        "mean_logprob": -0.21803490104406117,
+        "min_logprob": -1.0651519298553467,
+        "perplexity": 1.2436304708635078,
+        "n_tokens": 92
+      },
+      "elapsed_sec": 7.89
+    },
+    {
+      "example_id": "446_nda-5",
+      "story_id": "446_nda-5",
+      "cluster_id": "446",
+      "hypothesis_id": "nda-5",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (∀y (Agrees(x, y) ∧ Consideration(x, y) ∧ TradeSecrets(x, y) ∧ NavidecIncorporated(y)) → ShallNotDisclose(x, y))"
+      ],
+      "translated_conclusion": "∃x ∃y (∃z (ConfidentialInformation(x, z) ∧ Employee(y, z) ∧ Some(x, y)))",
+      "confidence": {
+        "mean_logprob": -0.35560469677145395,
+        "min_logprob": -2.301144599914551,
+        "perplexity": 1.4270433219185148,
+        "n_tokens": 81
+      },
+      "elapsed_sec": 7.03
+    },
+    {
+      "example_id": "451_nda-19",
+      "story_id": "451_nda-19",
+      "cluster_id": "451",
+      "hypothesis_id": "nda-19",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "translation_format",
+      "error": "StoryFormatError: duplicate label P2 in model output",
+      "translated_premises": null,
+      "translated_conclusion": null,
+      "confidence": {
+        "mean_logprob": -0.20352607632053366,
+        "min_logprob": -1.0850131511688232,
+        "perplexity": 1.225717119416972,
+        "n_tokens": 105
+      },
+      "elapsed_sec": 8.83
+    },
+    {
+      "example_id": "451_nda-13",
+      "story_id": "451_nda-13",
+      "cluster_id": "451",
+      "hypothesis_id": "nda-13",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (ConfidentialInformation(x) ∧ CanShow(x) → ¬ObligationOfConfidentiality(x))",
+        "ObligationOfConfidentiality(x) → (∃y (ThirdParty(y) ∧ RightfullyDisclosed(x, y)) ∧ ObligationOfConfidentiality(y))"
+      ],
+      "translated_conclusion": "∀x (ConfidentialInformation(x) → (∃y (ThirdParty(y) ∧ SimilarInformation(x, y)) → MayAcquire(x, y)))",
+      "confidence": {
+        "mean_logprob": -0.19838993942937122,
+        "min_logprob": -1.2651416063308716,
+        "perplexity": 1.2194378080072588,
+        "n_tokens": 100
+      },
+      "elapsed_sec": 8.48
+    },
+    {
+      "example_id": "476_nda-18",
+      "story_id": "476_nda-18",
+      "cluster_id": "476",
+      "hypothesis_id": "nda-18",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (PriorWrittenConsent(x, Company) → WithoutPriorWrittenConsent(x, Company))",
+        "∀x (Representative(x) ∧ AwareOfConfidentialInfo(x, Company) → ¬InitiateCommunications(x, Company))",
+        "∀x (Director(x) ∨ Officer(x) ∨ Employee(x) ∧ AwareOfConfidentialInfo(x, Company) → ¬SolicitEmployment(x, Company))",
+        "∀x (PriorWrittenConsent(x, Fox) → WithoutPriorWrittenConsent(x, Fox))",
+        "∀x (Representative(x) ∧ AwareOfConfidentialInfo(x, Fox) → ¬InitiateCommunications(x, Fox))",
+        "∀x (Director(x) ∨ Officer(x) ∨ Employee(x) ∧ AwareOfConfidentialInfo(x, Fox) → ¬SolicitEmployment(x, Fox))"
+      ],
+      "translated_conclusion": "∀x (Representative(x) ∧ AwareOfConfidentialInfo(x, DisclosingParty) → ¬SolicitSomeRepresentatives(x, DisclosingParty))",
+      "confidence": {
+        "mean_logprob": -0.09686225145667686,
+        "min_logprob": -1.7099629640579224,
+        "perplexity": 1.1017086044128326,
+        "n_tokens": 217
+      },
+      "elapsed_sec": 17.52
+    },
+    {
+      "example_id": "476_nda-4",
+      "story_id": "476_nda-4",
+      "cluster_id": "476",
+      "hypothesis_id": "nda-4",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols/arities are used as both relation and function symbols: statedInAgreement/0.\n\n\nFatal error:  The following symbols/arities are used as both relation and function symbols: statedInAgreement/0",
+      "translated_premises": [
+        "∀x (Representative(x) ∧ ReceivingParty(x) → ∀y (ConfidentialInformation(y) → ¬UseForOtherPurpose(x, y)))"
+      ],
+      "translated_conclusion": "∀x (ReceivingParty(x) → ∀y (ConfidentialInformation(y) → (UseForPurpose(x, y, statedInAgreement) ∧ statedInAgreement)))",
+      "confidence": {
+        "mean_logprob": -0.24180669221699647,
+        "min_logprob": -1.5970268249511719,
+        "perplexity": 1.2735479822827516,
+        "n_tokens": 75
+      },
+      "elapsed_sec": 6.6
+    },
+    {
+      "example_id": "493_nda-15",
+      "story_id": "493_nda-15",
+      "cluster_id": "493",
+      "hypothesis_id": "nda-15",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: Grant/5, Grant/6.\n\n\nFatal error:  The following symbols are used with multiple arities: Grant/5, Grant/6",
+      "translated_premises": [
+        "∀x ∀y (Agreement(x) ∧ Party(y) ∧ Contains(x, y) ∧ Information(x) → ¬Grant(x, y, right, title, interest))"
+      ],
+      "translated_conclusion": "∀x (Agreement(x) → ¬Grant(x, ReceivingParty, right, title, interest, ConfidentialInformation))",
+      "confidence": {
+        "mean_logprob": -0.3237591410720461,
+        "min_logprob": -1.874493956565857,
+        "perplexity": 1.3823143242739038,
+        "n_tokens": 67
+      },
+      "elapsed_sec": 5.99
+    },
+    {
+      "example_id": "493_nda-5",
+      "story_id": "493_nda-5",
+      "cluster_id": "493",
+      "hypothesis_id": "nda-5",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: Obligation/3, Obligation/2.\n\n\nFatal error:  The following symbols are used with multiple arities: Obligation/3, Obligation/2",
+      "translated_premises": [
+        "∀x (RecipientParty(x) → ∀y (ConfidentialInfo(x, y) → Obligation(x, y)))",
+        "∀x (RecipientParty(x) → ∀y (ConfidentialInfo(x, y) → ∀z (Representative(z) ∧ NeedsToKnow(x, y, z) → Obligation(x, z, y))))"
+      ],
+      "translated_conclusion": "∃x ∃y ∃z (RecipientParty(x) ∧ ConfidentialInfo(x, y) ∧ Employee(z) ∧ NeedsToKnow(x, y, z))",
+      "confidence": {
+        "mean_logprob": -0.15544724911243274,
+        "min_logprob": -1.4928189516067505,
+        "perplexity": 1.1681803118936105,
+        "n_tokens": 114
+      },
+      "elapsed_sec": 9.69
+    },
+    {
+      "example_id": "521_nda-19",
+      "story_id": "521_nda-19",
+      "cluster_id": "521",
+      "hypothesis_id": "nda-19",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Return(x) ∨ Destruction(x) ∨ ContinuedPossession(x)) → (ConfidentialInfo(x) → (BoundBy(x, ReceivingParty) ∧ BoundBy(x, RepresentativesOfReceivingParty)))"
+      ],
+      "translated_conclusion": "∃x (Obligation(x, Agreement) ∧ SurvivesTermination(x, Agreement))",
+      "confidence": {
+        "mean_logprob": -0.2596493537603757,
+        "min_logprob": -1.326064109802246,
+        "perplexity": 1.296475402729092,
+        "n_tokens": 70
+      },
+      "elapsed_sec": 6.31
+    },
+    {
+      "example_id": "523_nda-10",
+      "story_id": "523_nda-10",
+      "cluster_id": "523",
+      "hypothesis_id": "nda-10",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (¬RequiredByLaw(x) ∧ ¬RequiredByRegulatoryAuthority(x) → (¬Disclose(x) ∧ ¬DirectRepresentatives(x, disclose)))"
+      ],
+      "translated_conclusion": "∀x (Agreed(x) → ¬Disclose(x))",
+      "confidence": {
+        "mean_logprob": -0.2981718476848124,
+        "min_logprob": -1.2219791412353516,
+        "perplexity": 1.347393314406948,
+        "n_tokens": 53
+      },
+      "elapsed_sec": 5.2
+    },
+    {
+      "example_id": "523_nda-5",
+      "story_id": "523_nda-5",
+      "cluster_id": "523",
+      "hypothesis_id": "nda-5",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (Representative(x, y) → Confidential(x, EvaluationMaterials))",
+        "∀x ∀y ∀z ∀w ∀v (Director(x, y) ∨ Officer(x, y) ∨ Employee(x, y) ∨ Affiliate(x, y) ∨ Agent(x, y) ∨ Representative(x, y) ∨ Attorney(x, y) ∨ Accountant(x, y) ∨ FinancialAdvisor(x, y) ∨ Lender(x, y) → (NeedToKnow(x, y, z) → Confidential(z, w)))"
+      ],
+      "translated_conclusion": "∃x ∃y ∃z (Employee(x, y) ∧ Employee(z, y) ∧ Confidential(z, x))",
+      "confidence": {
+        "mean_logprob": -0.18319865526768334,
+        "min_logprob": -1.2677329778671265,
+        "perplexity": 1.2010529798844942,
+        "n_tokens": 144
+      },
+      "elapsed_sec": 12.01
+    },
+    {
+      "example_id": "523_nda-4",
+      "story_id": "523_nda-4",
+      "cluster_id": "523",
+      "hypothesis_id": "nda-4",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: '∈'.  Expected token ')'.\nall x (ConfidentialInformation(x) -> (NotUsedForOtherPurposes(x) & Purpose(x) ∈ {ExclusivePurpose(x), OtherPurposes(x)}))\n                                                                              ^",
+      "translated_premises": [
+        "∀x (EvaluationMaterials(x) → (ExclusivePurpose(x) ∧ NotUsedForOtherPurposes(x)))",
+        "∀x (PossibleTransaction(x) → (NotConsummated(x) → (NotUsedForAnyPurpose(x) ∧ RepresentativesNotUsedForAnyPurpose(x))))",
+        "∀x (PossibleTransaction(x) → (¬RequiredByApplicableLaw(x) ∧ ¬RequiredByRegulatoryAuthority(x) → (PriorWrittenConsent(x) → (NotDiscloseToAnyPerson(x) ∧ NotMakeInquiryAboutCompanyBusiness(x)))))",
+        "∀x (PossibleTransaction(x) → (NotDiscussWithThirdParty(x) ∧ NotOfferEquityParticipation(x)))"
+      ],
+      "translated_conclusion": "∀x (ConfidentialInformation(x) → (NotUsedForOtherPurposes(x) ∧ Purpose(x) ∈ {ExclusivePurpose(x), OtherPurposes(x)}))",
+      "confidence": {
+        "mean_logprob": -0.20431803089483216,
+        "min_logprob": -1.6113277673721313,
+        "perplexity": 1.226688216177996,
+        "n_tokens": 186
+      },
+      "elapsed_sec": 15.14
+    },
+    {
+      "example_id": "526_nda-20",
+      "story_id": "526_nda-20",
+      "cluster_id": "526",
+      "hypothesis_id": "nda-20",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Request(x) ∧ DisclosingParty(x) → ∀y (Information(y) ∧ TangibleForm(y) ∧ InPossession(x, y)) → ReturnOrDestroy(x, y))"
+      ],
+      "translated_conclusion": "∃x (ReceivingParty(x) ∧ ∃y (ConfidentialInformation(y) ∧ InPossession(x, y)) ∧ ¬(ReturnOrDestroy(x, y) → ∀z (ConfidentialInformation(z) ∧ InPossession(x, z))))",
+      "confidence": {
+        "mean_logprob": -0.1741183393230923,
+        "min_logprob": -1.398114800453186,
+        "perplexity": 1.1901964045236781,
+        "n_tokens": 101
+      },
+      "elapsed_sec": 8.62
+    },
+    {
+      "example_id": "543_nda-5",
+      "story_id": "543_nda-5",
+      "cluster_id": "543",
+      "hypothesis_id": "nda-5",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: Bind/4, Bind/3, NeedToKnow/2, NeedToKnow/1.\n\n\nFatal error:  The following symbols are used with multiple arities: Bind/4, Bind/3, NeedToKnow/2, NeedToKnow/1",
+      "translated_premises": [
+        "∀x (Recipient(x) → (Disclose(x, ConfidentialInformation) → (NeedToKnow(x) ∧ Bind(x, employees, contractors) ∨ Advise(x, professionalAdvisors))))",
+        "∀x (Recipient(x) → (Disclose(x, ConfidentialInformation) → (∃y (Employee(y) ∧ NeedToKnow(x, y)) ∨ (∃y (Contractor(y) ∧ NeedToKnow(x, y)) ∧ Bind(x, y, employees, contractors)) ∨ (∃y (ProfessionalAdvisor(y) ∧ NeedToKnow(x, y)) ∧ Advise(x, y)))))"
+      ],
+      "translated_conclusion": "∃x ∃y (Recipient(x) ∧ Employee(y) ∧ Disclose(x, ConfidentialInformation) ∧ Disclose(x, y))",
+      "confidence": {
+        "mean_logprob": -0.1823237208948497,
+        "min_logprob": -1.3280200958251953,
+        "perplexity": 1.2000025969238841,
+        "n_tokens": 161
+      },
+      "elapsed_sec": 13.18
+    },
+    {
+      "example_id": "544_nda-5",
+      "story_id": "544_nda-5",
+      "cluster_id": "544",
+      "hypothesis_id": "nda-5",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: End of input found.  Expected token ')'.\nall x all y (Party(x) & Party(y) -> (Agree(x) & Undertake(x) -> (-Disclose(x, y) & -MakeAvailable(x, y) & -Reproduce(x, y) & -Transmit(x, y) & -Use(x, y)) & (ConfidentialInfo(x) -> (Disclose(x, y) | MakeAvailable(x, y) | Reproduce(x, y) | Transmit(x, y) | Use(x, y)) & (Affiliate(x) & Affiliate(y) -> (Disclose(x, y) | MakeAvailable(x, y) | Reproduce(x, y) | Transmit(x, y) | Use(x, y)) & (Director(x) & Director(y) -> (Disclose(x, y) | MakeAvailable(x, y) | Reproduce(x, y) | Transmit(x, y) | Use(x, y)) & (Officer(x) & Officer(y) -> (Disclose(x, y) | MakeAvailable(x, y) | Reproduce(x, y) | Transmit(x, y) | Use(x, y)) & (Employee(x) & Employee(y) -> (Disclose(x, y) | MakeAvailable(x, y) | Reproduce(x, y) | Transmit(x, y) | Use(x, y)) & (Advisor(x) & Advisor(y) -> (Disclose(x, y) | MakeAvailable(x, y) | Reproduce(x, y) | Transmit(x, y) | Use(x, y))))))\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^",
+      "translated_premises": [
+        "∀x ∀y (Party(x) ∧ Party(y) → (Agree(x) ∧ Undertake(x) → (¬Disclose(x, y) ∧ ¬MakeAvailable(x, y) ∧ ¬Reproduce(x, y) ∧ ¬Transmit(x, y) ∧ ¬Use(x, y)) ∧ (ConfidentialInfo(x) → (Disclose(x, y) ∨ MakeAvailable(x, y) ∨ Reproduce(x, y) ∨ Transmit(x, y) ∨ Use(x, y)) ∧ (Affiliate(x) ∧ Affiliate(y) → (Disclose(x, y) ∨ MakeAvailable(x, y) ∨ Reproduce(x, y) ∨ Transmit(x, y) ∨ Use(x, y)) ∧ (Director(x) ∧ Director(y) → (Disclose(x, y) ∨ MakeAvailable(x, y) ∨ Reproduce(x, y) ∨ Transmit(x, y) ∨ Use(x, y)) ∧ (Officer(x) ∧ Officer(y) → (Disclose(x, y) ∨ MakeAvailable(x, y) ∨ Reproduce(x, y) ∨ Transmit(x, y) ∨ Use(x, y)) ∧ (Employee(x) ∧ Employee(y) → (Disclose(x, y) ∨ MakeAvailable(x, y) ∨ Reproduce(x, y) ∨ Transmit(x, y) ∨ Use(x, y)) ∧ (Advisor(x) ∧ Advisor(y) → (Disclose(x, y) ∨ MakeAvailable(x, y) ∨ Reproduce(x, y) ∨ Transmit(x, y) ∨ Use(x, y))))))"
+      ],
+      "translated_conclusion": "∀x (Employee(x) → (ConfidentialInfo(x) → (Affiliate(x) ∨ Director(x) ∨ Officer(x) ∨ Employee(x) ∨ Advisor(x) → (Disclose(x) ∨ MakeAvailable(x) ∨ Reproduce(x) ∨ Transmit(x) ∨ Use(x)))))",
+      "confidence": {
+        "mean_logprob": -0.0990070265440415,
+        "min_logprob": -1.6306166648864746,
+        "perplexity": 1.1040740573566157,
+        "n_tokens": 388
+      },
+      "elapsed_sec": 30.38
+    },
+    {
+      "example_id": "546_nda-8",
+      "story_id": "546_nda-8",
+      "cluster_id": "546",
+      "hypothesis_id": "nda-8",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "True",
+      "outcome": "correct",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (RequestedToDisclose(x, y) → Notify(x, y))",
+        "∀x ∀y (RequestedToDisclose(x, y) → PromptlyNotify(x, y))"
+      ],
+      "translated_conclusion": "∀x ∀y (RequestedToDisclose(x, y) → Notify(x, y))",
+      "confidence": {
+        "mean_logprob": -0.2026188449838842,
+        "min_logprob": -1.4613667726516724,
+        "perplexity": 1.2246056147085573,
+        "n_tokens": 68
+      },
+      "elapsed_sec": 6.31
+    },
+    {
+      "example_id": "549_nda-20",
+      "story_id": "549_nda-20",
+      "cluster_id": "549",
+      "hypothesis_id": "nda-20",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (Employee(x) → (∀y (ConfidentialInfo(y) → PropertyOf(y, BankingOrganization(x))) ∧ ∀z (Terminated(x, z) → ∀w (ConfidentialInfo(w) → Return(w, FinancialInstitution(x), z)))))",
+        "∀x (Terminated(x, employment) → ∀y (BankingOrganizationDocuments(y) → Return(y, Bank(x), employment)) ∧ ∀y (ConfidentialInfo(y) → Return(y, Bank(x), employment)))"
+      ],
+      "translated_conclusion": "∃x ∃y (ConfidentialInfo(y) ∧ ReceivingParty(x) ∧ (Return(y, x, termination) ∨ Destruction(y, x, termination)))",
+      "confidence": {
+        "mean_logprob": -0.23059889387672047,
+        "min_logprob": -2.006161689758301,
+        "perplexity": 1.2593540035272028,
+        "n_tokens": 146
+      },
+      "elapsed_sec": 12.17
+    },
+    {
+      "example_id": "564_nda-1",
+      "story_id": "564_nda-1",
+      "cluster_id": "564",
+      "hypothesis_id": "nda-1",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x (EvaluationMaterial(x) → (ProvidedTo(x, investor) ∧ ProvidedBy(x, company) ∧ ConnectedTo(x, transaction)))"
+      ],
+      "translated_conclusion": "∀x (ConfidentialInformation(x) → IdentifiedBy(x, disclosingParty))",
+      "confidence": {
+        "mean_logprob": -0.2812372307372208,
+        "min_logprob": -2.017940044403076,
+        "perplexity": 1.3247678423121607,
+        "n_tokens": 52
+      },
+      "elapsed_sec": 5.09
+    },
+    {
+      "example_id": "564_nda-18",
+      "story_id": "564_nda-18",
+      "cluster_id": "564",
+      "hypothesis_id": "nda-18",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: Solicit/3, Solicit/2.\n\n\nFatal error:  The following symbols are used with multiple arities: Solicit/3, Solicit/2",
+      "translated_premises": [
+        "∀x ∀y ∀z (Period(x, eighteenMonths) ∧ Date(x, thisAgreement) ∧ Investor(y) ∧ Company(z) ∧ PriorWrittenConsent(z, y, x) → ¬Solicit(y, z, x))"
+      ],
+      "translated_conclusion": "∀x ∀y (Representative(x, y) ∧ DisclosingParty(y) → ¬Solicit(x, y))",
+      "confidence": {
+        "mean_logprob": -0.3871773927659416,
+        "min_logprob": -2.3212010860443115,
+        "perplexity": 1.472817735312844,
+        "n_tokens": 81
+      },
+      "elapsed_sec": 7.25
+    },
+    {
+      "example_id": "564_nda-5",
+      "story_id": "564_nda-5",
+      "cluster_id": "564",
+      "hypothesis_id": "nda-5",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols are used with multiple arities: Disclosed/1, Disclosed/2.\n\n\nFatal error:  The following symbols are used with multiple arities: Disclosed/1, Disclosed/2",
+      "translated_premises": [
+        "∀x (Confidential(x) ∧ Investor(x) → (¬Disclosed(x) ∧ ∀y (Representative(y) ∧ NeedToKnow(y, x)) → Disclosed(x, y)))",
+        "NeedToKnow(representative, x)",
+        "AbleToEvaluate(representative, x)",
+        "Directed(representative, x)"
+      ],
+      "translated_conclusion": "∃x ∃y (Confidential(x) ∧ Representative(y) ∧ Disclosed(x, y))",
+      "confidence": {
+        "mean_logprob": -0.2356601745876931,
+        "min_logprob": -1.8343002796173096,
+        "perplexity": 1.2657441050613287,
+        "n_tokens": 103
+      },
+      "elapsed_sec": 8.94
+    },
+    {
+      "example_id": "565_nda-4",
+      "story_id": "565_nda-4",
+      "cluster_id": "565",
+      "hypothesis_id": "nda-4",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: ')'.\nall x all y (Party(x) & Party(y) -> (-Restricted(x, y) | (Use(x, y) -> (Infringe(x, y) | PatentRights(x) | TrademarkRights(x) | CopyrightRights(x))))))\n                                                                                                                                                      ^",
+      "translated_premises": [
+        "∀x ∀y (Party(x) ∧ Party(y) → (¬Restricted(x, y) ∨ (Use(x, y) → (Infringe(x, y) ∨ PatentRights(x) ∨ TrademarkRights(x) ∨ CopyrightRights(x))))))"
+      ],
+      "translated_conclusion": "∀x (Party(x) → (Use(x) → Purposes(x)))",
+      "confidence": {
+        "mean_logprob": -0.34141316894894164,
+        "min_logprob": -1.9044182300567627,
+        "perplexity": 1.4069344224073532,
+        "n_tokens": 75
+      },
+      "elapsed_sec": 6.73
+    },
+    {
+      "example_id": "585_nda-2",
+      "story_id": "585_nda-2",
+      "cluster_id": "585",
+      "hypothesis_id": "nda-2",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "translation_format",
+      "error": "StoryFormatError: expected P1..P1, missing=[], extra=[2, 3]",
+      "translated_premises": null,
+      "translated_conclusion": null,
+      "confidence": {
+        "mean_logprob": -0.2398132891309615,
+        "min_logprob": -1.525212287902832,
+        "perplexity": 1.2710118164448805,
+        "n_tokens": 80
+      },
+      "elapsed_sec": 7.27
+    },
+    {
+      "example_id": "591_nda-10",
+      "story_id": "591_nda-10",
+      "cluster_id": "591",
+      "hypothesis_id": "nda-10",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "translation_format",
+      "error": "StoryFormatError: expected P1..P4, missing=[], extra=[5]",
+      "translated_premises": null,
+      "translated_conclusion": null,
+      "confidence": {
+        "mean_logprob": -0.19202876402978292,
+        "min_logprob": -1.8676435947418213,
+        "perplexity": 1.211705369992992,
+        "n_tokens": 180
+      },
+      "elapsed_sec": 14.7
+    },
+    {
+      "example_id": "591_nda-13",
+      "story_id": "591_nda-13",
+      "cluster_id": "591",
+      "hypothesis_id": "nda-13",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "LogicalExpressionException: Unexpected token: ')'.\nall x all y ((iii) & AvailableTo(x, y, Recipient, RepresentativesOfRecipient) & SourceOfInformation(x, y, Provider, RepresentativesOfProvider) & -BoundByConfidentialityAgreement(x, y, Provider, RepresentativesOfProvider)) -> AvailableTo(x, y, Recipient, RepresentativesOfRecipient))\n                                                                                                                                                                                                                                                                                         ^",
+      "translated_premises": [
+        "∀x (EvaluationMaterial(x) → ¬IncludesInformation(x, Recipient, RepresentativesOfRecipient))",
+        "∀x ∀y ((iii) ∧ AvailableTo(x, y, Recipient, RepresentativesOfRecipient) ∧ SourceOfInformation(x, y, Provider, RepresentativesOfProvider) ∧ ¬BoundByConfidentialityAgreement(x, y, Provider, RepresentativesOfProvider)) → AvailableTo(x, y, Recipient, RepresentativesOfRecipient))"
+      ],
+      "translated_conclusion": "∃x ∃y (AvailableTo(x, y, Recipient, RepresentativesOfRecipient) ∧ SimilarTo(x, y, ConfidentialInformation))",
+      "confidence": {
+        "mean_logprob": -0.26665997198741986,
+        "min_logprob": -1.6683709621429443,
+        "perplexity": 1.30559643148636,
+        "n_tokens": 127
+      },
+      "elapsed_sec": 10.47
+    },
+    {
+      "example_id": "600_nda-17",
+      "story_id": "600_nda-17",
+      "cluster_id": "600",
+      "hypothesis_id": "nda-17",
+      "gold_label": "False",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": null,
+      "outcome": "loud_failure",
+      "failure_stage": "fol_parse",
+      "error": "Prover9FatalException: (FATAL)\n%%ERROR: The following symbols cannot be used as atomic formulas, because they are variables: ListFusion.\n\n\nFatal error:  The following symbols cannot be used as atomic formulas, because they are variables: ListFusion",
+      "translated_premises": [
+        "∀x (List(x) → (¬Reproduced(x) ∧ ¬Transferred(x) ∧ ¬Conveyed(x)))",
+        "ListFusion",
+        "∀x (Publication(x) → (¬Copied(x) ∧ ¬Reprinted(x) ∧ ¬Disseminated(x)))"
+      ],
+      "translated_conclusion": "∃x (ConfidentialInformation(x) ∧ (Copy(x) ∧ SomeCircumstances(x)))",
+      "confidence": {
+        "mean_logprob": -0.14652351187475018,
+        "min_logprob": -1.3328630924224854,
+        "perplexity": 1.157802152597635,
+        "n_tokens": 91
+      },
+      "elapsed_sec": 7.77
+    },
+    {
+      "example_id": "611_nda-3",
+      "story_id": "611_nda-3",
+      "cluster_id": "611",
+      "hypothesis_id": "nda-3",
+      "gold_label": "True",
+      "label_space": [
+        "False",
+        "True"
+      ],
+      "predicted_label": "Uncertain",
+      "outcome": "silent_failure",
+      "failure_stage": null,
+      "error": null,
+      "translated_premises": [
+        "∀x ∀y (ConfidentialInfo(x, y) → (MemberOfCEDCGroup(x) ∧ MemberOfCEDCGroup(y) ∧ DisclosedOrMadeAvailable(x, y)))"
+      ],
+      "translated_conclusion": "∃x ∃y (ConfidentialInfo(x, y) ∧ VerballyConveyed(x, y))",
+      "confidence": {
+        "mean_logprob": -0.2263273464975456,
+        "min_logprob": -1.3749274015426636,
+        "perplexity": 1.2539860860528609,
+        "n_tokens": 69
+      },
+      "elapsed_sec": 6.33
+    }
+  ]
+}

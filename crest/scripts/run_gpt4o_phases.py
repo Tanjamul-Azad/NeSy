@@ -117,7 +117,13 @@ def main():
             sample="random",
             sample_seed=args.sample_seed,
             out_path=str(PROJECT_ROOT / "experiments" / "logs"
-                         / f"vanilla_pipeline_{args.dataset}_{tag}_validation{nsuffix}.json"),
+                         # args.split, not a hardcoded "validation": the first
+                         # ContractNLI run wrote its test-split results to a
+                         # file named ..._validation_n100.json, which contradicts
+                         # the payload's own "split": "test" field. A results
+                         # file whose name lies about its provenance is exactly
+                         # the silent corruption this project studies.
+                         / f"vanilla_pipeline_{args.dataset}_{tag}_{args.split}{nsuffix}.json"),
         )
         print(f"\n  cost so far: {harness.cost_report()}")
 
@@ -135,7 +141,7 @@ def main():
             sample="random",
             sample_seed=args.sample_seed,
             out_path=str(PROJECT_ROOT / "experiments" / "logs"
-                         / f"self_refine_{args.dataset}_{tag}_validation{nsuffix}.json"),
+                         / f"self_refine_{args.dataset}_{tag}_{args.split}{nsuffix}.json"),
         )
 
     print("\n" + "=" * 68)
