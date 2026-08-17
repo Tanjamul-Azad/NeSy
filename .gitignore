@@ -12,3 +12,4 @@ __pycache__/
 *.ckpt
 .build/
 contract-nli.zip
+report/fydp.pdf
