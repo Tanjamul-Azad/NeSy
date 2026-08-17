@@ -84,7 +84,18 @@ if hasattr(sys.stdout, "reconfigure"):
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from scipy.stats import beta, binom
+
 from crest.grounding.fol_to_prover9 import check_entailment
+
+
+def _clopper_pearson(k: int, n: int, alpha: float = 0.05):
+    """Exact binomial interval. Used instead of a normal approximation because
+    n here is 10 and k can be 0 or n, where the approximation is meaningless.
+    """
+    lo = beta.ppf(alpha / 2, k, n - k + 1) if k > 0 else 0.0
+    hi = beta.ppf(1 - alpha / 2, k + 1, n - k) if k < n else 1.0
+    return float(lo), float(hi)
 
 # Each entry: the hand-written FOL under both conventions, plus the note
 # explaining what the charitable convention had to add. The `blocker` field
@@ -410,10 +421,27 @@ def run(timeout: int = 30) -> dict:
     counts = {c: sum(r[c]["match"] for r in rows) for c in CONVENTIONS}
     print(f"\n=== ContractNLI hand-formalisation ceiling probe (n={n}) ===")
     for c in CONVENTIONS:
-        print(f"{c:<22} {counts[c]}/{n} ({counts[c] / n:.0%}) reproduce the gold label")
-    print("\nCompare FOLIO's Phase 2.1 gold-FOL ceiling: 81.1% (excluding malformed gold FOL).")
+        k = counts[c]
+        lo, hi = _clopper_pearson(k, n)
+        print(f"{c:<22} {k}/{n} ({k / n:.0%})  95% CI [{lo:.0%}, {hi:.0%}]")
+    # n=10 is small and the intervals say so -- printed rather than left for a
+    # reader to work out, because the point estimate alone would overstate what
+    # this probe establishes.
+    lo70 = binom.cdf(counts["charitable"], n, 0.70)
+    print(f"\nP(observing <= {counts['charitable']}/{n} | true ceiling = 70%) = {lo70:.2f}")
+    print("Compare FOLIO's Phase 2.1 gold-FOL ceiling: 81.1% (excluding malformed gold FOL).")
     print("Phase 2's pre-registered gate: <70% ceiling => do not interpret downstream")
     print("silent-failure numbers from this dataset as translation quality.")
+    print("\nWHAT THIS PROBE DOES AND DOES NOT ESTABLISH, at this n:")
+    print("  - The LITERAL convention clears the gate decisively (CI upper bound well")
+    print("    below 70%): evidence-span premises taken at face value essentially never")
+    print("    entail the gold label.")
+    print("  - The CHARITABLE point estimate sits below the gate, but n is too small to")
+    print("    REJECT a true 70% ceiling. Do not write 'the gate fires' for this arm --")
+    print("    write the point estimate with its interval.")
+    print("  - The five blockers are an existence proof, not a rate estimate, and do not")
+    print("    depend on n: each is a demonstrated case where a CORRECT formalisation")
+    print("    still fails to derive the gold label.")
     print("The spread across conventions is the point: on ContractNLI the ceiling is set")
     print("by the annotation convention, not by the dataset -- so the convention must be")
     print("pre-registered before the pilot, not chosen after seeing model output.")

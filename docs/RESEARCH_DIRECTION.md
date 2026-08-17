@@ -1029,16 +1029,36 @@ through the identical Prover9 grounder:
 `crest/crest/evaluation/contractnli_ceiling_probe.py`, results in
 `crest/experiments/logs/contractnli_ceiling_probe.json`.
 
-| Annotation convention | Gold label reproduced |
-|---|---|
-| **Literal** (each sentence on its own terms, no vocabulary unification, no dropped exceptions, no injected knowledge) | **0/10 (0%)** |
-| **Charitable** (align the hypothesis's generic vocabulary with the NDA's own drafting vocabulary; treat procedural provisos as side-conditions) | **6/10 (60%)** |
-| **Assumption-augmented** (additionally inject whatever unstated legal-context assumption is needed as an explicit premise — what "Know Your Limits" did) | **10/10 (100%)** |
+| Annotation convention | Gold label reproduced | 95% CI (Clopper–Pearson) |
+|---|---|---|
+| **Literal** (each sentence on its own terms, no vocabulary unification, no dropped exceptions, no injected knowledge) | **0/10 (0%)** | [0%, 31%] |
+| **Charitable** (align the hypothesis's generic vocabulary with the NDA's own drafting vocabulary; treat procedural provisos as side-conditions) | **6/10 (60%)** | [26%, 88%] |
+| **Assumption-augmented** (additionally inject whatever unstated legal-context assumption is needed as an explicit premise — what "Know Your Limits" did) | **10/10 (100%)** | [69%, 100%] |
 
-Compare FOLIO: 81.1%. **Phase 2's pre-registered gate says below 70% means
-do not interpret downstream silent-failure numbers as translation quality.
-Under the two defensible conventions, ContractNLI-from-evidence-spans is at
-0% and 60% — the gate fires.**
+Compare FOLIO: 81.1%. Phase 2's pre-registered gate says below 70% means do
+not interpret downstream silent-failure numbers as translation quality.
+
+**Corrected statement of what fires, after computing the intervals — the
+first write-up of this said "the gate fires under both defensible
+conventions", which n=10 does not support:**
+- **Literal: the gate fires decisively.** CI upper bound 31%, far below 70%.
+  Evidence-span premises taken at face value essentially never entail the
+  gold label.
+- **Charitable: the point estimate (60%) is below the gate, but n=10 cannot
+  reject a true 70% ceiling** — P(≤6/10 | p=0.70) = 0.35. Report it as
+  "60%, 95% CI [26%, 88%]", never as "the gate fired". It also cannot reject
+  FOLIO's 81% at conventional levels (p = 0.10), which is the more
+  uncomfortable version of the same limitation and is stated here rather than
+  omitted.
+- **The five blockers below do not depend on n at all.** Each is an existence
+  proof — a demonstrated case where a *correct* formalisation still fails to
+  derive the gold label — not a rate estimate. That part of this result is
+  solid at n=10 and is what the pilot's interpretation actually rests on.
+
+Tightening the rate estimate by hand is not cheap: even n=30 at a true 60%
+would not reject 70% (p ≈ 0.18). So the rate should be treated as
+indicative, and the qualitative blocker taxonomy as the citable finding,
+unless someone commits to a much larger hand-formalisation effort.
 
 **The five structural blockers, which are the actual content of this result**
 (each names why a *correct* translation still fails to derive the gold label):
@@ -1118,10 +1138,11 @@ Committed in advance, per the same discipline as Phase 2's ceiling gate and
 Phase 3.3's kill gate, so the interpretation cannot be chosen after seeing
 the numbers.
 
-- **Convention: charitable, ceiling = 6/10 (60%).** Every ContractNLI
-  accuracy and silent-failure number is reported against that ceiling, never
-  against 100%. The literal (0%) and assumption-augmented (100%) ceilings are
-  reported alongside as the convention-sensitivity range.
+- **Convention: charitable, ceiling = 6/10 (60%, 95% CI [26%, 88%]).** Every
+  ContractNLI accuracy and silent-failure number is reported against that
+  ceiling *with its interval*, never against 100% and never as a bare 60%.
+  The literal (0%) and assumption-augmented (100%) ceilings are reported
+  alongside as the convention-sensitivity range.
 - **Sample:** n=100, seeded random (seed 42) from the `test` split — 82
   Entailment / 18 Contradiction, 65 documents, all 17 hypothesis templates.
   Natural label prevalence is preserved rather than balanced, matching the

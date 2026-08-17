@@ -44,7 +44,13 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from crest.evaluation.stats import mcnemar_exact, proportion_ci_clustered
 
 # From contractnli_ceiling_probe.py -- what a CORRECT formalisation scores.
+# The intervals are carried alongside the point estimates deliberately: at
+# n=10 the charitable arm's CI is [26%, 88%], which cannot reject a true 70%
+# ceiling, and a bare "60%" printed next to model results would imply a
+# precision this probe does not have.
 CEILING = {"literal": 0.00, "charitable": 0.60, "assumption_augmented": 1.00}
+CEILING_CI = {"literal": (0.00, 0.31), "charitable": (0.26, 0.88),
+              "assumption_augmented": (0.69, 1.00)}
 PRIMARY_CEILING = "charitable"
 
 _MODEL_ORDER = ["Llama-3.1-8B", "gpt-4o-mini", "gpt-4o"]
@@ -170,11 +176,18 @@ def main():
     print("=" * 78)
     print("ContractNLI pilot — real NDAs, evidence-span premises, binary True/False")
     print("=" * 78)
+    clo, chi = CEILING_CI[PRIMARY_CEILING]
     print(f"CEILING (hand formalisation, {PRIMARY_CEILING} convention): {ceil:.0%}"
-          f"   [literal {CEILING['literal']:.0%} / assumption-augmented "
-          f"{CEILING['assumption_augmented']:.0%}]")
+          f"  95% CI [{clo:.0%}, {chi:.0%}]  (n=10)")
+    print(f"   other conventions: literal {CEILING['literal']:.0%} "
+          f"[{CEILING_CI['literal'][0]:.0%}, {CEILING_CI['literal'][1]:.0%}] / "
+          f"assumption-augmented {CEILING['assumption_augmented']:.0%} "
+          f"[{CEILING_CI['assumption_augmented'][0]:.0%}, "
+          f"{CEILING_CI['assumption_augmented'][1]:.0%}]")
     print("Read every accuracy below against that ceiling and the majority baseline,")
-    print("NOT against 100% and NOT against the FOLIO numbers.\n")
+    print("NOT against 100% and NOT against the FOLIO numbers. The charitable ceiling's")
+    print("interval is wide enough that it cannot reject a true 70% ceiling -- treat it")
+    print("as indicative, and lean on the blocker taxonomy for the qualitative claim.\n")
 
     for r in rows:
         print(f"--- {r['model']}  ({r['file']})")
