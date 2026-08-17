@@ -1,0 +1,211 @@
+{
+  "n": 10,
+  "matches": {
+    "literal": 0,
+    "charitable": 6,
+    "assumption_augmented": 10
+  },
+  "provenance": "Claude hand formalisation, NOT an independent human's -- feasibility probe only",
+  "rows": [
+    {
+      "example_id": "165_nda-12",
+      "gold": "True",
+      "blocker": "missing_deontic_bridge (exclusion from CI => permission is an unstated legal default)",
+      "literal": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "charitable": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "assumption_augmented": {
+        "predicted": "True",
+        "match": true,
+        "error": null
+      }
+    },
+    {
+      "example_id": "49_nda-4",
+      "gold": "True",
+      "blocker": "vocabulary_alignment (document vocabulary vs generic hypothesis vocabulary)",
+      "literal": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "charitable": {
+        "predicted": "True",
+        "match": true,
+        "error": null
+      },
+      "assumption_augmented": {
+        "predicted": "True",
+        "match": true,
+        "error": null
+      }
+    },
+    {
+      "example_id": "227_nda-5",
+      "gold": "True",
+      "blocker": "existential_hypothesis + unsatisfied_provisos",
+      "literal": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "charitable": {
+        "predicted": "True",
+        "match": true,
+        "error": null
+      },
+      "assumption_augmented": {
+        "predicted": "True",
+        "match": true,
+        "error": null
+      }
+    },
+    {
+      "example_id": "23_nda-10",
+      "gold": "True",
+      "blocker": "obligation_outside_evidence_spans (definition-only premises)",
+      "literal": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "charitable": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "assumption_augmented": {
+        "predicted": "True",
+        "match": true,
+        "error": null
+      }
+    },
+    {
+      "example_id": "30_nda-15",
+      "gold": "True",
+      "blocker": "lexical_variation (confer vs grant) + sentence-fragment premise",
+      "literal": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "charitable": {
+        "predicted": "True",
+        "match": true,
+        "error": null
+      },
+      "assumption_augmented": {
+        "predicted": "True",
+        "match": true,
+        "error": null
+      }
+    },
+    {
+      "example_id": "493_nda-15",
+      "gold": "True",
+      "blocker": "dropped_exception_clause (gold-label defensibility question)",
+      "literal": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "charitable": {
+        "predicted": "True",
+        "match": true,
+        "error": null
+      },
+      "assumption_augmented": {
+        "predicted": "True",
+        "match": true,
+        "error": null
+      }
+    },
+    {
+      "example_id": "48_nda-2",
+      "gold": "False",
+      "blocker": "needs_world_knowledge_witness (open-world: no non-technical instance assertable)",
+      "literal": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "charitable": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "assumption_augmented": {
+        "predicted": "False",
+        "match": true,
+        "error": null
+      }
+    },
+    {
+      "example_id": "446_nda-5",
+      "gold": "False",
+      "blocker": "open_world_permission_gap (¬PriorWrittenPermission not assertable)",
+      "literal": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "charitable": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "assumption_augmented": {
+        "predicted": "False",
+        "match": true,
+        "error": null
+      }
+    },
+    {
+      "example_id": "46_nda-2",
+      "gold": "False",
+      "blocker": "needs_ontological_axiom (financial information is not technical information)",
+      "literal": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "charitable": {
+        "predicted": "False",
+        "match": true,
+        "error": null
+      },
+      "assumption_augmented": {
+        "predicted": "False",
+        "match": true,
+        "error": null
+      }
+    },
+    {
+      "example_id": "564_nda-1",
+      "gold": "False",
+      "blocker": "definition_scope_read_as_existence_claim",
+      "literal": {
+        "predicted": "Uncertain",
+        "match": false,
+        "error": null
+      },
+      "charitable": {
+        "predicted": "False",
+        "match": true,
+        "error": null
+      },
+      "assumption_augmented": {
+        "predicted": "False",
+        "match": true,
+        "error": null
+      }
+    }
+  ]
+}
