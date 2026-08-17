@@ -735,6 +735,44 @@ now done; remaining concrete tasks unchanged: Cohen's κ helper in
 bucket onto the 9-category schema, then computing a real κ against
 Claude's and Gemini's independent passes.
 
+---
+
+### Cohen's κ implemented and computed on the full 72-case Claude-vs-Gemini overlap (2026-08-17)
+
+`cohens_kappa()` added to `crest/crest/evaluation/stats.py`, matching the
+module's existing dataclass-result style, verified against a hand-computed
+textbook example (po=0.70, pe=0.50, κ=0.40 — exact match) before use on
+real data.
+
+**Result on all 72 cases (Claude's full reference set — the original 19
+from step 2 plus the fresh 53 — vs Gemini's full 72): κ = 0.690
+("substantial"), po = 0.736, pe = 0.150.** This clears the project's
+pre-registered κ ≥ 0.6 target, on the full case set rather than just the
+19-case overlap computed earlier.
+
+**19 of 72 cases disagree.** Three (C064, C065, C066) were already checked
+against raw FOL in the earlier Gemini cross-check and confirmed as Gemini
+errors (a real fusion claim that doesn't hold up against the actual
+predicates used) — Claude's `generic_bare_plural` label is the verified-
+correct one there. The remaining 16 disagreements are not yet individually
+checked; most involve Claude's `OTHER` category (used for cases that didn't
+cleanly fit the 9-way schema) against a more specific Gemini label — a
+natural place for real disagreement to live, not necessarily an error on
+either side, and worth resolving once the human's category assignments are
+available for a three-way comparison.
+
+**This is still not a substitute for step 4's human IAA requirement** — it
+remains an AI-vs-AI comparison (Claude vs Gemini), exactly the caveat
+already on record from the original 19-case check. What's new here is that
+it now covers the complete 72-case set, and gives a concrete, code-verified
+number rather than a hand-computed one on a subset.
+
+**Remaining task before step 4 can close:** map the human annotator's
+bucket assignments (🟥/🟨/🟢, now individually verified — see the two
+verification files above) onto the same 9-category schema, so a genuine
+three-way comparison (human vs Claude vs Gemini) and a real human-anchored
+κ can be computed. This is the one piece of step 4 not yet done.
+
 ### Does CREST remain a valid thing to try here?
 
 Yes — if the second (legal/policy) dataset confirms the same
