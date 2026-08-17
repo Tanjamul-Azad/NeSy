@@ -773,6 +773,59 @@ verification files above) onto the same 9-category schema, so a genuine
 three-way comparison (human vs Claude vs Gemini) and a real human-anchored
 κ can be computed. This is the one piece of step 4 not yet done.
 
+---
+
+### Three-way κ computed — but with a critical caveat that keeps step 4 open (2026-08-17)
+
+Full computation and per-case data: `crest/annotation/kappa_computation_full72.md`.
+
+Claude mapped all 72 of the human's free-form prose diagnoses onto the
+9-category schema (the human never picked a category name directly — both
+passes are prose, not a selection from `guidelines.md`'s list) and computed:
+
+| Pair | κ | interpretation |
+|---|---|---|
+| Human vs Claude | 0.826 | almost perfect |
+| Human vs Gemini | 0.604 | substantial |
+| Claude vs Gemini | 0.690 | substantial |
+
+**These "Human vs X" numbers must not be cited as validated IAA.** Claude
+sits on both sides of the comparison — the human-side labels are Claude's
+own interpretation of the human's text, not the human's own category
+choice. This is vulnerable to exactly the confirmation-bias risk this
+project's rigor standard exists to catch, and is explicitly flagged as
+unusable for the paper in `kappa_computation_full72.md`. The only valid use
+of this pass: it's a sanity check that the human's diagnoses, once put in
+the schema's vocabulary, land in a similar neighborhood to Claude's and
+Gemini's own labels — a mild positive signal about the schema's coverage,
+not evidence of independent agreement.
+
+**A real, citable κ still requires:** giving the human the 9 category names
+directly (already in `guidelines.md`) and having them pick one per case
+themselves, with no Claude-authored mapping in between. **Step 4 remains
+open until that happens** — this is now the single, well-defined remaining
+task, not a vague "needs more work."
+
+**One important self-correction surfaced while doing this mapping:** the
+earlier `needs_scrutiny_bucket_verification.md` "Faithful" verdicts for
+C065 and C066 only checked conclusion-formula equivalence, missing that
+both share the same cancer-story premises as C021/C045, which already
+carry the confirmed `SevereCancer(bileDuctCancer)` ground-fact bug
+(`generic_bare_plural`). Corrected: C065/C066 are real failures. **Only 3
+cases across the full 72 (C003, C068, C069) are now confirmed genuinely
+translation-faithful with a still-wrong verdict — down from the previously
+reported 5.** Both verification files have been updated with this
+correction.
+
+**Also worth carrying into the taxonomy discussion:** in Claude's mapping
+of the human's diagnoses, `OTHER` was the single largest category (12/72,
+17%) — a sign the 9-category schema doesn't yet cleanly name several
+recurring mechanisms independently spotted by both Claude's and the
+human's passes (constraint-to-tautology collapse, conclusion-polarity
+pre-judgment, negation-scope errors, biconditional over-strengthening).
+Worth considering a schema expansion before the paper's taxonomy section is
+finalized, once the real (human-direct) category labels are in hand.
+
 ### Does CREST remain a valid thing to try here?
 
 Yes — if the second (legal/policy) dataset confirms the same

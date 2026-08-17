@@ -7,7 +7,24 @@ checking." The human's own proposed test for this bucket was exactly
 right — "check what worlds satisfy the formula, don't just eyeball whether
 it looks different" — it was applied here rigorously, case by case.
 
-## Result: 12 of 15 are confirmed real failures; 3 are genuinely faithful/equivalent
+## ⚠️ Correction (2026-08-17, later same day): C065/C066 verdict was too narrow
+
+The table below originally marked C065 and C066 "✅ Faithful" based only on
+checking whether their *conclusion* formulas are logically equivalent to
+gold's. That check was correct as far as it went, but incomplete: both
+cases share the same cancer-story premises as C021/C045, which were already
+confirmed elsewhere to contain the `SevereCancer(bileDuctCancer)`
+ground-fact-instead-of-universal-rule bug (`generic_bare_plural`). That
+premise-level bug is present in C065's and C066's own premises too — a
+conclusion-only equivalence check cannot catch a bug that lives in the
+premises. **Corrected verdict: C065 and C066 are real `generic_bare_plural`
+failures, not faithful translations.** See
+`crest/annotation/kappa_computation_full72.md` for where this was caught.
+Only C003, C068, and C069 remain confirmed genuinely faithful across the
+entire 72-case set (not 5, as originally reported here and in
+`faithful_bucket_verification.md`).
+
+## Result: 12 of 15 are confirmed real failures; 3 are genuinely faithful/equivalent (see correction above — now effectively 13/15, with C065/C066 reclassified)
 
 | Case | Model | Story | Verdict | Reasoning |
 |---|---|---|---|---|
@@ -24,8 +41,8 @@ it looks different" — it was applied here rigorously, case by case.
 | C045 | gpt-4o-mini | Cancer | 🟥 FAIL | Conclusion is `(A∧(B∨C)) ∨ (B∧C)` where gold is `A∧(B∨C)`. The second disjunct omits `A` (`Cholangiocarcinoma`), so when `B∧C` holds but `A` is false, the LLM's formula is true while gold's is false — a genuine weakening, not the harmless redundancy it resembles at a glance. |
 | C046 | gpt-4o-mini | Olympics | 🟥 FAIL | Three separate, mutually disconnected constants used for what should be one entity: `LastSummerOlympicGames(wasInTokyo)` (premise), `WonMostMedals(unitedStates, tokyo)` (premise), `WonMostMedals(unitedStates, lastSummerOlympicGames)` (conclusion) — worse than the coreference failure already known for this story (C022/C046/C067 family); this version has three ungrounded symbols instead of two. |
 | C058 | gpt-4o | Picuris Mountains | 🟥 FAIL | Same missing-fact bug as C037 (`Mine(hardingPegmatiteMine)` never asserted), confirmed present even in the flagship gpt-4o model on this story — cross-model recurrence of the "precondition injection without instantiation" pattern already dominant in the 🟢 bucket. |
-| C065 | gpt-4o | Cancer (conditional variant) | ✅ Faithful | LLM's `(P∨Q)→(P∧R)` is logically identical to gold's `¬(P∨Q)∨(P∧R)` via material-conditional equivalence (`A→B ≡ ¬A∨B`) — exact match, not just similar. |
-| C066 | gpt-4o | Cancer (same story as C045/C021) | ✅ Faithful | Conclusion is `(A∧(B∨C)) ∨ (A∧B∧C)` — here the second disjunct *does* include `A`, so it's implied by the first disjunct whenever it's true; the whole formula reduces to exactly `A∧(B∨C)` = gold. Same surface pattern as C045 (an "extra disjunct"), opposite verdict — confirms the human's "check case by case, not by formula length" instinct was correct, it just hadn't been carried through consistently. |
+| C065 | gpt-4o | Cancer (conditional variant) | 🟥 FAIL (corrected) | Conclusion formula alone is logically identical to gold's via `A→B≡¬A∨B` — but the shared cancer-story **premises** include `SevereCancer(bileDuctCancer)` as a ground fact (same bug as C021/C045), so the case as a whole is a real `generic_bare_plural` failure. Original "Faithful" verdict only checked the conclusion, missing the premise-level bug — see correction note above. |
+| C066 | gpt-4o | Cancer (same story as C045/C021) | 🟥 FAIL (corrected) | Conclusion formula reduces to exactly gold's via a redundant disjunct — but same premise-level `SevereCancer(bileDuctCancer)` bug as C065/C021/C045 makes the case a real failure overall. Original "Faithful" verdict was conclusion-only; see correction note above. |
 
 ## Cross-cutting notes
 
@@ -49,10 +66,10 @@ schema covers it only by default.
 ## Combined picture across both verification passes
 
 - 🟢 "Faithful" bucket (20 cases): 18 real failures, 2 confirmed faithful
-- 🟨 "Needs scrutiny" bucket (15 cases): 12 real failures, 3 confirmed faithful
-- **Combined: 30 of 35 story-level "looks okay" verdicts did not survive a
-  derivation-level check.** Only 5 cases across both buckets (C003, C065,
-  C066, C068, C069) are confirmed genuinely translation-faithful with a
+- 🟨 "Needs scrutiny" bucket (15 cases): 13 real failures, 2 confirmed faithful (corrected — see note above)
+- **Combined: 31 of 35 story-level "looks okay" verdicts did not survive a
+  derivation-level check.** Only 3 cases across both buckets (C003, C068,
+  C069) are confirmed genuinely translation-faithful with a
   still-wrong pipeline verdict — the actual, small set of candidates for a
   non-translation (solver-side or otherwise unexplained) silent failure, if
   any exist at all in this dataset.
