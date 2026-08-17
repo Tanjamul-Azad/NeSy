@@ -691,6 +691,50 @@ section above (Cohen's κ helper in stats.py, category-schema mapping,
 verifying the remaining 🟨 "needs scrutiny" cases) still stands; this
 verification pass covers the 🟢 bucket specifically, not the whole 72.
 
+---
+
+### Interim: 🟨 "needs scrutiny" bucket also verified (2026-08-17, same day)
+
+Same derivation-tracing method applied to the human's 15 🟨 cases (formula
+differs from gold, equivalence not obviously resolved either way). Full
+results: `crest/annotation/needs_scrutiny_bucket_verification.md`.
+
+**Result: 12 of 15 are confirmed real translation failures; 3 (C003, C065,
+C066) are confirmed genuinely faithful/logically equivalent to gold.**
+
+**Two findings worth carrying forward:**
+1. **A new failure mechanism, distinct from anything in the existing
+   9-category taxonomy: constraint-to-tautology collapse.** C005 and C020
+   both preserve an operator syntactically (⊕, or a compound implication)
+   but restructure the surrounding formula so it becomes a logical
+   tautology — true under every truth assignment, verified by full
+   truth-table check, contributing zero actual constraint. This is more
+   severe than `xor_to_or` (which weakens a constraint but still
+   constrains something) — here the constraint vanishes entirely while
+   still reading as if it encodes one. Worth a dedicated category.
+2. **Cross-model confirmation of the "precondition injection without
+   instantiation" pattern found in the 🟢-bucket check**: `Mine(...)` is
+   never asserted in both the gpt-4o-mini (C037) *and* the gpt-4o (C058)
+   versions of the Picuris Mountains story — the same bug in the
+   flagship model, not just the weaker ones.
+
+**Combined picture across both verification passes (🟢 + 🟨, 35 cases
+total):** 30 of 35 "looks faithful or ambiguous" story-level verdicts did
+not survive a derivation check — only 5 cases (C003, C065, C066, C068,
+C069) across the entire 72-case set are confirmed genuinely
+translation-faithful with a still-wrong pipeline verdict. This is now a
+strong, independently-verified answer to the original worry that silent
+failure might be partly a solver-side phenomenon: **it overwhelmingly
+is not**. The 5 remaining faithful-but-wrong cases are too few to
+characterize a distinct non-translation failure mode — flagged as an open
+question for the paper, not resolved.
+
+**Plan remains paused at step 4** — verification of both non-🟥 buckets is
+now done; remaining concrete tasks unchanged: Cohen's κ helper in
+`stats.py`, mapping the (now corrected) bucket assignments plus the 🟥
+bucket onto the 9-category schema, then computing a real κ against
+Claude's and Gemini's independent passes.
+
 ### Does CREST remain a valid thing to try here?
 
 Yes — if the second (legal/policy) dataset confirms the same
