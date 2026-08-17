@@ -933,8 +933,69 @@ is planned.
 **Step 4 is now complete**: a validated (κ=0.725, human-vs-Claude)
 9-category taxonomy exists, with full reasoning trails, raw-FOL
 verification on the disputed cases, and an honest, documented
-reconciliation process. Proceeding to step 5 (schema-consistency detector
-prototype) is now unblocked.
+reconciliation process.
+
+---
+
+## Sequential plan, updated 2026-08-17 — ContractNLI pilot reinserted before the detector step
+
+The original 6-step plan only did a *feasibility* check on ContractNLI
+(step 3, done — loader built and structurally validated, zero model runs).
+Tanjamul has now asked for the actual pilot run to be scheduled before the
+detector prototype, not after — reasoning: ContractNLI is the paper's
+single biggest remaining gap (a second naturalistic dataset to avoid a
+"single-dataset artifact" dismissal), and knowing whether the capability×
+language-type gap replicates there should inform how the detector is
+scoped, not be discovered after the detector is already built.
+
+**Revised order from here: step 5 = ContractNLI pilot run (NEXT) → step 6 =
+schema-consistency detector prototype → step 7 = paper draft.**
+
+### Step 5 — ContractNLI pilot run: exact plan for the next session
+
+**Tanjamul wants to start this in a NEW chat session** — everything needed
+to pick this up cold is recorded here.
+
+- **Models: both Llama-3.1-8B and the GPT API** (matches the exact three-
+  model setup already used for the FOLIO study — Llama-3.1-8B run locally/
+  via existing harness, gpt-4o-mini and/or gpt-4o via the OpenAI API). Use
+  whichever specific GPT model(s) the existing FOLIO harness config already
+  targets, for a clean apples-to-apples comparison with the FOLIO numbers —
+  check `crest/crest/inference/` and `crest/experiments/` for the exact
+  model identifiers already wired up before assuming.
+- **Sample size:** n=50–100, per the original recommendation in the
+  ContractNLI feasibility section above (§3.5) — small deliberate pilot,
+  not a full run, since the goal is "does the gap replicate at all," not a
+  publication-grade full-dataset result yet.
+- **Pipeline:** reuse the existing `crest/crest/evaluation/vanilla_pipeline.py`-
+  style pipeline unchanged, swapping in `crest/data/loaders/contractnli_loader.py`
+  (already built and structurally tested — 4,371/614/1,188 usable
+  Entailment/Contradiction examples across train/dev/test, binary
+  True/False labels only, NOT 3-way like FOLIO — this is a known,
+  documented limitation, not a bug to fix first).
+- **Known open design decisions already flagged in the loader's docstring,
+  still unresolved, will need a call before/during this run:**
+  1. NotMentioned/"Uncertain" examples are excluded (no natural
+     evidence-span analogue) — the pilot will necessarily be a binary
+     (True/False) study, unlike FOLIO's 3-way one. State this explicitly
+     when reporting results, don't let it read as an oversight.
+  2. Clustering axis for `stats.py`'s bootstrap CI must be document identity
+     and/or hypothesis-template identity, NOT `story_id` (`story_id`
+     doesn't mean the same thing here as in FOLIO/ProofWriter/PrOntoQA) —
+     not yet wired into `stats.py`, needs doing as part of this step, not
+     assumed to already work.
+- **Security reminder carried over from earlier work on this project:
+  never touch, print, or log API keys/credentials directly** — whatever
+  key-handling pattern the existing FOLIO harness already uses (env vars,
+  presumably) should be reused as-is, not modified or exposed.
+- **What "done" looks like for this step:** the same style of table already
+  in §0 of this document (accuracy + silent-failure rate per model, with
+  McNemar/clustered-CI stats per `stats.py`'s existing reporting rule) but
+  for ContractNLI instead of FOLIO — answering specifically: does the
+  capability×language-type interaction (frontier model solves synthetic,
+  struggles on naturalistic) replicate on real legal text, or not? Either
+  answer is a reportable, useful result — a negative result here (gap
+  doesn't replicate) is scientifically valuable too, not a failed pilot.
 
 ### Does CREST remain a valid thing to try here?
 
