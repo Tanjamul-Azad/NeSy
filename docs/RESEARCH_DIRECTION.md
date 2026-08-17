@@ -1092,12 +1092,73 @@ decide how to run the pilot; it is **not** citable as a human-verified
 ceiling. A human should re-formalise the same 10 cases independently before
 any ceiling number from it appears in the paper.
 
-**Decision required before spending API budget** — the pilot as specified
-would measure the task's formalisability, not the models' translation
-quality, and both Llama and GPT-4o would collapse toward Uncertain for
-reasons that have nothing to do with the capability×language-type question.
-Options are on the table with Tanjamul; step 5 is paused at this gate, not
-abandoned.
+**Decision taken 2026-08-17 (Tanjamul): run the pilot anyway.** Reasoning, in
+his words: ContractNLI is a real-life dataset, so run it the same way as the
+others, surface the limitations, and let the methodology framework address
+them afterwards — which is the plan the project has followed throughout.
+Recorded as his call after the ceiling result was put in front of him, not a
+decision made in ignorance of it.
+
+**One correction that must travel with that decision, stated in the paper:**
+of the five blockers, **CREST's detect-and-repair layer can address exactly
+one** — blocker 5 (`vocabulary_alignment` / `lexical_variation`), which is
+predicate-schema divergence and squarely CREST's target phenomenon. Blockers
+1–4 are not translation errors at all: the required information is absent
+from the input (1, 3) or the formalism cannot express the inference (2, 4).
+No detector-and-repair layer over NL→FOL fixes those; they need a different
+input (document-level retrieval), a different formalism (deontic/defeasible
+logic), or assumption injection (which is unfalsifiable). Claiming CREST
+"fixes ContractNLI's limitations" without this split would be an overclaim a
+reviewer will catch immediately. Running the pilot is what turns this split
+from an argument into a measurement.
+
+### Step 5 pilot — PRE-REGISTRATION (written before any model output existed)
+
+Committed in advance, per the same discipline as Phase 2's ceiling gate and
+Phase 3.3's kill gate, so the interpretation cannot be chosen after seeing
+the numbers.
+
+- **Convention: charitable, ceiling = 6/10 (60%).** Every ContractNLI
+  accuracy and silent-failure number is reported against that ceiling, never
+  against 100%. The literal (0%) and assumption-augmented (100%) ceilings are
+  reported alongside as the convention-sensitivity range.
+- **Sample:** n=100, seeded random (seed 42) from the `test` split — 82
+  Entailment / 18 Contradiction, 65 documents, all 17 hypothesis templates.
+  Natural label prevalence is preserved rather than balanced, matching the
+  FOLIO protocol; the imbalance is handled by reporting the baseline, not by
+  resampling.
+- **Baselines printed beside every accuracy figure:** majority class 82.0%
+  on this sample (81.5% on the full test split), chance 50%. FOLIO's
+  majority class was 35.5%, so ContractNLI accuracy is NOT comparable to
+  FOLIO accuracy without these numbers.
+- **Task shape:** binary (True/False), not 3-way — NotMentioned is excluded
+  by the loader (see §Step 3). A predicted `Uncertain` is therefore always
+  scored wrong, and always as `under_determination`.
+- **Clustering:** bootstrap CIs computed twice, clustered by source NDA
+  (`cluster_id`) and by hypothesis template (`hypothesis_id`), with the wider
+  (more conservative) interval reported as the headline.
+- **Models:** Llama-3.1-8B (Kaggle), gpt-4o-mini, gpt-4o — the same three as
+  FOLIO, identical prompt (v3-story-fewshot, FOLIO demonstrations, unchanged
+  and unadapted to the legal domain), identical parser, identical Prover9
+  grounder.
+- **Pre-registered predictions, so the result can falsify them:**
+  1. Under-determination will dominate for **all three** models, and the
+     Llama-vs-gpt-4o gap on the silent-failure endpoint will be small or
+     absent — because a ≤60% ceiling caps every arm alike.
+  2. If that holds, the honest conclusion is **"the capability×language-type
+     interaction cannot be tested on ContractNLI-as-FOL"** — NOT "the gap
+     does not replicate on legal text". Those are different claims and only
+     the first is supported by a floor effect.
+  3. A gpt-4o accuracy meaningfully above the 60% charitable ceiling would
+     mean the models are exploiting something the hand formalisation missed
+     — in that case the probe is wrong and gets redone, rather than the
+     result being kept because it is flattering.
+- **What is reportable either way:** the per-blocker breakdown of where each
+  model's FOL fails, which is the input to the CREST-can-fix-1-of-5 split
+  above.
+- **Not run:** Self-Refine on ContractNLI. It is already falsified across the
+  full FOLIO/ProofWriter/PrOntoQA × 3-model matrix, and running it against a
+  60% ceiling would spend budget to produce another uninterpretable cell.
 
 **Separately blocking, unrelated to the science:** the `OPENAI_API_KEY` in
 the environment now returns HTTP 401 (invalid key). No GPT run can proceed
