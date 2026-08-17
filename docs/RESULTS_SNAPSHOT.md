@@ -37,6 +37,64 @@ everywhere (kill gate fired); under-determination is what persists on FOLIO.
 
 ---
 
+## 1b. ContractNLI pilot (added 2026-08-17) — real NDAs, and a floor, not a data point
+
+**Read this table only with its ceiling.** ContractNLI ships no gold FOL, so
+`crest/crest/evaluation/contractnli_ceiling_probe.py` hand-formalised 10 cases
+to measure what a *correct* translation scores: **0% under a literal
+convention, 60% [26%, 88%] under a charitable one, 100% if unstated legal
+assumptions may be injected**. FOLIO's comparable ceiling is 81.1%. Majority
+class here is 82% (FOLIO's was 35.5%); the task is binary, so `Uncertain` is
+always wrong and always under-determination.
+
+| dataset | model | n grade | accuracy | silent | wrong_dir | under_det | loud |
+|---|---|---|---|---|---|---|---|
+| contractnli | Llama-3.1-8B | 56 | 7% [0,14] | **93%** [86,100] | 2% | 91% | 44 |
+| contractnli | gpt-4o-mini | 86 | 0% [0,0] | **100%** [100,100] | 0% | 100% | 14 |
+| contractnli | gpt-4o | 85 | 1% [0,4] | **99%** [96,100] | 0% | 99% | 15 |
+
+n=100 seeded from the test split, 65 NDAs, all 17 hypothesis templates. CIs are
+the wider of document-clustered and hypothesis-clustered bootstraps. Paired
+McNemar on accuracy finds no significant difference between any pair
+(p=0.125 / 0.25 / 1.0).
+
+**Pre-registered conclusion, and the wording matters:** all three models sit at
+the *literal* ceiling, so **the capability × language-type interaction cannot
+be tested on ContractNLI-as-FOL** — which is NOT the same claim as "the gap
+does not replicate on legal text". A floor effect licenses only the first.
+
+**Three findings that survive the floor and are worth reporting:**
+
+1. **The failure inverts the FOLIO visibility story.** Llama is *significantly*
+   better on the not-silent endpoint (p=3.1e-07 vs gpt-4o-mini, 9.4e-07 vs
+   gpt-4o) — but purely because 44% of its output is unparseable and therefore
+   loud. The frontier models fail **invisibly** on 99–100% of gradeable
+   examples. On legal text the capable models are the quiet ones.
+2. **The dominant mechanical cause is intra-example predicate naming
+   inconsistency** — CREST's exact target phenomenon. Measured in
+   `contractnli_blocker_attribution.py`: the share of silent failures whose
+   conclusion predicates appear *nowhere* in their own premises, making a
+   proof unreachable by construction, is **21% (Llama) / 47% (gpt-4o-mini) /
+   36% (gpt-4o)**. The pairs are near-misses, not confusions about law:
+   `GrantsRights` vs `GrantsRight`, `ConferRights` vs `GrantRights`,
+   `VerballyConveyed` vs `ConveyedVerbally` — the same relation named two ways
+   inside a single prompt.
+3. **Of the five blockers the ceiling probe identified, exactly one is
+   translation-level** and therefore addressable by a detect-and-repair layer.
+   The other four (obligation outside the evidence spans, open-world permission
+   gap, absent world-knowledge witness, missing deontic bridge) defeat a
+   *perfect* translation. Any claim that CREST "fixes ContractNLI" must be
+   scoped to the first.
+
+Caveat on comparing the disjointness rates across models: Llama's 21% is
+computed over a pool from which its 44 loud failures have already been
+removed, so it is not directly comparable to the frontier models' rates.
+
+Cost: $0.32 total (gpt-4o-mini $0.02, gpt-4o $0.30); the Llama arm ran on
+Kaggle.
+
+---
+
 ## 2. Self-Refine falsification gate (paired, McNemar exact)
 
 Endpoint p is on the not-silent-failure outcome; p > 0.05 = Self-Refine does

@@ -1188,6 +1188,69 @@ handling is unchanged.
 
 ---
 
+### Step 5 RESULT — all three arms run, pre-registered prediction confirmed (2026-08-17)
+
+Full table with CIs: `docs/RESULTS_SNAPSHOT.md` §1b. Raw runs:
+`crest/experiments/logs/vanilla_pipeline_contractnli_*_test_n100.json`.
+Analysis: `contractnli_pilot_summary.py`, `contractnli_blocker_attribution.py`.
+
+| model | accuracy (gradeable) | silent | under-det | loud |
+|---|---|---|---|---|
+| Llama-3.1-8B | 7% [0,14] | 93% | 91% | 44 |
+| gpt-4o-mini | 0% [0,0] | 100% | 100% | 14 |
+| gpt-4o | 1% [0,4] | 99% | 99% | 15 |
+
+Majority class 82%. Charitable ceiling 60% [26,88]; literal ceiling 0%.
+**Pre-registered prediction 1 confirmed:** under-determination dominates for
+all three, and no pair differs significantly on accuracy (p = 0.125 / 0.25 /
+1.0). **Pre-registered falsifier not triggered:** no model came near the 60%
+ceiling, so the hand formalisation stands rather than needing a redo.
+**Pre-registered wording therefore applies:** the capability × language-type
+interaction *cannot be tested* on ContractNLI-as-FOL. It is not evidence that
+the gap fails to replicate on legal text.
+
+**Why the models land exactly at the literal ceiling — verified by reading
+their FOL, not inferred.** They formalise each sentence in its own vocabulary
+and never unify it across the prompt. `11_nda-15`: premise `GrantsRights(x)`,
+conclusion `GrantsRight(agreement, receivingParty, confidentialInformation)`.
+`30_nda-15`: premise `ConferRights`, conclusion `GrantRights`. `8_nda-3`:
+premise `Disclose`, conclusion `ConveyedVerbally`. The models behave like the
+probe's literal annotator, whose ceiling is 0%.
+
+**Quantified, since this is the part that feeds step 6.** Share of silent
+failures whose conclusion predicates appear nowhere in their own premises —
+i.e. unreachable by construction, no derivation possible regardless of
+everything else: **Llama 21%, gpt-4o-mini 47%, gpt-4o 36%**. This is a lower
+bound on vocabulary-driven failure and it is large. It is also precisely
+predicate-schema divergence, the phenomenon CREST's detector targets, showing
+up as the dominant mechanical cause on real legal text. (Llama's 21% is not
+directly comparable — its 44 loud failures were removed from the pool first.)
+
+**Three results that survive the floor:**
+1. The FOLIO visibility story inverts here. Llama is significantly better on
+   the not-silent endpoint (p = 3.1e-07 / 9.4e-07) only because 44% of its
+   output is unparseable, i.e. loud. The frontier models fail invisibly on
+   99–100% of gradeable examples. On legal text, capability buys silence.
+2. Predicate naming inconsistency inside a single prompt is the dominant
+   mechanical failure — near-misses (`GrantsRight`/`GrantsRights`), not
+   confusion about law.
+3. The CREST-addressable share is now a measured number rather than an
+   argument: one blocker of five, covering 21–47% of silent failures by the
+   lower-bound test.
+
+**What this means for the paper.** ContractNLI does *not* close the
+second-naturalistic-dataset gap — it cannot, at this ceiling. What it does
+provide is (a) a documented, quantified reason why the obvious second dataset
+does not work, which is a genuine methodological contribution and exactly the
+dataset-selection rigor reviewers ask for, and (b) the strongest available
+evidence that CREST's target phenomenon is the dominant mechanical failure in
+the register where symbolic reasoning is actually needed. The
+second-naturalistic-dataset gap remains open and still needs a decision
+(SARA's hand-written Prolog formalisations remain the leading candidate,
+because a gold formalisation means a real ceiling exists by construction).
+
+---
+
 ### Does CREST remain a valid thing to try here?
 
 Yes — if the second (legal/policy) dataset confirms the same

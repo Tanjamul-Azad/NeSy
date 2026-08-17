@@ -1,0 +1,126 @@
+{
+  "ceiling": {
+    "literal": 0.0,
+    "charitable": 0.6,
+    "assumption_augmented": 1.0
+  },
+  "rows": [
+    {
+      "file": "vanilla_pipeline_contractnli_story_fewshot_test_n100.json",
+      "model": "Llama-3.1-8B",
+      "n_total": 100,
+      "n_gradeable": 56,
+      "n_documents": 65,
+      "n_hypotheses": 17,
+      "loud": 44,
+      "majority_baseline": 0.82,
+      "accuracy": {
+        "point": 0.07142857142857142,
+        "lo": 0.0,
+        "hi": 0.14035087719298245,
+        "cluster_axis": "hypothesis"
+      },
+      "silent": {
+        "point": 0.9285714285714286,
+        "lo": 0.8596491228070176,
+        "hi": 1.0,
+        "cluster_axis": "hypothesis"
+      },
+      "under_determination": 0.9107142857142857,
+      "wrong_direction": 0.017857142857142856,
+      "prediction_distribution": {
+        "None": 44,
+        "Uncertain": 51,
+        "False": 2,
+        "True": 3
+      },
+      "accuracy_by_gold_label": {
+        "True": {
+          "n": 44,
+          "accuracy": 0.06818181818181818
+        },
+        "False": {
+          "n": 12,
+          "accuracy": 0.08333333333333333
+        }
+      }
+    },
+    {
+      "file": "vanilla_pipeline_contractnli_gpt4omini_test_n100.json",
+      "model": "gpt-4o-mini",
+      "n_total": 100,
+      "n_gradeable": 86,
+      "n_documents": 65,
+      "n_hypotheses": 17,
+      "loud": 14,
+      "majority_baseline": 0.82,
+      "accuracy": {
+        "point": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "cluster_axis": "document"
+      },
+      "silent": {
+        "point": 1.0,
+        "lo": 1.0,
+        "hi": 1.0,
+        "cluster_axis": "document"
+      },
+      "under_determination": 1.0,
+      "wrong_direction": 0.0,
+      "prediction_distribution": {
+        "Uncertain": 86,
+        "None": 14
+      },
+      "accuracy_by_gold_label": {
+        "True": {
+          "n": 70,
+          "accuracy": 0.0
+        },
+        "False": {
+          "n": 16,
+          "accuracy": 0.0
+        }
+      }
+    },
+    {
+      "file": "vanilla_pipeline_contractnli_gpt4o_test_n100.json",
+      "model": "gpt-4o",
+      "n_total": 100,
+      "n_gradeable": 85,
+      "n_documents": 65,
+      "n_hypotheses": 17,
+      "loud": 15,
+      "majority_baseline": 0.82,
+      "accuracy": {
+        "point": 0.011764705882352941,
+        "lo": 0.0,
+        "hi": 0.038461538461538464,
+        "cluster_axis": "document"
+      },
+      "silent": {
+        "point": 0.9882352941176471,
+        "lo": 0.9615384615384616,
+        "hi": 1.0,
+        "cluster_axis": "document"
+      },
+      "under_determination": 0.9882352941176471,
+      "wrong_direction": 0.0,
+      "prediction_distribution": {
+        "Uncertain": 84,
+        "None": 15,
+        "True": 1
+      },
+      "accuracy_by_gold_label": {
+        "True": {
+          "n": 71,
+          "accuracy": 0.014084507042253521
+        },
+        "False": {
+          "n": 14,
+          "accuracy": 0.0
+        }
+      }
+    }
+  ]
+}

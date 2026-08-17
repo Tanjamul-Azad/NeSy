@@ -1,0 +1,149 @@
+[
+  {
+    "model": "Llama-3.1-8B",
+    "file": "vanilla_pipeline_contractnli_story_fewshot_test_n100.json",
+    "n_silent_analysed": 52,
+    "disjoint_vocabulary": 11,
+    "shares_some_vocabulary": 41,
+    "disjoint_rate": 0.21153846153846154,
+    "examples": [
+      {
+        "example_id": "8_nda-3",
+        "conclusion_predicates": [
+          "ConfidentialInformation",
+          "VerbalConveyance"
+        ],
+        "premise_predicates": [
+          "Access",
+          "Disclose",
+          "Discloser",
+          "Recipient"
+        ]
+      },
+      {
+        "example_id": "31_nda-7",
+        "conclusion_predicates": [
+          "Agent",
+          "Consultant",
+          "ProfessionalAdvisor",
+          "ReceivingParty",
+          "Share",
+          "ThirdParty"
+        ],
+        "premise_predicates": [
+          "Borrower",
+          "MayDisclose"
+        ]
+      },
+      {
+        "example_id": "83_nda-19",
+        "conclusion_predicates": [
+          "Obligation",
+          "Terminated"
+        ],
+        "premise_predicates": [
+          "Event",
+          "Nondisclosure",
+          "Occurrence"
+        ]
+      }
+    ]
+  },
+  {
+    "model": "gpt-4o-mini",
+    "file": "vanilla_pipeline_contractnli_gpt4omini_test_n100.json",
+    "n_silent_analysed": 86,
+    "disjoint_vocabulary": 40,
+    "shares_some_vocabulary": 46,
+    "disjoint_rate": 0.46511627906976744,
+    "examples": [
+      {
+        "example_id": "11_nda-15",
+        "conclusion_predicates": [
+          "GrantsRight"
+        ],
+        "premise_predicates": [
+          "ConfersInterests",
+          "GrantsIntellectualProperty",
+          "GrantsRights",
+          "InAgreement"
+        ]
+      },
+      {
+        "example_id": "18_nda-3",
+        "conclusion_predicates": [
+          "ConfidentialInformation",
+          "VerballyConveyed"
+        ],
+        "premise_predicates": [
+          "AgreedToProvideConfidentialInformation",
+          "ConfidentialInformationProvidedBy"
+        ]
+      },
+      {
+        "example_id": "23_nda-10",
+        "conclusion_predicates": [
+          "Agreed",
+          "Disclose"
+        ],
+        "premise_predicates": [
+          "Confidential",
+          "Contains",
+          "DerivedFrom",
+          "Information",
+          "RelatesTo"
+        ]
+      }
+    ]
+  },
+  {
+    "model": "gpt-4o",
+    "file": "vanilla_pipeline_contractnli_gpt4o_test_n100.json",
+    "n_silent_analysed": 84,
+    "disjoint_vocabulary": 30,
+    "shares_some_vocabulary": 54,
+    "disjoint_rate": 0.35714285714285715,
+    "examples": [
+      {
+        "example_id": "8_nda-3",
+        "conclusion_predicates": [
+          "ConveyedVerbally"
+        ],
+        "premise_predicates": [
+          "Access",
+          "Disclose",
+          "Recipient"
+        ]
+      },
+      {
+        "example_id": "11_nda-5",
+        "conclusion_predicates": [
+          "Employee",
+          "ShareConfidentialInformation"
+        ],
+        "premise_predicates": [
+          "BoundByConfidentialityAgreement",
+          "EmployeeOrAffiliate",
+          "FurtherInterests",
+          "NeedToKnow",
+          "PartyToAgreement",
+          "Personnel"
+        ]
+      },
+      {
+        "example_id": "30_nda-15",
+        "conclusion_predicates": [
+          "Agreement",
+          "GrantRights"
+        ],
+        "premise_predicates": [
+          "AcknowledgedBy",
+          "ConferRights",
+          "ConfidentialInformation",
+          "DisclosedBy",
+          "DisclosedTo"
+        ]
+      }
+    ]
+  }
+]
