@@ -177,6 +177,79 @@ def compare_conditions(
     }
 
 
+@dataclass
+class KappaResult:
+    n: int
+    categories: Tuple[str, ...]
+    po: float  # observed agreement
+    pe: float  # chance-expected agreement, from the marginals
+    kappa: float
+    interpretation: str
+
+    def summary(self) -> str:
+        return (f"Cohen's kappa, n={self.n}, {len(self.categories)} categories: "
+                f"po={self.po:.3f} pe={self.pe:.3f} kappa={self.kappa:.3f} "
+                f"({self.interpretation})")
+
+
+def _kappa_interpretation(k: float) -> str:
+    # Landis & Koch (1977) bins -- the standard reference scale for IAA;
+    # this project's stated target is kappa >= 0.6 ("substantial").
+    if k < 0:
+        return "poor (worse than chance)"
+    if k < 0.20:
+        return "slight"
+    if k < 0.40:
+        return "fair"
+    if k < 0.60:
+        return "moderate"
+    if k < 0.80:
+        return "substantial"
+    return "almost perfect"
+
+
+def cohens_kappa(labels_a: Sequence[str], labels_b: Sequence[str]) -> KappaResult:
+    """Cohen's kappa for inter-annotator agreement on a categorical label.
+
+    `labels_a[i]` and `labels_b[i]` must be two annotators' category labels
+    for the SAME case i (e.g. two independent classifications of the same
+    silent-failure example against the taxonomy in
+    `crest/annotation/guidelines.md`). Raw percent agreement overstates
+    reliability whenever a few categories dominate the label distribution --
+    two annotators who both label most things with the majority category
+    will agree often by chance alone. Kappa corrects for that by comparing
+    observed agreement (po) against the agreement expected from each
+    annotator's own marginal category distribution (pe).
+
+    This project's guidelines.md sets a target of kappa >= 0.6
+    ("substantial" per Landis & Koch) before a taxonomy is reported as
+    validated by independent annotation, rather than proposed by one
+    annotator alone.
+    """
+    if len(labels_a) != len(labels_b):
+        raise ValueError("paired label sequences must be the same length")
+    n = len(labels_a)
+    if n == 0:
+        raise ValueError("need at least one labeled case")
+
+    categories = tuple(sorted(set(labels_a) | set(labels_b)))
+    idx = {c: i for i, c in enumerate(categories)}
+    k = len(categories)
+
+    confusion = np.zeros((k, k), dtype=float)
+    for a, b in zip(labels_a, labels_b):
+        confusion[idx[a], idx[b]] += 1
+
+    po = float(np.trace(confusion) / n)
+    row_marginals = confusion.sum(axis=1) / n
+    col_marginals = confusion.sum(axis=0) / n
+    pe = float(np.dot(row_marginals, col_marginals))
+
+    kappa = 1.0 if pe == 1.0 else (po - pe) / (1 - pe)
+
+    return KappaResult(n, categories, po, pe, kappa, _kappa_interpretation(kappa))
+
+
 def print_comparison(name_a: str, name_b: str, res: Dict) -> None:
     print(f"  n = {res['n']} examples across {res['n_clusters']} stories "
           f"(clustered bootstrap, 10k resamples of whole stories)")
