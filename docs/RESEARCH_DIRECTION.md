@@ -535,6 +535,162 @@ pass; this only ensures Claude's own reference labels for all 72 cases will
 exist and be genuinely independent (not anchored on Gemini) once the human's
 answers are in hand, so all three passes can be compared honestly.
 
+---
+
+### Step 4 — the real human pass has arrived (2026-08-17)
+
+Tanjamul obtained a genuine human annotation pass over all 72 cases,
+confirmed (explicitly asked and confirmed) to be a real human who read
+`guidelines.md` and reviewed `annotation_sheet_72cases.json` directly — not
+an AI cross-check. Raw content preserved verbatim:
+`crest/annotation/human_annotation_72cases_raw.md`. **This is the actual
+step-4 deliverable the plan has been paused waiting for.**
+
+**What the human pass looks like, and why it needs reconciliation before a
+κ can be computed:** the human did not fill in `guidelines.md`'s strict
+`category` field per case. Instead they wrote free-form story-level
+diagnoses and independently proposed a *different*, richer 10-family error
+taxonomy (under-specification, over-specification, quantifier drift,
+negation drift, logical connective drift, implication reversal/distortion,
+predicate argument drift, entity/constant drift, relation hallucination,
+structural loss). This is genuinely useful — several of these families
+(quantifier drift, negation drift, implication reversal) name real,
+recurring patterns that our 9-category scheme currently only captures
+indirectly via `OTHER` (see Claude's 53-case pass above, which independently
+flagged 8 `OTHER` cases including an implication-direction reversal and a
+conclusion-polarity pre-judgment — both of which map cleanly onto this
+human's "implication reversal/distortion" and "negation drift" families).
+**Before a real Cohen's κ can be computed against Claude's or Gemini's
+labels, someone needs to map each of the human's 72 per-case diagnoses onto
+the 9-category schema (or decide to formally expand the schema using the
+human's proposed families — likely the better call, given the convergent
+signal from Claude's independent OTHER cases). This mapping is not done
+yet — it's the concrete next task, not an afterthought.**
+
+**A second, more serious finding: a recurring "translation is fine, it's a
+downstream reasoning/evaluator failure" diagnosis pattern, checked and found
+not to hold up.** The human repeatedly distinguishes cases where they judge
+the model's FOL as basically correct but the pipeline still returned the
+wrong label anyway (e.g. C009, C017, C018, C044, and others: C032, C047,
+C052, C061, C062 per their notes) — attributing these to a solver/evaluator
+problem rather than translation. **This claim, if true, would be a serious
+complication for CREST's entire framing**, since the project's core claim
+is that silent failure comes from translation, not solver execution. Claude
+spot-checked all 4 of the fully-verifiable cases (C009, C017, C018, C044)
+against the raw `llm_fol` directly and **found a concrete translation-level
+bug in every single one that fully explains the wrong label**, contradicting
+the "translation is fine" diagnosis each time:
+- **C017**: premise 5's negation is flipped — gold is
+  `¬JumpWhenShooting(x)→CanBlock(michael,x)`, the model wrote
+  `CanJumpWhenShooting(x)→CanBlock(michael,x)` (the negation was dropped,
+  not just renamed). Under the model's own (buggy) formalization,
+  `GreatShooter(windy)` genuinely isn't derivable — Prover9 didn't fail to
+  find a proof that exists; no such proof exists in the model's own FOL.
+- **C018**: premise 4's relation arguments are reversed — gold is
+  `LocatedIn(southShetlandIslands, antarctica)`, the model wrote
+  `LocatedIn(antarctica, southShetlandIslands)`, breaking the transitivity
+  chain to Antarctica outright.
+- **C044**: the model's conclusion is self-negated —
+  `¬∀x(Bird(x)→Swims(x))` instead of gold's positive
+  `∀x(Bird(x)→Swim(x))`. This directly and mechanistically explains why the
+  pipeline's entailment check returns a different verdict than gold — the
+  model is testing the negation of what it's supposed to be testing.
+- **C009**: the `∀y` quantifier is dropped, leaving `y` free/unbound
+  (matches Claude's independent 53-case classification of this exact case).
+
+**This is not a criticism of the annotator** — disagreement is exactly what
+IAA and the guidelines' disagreement-resolution process exist to surface,
+and story-level "does this feel right" reading is a reasonable first pass
+before FOL-line-by-line tracing. But it means **the remaining
+"reasoning/evaluator failure" verdicts in the human's notes (C032, C047,
+C052, C061, C062, and any others) should not be accepted at face value** —
+each needs the same direct FOL check before being trusted, the same way
+Gemini's SevereCancer misdiagnosis needed checking rather than accepting the
+category label alone (§ Gemini cross-check above). Given 4/4 checked cases
+so far all turned out to be translation bugs, the prior should lean toward
+"probably also translation bugs" for the unchecked remainder, not neutral.
+
+**Concrete next steps (not yet done):**
+1. Add a Cohen's κ helper to `crest/crest/evaluation/stats.py` (still
+   missing, per the original note in the step-4 protocol section above).
+2. Map the human's 72 per-case diagnoses onto the 9-category schema (or a
+   revised schema incorporating the human's proposed families) so an actual
+   κ can be computed against Claude's 72 (19 original + 53 fresh) and
+   against Gemini's 72.
+3. Verify the remaining "reasoning/evaluator failure" cases (C032, C047,
+   C052, C061, C062, and any others in the full per-case table) against raw
+   FOL, the same way C009/C017/C018/C044 were checked.
+4. Only after 1–3: report a real κ, and — if the "translation-is-fine"
+   claims mostly collapse under verification as the first 4 did — this
+   *strengthens* CREST's translation-failure framing rather than weakening
+   it, since it would show the phenomenon survives even a careful human
+   trying to find counter-examples to it.
+
+**Plan remains paused at step 4 until 1–3 above are done.**
+
+---
+
+### Interim: human's forensic second pass + systematic verification of the "Faithful" bucket (2026-08-17)
+
+The human annotator followed up with a much richer forensic pass over all
+72 cases, three-way bucketed (🟥 genuine semantic failure / 🟨 needs
+scrutiny / 🟢 faithful, no translation failure). This pass contributed a
+genuinely important methodological correction, now adopted: **a false
+conclusion is not automatically a translation failure.** Case C068/C069
+(the LGA "flies to" vs "flies from" pair) shows the model can translate
+both the premise and the (false) conclusion literally and correctly — the
+conclusion being false is the *point* of the test, not evidence of bad
+translation. This sharpens the annotation test going forward to three
+questions: (1) is the premise's meaning encoded correctly, (2) is the
+conclusion's literal English meaning encoded correctly (not pre-judged
+true/false), (3) is the premise–conclusion relationship preserved — not
+"does the final label match gold."
+
+**But the 🟢 "Faithful" bucket (20 cases) was itself only checked by
+story-level reading, not by tracing whether the conclusion is actually
+derivable from the model's own FOL.** Claude checked all 20 by hand-tracing
+the derivation the way Prover9 would attempt it. Full results:
+`crest/annotation/faithful_bucket_verification.md`.
+
+**Result: 18 of 20 "Faithful" cases have a confirmable translation-level
+bug that fully explains the wrong verdict; only 2 (C068, C069) hold up.**
+The dominant mechanism, found in 8 of the 18 (40% of the original
+"Faithful" bucket): the model adds a plausible-sounding restricting
+precondition to a rule (`Person(x)`, `Man(x)`, `Shooter(x)`,
+`DriedThaiChili(x)`) that mirrors the English wording, but never separately
+asserts that precondition's ground instance for the specific individual —
+so the rule can never fire, even though each premise reads as locally
+sensible in isolation. This is covered by the existing `missing_implicit_fact`
+category but is far more prevalent than the original 19-case count (5%)
+suggested — worth promoting to a more prominent finding.
+
+**Why this matters for the paper's framing:** the human's original concern
+(a wrong-label case with plausible-looking FOL might indicate a solver-side
+failure, not a translation failure) was a real risk to CREST's core claim.
+Checked systematically, it didn't hold up — Prover9 (confirmed by reading
+`crest/crest/grounding/fol_to_prover9.py`: a classical, deterministic,
+sound theorem prover, no LLM involved in verdict generation at all) always
+correctly failed to derive the conclusion from the model's own flawed
+premises. **This is a stronger, independently-verified version of CREST's
+core claim, not a weaker one** — it comes from actively trying to find
+counter-examples to "silent failure = translation failure" and mostly
+failing to find any. Only C068/C069 remain as a genuine (very small)
+sample of translation-faithful-but-still-wrong cases; too small to
+characterize a true solver-side failure mode, flagged as an open question
+rather than resolved.
+
+**Also surfaced: a refinement to the step-2 "dried Thai chilies" (id 806)
+finding.** Previously flagged only as a gold-label-naturalness question.
+Re-checked here (case C056): there is a separate, more basic bug underneath
+— the model turns gold's ground fact into a universal rule but never
+asserts the corresponding ground instance, so the rule never fires. Both
+observations are true simultaneously and should both be reported.
+
+**Plan remains paused at step 4** — the concrete next-steps list from the
+section above (Cohen's κ helper in stats.py, category-schema mapping,
+verifying the remaining 🟨 "needs scrutiny" cases) still stands; this
+verification pass covers the 🟢 bucket specifically, not the whole 72.
+
 ### Does CREST remain a valid thing to try here?
 
 Yes — if the second (legal/policy) dataset confirms the same
