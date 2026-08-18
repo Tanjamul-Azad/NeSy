@@ -78,7 +78,13 @@ does not replicate on legal text". A floor effect licenses only the first.
    36% (gpt-4o)**. The pairs are near-misses, not confusions about law:
    `GrantsRights` vs `GrantsRight`, `ConferRights` vs `GrantRights`,
    `VerballyConveyed` vs `ConveyedVerbally` — the same relation named two ways
-   inside a single prompt.
+   inside a single prompt. **Corrected 2026-08-17 after building the
+   detector:** these were first described as "near-misses", implying string
+   variants. Measured across all 147 unreachable goals in every committed run,
+   exactly **one** is a normalisation-detectable variant; the other 146 are
+   *semantic* divergence (a different relation chosen, not a different
+   spelling). So the defect is real and it is vocabulary divergence, but
+   string normalisation repairs ~0.7% of it — the repair needs semantics.
 3. **Of the five blockers the ceiling probe identified, exactly one is
    translation-level** and therefore addressable by a detect-and-repair layer.
    The other four (obligation outside the evidence spans, open-world permission
@@ -92,6 +98,33 @@ removed, so it is not directly comparable to the frontier models' rates.
 
 Cost: $0.32 total (gpt-4o-mini $0.02, gpt-4o $0.30); the Llama arm ran on
 Kaggle.
+
+### 1c. CREST-D, first component built and measured (2026-08-17)
+
+`crest/crest/detection/predicate_checker.py` — deterministic, no model call,
+no gold label, runs before the solver. Evaluated on every committed run
+(4 datasets × 3 models) at zero additional cost:
+`crest/crest/evaluation/schema_detector_eval.py`.
+
+| Claim | Flags | Precision |
+|---|---|---|
+| `will_return_uncertain` (goal unreachable: no conclusion predicate occurs in any premise) | 147, of which 130 reached the solver | **98.5%** |
+| `will_fail_loudly` (one predicate used with conflicting arities) | 55 | **100%** |
+
+Coverage of actual silent failures is **11.3% pooled**, and it is
+domain-concentrated: 21–47% on ContractNLI, ~0–7% on FOLIO, ~0% on
+ProofWriter/PrOntoQA. This is a high-precision triage signal, not an oracle,
+and both halves must be reported.
+
+**The 1.5% residue is not noise and is now named in the module:** both
+exceptions are inconsistent premise sets, from which any goal follows —
+including one sharing no vocabulary. The module's original docstring claimed
+100% soundness with no carve-out; that was wrong and is corrected in place.
+
+**What this component cannot do:** repair. Only 1 of 147 unreachable goals is
+fixable by string normalisation. That result moves repair out of the
+deterministic layer and into the trained corrector (Phase 8), and it is a
+measured argument for that component rather than an assumed one.
 
 ---
 
