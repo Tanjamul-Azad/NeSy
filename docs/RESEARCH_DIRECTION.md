@@ -1388,6 +1388,90 @@ pre-registered fallback from Phase 8 applied if it is null.
 
 ---
 
+## 3.95 NOVELTY, PINNED (2026-08-21) - closes G4
+
+Tanjamul's call, overriding the "submit to the nearest cycle" recommendation:
+establish the novelty first, build the framework, aim for **main track**. The
+cost is stated and accepted -- the October 12 ARR cycle is out of reach for a
+built-and-ablated framework, so the realistic targets are ARR January 2027
+(ACL 2027) or May 2027 (EMNLP 2027).
+
+### The claim, in one paragraph
+
+*Blind self-correction of LLM-produced formal translations does not work: it
+cannot tell when to revise, so it behaves as a random perturbation generator
+and measurably degrades the pipeline (our Self-Refine arm: net -31 on FOLIO,
+significantly harmful on two of nine cells). We propose instead a
+**diagnosis-conditioned repair layer with verified acceptance**. A
+deterministic pre-solver analysis classifies each translation into a specific
+defect class -- goal unreachable by vocabulary divergence, arity conflict,
+structural mismatch with the source sentence, or no objection -- and repair is
+invoked only on the classes that are repairable in principle, targeted at the
+identified defect rather than rewriting the formula. Every candidate repair is
+then accepted only if it passes a gold-label-free verification test, so the
+layer is **guaranteed by construction never to degrade the baseline**. This
+non-degradation property is what no existing training-free method has:
+Self-Refine has no signal telling it when to fire, and Logic-LM's reactive
+refinement only ever sees syntax errors, never a well-formed translation that
+means the wrong thing.*
+
+### Why each piece is forced by our own measurements, not chosen for elegance
+
+- **Why diagnosis, not a scalar risk score.** Four of the five ContractNLI
+  blockers defeat a *perfect* translator (missing obligation, open-world
+  permission gap, absent world-knowledge witness, missing deontic bridge). A
+  scalar "risk = 0.8" gives the repair layer no way to tell those apart from a
+  repairable defect, so it would attempt repairs that cannot succeed. The
+  layer must know *what kind* of failure it faces, and must be willing to say
+  "not repairable, do not touch".
+- **Why repair cannot be deterministic.** Of 147 unreachable goals across
+  every committed run, exactly ONE is fixable by string normalisation; 146 are
+  semantic divergence (ConferRights vs GrantRights). Measured, not assumed --
+  so the repair component genuinely needs a learned/semantic model, which is
+  what makes Phase 8 a contribution rather than plumbing.
+- **Why verified acceptance is the core.** Self-Refine rewrote 47/50 examples
+  and emitted NO_ISSUES zero times. Its damage came entirely from applying
+  unverified rewrites. An acceptance test that rejects any repair failing to
+  improve the diagnosed defect while preserving faithfulness converts that
+  failure mode into a no-op. This is the difference between our method and the
+  baseline that falsified the naive version of it.
+
+### Pre-registered falsification gates for the framework itself
+
+Written before the framework exists, so a null result cannot be argued away:
+
+1. **Coverage gate.** Signal 1 alone flags 11.3% of silent failures. If the
+   full detector's coverage stays below ~25% on FOLIO after all signals are
+   added, the framework can only ever address a small slice, and the paper
+   must be reframed around detection quality rather than mitigation.
+2. **Non-degradation gate.** If the accept-test lets through any repair that
+   makes a previously-correct example wrong, the central guarantee is false
+   and must be withdrawn, not weakened.
+3. **Ablation gate (Phase 8.4, restated).** Diagnosis-conditioned firing vs
+   firing on every example must show a significant difference. If it does not,
+   the selectivity is decoration and the honest conclusion is that we have a
+   repair model, not a framework.
+4. **Baseline-parity gate.** The comparison against Self-Refine must use the
+   same repair model with the conditioning removed. Comparing our tuned repair
+   against the published Self-Refine prompt would measure the repair model,
+   not the idea.
+
+### Build order (each step gated by the one before)
+
+1. **Coverage first** -- `structural_diff.py`: negation count, quantifier
+   profile and connective profile of each formula against cues in its own
+   source sentence. This is the signal that catches the meaning-level failures
+   reachability misses, and gate 1 above is decided by it.
+2. `risk_combiner.py` -- diagnosis output, calibrated (ECE/Brier, Phase 7.3).
+3. Acceptance test -- the non-degradation guarantee, tested against gate 2.
+4. Repair model -- distillation warm-start then DPO (Phase 8), evaluated only
+   on the repairable class, endpoint reachability-restored.
+5. Ablations -- gates 3 and 4.
+
+Everything up to step 4 runs on data already committed, at zero API cost.
+
+---
+
 ## 4. Where to find the underlying evidence
 
 - `docs/RESULTS_SNAPSHOT.md` — the three headline tables (capability ×
