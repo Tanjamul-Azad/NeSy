@@ -1472,6 +1472,114 @@ Everything up to step 4 runs on data already committed, at zero API cost.
 
 ---
 
+## 3.96 THE A*-TARGET PROGRAMME (set 2026-08-22)
+
+Tanjamul's instruction: implement the framework, keep a strong methodology, aim
+only at top A* / Q1, take the time it needs, always scale up, and if something
+genuinely forward-looking can be stood up, plan for that instead of small work.
+This section replaces the "nearest cycle" thinking in 3.9 as the governing
+target. 3.9's build order survives inside it.
+
+### The problem nobody has formulated
+
+When a neuro-symbolic pipeline returns a wrong answer, no existing work can say
+WHOSE FAULT IT WAS. Three distinct causes are collapsed into one accuracy
+number:
+
+  (i)   the task is not formalizable -- no correct translation could have
+        derived the gold label from the given premises;
+  (ii)  the translation lost or distorted meaning;
+  (iii) the solver failed (timeout, incompleteness, encoding limits).
+
+Every autoformalization paper we have read reports a number mixing all three,
+then attributes the whole of it to (ii). Our own measurements this month show
+that is wrong in both directions: (iii) is nearly innocent -- 30 of 35
+story-level "the solver is to blame" verdicts collapsed under derivation
+checking, leaving 1 of 72 -- while (i) is large and entirely unmeasured, with
+four of five ContractNLI blocker classes defeating a *perfect* translator and
+the ceiling moving 0% -> 60% -> 100% under nothing but a change of annotation
+convention.
+
+### The contribution
+
+**Failure attribution for neuro-symbolic pipelines: assign each outcome to
+(i), (ii) or (iii) without a gold label and before the solver runs; then repair
+only what is attributable to (ii), under a guarantee of non-degradation.**
+
+Why this is A*-shaped rather than incremental:
+- It is a **problem formulation** others can adopt, not one more detector.
+- It carries a **measurable property** (attribution precision against human
+  ground truth) and a **guarantee** (repair can never worsen the pipeline --
+  see 3.95).
+- It **changes how results must be reported**: an accuracy number that has not
+  been attribution-decomposed is uninterpretable, because it silently credits
+  or blames the wrong component.
+- It **generalises beyond FOL**, which separates a good paper from a landmark
+  one -- see P-D.
+
+### Programme, with the gate that ends each phase
+
+Timeline deliberately 12-18 months; the thesis checkpoint is protected inside
+it.
+
+**P-A. Formalize attribution and build the attributor on FOL.** (~2 months,
+near-zero cost.) Definitions of (i)/(ii)/(iii) precise enough for two
+annotators to apply. Signals: reachability (built), structural divergence, and
+whatever else survives testing. Output is an attribution label, not a scalar.
+*Gate:* attribution precision against human labels on FOLIO + ContractNLI.
+Below ~70% on the three-way decision, the definitions get revised before
+anything is built on top.
+
+**P-B. Build the resource -- the moat.** (~3 months, five people.) A
+formalizability-and-attribution annotated benchmark: per item, is the gold
+target derivable under a stated convention, which blocker applies if not, and
+the attribution class. 300-500 items across FOLIO, ContractNLI and one further
+source. Multi-annotator with kappa.
+*Gate:* kappa >= 0.6 on the attribution class. This is also the honest answer
+to G1 -- it closes the single-dataset weakness by producing the resource that
+explains why single-dataset evaluation was unsound, instead of hunting one more
+dataset.
+*Why it is the moat:* five people can produce an annotated resource a lone
+researcher cannot, and resource papers are cited for years.
+
+**P-C. Repair with the non-degradation guarantee.** (~3 months.) Distillation
+warm-start then DPO on the (ii)-attributed subset only. Endpoint is
+derivability restored, never raw accuracy.
+*Gates:* the four already pre-registered in 3.95, unchanged.
+
+**P-D. Cross-formalism generality -- the ceiling-lifting step.** (~4 months.)
+Repeat attribution on at least one further target formalism: SMT via Z3, or LTL
+on the requirements-engineering benchmark noted in 3.5. If the same three-way
+attribution holds with a different solver and a different formal language, the
+contribution stops being a FOL finding and becomes a property of
+neuro-symbolic pipelines.
+*Gate:* if attribution precision collapses on the second formalism, report it
+scoped rather than stretching the claim.
+
+**P-E. Scale and write.** Multi-seed throughout, additional open models (Qwen
+2.5, Mistral alongside Llama -- free on Kaggle), full clustered stats. Scale is
+targeted where intervals are too wide to support a claim, never for the size of
+the number.
+
+### The thesis is protected inside this
+
+P-A + P-B + P-C constitute a complete, defensible thesis on their own,
+independent of whether P-D lands. The FYDP deliverable therefore does not
+depend on the most ambitious phase succeeding -- which is the condition under
+which attempting the ambitious phase is rational rather than reckless.
+
+### Honest risks, stated once
+
+- A* is never guaranteed by a plan. A plan raises the ceiling and keeps the
+  work strong at a good venue if the top one rejects.
+- P-B is simultaneously the bottleneck and the differentiator. If annotation
+  cannot be sustained, the programme reduces to a method paper.
+- Someone may formulate attribution first. G5 becomes a recurring task, not a
+  one-off before submission.
+- P-D needs new grounders. Real engineering, budgeted as a phase.
+
+---
+
 ## 4. Where to find the underlying evidence
 
 - `docs/RESULTS_SNAPSHOT.md` — the three headline tables (capability ×
