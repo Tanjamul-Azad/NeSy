@@ -79,6 +79,7 @@ Kept visible so the register shows progress, not only debt.
 | 2026-08-17 | C065/C066/C068/C069 are translation-faithful | All four are real failures; only C003 survives | Derivation re-checks |
 | 2026-08-22 | "The ContractNLI ceiling gate fires under both defensible conventions" | Only the literal arm fires decisively (CI [0%, 31%]). The charitable arm's 6/10 cannot reject a 70% ceiling (p=0.35) | Computing the intervals |
 | 2026-08-22 | ContractNLI's failures are "near-misses" — the same relation spelled two ways | Only 1 of 147 unreachable goals is a normalisation-detectable variant; 146 are semantic divergence. The phenomenon is vocabulary divergence, but it is meaning-level, so string normalisation repairs ~0.7% of it | Building the detector and measuring it |
+| 2026-08-22 | The P-A coverage gate ("~25% coverage on FOLIO") is a valid gate | Mis-specified. Signal 2 reached 56% coverage while carrying no information (lift ~1.0). Corrected: lift must clear 1.0 with an interval excluding it; coverage alone gates nothing | Building signal 2 and measuring it |
 | 2026-08-22 | The reachability check is SOUND (100%) | 98.5% on the 130 solver-reached flags. Inconsistent premise sets are a real exception: from a contradiction any goal follows | `schema_detector_eval.py` |
 
 ---

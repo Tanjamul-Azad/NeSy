@@ -126,6 +126,60 @@ fixable by string normalisation. That result moves repair out of the
 deterministic layer and into the trained corrector (Phase 8), and it is a
 measured argument for that component rather than an assumed one.
 
+### 1d. CREST-D signal 2 (structural divergence) — a NEGATIVE result (2026-08-22)
+
+Signal 1 sees only the FOL, so signal 2 compares each formula against **the
+sentence it came from**: quantifier presence, negation parity, conditional
+presence, exclusivity. Five rules, each targeting a failure class our own
+annotation study measured. Evaluated on every committed run by re-joining the
+source sentences from the datasets — no new model calls
+(`crest/crest/evaluation/attributor_eval.py`).
+
+**It does not work on the text that matters, and the aggregate nearly hid it.**
+The metric is *lift* = P(silent | flagged) / P(silent); lift 1.0 means the
+signal carries no information regardless of how good its recall looks.
+
+| dataset | flag rate | recall | **lift** |
+|---|---|---|---|
+| proofwriter (synthetic) | 96.8% | 100% | **1.03** |
+| folio (naturalistic) | ~50–58% | 48–64% | **1.03–1.16** |
+| contractnli (real legal) | 64–80% | 44–64% | **0.86–0.98** |
+| prontoqa (synthetic) | 1.4–4.8% | 11–14% | **2.26–9.62** |
+
+Aggregate coverage on FOLIO reached 56%, which *passed* the coverage gate
+pre-registered in §3.96 — while carrying almost no information. **The gate was
+mis-specified and is corrected: coverage alone is not a gate; lift must clear
+1.0 with an interval excluding it.** Recorded because a gate that passes a
+worthless signal is worse than no gate.
+
+**Per-rule decomposition, done before discarding the module:**
+
+| rule | PrOntoQA | ProofWriter | FOLIO | ContractNLI |
+|---|---|---|---|---|
+| `negation_parity` | **5.07** | **6.35** | 1.09 | 0.92 |
+| `quantifier_missing` | **5.38** | — | 1.17 | 1.07 |
+| `quantifier_substituted` | — | 1.01 (fires on 96%) | 1.09 | 0.90 |
+| `conditional_lost` | — | 0.00 | **0.14** | 1.07 |
+| `exclusivity_lost` | — | — | 1.16 | 0.86 |
+
+Two rules are genuinely informative — but only where they fire rarely, on
+**templated synthetic** text. On naturalistic text English cues are ambiguous
+("any" is universal or existential depending on context), the rules fire on
+half of everything, and lift collapses. `conditional_lost` on FOLIO has lift
+**0.14**, i.e. it is anti-correlated — it fires on examples that are more often
+*correct*.
+
+**Why this matters more than a failed component.** This is the *second*
+independent cheap detector to show the same shape: generation confidence gave
+AUROC 0.87 on synthetic/weak and 0.49 (chance) on FOLIO × gpt-4o-mini; surface
+structural cues give lift 5–6 on synthetic and ~1.0 on naturalistic. **Cheap
+signals systematically fail in exactly the regime where the failure persists.**
+Combined with the earlier finding that only 1 of 147 unreachable goals is
+repairable by string normalisation, the deterministic layer can neither detect
+nor repair meaning-level divergence on naturalistic text. The framework's need
+for a learned semantic component is now an empirical result, not a design
+preference.
+
 ---
 
 ## 2. Self-Refine falsification gate (paired, McNemar exact)

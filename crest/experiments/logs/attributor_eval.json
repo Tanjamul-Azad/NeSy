@@ -1,0 +1,628 @@
+{
+  "cells": [
+    {
+      "dataset": "contractnli",
+      "model": "gpt-4o",
+      "file": "vanilla_pipeline_contractnli_gpt4o_test_n100.json",
+      "n_analysable": 99,
+      "sig1": {
+        "flag_rate": 0.3939393939393939,
+        "precision": 0.7692307692307693,
+        "recall": 0.35714285714285715,
+        "base_rate": 0.8484848484848485,
+        "lift": 0.9065934065934066
+      },
+      "sig2": {
+        "flag_rate": 0.47474747474747475,
+        "precision": 0.8297872340425532,
+        "recall": 0.4642857142857143,
+        "base_rate": 0.8484848484848485,
+        "lift": 0.9779635258358662
+      },
+      "combined": {
+        "flag_rate": 0.6767676767676768,
+        "precision": 0.835820895522388,
+        "recall": 0.6666666666666666,
+        "base_rate": 0.8484848484848485,
+        "lift": 0.9850746268656716
+      },
+      "mismatch_kinds": {
+        "negation_parity": 38,
+        "quantifier_missing": 4,
+        "quantifier_substituted": 6,
+        "exclusivity_lost": 8,
+        "conditional_lost": 5
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "model": "gpt-4o-mini",
+      "file": "vanilla_pipeline_contractnli_gpt4omini_test_n100.json",
+      "n_analysable": 98,
+      "sig1": {
+        "flag_rate": 0.5,
+        "precision": 0.8163265306122449,
+        "recall": 0.46511627906976744,
+        "base_rate": 0.8775510204081632,
+        "lift": 0.930232558139535
+      },
+      "sig2": {
+        "flag_rate": 0.6530612244897959,
+        "precision": 0.859375,
+        "recall": 0.6395348837209303,
+        "base_rate": 0.8775510204081632,
+        "lift": 0.9792877906976745
+      },
+      "combined": {
+        "flag_rate": 0.7959183673469388,
+        "precision": 0.8589743589743589,
+        "recall": 0.7790697674418605,
+        "base_rate": 0.8775510204081632,
+        "lift": 0.9788312462731067
+      },
+      "mismatch_kinds": {
+        "negation_parity": 39,
+        "quantifier_missing": 35,
+        "quantifier_substituted": 10,
+        "exclusivity_lost": 8,
+        "conditional_lost": 5
+      }
+    },
+    {
+      "dataset": "contractnli",
+      "model": "Llama-3.1-8B",
+      "file": "vanilla_pipeline_contractnli_story_fewshot_test_n100.json",
+      "n_analysable": 89,
+      "sig1": {
+        "flag_rate": 0.29213483146067415,
+        "precision": 0.4230769230769231,
+        "recall": 0.21153846153846154,
+        "base_rate": 0.5842696629213483,
+        "lift": 0.724112426035503
+      },
+      "sig2": {
+        "flag_rate": 0.550561797752809,
+        "precision": 0.46938775510204084,
+        "recall": 0.4423076923076923,
+        "base_rate": 0.5842696629213483,
+        "lift": 0.8033751962323391
+      },
+      "combined": {
+        "flag_rate": 0.6404494382022472,
+        "precision": 0.5087719298245614,
+        "recall": 0.5576923076923077,
+        "base_rate": 0.5842696629213483,
+        "lift": 0.870782726045884
+      },
+      "mismatch_kinds": {
+        "negation_parity": 41,
+        "exclusivity_lost": 8,
+        "quantifier_substituted": 7,
+        "conditional_lost": 2,
+        "quantifier_missing": 3
+      }
+    },
+    {
+      "dataset": "folio",
+      "model": "gpt-4o-mini",
+      "file": "vanilla_pipeline_folio_gpt4omini_validation.json",
+      "n_analysable": 203,
+      "sig1": {
+        "flag_rate": 0.08374384236453201,
+        "precision": 0.29411764705882354,
+        "recall": 0.07042253521126761,
+        "base_rate": 0.3497536945812808,
+        "lift": 0.8409279204639603
+      },
+      "sig2": {
+        "flag_rate": 0.5123152709359606,
+        "precision": 0.36538461538461536,
+        "recall": 0.5352112676056338,
+        "base_rate": 0.3497536945812808,
+        "lift": 1.044691224268689
+      },
+      "combined": {
+        "flag_rate": 0.5763546798029556,
+        "precision": 0.358974358974359,
+        "recall": 0.5915492957746479,
+        "base_rate": 0.3497536945812808,
+        "lift": 1.0263633080534489
+      },
+      "mismatch_kinds": {
+        "exclusivity_lost": 58,
+        "negation_parity": 48,
+        "conditional_lost": 6,
+        "quantifier_substituted": 36,
+        "quantifier_missing": 12
+      }
+    },
+    {
+      "dataset": "folio",
+      "model": "gpt-4o",
+      "file": "vanilla_pipeline_gpt4o_validation_n203.json",
+      "n_analysable": 203,
+      "sig1": {
+        "flag_rate": 0.06403940886699508,
+        "precision": 0.15384615384615385,
+        "recall": 0.037037037037037035,
+        "base_rate": 0.2660098522167488,
+        "lift": 0.5783475783475783
+      },
+      "sig2": {
+        "flag_rate": 0.4630541871921182,
+        "precision": 0.2765957446808511,
+        "recall": 0.48148148148148145,
+        "base_rate": 0.2660098522167488,
+        "lift": 1.0397951142631994
+      },
+      "combined": {
+        "flag_rate": 0.4975369458128079,
+        "precision": 0.26732673267326734,
+        "recall": 0.5,
+        "base_rate": 0.2660098522167488,
+        "lift": 1.004950495049505
+      },
+      "mismatch_kinds": {
+        "exclusivity_lost": 50,
+        "negation_parity": 37,
+        "conditional_lost": 6,
+        "quantifier_substituted": 32,
+        "quantifier_missing": 11
+      }
+    },
+    {
+      "dataset": "folio",
+      "model": "gpt-4o",
+      "file": "vanilla_pipeline_gpt4o_validation_n50.json",
+      "n_analysable": 50,
+      "sig1": {
+        "flag_rate": 0.08,
+        "precision": 0.0,
+        "recall": 0.0,
+        "base_rate": 0.16,
+        "lift": 0.0
+      },
+      "sig2": {
+        "flag_rate": 0.44,
+        "precision": 0.13636363636363635,
+        "recall": 0.375,
+        "base_rate": 0.16,
+        "lift": 0.8522727272727272
+      },
+      "combined": {
+        "flag_rate": 0.52,
+        "precision": 0.11538461538461539,
+        "recall": 0.375,
+        "base_rate": 0.16,
+        "lift": 0.7211538461538461
+      },
+      "mismatch_kinds": {
+        "exclusivity_lost": 9,
+        "negation_parity": 10,
+        "quantifier_substituted": 7,
+        "conditional_lost": 2,
+        "quantifier_missing": 1
+      }
+    },
+    {
+      "dataset": "folio",
+      "model": "gpt-4o-mini",
+      "file": "vanilla_pipeline_gpt4omini_validation_n50.json",
+      "n_analysable": 50,
+      "sig1": {
+        "flag_rate": 0.18,
+        "precision": 0.2222222222222222,
+        "recall": 0.14285714285714285,
+        "base_rate": 0.28,
+        "lift": 0.7936507936507935
+      },
+      "sig2": {
+        "flag_rate": 0.48,
+        "precision": 0.25,
+        "recall": 0.42857142857142855,
+        "base_rate": 0.28,
+        "lift": 0.8928571428571428
+      },
+      "combined": {
+        "flag_rate": 0.64,
+        "precision": 0.25,
+        "recall": 0.5714285714285714,
+        "base_rate": 0.28,
+        "lift": 0.8928571428571428
+      },
+      "mismatch_kinds": {
+        "exclusivity_lost": 10,
+        "negation_parity": 11,
+        "quantifier_substituted": 7,
+        "conditional_lost": 2,
+        "quantifier_missing": 1
+      }
+    },
+    {
+      "dataset": "prontoqa",
+      "model": "gpt-4o",
+      "file": "vanilla_pipeline_prontoqa_gpt4o_validation.json",
+      "n_analysable": 500,
+      "sig1": {
+        "flag_rate": 0.0,
+        "precision": null,
+        "recall": null,
+        "base_rate": 0.0,
+        "lift": null
+      },
+      "sig2": {
+        "flag_rate": 0.0,
+        "precision": null,
+        "recall": null,
+        "base_rate": 0.0,
+        "lift": null
+      },
+      "combined": {
+        "flag_rate": 0.0,
+        "precision": null,
+        "recall": null,
+        "base_rate": 0.0,
+        "lift": null
+      },
+      "mismatch_kinds": {}
+    },
+    {
+      "dataset": "prontoqa",
+      "model": "gpt-4o-mini",
+      "file": "vanilla_pipeline_prontoqa_gpt4omini_validation.json",
+      "n_analysable": 500,
+      "sig1": {
+        "flag_rate": 0.0,
+        "precision": null,
+        "recall": 0.0,
+        "base_rate": 0.104,
+        "lift": null
+      },
+      "sig2": {
+        "flag_rate": 0.014,
+        "precision": 1.0,
+        "recall": 0.1346153846153846,
+        "base_rate": 0.104,
+        "lift": 9.615384615384615
+      },
+      "combined": {
+        "flag_rate": 0.014,
+        "precision": 1.0,
+        "recall": 0.1346153846153846,
+        "base_rate": 0.104,
+        "lift": 9.615384615384615
+      },
+      "mismatch_kinds": {
+        "negation_parity": 7
+      }
+    },
+    {
+      "dataset": "prontoqa",
+      "model": "Llama-3.1-8B",
+      "file": "vanilla_pipeline_prontoqa_story_fewshot_validation.json",
+      "n_analysable": 497,
+      "sig1": {
+        "flag_rate": 0.0,
+        "precision": null,
+        "recall": 0.0,
+        "base_rate": 0.3501006036217304,
+        "lift": null
+      },
+      "sig2": {
+        "flag_rate": 0.0482897384305835,
+        "precision": 0.7916666666666666,
+        "recall": 0.10919540229885058,
+        "base_rate": 0.3501006036217304,
+        "lift": 2.2612547892720305
+      },
+      "combined": {
+        "flag_rate": 0.0482897384305835,
+        "precision": 0.7916666666666666,
+        "recall": 0.10919540229885058,
+        "base_rate": 0.3501006036217304,
+        "lift": 2.2612547892720305
+      },
+      "mismatch_kinds": {
+        "quantifier_missing": 16,
+        "negation_parity": 10
+      }
+    },
+    {
+      "dataset": "proofwriter",
+      "model": "gpt-4o",
+      "file": "vanilla_pipeline_proofwriter_gpt4o_validation.json",
+      "n_analysable": 600,
+      "sig1": {
+        "flag_rate": 0.011666666666666667,
+        "precision": 0.0,
+        "recall": 0.0,
+        "base_rate": 0.028333333333333332,
+        "lift": 0.0
+      },
+      "sig2": {
+        "flag_rate": 0.9683333333333334,
+        "precision": 0.029259896729776247,
+        "recall": 1.0,
+        "base_rate": 0.028333333333333332,
+        "lift": 1.0327022375215147
+      },
+      "combined": {
+        "flag_rate": 0.9683333333333334,
+        "precision": 0.029259896729776247,
+        "recall": 1.0,
+        "base_rate": 0.028333333333333332,
+        "lift": 1.0327022375215147
+      },
+      "mismatch_kinds": {
+        "quantifier_substituted": 581
+      }
+    },
+    {
+      "dataset": "proofwriter",
+      "model": "gpt-4o-mini",
+      "file": "vanilla_pipeline_proofwriter_gpt4omini_validation.json",
+      "n_analysable": 600,
+      "sig1": {
+        "flag_rate": 0.018333333333333333,
+        "precision": 0.0,
+        "recall": 0.0,
+        "base_rate": 0.03666666666666667,
+        "lift": 0.0
+      },
+      "sig2": {
+        "flag_rate": 0.9666666666666667,
+        "precision": 0.03793103448275862,
+        "recall": 1.0,
+        "base_rate": 0.03666666666666667,
+        "lift": 1.0344827586206897
+      },
+      "combined": {
+        "flag_rate": 0.9666666666666667,
+        "precision": 0.03793103448275862,
+        "recall": 1.0,
+        "base_rate": 0.03666666666666667,
+        "lift": 1.0344827586206897
+      },
+      "mismatch_kinds": {
+        "quantifier_substituted": 580,
+        "conditional_lost": 3
+      }
+    },
+    {
+      "dataset": "proofwriter",
+      "model": "Llama-3.1-8B",
+      "file": "vanilla_pipeline_proofwriter_story_fewshot_validation.json",
+      "n_analysable": 600,
+      "sig1": {
+        "flag_rate": 0.023333333333333334,
+        "precision": 0.0,
+        "recall": 0.0,
+        "base_rate": 0.14166666666666666,
+        "lift": 0.0
+      },
+      "sig2": {
+        "flag_rate": 0.9433333333333334,
+        "precision": 0.14487632508833923,
+        "recall": 0.9647058823529412,
+        "base_rate": 0.14166666666666666,
+        "lift": 1.0226564123882769
+      },
+      "combined": {
+        "flag_rate": 0.9433333333333334,
+        "precision": 0.14487632508833923,
+        "recall": 0.9647058823529412,
+        "base_rate": 0.14166666666666666,
+        "lift": 1.0226564123882769
+      },
+      "mismatch_kinds": {
+        "quantifier_substituted": 565,
+        "negation_parity": 16
+      }
+    },
+    {
+      "dataset": "folio",
+      "model": "Llama-3.1-8B",
+      "file": "vanilla_pipeline_story_fewshot_validation.json",
+      "n_analysable": 203,
+      "sig1": {
+        "flag_rate": 0.04433497536945813,
+        "precision": 0.1111111111111111,
+        "recall": 0.014492753623188406,
+        "base_rate": 0.3399014778325123,
+        "lift": 0.32689210950080516
+      },
+      "sig2": {
+        "flag_rate": 0.5517241379310345,
+        "precision": 0.39285714285714285,
+        "recall": 0.6376811594202898,
+        "base_rate": 0.3399014778325123,
+        "lift": 1.1557971014492754
+      },
+      "combined": {
+        "flag_rate": 0.5665024630541872,
+        "precision": 0.3826086956521739,
+        "recall": 0.6376811594202898,
+        "base_rate": 0.3399014778325123,
+        "lift": 1.125645872715816
+      },
+      "mismatch_kinds": {
+        "exclusivity_lost": 48,
+        "negation_parity": 64,
+        "quantifier_substituted": 29,
+        "conditional_lost": 6,
+        "quantifier_missing": 13
+      }
+    },
+    {
+      "dataset": "folio",
+      "model": "Llama-3.1-8B",
+      "file": "vanilla_pipeline_story_fewshot_validation_n50.json",
+      "n_analysable": 50,
+      "sig1": {
+        "flag_rate": 0.08,
+        "precision": 0.0,
+        "recall": 0.0,
+        "base_rate": 0.32,
+        "lift": 0.0
+      },
+      "sig2": {
+        "flag_rate": 0.54,
+        "precision": 0.4074074074074074,
+        "recall": 0.6875,
+        "base_rate": 0.32,
+        "lift": 1.2731481481481481
+      },
+      "combined": {
+        "flag_rate": 0.58,
+        "precision": 0.3793103448275862,
+        "recall": 0.6875,
+        "base_rate": 0.32,
+        "lift": 1.1853448275862069
+      },
+      "mismatch_kinds": {
+        "exclusivity_lost": 9,
+        "negation_parity": 13,
+        "conditional_lost": 2,
+        "quantifier_substituted": 6,
+        "quantifier_missing": 1
+      }
+    }
+  ],
+  "per_rule": [
+    {
+      "dataset": "contractnli",
+      "rule": "quantifier_missing",
+      "fires": 42,
+      "fire_rate": 0.14685314685314685,
+      "precision": 0.8333333333333334,
+      "base_rate": 0.7762237762237763,
+      "lift": 1.0735735735735736
+    },
+    {
+      "dataset": "contractnli",
+      "rule": "quantifier_substituted",
+      "fires": 23,
+      "fire_rate": 0.08041958041958042,
+      "precision": 0.6956521739130435,
+      "base_rate": 0.7762237762237763,
+      "lift": 0.8962005483744614
+    },
+    {
+      "dataset": "contractnli",
+      "rule": "negation_parity",
+      "fires": 118,
+      "fire_rate": 0.4125874125874126,
+      "precision": 0.711864406779661,
+      "base_rate": 0.7762237762237763,
+      "lift": 0.9170865781035272
+    },
+    {
+      "dataset": "contractnli",
+      "rule": "conditional_lost",
+      "fires": 12,
+      "fire_rate": 0.04195804195804196,
+      "precision": 0.8333333333333334,
+      "base_rate": 0.7762237762237763,
+      "lift": 1.0735735735735736
+    },
+    {
+      "dataset": "contractnli",
+      "rule": "exclusivity_lost",
+      "fires": 24,
+      "fire_rate": 0.08391608391608392,
+      "precision": 0.6666666666666666,
+      "base_rate": 0.7762237762237763,
+      "lift": 0.8588588588588588
+    },
+    {
+      "dataset": "folio",
+      "rule": "quantifier_missing",
+      "fires": 39,
+      "fire_rate": 0.05138339920948617,
+      "precision": 0.358974358974359,
+      "base_rate": 0.30566534914361,
+      "lift": 1.1744031830238728
+    },
+    {
+      "dataset": "folio",
+      "rule": "quantifier_substituted",
+      "fires": 117,
+      "fire_rate": 0.1541501976284585,
+      "precision": 0.3333333333333333,
+      "base_rate": 0.30566534914361,
+      "lift": 1.0905172413793103
+    },
+    {
+      "dataset": "folio",
+      "rule": "negation_parity",
+      "fires": 183,
+      "fire_rate": 0.24110671936758893,
+      "precision": 0.3333333333333333,
+      "base_rate": 0.30566534914361,
+      "lift": 1.0905172413793103
+    },
+    {
+      "dataset": "folio",
+      "rule": "conditional_lost",
+      "fires": 24,
+      "fire_rate": 0.03162055335968379,
+      "precision": 0.041666666666666664,
+      "base_rate": 0.30566534914361,
+      "lift": 0.13631465517241378
+    },
+    {
+      "dataset": "folio",
+      "rule": "exclusivity_lost",
+      "fires": 184,
+      "fire_rate": 0.24242424242424243,
+      "precision": 0.3532608695652174,
+      "base_rate": 0.30566534914361,
+      "lift": 1.1557112068965518
+    },
+    {
+      "dataset": "prontoqa",
+      "rule": "quantifier_missing",
+      "fires": 16,
+      "fire_rate": 0.01068804275217101,
+      "precision": 0.8125,
+      "base_rate": 0.1509686038744155,
+      "lift": 5.381913716814159
+    },
+    {
+      "dataset": "prontoqa",
+      "rule": "negation_parity",
+      "fires": 17,
+      "fire_rate": 0.011356045424181697,
+      "precision": 0.7647058823529411,
+      "base_rate": 0.1509686038744155,
+      "lift": 5.065330557001562
+    },
+    {
+      "dataset": "proofwriter",
+      "rule": "quantifier_substituted",
+      "fires": 1726,
+      "fire_rate": 0.9588888888888889,
+      "precision": 0.06952491309385864,
+      "base_rate": 0.06888888888888889,
+      "lift": 1.0092326094269801
+    },
+    {
+      "dataset": "proofwriter",
+      "rule": "negation_parity",
+      "fires": 16,
+      "fire_rate": 0.008888888888888889,
+      "precision": 0.4375,
+      "base_rate": 0.06888888888888889,
+      "lift": 6.350806451612903
+    },
+    {
+      "dataset": "proofwriter",
+      "rule": "conditional_lost",
+      "fires": 3,
+      "fire_rate": 0.0016666666666666668,
+      "precision": 0.0,
+      "base_rate": 0.06888888888888889,
+      "lift": 0.0
+    }
+  ]
+}
