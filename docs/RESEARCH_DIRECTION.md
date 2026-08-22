@@ -997,7 +997,7 @@ to pick this up cold is recorded here.
   answer is a reportable, useful result — a negative result here (gap
   doesn't replicate) is scientifically valuable too, not a failed pilot.
 
-### Step 5 in progress — plumbing done, then the ceiling gate fired BEFORE any model run (2026-08-17)
+### Step 5 in progress — plumbing done, then the ceiling gate fired BEFORE any model run (2026-08-22)
 
 **What was built and verified (zero API cost):**
 - ContractNLI wired into `crest/data/loaders/registry.py` (with an explicit
@@ -1112,7 +1112,7 @@ decide how to run the pilot; it is **not** citable as a human-verified
 ceiling. A human should re-formalise the same 10 cases independently before
 any ceiling number from it appears in the paper.
 
-**Decision taken 2026-08-17 (Tanjamul): run the pilot anyway.** Reasoning, in
+**Decision taken 2026-08-22 (Tanjamul): run the pilot anyway.** Reasoning, in
 his words: ContractNLI is a real-life dataset, so run it the same way as the
 others, surface the limitations, and let the methodology framework address
 them afterwards — which is the plan the project has followed throughout.
@@ -1188,7 +1188,7 @@ handling is unchanged.
 
 ---
 
-### Step 5 RESULT — all three arms run, pre-registered prediction confirmed (2026-08-17)
+### Step 5 RESULT — all three arms run, pre-registered prediction confirmed (2026-08-22)
 
 Full table with CIs: `docs/RESULTS_SNAPSHOT.md` §1b. Raw runs:
 `crest/experiments/logs/vanilla_pipeline_contractnli_*_test_n100.json`.
@@ -1265,7 +1265,7 @@ Self-Refine on the synthetic datasets in Section 1, Track A).
 
 ---
 
-## 3.9 The plan from here (set 2026-08-17, at Tanjamul's direction)
+## 3.9 The plan from here (set 2026-08-22, at Tanjamul's direction)
 
 His requirements, in his words: the gaps must stay visible in front of us, all
 edges checked, all findings in hand — *then* detection and mitigation. And the
@@ -1388,9 +1388,9 @@ pre-registered fallback from Phase 8 applied if it is null.
 
 ---
 
-## 3.95 NOVELTY, PINNED (2026-08-21) - closes G4
+## 3.95 NOVELTY, PINNED (2026-08-22) - closes G4
 
-Tanjamul's call, overriding the "submit to the nearest cycle" recommendation:
+Tanjamul's call (2026-08-22), overriding the "submit to the nearest cycle" recommendation:
 establish the novelty first, build the framework, aim for **main track**. The
 cost is stated and accepted -- the October 12 ARR cycle is out of reach for a
 built-and-ablated framework, so the realistic targets are ARR January 2027

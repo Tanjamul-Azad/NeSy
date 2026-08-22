@@ -37,7 +37,7 @@ everywhere (kill gate fired); under-determination is what persists on FOLIO.
 
 ---
 
-## 1b. ContractNLI pilot (added 2026-08-17) — real NDAs, and a floor, not a data point
+## 1b. ContractNLI pilot (added 2026-08-22) — real NDAs, and a floor, not a data point
 
 **Read this table only with its ceiling.** ContractNLI ships no gold FOL, so
 `crest/crest/evaluation/contractnli_ceiling_probe.py` hand-formalised 10 cases
@@ -78,7 +78,7 @@ does not replicate on legal text". A floor effect licenses only the first.
    36% (gpt-4o)**. The pairs are near-misses, not confusions about law:
    `GrantsRights` vs `GrantsRight`, `ConferRights` vs `GrantRights`,
    `VerballyConveyed` vs `ConveyedVerbally` — the same relation named two ways
-   inside a single prompt. **Corrected 2026-08-17 after building the
+   inside a single prompt. **Corrected 2026-08-22 after building the
    detector:** these were first described as "near-misses", implying string
    variants. Measured across all 147 unreachable goals in every committed run,
    exactly **one** is a normalisation-detectable variant; the other 146 are
@@ -99,7 +99,7 @@ removed, so it is not directly comparable to the frontier models' rates.
 Cost: $0.32 total (gpt-4o-mini $0.02, gpt-4o $0.30); the Llama arm ran on
 Kaggle.
 
-### 1c. CREST-D, first component built and measured (2026-08-17)
+### 1c. CREST-D, first component built and measured (2026-08-22)
 
 `crest/crest/detection/predicate_checker.py` — deterministic, no model call,
 no gold label, runs before the solver. Evaluated on every committed run
