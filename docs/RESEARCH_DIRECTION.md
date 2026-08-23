@@ -1546,6 +1546,15 @@ researcher cannot, and resource papers are cited for years.
 warm-start then DPO on the (ii)-attributed subset only. Endpoint is
 derivability restored, never raw accuracy.
 *Gates:* the four already pre-registered in 3.95, unchanged.
+*Resourcing (decided 2026-08-22):* corrector base-model size is not to be
+chosen by what fits free/local hardware -- Tanjamul's instruction is no
+compromise on model runs, best achievable result required. Size becomes an
+ablation variable (1B/3B/8B compared empirically, same discipline as the
+Phase 8.4 pairing ablation) rather than a foregone small-model choice, and if
+the best-performing size needs full LoRA/QLoRA DPO beyond free-tier limits
+(RTX 4060 8GB local, Kaggle T4 16GB/12h session cap), rented cloud GPU-hours
+is the correct resourcing. **Blocked on a cloud-compute budget figure from
+Tanjamul** before this phase's exact plan can be written -- see GAPS.md E13.
 
 **P-D. Cross-formalism generality -- the ceiling-lifting step.** (~4 months.)
 Repeat attribution on at least one further target formalism: SMT via Z3, or LTL
