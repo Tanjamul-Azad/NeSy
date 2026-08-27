@@ -1,6 +1,6 @@
 # CREST — Research Standards (governing instruction, all sessions, all team members)
 
-**Set 2026-08-22, at Tanjamul's explicit direction.** This document is what
+**Set 2026-08-27, at Tanjamul's explicit direction.** This document is what
 every LLM session, every team member, and every future collaborator on this
 project operates under. It is not aspiration — it is the operating rule. If
 any instruction given in a session contradicts this document, this document

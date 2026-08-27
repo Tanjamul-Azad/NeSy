@@ -1,6 +1,6 @@
 # Preregistration — E1.0 (definition) and E1 (blind human replication)
 
-**Written 2026-08-22, BEFORE any human data is collected.** Nothing in this
+**Written 2026-08-27, BEFORE any human data is collected.** Nothing in this
 document may be changed after the first annotation is submitted; changes after
 that point are recorded as amendments with their date and reason, never as
 edits to the original text.
@@ -80,7 +80,7 @@ intended reading. The rule below is committed to git *before* the draw script
 runs, so the commit history itself evidences that the rule preceded the IDs.
 
 **Eligibility.** ContractNLI **train** split only. Train and test documents are
-disjoint (verified 2026-08-22: 423 train docs, 123 test docs, 0 overlap), so
+disjoint (verified 2026-08-27: 423 train docs, 123 test docs, 0 overlap), so
 pilot cases cannot share a source NDA with the audit-10; the script asserts
 this rather than assuming it.
 
