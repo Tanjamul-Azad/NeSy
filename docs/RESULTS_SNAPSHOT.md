@@ -30,10 +30,21 @@ FOLIO have near-identical weak-model prevalence (36–40% silent) but opposite
 responses to scale: gpt-4o eliminates it on synthetic PrOntoQA (36%→0%) yet
 leaves a large residue on naturalistic FOLIO (40%→29%). The phenomenon is
 capability-**removable** on synthetic logical reasoning but capability-
-**resistant** on naturalistic autoformalization. The synthetic datasets act as
-controls isolating the cause as naturalistic language complexity, not logical
-depth. The confidently-wrong class specifically collapses on frontier scale
-everywhere (kill gate fired); under-determination is what persists on FOLIO.
+**resistant** on naturalistic autoformalization. The confidently-wrong class
+specifically collapses on frontier scale everywhere (kill gate fired);
+under-determination is what persists on FOLIO.
+
+**CAUSAL WORDING CORRECTED 2026-08-22.** This paragraph previously said the
+synthetic datasets "act as controls isolating the cause as naturalistic
+language complexity, not logical depth." That is a causal claim the design
+does not support, and it is the first thing a reviewer would attack. FOLIO and
+ProofWriter/PrOntoQA differ on many axes at once (dataset construction
+procedure, ontology, proof structure, label distribution, annotation
+convention, lexical diversity), so language naturalism is confounded with all
+of them. Defensible wording: **a dataset-type interaction consistent with a
+naturalistic-language hypothesis**. Establishing naturalism as the cause needs
+a controlled intervention or a matched benchmark that varies naturalism while
+holding the other axes fixed. Tracked as GAPS.md E14.
 
 ---
 

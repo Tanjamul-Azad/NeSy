@@ -1390,6 +1390,23 @@ pre-registered fallback from Phase 8 applied if it is null.
 
 ## 3.95 NOVELTY, PINNED (2026-08-22) - closes G4
 
+> **STATUS 2026-08-22 (same day, after external review): TWO CLAIMS IN THIS
+> SECTION ARE UNDER CORRECTION AND MUST NOT BE USED AS WRITTEN.**
+> 1. **"guaranteed by construction never to degrade the baseline"** -- the word
+>    *guarantee* is unearned. An acceptance heuristic showing zero regression is
+>    *empirical* non-degradation, not a theorem. Until a formal property is
+>    derived or the wording is changed, this phrase appears in no draft.
+>    Tracked as GAPS.md **E15**.
+> 2. **"before the solver runs"** (in 3.96's formulation) -- not observable for
+>    the solver-failure class, since timeout and incompleteness are properties
+>    of an execution. The formulation must split pre-solver *risk prediction*
+>    from post-execution *causal diagnosis*, or reframe as "before trusting the
+>    downstream answer". Tracked as GAPS.md **E16**.
+>
+> Both were caught by an external review pass and verified against our own
+> wording, not by us. The claim below is otherwise retained; these two
+> corrections are pending, not optional.
+
 Tanjamul's call (2026-08-22), overriding the "submit to the nearest cycle" recommendation:
 establish the novelty first, build the framework, aim for **main track**. The
 cost is stated and accepted -- the October 12 ARR cycle is out of reach for a
@@ -1440,10 +1457,14 @@ means the wrong thing.*
 
 Written before the framework exists, so a null result cannot be argued away:
 
-1. **Coverage gate.** Signal 1 alone flags 11.3% of silent failures. If the
-   full detector's coverage stays below ~25% on FOLIO after all signals are
-   added, the framework can only ever address a small slice, and the paper
-   must be reframed around detection quality rather than mitigation.
+1. **Discrimination gate (REPLACES the original coverage gate, 2026-08-22).**
+   The original wording here was "coverage above ~25% on FOLIO". That gate was
+   mis-specified and it PASSED on a worthless signal: structural divergence
+   reached 56% coverage on FOLIO while carrying no information (lift ~1.0).
+   Corrected gate: a signal counts only if **lift > 1.0 with a 95% CI whose
+   lower bound excludes 1.0**, at a practically useful precision (target
+   roughly >=70% on the attribution decision). Coverage is reported alongside
+   but never gates on its own. Original wording preserved in GAPS.md Section D.
 2. **Non-degradation gate.** If the accept-test lets through any repair that
    makes a previously-correct example wrong, the central guarantee is false
    and must be withdrawn, not weakened.
@@ -1458,11 +1479,18 @@ Written before the framework exists, so a null result cannot be argued away:
 
 ### Build order (each step gated by the one before)
 
-1. **Coverage first** -- `structural_diff.py`: negation count, quantifier
-   profile and connective profile of each formula against cues in its own
-   source sentence. This is the signal that catches the meaning-level failures
-   reachability misses, and gate 1 above is decided by it.
+1. ~~`structural_diff.py` for coverage~~ **DONE 2026-08-22, NEGATIVE RESULT.**
+   Built and measured: lift ~1.0 on naturalistic data (FOLIO 1.03, ContractNLI
+   0.86-0.98), informative only on templated synthetic text where it fires
+   rarely (PrOntoQA 5.07, ProofWriter 6.35). It does not provide the coverage
+   this step assumed. Full result: `RESULTS_SNAPSHOT.md` 1d. Consequence: the
+   deterministic layer cannot detect meaning-level divergence on naturalistic
+   text, which is now an empirical constraint on the design rather than an
+   assumption.
 2. `risk_combiner.py` -- diagnosis output, calibrated (ECE/Brier, Phase 7.3).
+   NOTE: with signal 2 negative, this cannot be a weighted combination of two
+   working signals. What it combines, and whether a learned component is
+   required this early, is now an open design question, not a scheduled step.
 3. Acceptance test -- the non-degradation guarantee, tested against gate 2.
 4. Repair model -- distillation warm-start then DPO (Phase 8), evaluated only
    on the repairable class, endpoint reachability-restored.
