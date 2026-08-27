@@ -1408,31 +1408,13 @@ pre-registered fallback from Phase 8 applied if it is null.
 
 ## 3.95 NOVELTY, PINNED (2026-08-22) - closes G4
 
-> **STATUS 2026-08-22 (same day, after external review): TWO CLAIMS IN THIS
-> SECTION ARE UNDER CORRECTION AND MUST NOT BE USED AS WRITTEN.**
-> 1. **"guaranteed by construction never to degrade the baseline"** -- the word
->    *guarantee* is unearned. An acceptance heuristic showing zero regression is
->    *empirical* non-degradation, not a theorem. Until a formal property is
->    derived or the wording is changed, this phrase appears in no draft.
->    Tracked as GAPS.md **E15**.
-> 2. **"before the solver runs"** (in 3.96's formulation) -- not observable for
->    the solver-failure class, since timeout and incompleteness are properties
->    of an execution. The formulation must split pre-solver *risk prediction*
->    from post-execution *causal diagnosis*, or reframe as "before trusting the
->    downstream answer". Tracked as GAPS.md **E16**.
->
-> 3. **The flat three-class attribution framing is superseded.** Diagnosis is
->    a state vector over three axes -- F (formalizability adequacy), T
->    (translation fidelity), S (solver adequacy) -- not one of three
->    mutually exclusive labels, because F=0 and T=0 can hold together.
->    See `docs/PREREG_E1_formalizability.md` Part 2, GAPS.md **E17**.
-> 4. **"Formalizable" is contract-relative, not absolute** -- every figure
->    must be indexed to a named admissibility contract, and construction
->    failure is never reported as proven impossibility. GAPS.md **E19**.
->
-> All four were caught by external review and verified against our own
-> wording, not by us. The claim below is otherwise retained; these
-> corrections are pending, not optional.
+> **S0 FORMULATION FREEZE APPLIED 2026-08-27.** The four claims previously
+> flagged here as under correction (E15 guarantee wording, E16 pre-solver
+> observability, E17 flat classes, E19 absolute formalizability) have been
+> **rewritten out of the text below**, not footnoted. Original wording is in
+> `docs/GAPS.md` Section D. **Novelty language remains provisional until a
+> dated G5 literature search** — see the G5 → G4 dependency in
+> `docs/FYDP2_PLAN.md` S0.
 
 Tanjamul's call (2026-08-22), overriding the "submit to the nearest cycle" recommendation:
 establish the novelty first, build the framework, aim for **main track**. The
@@ -1442,22 +1424,73 @@ built-and-ablated framework, so the realistic targets are ARR January 2027
 
 ### The claim, in one paragraph
 
+**Rewritten 2026-08-27 (S0 formulation freeze).** The previous version claimed
+pre-solver classification into mutually exclusive defect classes with a
+non-degradation *guarantee*. Three parts of that were wrong and are corrected
+here rather than footnoted: solver-execution failure is not observable before
+execution (E16), the classes are not mutually exclusive (E17), and an
+acceptance heuristic does not yield a guarantee (E15). Original wording is
+preserved in `docs/GAPS.md` Section D.
+
 *Blind self-correction of LLM-produced formal translations does not work: it
 cannot tell when to revise, so it behaves as a random perturbation generator
 and measurably degrades the pipeline (our Self-Refine arm: net -31 on FOLIO,
-significantly harmful on two of nine cells). We propose instead a
-**diagnosis-conditioned repair layer with verified acceptance**. A
-deterministic pre-solver analysis classifies each translation into a specific
-defect class -- goal unreachable by vocabulary divergence, arity conflict,
-structural mismatch with the source sentence, or no objection -- and repair is
-invoked only on the classes that are repairable in principle, targeted at the
-identified defect rather than rewriting the formula. Every candidate repair is
-then accepted only if it passes a gold-label-free verification test, so the
-layer is **guaranteed by construction never to degrade the baseline**. This
-non-degradation property is what no existing training-free method has:
-Self-Refine has no signal telling it when to fire, and Logic-LM's reactive
-refinement only ever sees syntax errors, never a well-formed translation that
-means the wrong thing.*
+significantly harmful on two of nine cells). We propose instead* **diagnostic
+attribution with selective corrective policy**. *A wrong pipeline output is
+diagnosed along three independent, non-exclusive axes* -- `F` *(is the instance
+determinable under a stated formalization contract),* `T` *(is the produced
+representation semantically faithful to the source), and* `S` *(did symbolic
+execution run adequately) -- using post-execution evidence, since* `S` *is a
+property of an execution and cannot be observed before one. Correction is
+invoked only where the diagnosis says correction can help --* `R = (F=1 ∧ T=0)`
+*-- and every candidate repair must pass a gold-label-free acceptance test
+before it is adopted. In tested settings this yields* **empirical
+non-degradation** *(reported with an interval, never as a theorem). What
+existing training-free methods lack is the diagnostic step: Self-Refine has no
+signal telling it when to fire, and Logic-LM's reactive refinement only ever
+sees syntax errors, never a well-formed translation that means the wrong
+thing.*
+
+### The formulation, stated precisely
+
+**Diagnosis.** `D(x) = (F, T, S)` — three **independent, non-exclusive** axes.
+`F=0 ∧ T=0` can hold together: the translation really is defective *and*
+repairing it would not recover the task. A flat class label cannot express
+that, which is exactly the case where a repair layer wastes effort while
+appearing justified.
+
+| Axis | Question | Evidence available |
+|---|---|---|
+| `F(x; Φ, C)` | Is the instance determinable under formalism `Φ` and admissibility contract `C`? | source text + contract; **contract-relative, never absolute** |
+| `T` | Is the produced representation semantically faithful to the source under `C`? | source text + produced formulas |
+| `S` | Did symbolic execution run adequately? | **post-execution only**: verdict, timeout, proof trace, encoding status |
+
+`F` is **not** an absolute "formalizable/unformalizable" property. Its
+observable in E1 is *constructive recoverability under (Φ, C)*, and **no
+construction found never licenses an impossibility claim** (E19).
+
+**Repair trigger.** `R(x) = [F=1 ∧ T=0]` — a **diagnostic policy, not a
+theorem**. Data may later show `F` needs to be graded rather than binary, so
+the annotation protocol must define `uncertain / not-assessable` handling
+before labels are collected, and the policy for `R` when `F` is uncertain must
+be preregistered (conservative = do not repair) rather than settled at
+implementation time.
+
+**Architecture, in the order things actually happen:**
+
+| Layer | Role | Status |
+|---|---|---|
+| Pre-solver triage | *optional* cheap risk signals | not load-bearing; both cheap signals measured weak on naturalistic text |
+| Solver execution | the actual prover | unchanged |
+| Post-execution attribution | aggregate F/T/S evidence | the contribution |
+| Selective corrective policy | repair only predicted-repairable translation failures | the contribution |
+| Acceptance / verification | empirical safety mechanism | **formal guarantee only if later proven** |
+
+This drops FYDP-1's "intercept everything before the solver" constraint. That
+constraint bought nothing here (Prover9 costs ~2–5s and is free in our
+pipeline) while making the `S` axis unobservable. **FYDP-1 proposed CREST as a
+proactive pre-solver framework; FYDP-2's evidence revised it.** That is
+scientific evolution and is written up as such in the thesis, not hidden.
 
 ### Why each piece is forced by our own measurements, not chosen for elegance
 
@@ -1535,7 +1568,13 @@ genuinely forward-looking can be stood up, plan for that instead of small work.
 This section replaces the "nearest cycle" thinking in 3.9 as the governing
 target. 3.9's build order survives inside it.
 
-### The problem nobody has formulated
+### The problem we have not found formulated elsewhere
+
+**Wording note (2026-08-27):** the heading previously read "the problem nobody
+has formulated". That is an unverified novelty claim and is not permitted to
+return until a dated G5 search supports it (`RESEARCH_STANDARDS.md` rule 4,
+GAPS.md G5). Note also that our own related-work pass records one of the two
+near-neighbour papers as read at ABSTRACT level only, not full text.
 
 When a neuro-symbolic pipeline returns a wrong answer, no existing work can say
 WHOSE FAULT IT WAS. Three distinct causes are collapsed into one accuracy
@@ -1557,9 +1596,16 @@ convention.
 
 ### The contribution
 
-**Failure attribution for neuro-symbolic pipelines: assign each outcome to
-(i), (ii) or (iii) without a gold label and before the solver runs; then repair
-only what is attributable to (ii), under a guarantee of non-degradation.**
+**Failure attribution for neuro-symbolic pipelines: diagnose each wrong output
+along three independent axes `D(x) = (F, T, S)` without a gold label, using
+post-execution evidence; then apply correction only where the diagnosis says it
+can help, `R = (F=1 ∧ T=0)`, under an acceptance test that yields empirical
+non-degradation.**
+
+*(Corrected 2026-08-27. The earlier wording — "assign to (i), (ii) or (iii) …
+before the solver runs … under a guarantee" — was wrong three ways: `S` is not
+observable before execution, the axes are not mutually exclusive, and an
+acceptance heuristic is not a guarantee. See GAPS.md E15/E16/E17.)*
 
 Why this is A*-shaped rather than incremental:
 - It is a **problem formulation** others can adopt, not one more detector.

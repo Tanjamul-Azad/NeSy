@@ -140,9 +140,17 @@ conditional).
 after every completed gate.
 
 The research loop is: **preregister → run → analyze → update claim/retraction →
-immediately write the corresponding paper and thesis subsection.** Writing is
-not a phase at the end; when the last experiment finishes, the manuscript is
-nearly finished too.
+immediately update the canonical evidence** (`CLAIMS_EVIDENCE.md`, related-work
+matrix, tables, limitations) **and sync the thesis section.**
+
+**Corrected 2026-08-27:** this previously said "immediately write the
+corresponding paper subsection". Paper *prose* starts only once the
+contribution is stable (realistically after S4), because prose written against
+a moving claim is rewritten every time the claim is corrected — and correcting
+claims is this project's normal operation, not an exception. Thesis sections
+sync throughout, since a thesis can absorb evolution that a fixed-length paper
+cannot. Writing is still not a phase at the end: the evidence base is complete
+when the experiments are.
 
 ### The canonical-table rule (enforces condition 6)
 
