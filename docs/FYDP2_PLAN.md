@@ -9,7 +9,7 @@ this one wins.
 
 **Exit condition:** `docs/DEFINITION_OF_DONE.md` (ten conditions).
 **Operating rules:** `docs/RESEARCH_STANDARDS.md`.
-**Live obligations:** `docs/GAPS.md` (5 gaps + 22 edges; every one is assigned
+**Live obligations:** `docs/GAPS.md` (5 gaps + 24 edges; every one is assigned
 to a stage below — nothing is left unplaced).
 
 ---
@@ -48,9 +48,21 @@ review rather than by us.
 | Split pre-solver *risk prediction* from post-execution *causal diagnosis*; decide whether the pre-solver constraint has any motivation at all | **E16** |
 | Fix F/T/S as independent axes with a stated repair trigger (`T=0` fires only when `F=1`) | **E17** |
 | Freeze `Formalizable(x; Φ, C)`; every figure indexed to a named contract | **E19** (done: `PREREG_E1_formalizability.md`) |
-| Rewrite §3.95/§3.96 to remove the four flagged claims rather than footnote them | E15/E16/E17 |
-| **Dated G5 literature search** — required *before* novelty wording is re-frozen | **G5** (this round) |
-| Re-freeze the contribution wording, provisionally, only after that search | **G4** |
+| Rewrite §3.95/§3.96 to remove the four flagged claims rather than footnote them | E15/E16/E17 ✅ 2026-08-27 |
+| **G5 Pass A** — dated novelty-collision audit | **G5** ✅ 2026-08-27, `RELATED_WORK_MATRIX.md` |
+| **G5 Pass A follow-ups**: full text of arXiv:2604.25031 on the one decisive question; source for the unverifiable "SymDiag"; verify the Tier-2 rows | **E24** |
+| **G5 Pass B** — adversarial search on our own remaining claims, incl. program-repair / fault-localization literature | **E24** |
+| Re-freeze the contribution wording, provisionally, only after Pass B | **G4** — still blocked |
+
+**G5 Pass A outcome (2026-08-27), stated plainly because it changes the
+contribution:** three of our candidate claims are **dead** —
+diagnosis-guided selective repair (arXiv:2604.25031 does it, in the legal
+domain), our FOLIO gold-noise finding (arXiv:2606.02837 reports 39% and
+releases corrections), and semantic-consistency-plus-self-correction
+(arXiv:2510.24592). What survives, **provisionally**, is the `F`/`T`/`S`
+separation and specifically `R = (F=1 ∧ T=0)` — deciding *not* to repair
+because repair cannot recover the task. That rests on one abstract and one
+search pass, which is not enough to freeze on.
 
 **Dependency, made explicit:** `S0 definitions freeze → dated G5 search → G4
 provisional novelty freeze`. Until that search exists, **"first", "no prior
@@ -105,6 +117,7 @@ discovery.
 | Verify ProofWriter/PrOntoQA splits against Logic-LM's published samples | **E11** | free |
 | Verify the pricing table before any cost figure is quoted | **E12** | free |
 | Raise FOLIO's example-1414 gold-label issue with the supervisor | **E7** | free |
+| **Re-run all FOLIO arms against the corrected ground truth** (arXiv:2606.02837) and report both | **E23** | ~$1 |
 | State the model-snapshot limitation for historical runs | **E4** | free |
 
 **Exit gate:** every row above CLOSED or ACCEPTED, and `RESULTS_SNAPSHOT.md`
@@ -300,9 +313,9 @@ the repo does not enter either document.
 
 | Stage | Items |
 |---|---|
-| S0 | E15, E16, E17 *(closed 2026-08-27)*, E19, G4, G5 *(this round)* |
+| S0 | E15, E16, E17 *(closed)*, E19, E24, G4 *(blocked)*, G5 *(Pass A done, Pass B owed)* |
 | S1 | E1, E18 (H2) |
-| S2 | E3, E4, E6, E7, E8, E10, E11, E12 |
+| S2 | E3, E4, E6, E7, E8, E10, E11, E12, **E23** *(re-run FOLIO on corrected ground truth)* |
 | S3 | E2, E18, E21, E22, G1 *(conditional)* |
 | S4 | G2, E20 |
 | S5 | E13, G3 |
