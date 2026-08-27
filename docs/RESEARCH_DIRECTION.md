@@ -1403,8 +1403,17 @@ pre-registered fallback from Phase 8 applied if it is null.
 >    from post-execution *causal diagnosis*, or reframe as "before trusting the
 >    downstream answer". Tracked as GAPS.md **E16**.
 >
-> Both were caught by an external review pass and verified against our own
-> wording, not by us. The claim below is otherwise retained; these two
+> 3. **The flat three-class attribution framing is superseded.** Diagnosis is
+>    a state vector over three axes -- F (formalizability adequacy), T
+>    (translation fidelity), S (solver adequacy) -- not one of three
+>    mutually exclusive labels, because F=0 and T=0 can hold together.
+>    See `docs/PREREG_E1_formalizability.md` Part 2, GAPS.md **E17**.
+> 4. **"Formalizable" is contract-relative, not absolute** -- every figure
+>    must be indexed to a named admissibility contract, and construction
+>    failure is never reported as proven impossibility. GAPS.md **E19**.
+>
+> All four were caught by external review and verified against our own
+> wording, not by us. The claim below is otherwise retained; these
 > corrections are pending, not optional.
 
 Tanjamul's call (2026-08-22), overriding the "submit to the nearest cycle" recommendation:
