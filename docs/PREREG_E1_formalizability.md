@@ -66,12 +66,70 @@ is not a condition in this study.
 
 ### Contract pilot — before the audit cases are touched
 
-Both contracts are applied by all annotators to **2–3 pilot cases drawn from
-ContractNLI's train split** (never the audit cases). Purpose: surface
-ambiguities in the contract wording while it is still cheap to fix. The
-contract may be revised after the pilot; it is frozen the moment the first
-audit case is issued. Pilot disagreements and any resulting contract revision
-are recorded in this document as a dated amendment.
+Both contracts are applied by all five pool members to **exactly 3 pilot cases
+drawn from ContractNLI's train split** (never the audit cases). Purpose:
+stress-test the contract wording while it is still cheap to fix. **No E1
+scientific result is reported from pilot cases** - they exist only for
+instruction debugging.
+
+#### Pilot selection rule - FROZEN BEFORE ANY CASE ID IS SEEN
+
+Nobody, human or model, hand-picks pilot cases. A "these three look
+interesting" choice would unknowingly select cases that confirm the contract's
+intended reading. The rule below is committed to git *before* the draw script
+runs, so the commit history itself evidences that the rule preceded the IDs.
+
+**Eligibility.** ContractNLI **train** split only. Train and test documents are
+disjoint (verified 2026-08-22: 423 train docs, 123 test docs, 0 overlap), so
+pilot cases cannot share a source NDA with the audit-10; the script asserts
+this rather than assuming it.
+
+**Three strata, defined by script-computable surface features** so assignment
+needs no human judgement about which cases are "interesting":
+
+| Stratum | Definition (premise text + hypothesis, evaluated in priority order) |
+|---|---|
+| **S3 - modal/deontic conditional** | premise matches a deontic cue (`may`, `shall`, `must`, `permitted`, `entitled`) AND a conditional cue (`if`, `unless`, `provided`, `subject to`) |
+| **S2 - negation / exception / contradiction** | not S3, and (gold label is `False` OR premise matches a negation-or-exception cue: `not`, `no `, `nothing`, `except`, `unless`) |
+| **S1 - plain positive obligation** | not S3, not S2, and gold label is `True` |
+
+Priority S3 -> S2 -> S1 makes the strata mutually exclusive. These definitions
+are fixed here, before the strata are populated.
+
+**Draw.** One case per stratum by deterministic seeded selection, seed string
+`E1PILOT_001`. Within a stratum, eligible IDs are sorted, the seeded RNG
+produces one permutation, and the first case is taken. Constraint: the three
+selected cases must come from **three distinct NDA documents** and **three
+distinct hypothesis templates**; a pick colliding with an earlier pick on
+either axis is skipped for the next case in the same permutation. Declared
+fallback: if a stratum has no eligible case satisfying distinctness, that is
+recorded and the stratum is filled from the next stratum in priority order -
+declared now, not improvised later.
+
+**No re-rolling.** The script's output is the pilot set. "That one looks
+unsuitable, take another" is not permitted.
+
+#### Pilot pass/fail gate - also preregistered
+
+The contract is frozen only if all of the following hold:
+
+1. Every formalizer scores **100% on a contract-comprehension quiz** about the
+   rules (not about case semantics).
+2. After the 3 pilot cases, **zero unresolved contract-level ambiguities**.
+3. Disagreement about **case semantics** is permitted and expected.
+   Disagreement about **rule interpretation** ("does the contract allow this
+   assumption?") blocks the freeze.
+4. Both fidelity reviewers independently demonstrate they can apply the
+   contract's admissibility rules, not merely judge plausibility.
+
+**No kappa is estimated from the pilot** - n=3 makes it meaningless.
+Reliability is measured at the audit stage.
+
+**Revision protocol.** If the pilot exposes ambiguity:
+`contract v1 -> documented ambiguity -> v2 -> a FRESH draw of 3 train cases ->
+re-pilot`. Pilot cases are never reused across revisions, every revision keeps
+its history in this document, and **the audit-10 never participate in contract
+tuning under any circumstance**.
 
 ---
 
@@ -106,9 +164,40 @@ next step — not a re-interpretation of this one.
 
 ### Annotators
 
-**Exactly 3 independent human annotators.** Not "≥3": the primary metric below
-is existence-shaped, so its value rises mechanically with annotator count, and
-the number must be fixed in advance for the figure to mean anything.
+**A five-person external pool: exactly 3 formalizers + exactly 2 fidelity
+reviewers.** All five are external to the project. Not "≥3" for formalizers:
+the primary metric is existence-shaped, so its value rises mechanically with
+annotator count and the number must be fixed in advance for the figure to mean
+anything.
+
+**Why teammates are excluded from primary annotation.** E1 does not only ask
+"can humans write FOL"; it asks whether the frozen contract is *independently
+usable by someone without our priors*. A team member knows the CREST history,
+the ContractNLI failure patterns, the prior 0/10 result and the expected
+blocker types — consciously or not. A reviewer would correctly say the labels
+were produced by investigators who knew the hypothesis.
+
+**Formalizer requirements:** basic competence in symbolic logic / discrete
+mathematics / formal methods; comfortable with NL semantics; has not seen these
+10 audit cases before; will not see Claude's formalizations, model output,
+solver results, gold labels, prior ceiling numbers or the blocker taxonomy; was
+not involved in authoring the contract.
+
+**Fidelity reviewers are separate people from the formalizers.** This closes an
+independence hole in the earlier draft, where reviewers would have judged
+others' formulas while holding their own — inviting judgement against their own
+choices rather than against the text. Reviewers see only: the NL evidence, the
+hypothesis, the frozen contract, and a candidate formula. They do not see the
+formula's author, which formalizer produced it, the gold label, or any prover
+output.
+
+**Reviewer disagreement is resolved conservatively:** a formalization counts as
+admissible only if BOTH reviewers judge it faithful. Disagreement therefore
+means not-admissible, and the disagreement rate is itself reported as an H2
+(construct reliability) indicator rather than discarded.
+
+**Teammates' role** (real, but never in the primary measurement): contract
+drafting, training material, QC logistics, and post-hoc error analysis.
 
 ### Blinding
 
@@ -125,7 +214,7 @@ For each (case, annotator, contract), the formalization is classified as:
 | Outcome | Meaning |
 |---|---|
 | **A. Faithful + yields gold** | Constructively recoverable under `C`. |
-| **B. Faithful + yields the opposite of gold** | Evidence the **gold label is wrong**, not that the task resists formalization. Reported separately and never folded into failure. Precedent: our probe's case `493_nda-15`, where an exception clause makes the gold label arguably indefensible; and "Know Your Limits" relabelled 22% of its ContractNLI sample. |
+| **B. Faithful + yields the opposite of gold** — **`gold-contract conflict`** | The formalization and the gold label disagree under the frozen (Φ, C). **This is NOT yet "the gold label is wrong"** — that claim would additionally require fidelity judgement, contract adequacy, prover correctness and the dataset's intended semantics all to be established as aligned. Recorded as a conflict; a case may later be *promoted* to a label-error finding with separate evidence (candidate: `493_nda-15`, where an exception clause makes the gold label arguably indefensible; precedent: "Know Your Limits" relabelled 22% of its ContractNLI sample). Reported separately, never folded into failure. |
 | **C. Faithful + yields Uncertain** | Underdetermined *under this contract* — the honest core of the formalizability claim. |
 | **D. No faithful formalization produced** | Annotator could not construct one they and the reviewers accept. Reported as a construction failure, explicitly not as impossibility. |
 
@@ -145,18 +234,23 @@ Procedure:
 
 ### Primary metric
 
-**Case-level constructive recoverability under `C_L`:** the proportion of the
-10 cases for which **at least one of the 3 annotators** produced a formalization
-that (a) passed blind fidelity review and (b) yielded the gold relation.
+Two figures, both reported, with their exact names:
 
-Reported alongside, always:
-- **Per-annotator recoverability rate** (so the existence-metric's dependence
-  on annotator count is visible).
-- The full A/B/C/D outcome distribution.
-- The same figures under `C_C`.
+**`r_case@3` — fixed-budget constructive recoverability at 3 independent
+attempts.** Of the 10 cases, the proportion for which at least one of the
+exactly-3 formalizers produced a formalization that (a) passed blind fidelity
+review by BOTH reviewers and (b) yielded the gold relation.
 
-This metric is a **lower bound on existence**, and it grows with the number of
-annotators. That is stated wherever it is reported.
+**`r_individual` — per-attempt success rate.** Successful faithful
+constructions divided by the 30 annotator-case attempts (3 formalizers x 10
+cases).
+
+**`r_case@3` is NOT an existence probability and is never to be called one.**
+It is a fixed-budget figure: raising the number of formalizers raises it
+mechanically. The budget (3) is written into the metric's name for that reason.
+
+Reported alongside, always: the full A/B/C/D outcome distribution, the
+reviewer-disagreement rate, and the same figures under `C_C`.
 
 ### Reliability reporting (H2)
 
