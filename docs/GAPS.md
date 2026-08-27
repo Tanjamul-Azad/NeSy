@@ -15,7 +15,9 @@ marked OPEN, no downstream claim may quietly assume it is closed.
 4. Status vocabulary: **OPEN** / **IN PROGRESS** / **CLOSED** / **ACCEPTED
    LIMITATION** (won't fix, stated in the paper instead).
 
-Last updated: 2026-08-22.
+Last updated: 2026-08-27.
+
+**Every item below is assigned to a stage in `docs/FYDP2_PLAN.md`** — the single plan of record. An item with no stage is a planning bug, not an untracked task.
 
 ---
 
