@@ -103,6 +103,12 @@ repeated as a pattern.
   checkable source (arXiv ID, DOI, or equivalent) before submission. No
   placeholder citations survive to a draft that leaves the team's hands.
 
+## The plan this governs
+
+`docs/FYDP2_PLAN.md` is the single plan of record; `docs/DEFINITION_OF_DONE.md` is the exit condition. Earlier plan sections inside
+`docs/RESEARCH_DIRECTION.md` are marked SUPERSEDED and are history, not
+instructions.
+
 ## How this is enforced day to day
 
 - `docs/RESEARCH_DIRECTION.md`, `docs/RESULTS_SNAPSHOT.md`, and

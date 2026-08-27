@@ -131,8 +131,10 @@ evidence are the components CREST ends up with.
 
 ## Two parallel tracks, starting now
 
-**Research track:** E1.0/E1 → E8 → human reliability → resource → attribution →
-selective repair → scaling/ablations.
+**Research track:** the seven gated stages in `docs/FYDP2_PLAN.md` (S0 formulation
+freeze → S1 construct validation → S2 measurement hygiene → S3 resource → S4
+attributor → S5 selective repair → S6 scale/ablate, with S7 cross-formalism
+conditional).
 
 **Writing track:** paper v0.1 and thesis skeleton **now**, then both updated
 after every completed gate.

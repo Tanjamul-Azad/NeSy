@@ -124,6 +124,12 @@ is one chapter, not the whole thesis.
 
 ## 2. The plan — STRICTLY SEQUENTIAL, not parallel (decided 2026-08-03)
 
+> **SUPERSEDED 2026-08-27 — HISTORY ONLY, DO NOT FOLLOW.** The single plan of
+> record is `docs/FYDP2_PLAN.md`. This section is retained because the
+> reasoning behind past decisions is part of the record, not because the
+> sequence below is current.
+
+
 Tanjamul explicitly wants one task fully finished before the next starts, not
 a parallel week-by-week schedule. Order and reasoning:
 
@@ -939,6 +945,12 @@ reconciliation process.
 
 ## Sequential plan, updated 2026-08-17 — ContractNLI pilot reinserted before the detector step
 
+> **SUPERSEDED 2026-08-27 — HISTORY ONLY, DO NOT FOLLOW.** The single plan of
+> record is `docs/FYDP2_PLAN.md`. This section is retained because the
+> reasoning behind past decisions is part of the record, not because the
+> sequence below is current.
+
+
 The original 6-step plan only did a *feasibility* check on ContractNLI
 (step 3, done — loader built and structurally validated, zero model runs).
 Tanjamul has now asked for the actual pilot run to be scheduled before the
@@ -1267,6 +1279,12 @@ Self-Refine on the synthetic datasets in Section 1, Track A).
 
 ## 3.9 The plan from here (set 2026-08-22, at Tanjamul's direction)
 
+> **SUPERSEDED 2026-08-27 — HISTORY ONLY, DO NOT FOLLOW.** The single plan of
+> record is `docs/FYDP2_PLAN.md`. This section is retained because the
+> reasoning behind past decisions is part of the record, not because the
+> sequence below is current.
+
+
 His requirements, in his words: the gaps must stay visible in front of us, all
 edges checked, all findings in hand — *then* detection and mitigation. And the
 work must carry our own strongest novelty, building a dataset or a framework
@@ -1555,6 +1573,12 @@ Why this is A*-shaped rather than incremental:
   one -- see P-D.
 
 ### Programme, with the gate that ends each phase
+
+> **The five-phase sequence below is SUPERSEDED by `docs/FYDP2_PLAN.md`'s
+> seven stages, which fold in the edge-closing work this sketch omitted.
+> The problem formulation and contribution statement above remain current;
+> only the sequencing here is history.**
+
 
 Timeline deliberately 12-18 months; the thesis checkpoint is protected inside
 it.
