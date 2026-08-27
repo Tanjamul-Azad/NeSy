@@ -1,0 +1,51 @@
+{
+  "seed_string": "E1PILOT_001",
+  "rule_frozen_in_commit": "89e821a",
+  "distinct_documents": [
+    "388",
+    "573",
+    "614"
+  ],
+  "distinct_hypothesis_templates": [
+    "nda-13",
+    "nda-17",
+    "nda-3"
+  ],
+  "fallback_notes": [],
+  "cases": [
+    {
+      "stratum": "S3",
+      "example_id": "573_nda-17",
+      "document": "573",
+      "hypothesis_template": "nda-17",
+      "premises": [
+        "2.0 RECIPIENT agrees that for a period of two years from the date of receipt of the information, it shall not disclose or duplicate any information it receives from OWNER that is marked or designated as CONFIDENTIAL, PROPRIETARY or STRICTLY PRIVATE (hereinafter collectively referred to as \"PROPRIETARY\") to any other person (including RECIPIENT'S employees in any other Group or entity), firm, or company, or use it for its own benefit, except as provided herein."
+      ],
+      "conclusion": "Receiving Party may create a copy of some Confidential Information in some circumstances.",
+      "gold_label_DO_NOT_SHOW_ANNOTATORS": "False"
+    },
+    {
+      "stratum": "S2",
+      "example_id": "614_nda-13",
+      "document": "614",
+      "hypothesis_template": "nda-13",
+      "premises": [
+        "Notwithstanding the foregoing, the term “Confidential Information” does not include information which Recipient can demonstrate",
+        "(c) was, is or becomes available to the Recipient or its Representatives in their capacity as such from a third party who is not known by the Recipient or such Representative to be under any obligation of confidentiality to the Disclosing Party with respect thereto or otherwise prohibited from disclosing such information by any legal, contractual or fiduciary obligation, or"
+      ],
+      "conclusion": "Receiving Party may acquire information similar to Confidential Information from a third party.",
+      "gold_label_DO_NOT_SHOW_ANNOTATORS": "True"
+    },
+    {
+      "stratum": "S1",
+      "example_id": "388_nda-3",
+      "document": "388",
+      "hypothesis_template": "nda-3",
+      "premises": [
+        "Confidential Information may be furnished in any tangible or intangible form, including written or printed documents, visual demonstrations or inspections, computer disks or tapes, other electronic media and oral communications."
+      ],
+      "conclusion": "Confidential Information may include verbally conveyed information.",
+      "gold_label_DO_NOT_SHOW_ANNOTATORS": "True"
+    }
+  ]
+}
