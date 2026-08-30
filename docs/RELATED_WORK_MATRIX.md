@@ -1,4 +1,10 @@
-# Related Work Matrix — G5 Pass A (first dated search: 2026-08-27)
+# Related Work Matrix — G5 Pass A (2026-08-27; extended 2026-08-30)
+
+**Update 2026-08-30.** The team handbook (`CREST_Research_Learning_Book_v2_Bangla.docx`)
+surfaced four further papers our own Pass A missed. Each was **re-verified at source**
+before entry here rather than trusted from the handbook — the same rule the handbook
+itself states. One of them (FormalRx, ICML 2026) threatens our annotation work more
+than anything in the original pass.
 
 **Verification discipline (RESEARCH_STANDARDS rule 2).** Every row records how
 the claim about that paper was verified. A paper reported by a collaborator —
@@ -57,6 +63,72 @@ until a source is produced.** *Action: whoever reported it supplies a DOI,
 arXiv ID, or proceedings link.* If it is real, it is likely the single largest
 threat on this list, since TranslationError-vs-ReasoningError is adjacent to
 our `T` vs `S` split.
+
+### T0-3. FormalRx: Rectify and eXamine Semantic Failures in Autoformalization ⚠️ **NEW, ICML 2026**
+**[arXiv:2607.04655](https://arxiv.org/abs/2607.04655)** · Haocheng Wang, Baiyu
+Huang, Yingjia Wan, Xiao Zhu, Xiaoyang Liu, Yinya Huang, Zhijiang Guo ·
+**accepted ICML 2026** · **VERIFIED-ABS** (2026-08-30)
+
+Surfaced by the team handbook, not by our own Pass A. Verified at source.
+
+| | |
+|---|---|
+| **Taxonomy** | "SCI Error Taxonomy", hierarchical, **28 distinct categories** of autoformalization error |
+| **Capabilities** | alignment **verdict**, error **categorization**, error **localization**, **correction** |
+| **Training data** | **56,287** NL-FL pairs with fine-grained diagnostic annotations |
+| **Results** | FormalRx-8B: F1 0.88 (verdict), 0.71 (categorization); accuracy 0.75 (localization), 0.73 (correction) |
+
+**This is the most serious threat on the list, and larger than T0-1 for our
+annotation work.** Our 9-category mechanism taxonomy validated at kappa=0.725 on
+72 cases now sits in space occupied by a 28-category taxonomy with 56k
+annotated pairs, a trained diagnostic model, and an ICML acceptance. **"Our
+contribution is a fine-grained taxonomy of NL-to-FOL translation errors" is
+dead.** What is not obviously occupied: their unit of diagnosis is the
+translation itself (is this formalization aligned, where is it wrong, fix it) —
+per abstract there is no task-level question of whether a faithful
+formalization exists to repair toward, and no decision to withhold repair.
+**Full-text read required before relying on that distinction.**
+
+### T1-5. LeanMarathon — long-horizon Lean autoformalization
+**[arXiv:2606.05400](https://arxiv.org/abs/2606.05400)** · Yuanhe Zhang, Yuekai
+Sun, Taiji Suzuki, Jason D. Lee, Fanghui Liu · **VERIFIED-ABS** (2026-08-30)
+
+Evolving-blueprint architecture, four agents, adversarial fidelity review, then
+parallel proof discharge; 258 lemmas/theorems formalized across Erdos-problem
+papers with no `sorry`. Failure modes named in the abstract: "statements drift,
+dependencies tangle, context decays, and local repairs corrupt distant work."
+
+**Care needed.** The handbook describes this as distinguishing *blueprint drift
+from source gaps*, which would threaten our F-vs-T separation. **The abstract
+does not say that in those terms.** Treat the threat as plausible but
+**unconfirmed until full text is read** — this is exactly the kind of
+second-hand characterisation our own rules say not to act on.
+
+### T1-6. From Errors to Proofs: Minimal-Core-Guided Repair
+**[arXiv:2608.14771](https://arxiv.org/abs/2608.14771)** · Dipankar Sarkar ·
+2026-08-14 · **VERIFIED-ABS** (2026-08-30)
+
+Extracts a **minimal unsatisfiable core** over the model's own constraints to
+localize translation faults and guide repair; reports solution fabrication
+falling from 79% to 7%. Adjacent to our `S`-axis evidence: it uses solver
+output as diagnostic signal, which is the same move we make for `S`.
+
+### T1-7. Agentic Requirement Formalization / VERIMED — **REPORTED, NOT YET VERIFIED BY US**
+[arXiv:2604.18228], [arXiv:2605.13817] — reported in the handbook as covering
+formalism-compatibility filtering before translation, and ambiguity /
+underspecification auditing of NL requirements with SMT evidence. **Not checked
+at source in this pass.** If accurate, the second is close to our `F` axis in a
+different vocabulary and must be read in Pass B.
+
+### Cross-cutting observation (not in the handbook)
+
+**Daneshvar Amrollahi is first author of T0-1 (arXiv:2604.25031) and third
+author of T1-4 "Know Your Limits" (arXiv:2606.16118)** — verified author lists
+2026-08-30. The same group is working legal-domain autoformalization
+faithfulness from two directions: pipeline honesty, and roundtrip repair. This
+is not a coincidence to note in passing; it is an active, well-resourced group
+occupying our exact territory, and Pass B should track their subsequent output
+specifically.
 
 ---
 
@@ -153,6 +225,8 @@ verified at source.**
 | Our candidate claim | Closest verified prior work | Verdict |
 |---|---|---|
 | Diagnosis-guided **selective repair** for autoformalization | T0-1 (does exactly this, incl. legal domain) | **KILL** — cannot be our novelty |
+| **Fine-grained taxonomy of NL→FOL translation errors** (our 9 categories, κ=0.725, 72 cases) | **T0-3 FormalRx** — 28 categories, 56k annotated pairs, trained model, ICML 2026 | **KILL** — added 2026-08-30 |
+| Using solver output as diagnostic evidence for the `S` axis | T1-6 (minimal unsat cores guide repair) | **NARROW** — the move is not ours; the axis framing may survive |
 | **FOLIO gold FOL is ~30% malformed** as our data-quality contribution | T1-1 (39%, systematic, corrected release) | **KILL** — demote to corroboration |
 | **Legal text resists formalization** | T0-1 + T1-4 | **NARROW** — the observation is occupied; only an operationalized construct survives |
 | Semantic-consistency checking + iterative correction | T1-2 | **KILL** as novelty |
